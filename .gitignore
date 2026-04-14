@@ -33,4 +33,7 @@
 
 # --- Exclude loose files in skills root and machine-specific skills ---
 skills/*.*
-skills/ccs-delegation/
+skills/ccs-delegation
+
+!skills/conventional-commits.md
+

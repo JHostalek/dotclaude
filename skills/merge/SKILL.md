@@ -1,7 +1,7 @@
 ---
 name: merge
 description: Use when the user asks to merge another branch into the current branch, pull upstream changes without rebasing, or resolve merge conflicts.
-argument-hint: [target-branch] (defaults to master/main)
+argument-hint: "[target-branch] (defaults to master/main)"
 ---
 input = $ARGUMENTS
 

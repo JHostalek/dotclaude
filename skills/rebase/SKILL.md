@@ -1,7 +1,7 @@
 ---
 name: rebase
 description: Use when the user asks to rebase the current branch onto another branch or update branch history without merging.
-argument-hint: [target-branch] (defaults to master/main)
+argument-hint: "[target-branch] (defaults to master/main)"
 ---
 input = $ARGUMENTS
 
