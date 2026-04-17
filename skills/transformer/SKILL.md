@@ -24,7 +24,7 @@ Path first. If no file at `$input`, try `~/.claude/skills/$input/SKILL.md`, then
 - **Orchestration.** Approval gates, agent coordination, conditional phases. Protocol, not scaffolding.
 - **Calibration.** Statements countering pretraining bias — "you'll want to skip this step — don't"; "this tier is 50% of savings". **Highest-value lines in any skill.** Never strip.
 - **Templates & contracts.** Output formats, tool-call shapes, approval signals.
-- **Failure modes.** Specific ways *this* task goes wrong. Generic ("be careful") does nothing; specific ("python-pptx silently drops formatting when…") changes behavior.
+- **Domain facts the model can't infer.** Library quirks, protocol behaviors, tool gotchas. Phrase positively ("python-pptx: apply formatting before closing the run"), not as things to avoid — negatives prime the forbidden behavior. LLM-output patterns are not domain facts; reframe them as positive invariants in the relevant section.
 - **Domain taxonomies.** Non-obvious expertise compressed into categories.
 
 **Litmus test.** Would removing this cause wrong output, skipped coordination, or silent regression? Keep. Would a reasoning model arrive here unaided? Strip.
@@ -34,7 +34,7 @@ Path first. If no file at `$input`, try `~/.claude/skills/$input/SKILL.md`, then
 Under-specification is the twin failure of over-scaffolding. If the target is principle-only — abstract rules with no anchoring — ADD:
 
 - At least one example or anti-example showing the core judgment call.
-- 2–3 failure modes specific to this task's domain.
+- 2–3 domain facts the model can't infer, phrased positively.
 - Explicit invariants, XML-tagged when load-bearing.
 
 The verdict "nothing to cut, much to add" is valid. A rewrite that removes more than it adds is not automatically better.
@@ -74,7 +74,7 @@ Internalize before drafting:
 - You will want to rewrite every line. Don't. Changes in voice without changes in structure are noise.
 - Flat rule lists feel clean; they train the model to pattern-match instead of reason.
 - Your first instinct will be a checklist. The target is likely *under*-specified in calibration, *over*-specified in steps. Compress steps, add calibration.
-- Names-of-failure-modes and calibration statements are tiny per line but load-bearing. Don't cut them to hit a length target.
+- Domain facts and calibration statements are tiny per line but load-bearing. Don't cut them to hit a length target.
 
 ## Process
 

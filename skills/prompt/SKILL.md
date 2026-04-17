@@ -11,7 +11,7 @@ You are designing a production-grade prompt for an LLM. If `$task` is provided, 
 
 Infer from `$task` when obvious. Ask only when blocking.
 
-1. **Surface.** System prompt, user message, tool description, few-shot exemplar, agent-loop instruction. Craft differs by surface — a tool description has a ~200-token ceiling and second-person imperative voice; a system prompt is first-person and structure-heavy.
+1. **Surface.** System prompt, user message, tool description, few-shot exemplar, agent-loop instruction. Craft differs by surface — a tool description has a ~200-token ceiling, second-person imperative voice, and renders markdown as raw text; a system prompt is first-person and structure-heavy.
 2. **Target model class.** Extended-thinking (Opus 4.7, Sonnet 4.6, o1/o3) / instruction-tuned chat (Opus 4.6-era, GPT-4o, Gemini) / small or open-weights (<32B, local). Techniques that help one family hurt another.
 3. **Task shape.** Classifier, generator, extractor, agent/tool-user, judge. Each has distinct failure modes and component needs.
 4. **Output contract.** Format, boundaries, error-state, length.
@@ -19,7 +19,7 @@ Infer from `$task` when obvious. Ask only when blocking.
 ## Principles
 
 <principles>
-- **Positive directives beat negatives.** "Return JSON matching schema X" outperforms "don't add prose." Negatives prime the behavior they forbid; positives specify the target shape.
+- **Positive directives beat negatives.** "Return JSON matching schema X" outperforms "don't add prose." Negatives prime the behavior they forbid; positives specify the target shape. Refactor any "don't X" rule to "do A; if not applicable, say so."
 - **Motivate constraints.** One sentence of *why* lets the model apply the rule to novel cases. "Cite sources — users cannot verify unsourced claims" beats bare "Cite sources."
 - **Concept-first, examples-last.** Lead with what and why. Few-shot exemplars *inside* the prompt bias output toward the demonstrated shape — add only when principles demonstrably fail to generalize. Diagnostic contrasts used during drafting (mediocre → final) are a separate tool and don't count against this rule.
 - **Density discipline.** Every rule competes for attention. Include only what changes behavior from the target model's default. On reasoning models, extra rules cause over-triggering.
@@ -33,14 +33,6 @@ Apply techniques conditionally, not universally.
 - **Extended-thinking models.** Strip explicit CoT scaffolding. Prefer "think carefully before responding" over written step plans. Trust internal decomposition. Density low, literalism high, invariants tagged.
 - **Instruction-tuned chat models.** Light structure earns its keep. Positive exemplars move the needle more than abstract principles. Role preambles occasionally useful.
 - **Small / open-weights.** Retain explicit decomposition (Self-Ask, Least-to-Most, ReAct). Few-shot exemplars for format normalization. Clear boundaries on every output field. Higher density is tolerated and often required.
-
-## Failure modes when drafting
-
-- **Role-preamble reflex.** "You are an expert X" where task-shape specification would be stronger. Most prompts don't need identity; they need task + contract.
-- **Principle dumping.** Piling every rule from this skill into one prompt. Signal-to-noise tanks; model drops rules silently.
-- **Negative stacking.** "Don't X, don't Y, don't Z" for a reasoning model. Refactor to "Do A; if not applicable, say so."
-- **Surface-format mismatch.** Markdown scaffolding in a tool-description slot that renders as raw text.
-- **Missing output contract.** No explicit shape, boundary, or error state — valid vs invalid output undefined.
 
 ## Components — assemble as needed
 
