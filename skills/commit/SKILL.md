@@ -22,3 +22,7 @@ The commit message is the only artifact that survives rebases, squashes, and fil
 - Imperative mood ("add OAuth flow" not "added OAuth flow")
 - Capture *intent*, not *implementation* — the diff shows what changed, the message explains why
 - If you can't write a focused message, the commit probably contains unrelated changes — split it
+
+## Push
+
+Push after every commit unless told otherwise.
