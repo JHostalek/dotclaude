@@ -65,6 +65,7 @@ Use `/plan` for multi-step, ambiguous, or high-impact work. Skip for single-file
 - **Delete-ready design.** Feature-local modules. Single integration point. Easy to remove as to add. If you can't describe how to delete the feature in one sentence, you built it wrong.
 - **Strong typing is non-negotiable.** Concrete types for every generic. `Any`/`any`/`unknown` reserved for genuinely dynamic payloads — prove the case before using them. Inputs, outputs, return types visible at the call site.
 - **LLM-optimized code.** Primary maintainers are AI agents. Types > prose documentation. One purpose per file. Clarity beats cleverness every time. Code a future agent can understand, extend, and trust.
+- **LLM-optimized prose (skills, prompts, CLAUDE.md).** Apply `prompt/SKILL.md` density discipline: include only what changes behavior from the model's default. Don't restate standard commands, APIs, or patterns the model already knows.
 - **Root causes, not symptoms.** When your change breaks a test, diagnose before blaming either side — the test may encode old behavior the change correctly supersedes, or your change may be wrong. Never delete or weaken a failing test to go green.
 
 ### 4.2 Code & Types
