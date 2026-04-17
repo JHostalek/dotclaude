@@ -21,7 +21,7 @@ Infer from `$task` when obvious. Ask only when blocking.
 <principles>
 - **Positive directives beat negatives.** "Return JSON matching schema X" outperforms "don't add prose." Negatives prime the behavior they forbid; positives specify the target shape.
 - **Motivate constraints.** One sentence of *why* lets the model apply the rule to novel cases. "Cite sources — users cannot verify unsourced claims" beats bare "Cite sources."
-- **Concept-first, examples-last.** Lead with what and why. Add examples only when principles demonstrably fail to generalize; examples bias toward the demonstrated shape.
+- **Concept-first, examples-last.** Lead with what and why. Few-shot exemplars *inside* the prompt bias output toward the demonstrated shape — add only when principles demonstrably fail to generalize. Diagnostic contrasts used during drafting (mediocre → final) are a separate tool and don't count against this rule.
 - **Density discipline.** Every rule competes for attention. Include only what changes behavior from the target model's default. On reasoning models, extra rules cause over-triggering.
 - **Invariants as XML.** Wrap content the model must retrieve verbatim — output contracts, refusal boundaries, safety rules — in semantic tags: `<output_contract>`, `<security>`, `<refusal>`.
 </principles>
@@ -84,6 +84,15 @@ Final:
 
     Quote the exact phrase driving the score in `reasoning`. Quoting
     grounds the score in the text rather than sentiment-hallucinating.
+
+## Technique index — when principles don't suffice
+
+Gate: target is small / open-weights, or a reasoning-model draft demonstrably underperforms. Naming primes retrieval; do not deploy all at once.
+
+- **Decomposition** — Self-Ask (sub-question framing), Least-to-Most (simpler → harder), Tree-of-Thoughts (branch and prune), Self-Consistency (sample + majority), Reflexion (critique then revise).
+- **Tool / retrieval** — ReAct (thought-action-observation loop), HyDE (hypothetical-document embedding), query rewrite / fusion, strict citation, prompt-injection defense.
+- **Verification** — in-prompt self-grader, PAL / Program-of-Thoughts (offload deterministic steps to code).
+- **Calibration** — few-shot exemplars for format and tone, positive vs. negative contrasts.
 
 ## Interaction
 
