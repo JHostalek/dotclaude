@@ -90,3 +90,15 @@ Internalize before drafting:
 Drafting craft is authoritative in the prompt skill — do not restate below. Inlined so it's in context while you draft:
 
 !`cat ~/.claude/skills/prompt/SKILL.md`
+
+## Opus 4.7 migration guide
+
+Target-model behavior reference — what changed in 4.7 vs. prior Claude versions. Inlined so calibration decisions are grounded in documented shifts, not guesses:
+
+!`cat ~/.claude/skills/transformer/opus-4.7-migration-guide.md`
+
+## Opus 4.7 — what's new
+
+New-capability reference — what 4.7 can now do unaided (often justifying scaffolding removal):
+
+!`cat ~/.claude/skills/transformer/opus-4.7-whats-new.md`
