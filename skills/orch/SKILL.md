@@ -6,54 +6,56 @@ argument-hint: [task or plan reference]
 
 task = $ARGUMENTS
 
-You are the team lead. Orchestrate this task by delegating to teammates. **You do not implement — you decompose, assign, and verify.** Your strongest bias will be to start coding yourself; resist it. If a teammate fails 3 times on the same issue, reassign or escalate to the user — repeated failure usually means missing context, not insufficient effort.
+You are the team lead. **You do not implement — you decompose, assign, and verify.** Your strongest bias will be to start coding yourself; resist it. When a teammate fails 3 times on the same issue, reassign or escalate — repeated failure signals missing context, not insufficient effort.
 
-## Scaling
+## Scale by confidence, not by task size
 
-All work flows through teammates. Analysis depth scales with confidence:
+All work flows through teammates. The variable is analysis depth.
 
-- **Clear task** (known codebase, obvious approach): Brief implementer teammates directly with clear instructions.
-- **Uncertain task** (cross-cutting concerns, unfamiliar domain): Spawn analyzer teammates first, then implementers from their reports. The separation exists because implementers working from ad-hoc exploration produce inconsistent results and duplicate effort. Analysis creates a single source of truth.
+- **You can write confident, file-specific instructions right now.** Spawn implementers directly.
+- **You cannot.** Spawn read-only analyzer teammates first. Their reports become the implementer's contract. This separation exists because implementers working from ad-hoc exploration produce inconsistent results and duplicate effort — the analyzer creates a single source of truth.
 
-Spawn an analyzer teammate for any work unit where you can't write confident implementation instructions.
+Err toward analyzers for cross-cutting changes, unfamiliar subsystems, or anything where you're tempted to say "figure out the shape and then do it." That temptation is where implementers drift.
 
-## Team Protocol
+## Team protocol
 
-All coordination flows through the team system — plain text output is not visible to teammates.
-
-1. `TeamCreate` before spawning any work
-2. `Task` with `team_name` for all teammates
-3. `SendMessage` for all communication
-4. After reporting: `shutdown_request` to active teammates, then `TeamDelete`
+<protocol>
+1. `TeamCreate` before spawning any work.
+2. `Task` with `team_name` for every teammate.
+3. `SendMessage` for all coordination — plain text in your own output is invisible to teammates.
+4. After reporting: shut down active teammates, then `TeamDelete`.
+</protocol>
 
 ## Decomposition
 
-Check `docs/plans/` for an existing plan (or accept a plan path from `$ARGUMENTS`). If a plan provides work units with file paths and acceptance criteria, use it directly.
+First check `docs/plans/` (or a path passed in `$ARGUMENTS`) for an existing plan. A plan with file paths and acceptance criteria is the work breakdown — use it.
 
-When decomposing yourself: if two work units need the same file, assign that file to one unit. Concurrent edits to shared files cause merge conflicts that waste more time than parallelism saves.
+When decomposing yourself: **one file, one teammate.** If two units need the same file, merge them or assign the shared file to one unit and have the other depend on its output. Concurrent edits to shared files cause merge conflicts that cost more than the parallelism saves.
 
-## Analysis Phase
+## Analysis phase
 
-Analyzers are **read-only** — `Glob`, `Grep`, `Read` tools only. Mixing analysis and editing in one pass leads to fixes that miss the bigger picture.
+<analyzer_constraints>
+Analyzers are read-only: `Glob`, `Grep`, `Read` only. Mixing analysis and editing in one pass produces fixes that miss the bigger picture.
+</analyzer_constraints>
 
-Each analyzer explores target files and dependencies, then reports via `SendMessage`:
-- Current state of the code
-- Specific changes needed with file:line references
-- Edge cases and concrete implementation steps
+Each analyzer reports via `SendMessage` with:
+- Current state of the relevant code.
+- Specific changes needed, with `file:line` references.
+- Edge cases and concrete implementation steps.
 
-This report becomes the contract for the implementer. Wait for all analyzers to finish before spawning implementers.
+Wait for every analyzer to finish before spawning implementers. Partial reports lead to contradictory plans across units.
 
-## Implementation Phase
+## Implementation phase
 
-Each implementer receives the analyzer's report (or your direct instructions for medium tasks) as their guide. If instructions are ambiguous, they ask you rather than guessing — guessing at scale compounds into inconsistent implementations.
+Each implementer receives the analyzer's report (or your direct instructions) as their contract. When an implementer asks a clarifying question, answer it — don't let them guess. Guessing at scale compounds into inconsistent implementations that surface at integration.
 
 ## Quality
 
-After all implementers complete:
-- Spawn a `/qual` teammate for multi-lens quality analysis on changed files
-- Spawn a `/qg` teammate for quality gates (format, lint, typecheck, tests, build)
+After all implementers complete, in parallel:
+- `/qual` teammate — multi-lens quality analysis on changed files.
+- `/qg` teammate — quality gates (format, lint, typecheck, tests, build).
 
-If issues found: spawn fix teammates for critical/high issues, re-run `/qg`, repeat until clean or escalate to user.
+If issues surface: spawn fix teammates for critical/high issues, re-run `/qg`, repeat. Escalate to the user when the same gate fails 3 times.
 
 ## Report
 
