@@ -9,10 +9,10 @@ target = $ARGUMENTS
 ## Resolve the target
 
 - Empty → PR/MR of the current branch.
-- Number → that PR/MR on the current remote (GitHub or GitLab; pick the CLI matching the host).
+- Number → that PR/MR on the current remote (use `gh` for GitHub, `glab` for GitLab).
 - Branch name or local path → diff against its merge base.
 
-Read the PR description, linked issues, and commit messages before the diff. A review grounded in stated intent catches when the diff drifts from that intent — a review grounded only in diff lines cannot. Pull CI status too; a failing pipeline is load-bearing context.
+Read the PR description, linked issues, and commit messages before the diff — a review grounded only in diff lines misses when code drifts from stated intent. Pull CI status too; a failing pipeline is load-bearing context.
 
 ## Stance
 
@@ -24,15 +24,15 @@ Correctness is table stakes — the diff shows bugs directly. These dimensions c
 
 **Security** — Trace user-controlled data from source to sink: SQL concatenation, input reaching command execution or file paths, hardcoded secrets, missing authorization on new endpoints, removed or weakened validation. Source-to-sink flow without sanitization is CRITICAL regardless of perceived exploitability.
 
-**Breaking changes** — Modified signatures, removed exports, changed response shapes, new required fields, migrations without backward compatibility. Search the repo for callers of changed symbols — the diff cannot show consumers it doesn't touch.
+**Breaking changes** — Modified signatures, removed exports, changed response shapes, new required fields, migrations without backward compatibility. Grep for callers of changed symbols — the diff cannot show consumers it doesn't touch.
 
-**Performance** — Database queries inside loops (N+1), quadratic algorithms in hot paths, unbounded allocations, resource leaks, blocking operations in async contexts.
+**Performance** — N+1 queries, quadratic algorithms in hot paths, unbounded allocations, resource leaks, blocking operations in async contexts.
 
 **Dependencies** — New dependencies: license, maintenance status, known CVEs. Major version bumps may carry breaking API changes — read the changelog; version number alone is not evidence.
 
 **Tests** — Critical paths covered (auth, data integrity, payments), boundaries and failure paths exercised, assertions test outcomes not implementation. Missing tests for new branches are a gap; snapshot-only tests for logic-heavy code are usually a gap disguised as coverage.
 
-**Over-engineering** — LLM-generated code has a specific failure mode: unnecessary abstractions, helpers used once, patterns for hypothetical flexibility, premature configurability. Flag explicitly — these are common, costly, and reviewers underweight them.
+**Over-engineering** — LLM-generated code has a specific failure mode: unnecessary abstractions, helpers used once, patterns for hypothetical flexibility, premature configurability. Flag explicitly — common, costly, reviewers underweight them.
 
 ## Severity
 
