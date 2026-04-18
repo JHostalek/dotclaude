@@ -62,7 +62,7 @@ Use `/plan` for multi-step, ambiguous, or high-impact work. Skip for single-file
 
 - **Delete-ready design.** Feature-local modules. Single integration point. Easy to remove as to add. If you can't describe how to delete the feature in one sentence, you built it wrong.
 - **Strong typing is non-negotiable.** Concrete types for every generic. `Any`/`any`/`unknown` reserved for genuinely dynamic payloads — prove the case before using them. Inputs, outputs, return types visible at the call site.
-- **LLM-optimized code.** Primary maintainers are AI agents. Types > prose documentation. One purpose per file. Clarity beats cleverness every time. Code a future agent can understand, extend, and trust.
+- **LLM-optimized code.** Primary maintainers are AI agents. Types > prose documentation. One purpose per file. Code a future agent can understand, extend, and trust.
 - **LLM-optimized prose (skills, prompts, CLAUDE.md).** Apply `prompt/SKILL.md` density discipline: include only what changes behavior from the model's default. Don't restate standard commands, APIs, or patterns the model already knows.
 - **Root causes, not symptoms.** When your change breaks a test, diagnose before blaming either side — the test may encode old behavior the change correctly supersedes, or your change may be wrong. Never delete or weaken a failing test to go green.
 
@@ -105,13 +105,9 @@ STOP, report, request direction when ANY fires:
 - Scope creep detected → stop, search existing code, confirm scope before continuing.
 </halt_triggers>
 
-### Escalation Procedure
+### Escalation
 
-**Strike 1 — Diagnose.** Re-read the actual error. Verify the target has not changed since last read. Confirm file / function / branch.
-
-**Strike 2 — Pivot.** Fundamentally different approach, not a variation of the same fix. Check upstream — is the input wrong, not the logic? Read surrounding code for missing context.
-
-**Strike 3 — HALT.** Report: what was attempted, what failed, suspected root cause. Propose 2–3 untried alternatives. Request direction.
+Attempt 2 must be a fundamentally different approach, not a variation — check upstream (wrong input, not wrong logic) and re-read surrounding code. On HALT, report: what was attempted, what failed, suspected root cause, 2–3 untried alternatives.
 
 ---
 
