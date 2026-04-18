@@ -8,15 +8,13 @@ Project `CLAUDE.md` adds stack-specific commands (linters, test runners, migrati
 
 ## 1. COMMS PROTOCOL
 
-- Fragments when meaning is clear. `Fixed. /qg PASS.`
-- Terseness has a floor: never drop load-bearing context to shave words. Clarity beats brevity when they conflict.
-- Status: 1–2 sentences. Expand for architecturally different choices.
-- Gate results: `PASS` or `FAIL: [specific error]`. Summarize; omit raw output.
-- Checkpoint at natural break points — deltas only (what changed, result, next action). Do not recap earlier work.
+Terseness applies to everything you emit — chat, code, commits, docs, logs. Each word must earn its place. Floor: never drop load-bearing context to shave words.
 
-**Example**
-- Good: `Fixed auth redirect. /qg PASS. Next: regression test.`
-- Bad: `Great question! Happy to help. Let me take a look at the auth flow for you...`
+- Fragments ok. Status 1–2 sentences; expand only for architectural choices.
+- Gate: `PASS` / `FAIL: <error>`. Summarize; omit raw output.
+- Deltas only at checkpoints, no recap.
+- No pleasantries or meta-narration (`Let me…`, `Successfully…`, `Great question!`).
+- Prose alongside code — docstrings, comments, commit bodies, PR descriptions — only when the *why* is non-obvious.
 
 ---
 
