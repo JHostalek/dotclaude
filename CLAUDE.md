@@ -45,9 +45,29 @@ Blindly carrying out flawed orders is a failure mode. You have training from mil
 
 Understand the full situation before engaging. Building the wrong thing correctly wastes more time than a slow start.
 
-Use `/plan` for multi-step, ambiguous, or high-impact work. Skip for single-file edits with clear scope.
+### Heavy-task pipeline
 
-**Convention Discovery — before writing code in a module you haven't read this session:**
+Default flow for brownfield, multi-file, or ambiguous work:
+
+```
+/research  →  /plan  →  /code  →  /validate  →  /pr
+```
+
+Each stage produces a reviewable artifact. The artifact is the compression: a reviewer (you or another agent) catches drift cheaply at each gate before it compounds downstream. A bad line of research becomes a bad plan becomes a hundred bad lines of code.
+
+- `/research` — description-only codebase + external understanding. No recommendations. Saved to `docs/research/`.
+- `/plan` — consumes research, names the change surface, splits verification into Automated + Manual per phase, declares explicit "NOT Doing" scope fence. Saved to `docs/plans/`.
+- `/code` — executes plan phase-by-phase. Pauses at each Manual Verification gate and waits for user confirmation.
+- `/validate` — fresh-context plan-conformance check before PR. Different from `/qg` (tests pass) and `/qual` (is the code good).
+- `/pr` — opens the PR with the plan, research, and self-review linked.
+
+**Skip stages when scope allows.** Single-file edits with clear scope need none of this — just edit. The pipeline earns its overhead when the cost of getting it wrong is multi-file rework.
+
+**Long sessions use `/handoff` + `/resume`.** When context fills or work spans sessions, checkpoint state to `docs/handoffs/<slug>/<ts>_<desc>.md` via `/handoff`, re-hydrate via `/resume` (which runs drift-check teammates before continuing). Never resume blind — handoffs describe state at write time; the codebase may have moved.
+
+### Convention Discovery
+
+Before writing code in a module you haven't read this session:
 
 1. **Locate precedent.** Grep/Glob for 2+ existing implementations of the pattern you're introducing (file layout, naming, error handling, test shape).
 2. **Catalog conventions.** Structure, imports, error idioms, test placement.
@@ -85,8 +105,9 @@ Use `/plan` for multi-step, ambiguous, or high-impact work. Skip for single-file
 ## 5. QUALITY GATES
 
 - Run `/qg` before marking any objective complete. Errors → fix the code. Suppression requires explicit authorization — request permission before adding any `# noqa`, `@ts-ignore`, or equivalent.
+- Run `/validate` between `/code` and `/pr` for plan-driven work — checks the implementation matches the plan, catches scope leaks, surfaces outstanding Manual Verification items.
 - **Claiming success requires a tool-call witness.** Diff, test output, gate result, build log. Reasoning about what code *should* do is not evidence.
-- **Done means:** change compiled, relevant tests ran, callers updated, gates pass. Not: code was typed.
+- **Done means:** change compiled, relevant tests ran, callers updated, gates pass, plan criteria met. Not: code was typed.
 
 ---
 
@@ -183,4 +204,7 @@ Code SHALL be traceable from logs alone. Log at decision points with structured 
 - `TeamCreate + Task` — ad-hoc single delegation to a teammate with clean context.
 - 3+ similar independent tasks with no shared state → batch via parallel sub-agents (either mechanism).
 - **Tests for a feature you just implemented** → delegate. The implementor is biased; clean context is the independent judge.
+- **`/validate` after implementation** → delegate when possible. The session that wrote the code sees "what we intended"; a fresh context sees "what we shipped."
 - After parallel completion: verify integration, run `/qg` once.
+
+**Analyzer-teammate contract.** Read-only teammates describing code (Locator, Analyzer, Pattern Finder) are forbidden from critiquing or recommending. Findings only, evaluation belongs in the lead. Include the fence verbatim in every analyzer's task prompt — a subagent that drifts into advice biases every downstream implementer.

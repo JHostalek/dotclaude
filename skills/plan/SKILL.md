@@ -1,7 +1,7 @@
 ---
 name: plan
 description: Use when a task is multi-step, ambiguous, or high-impact and you need an executable implementation plan before editing code.
-argument-hint: [task description]
+argument-hint: [task description or path to research artifact]
 ---
 
 task = $ARGUMENTS
@@ -10,14 +10,22 @@ Produce the minimum artifact that prevents the executor from going wrong. The ex
 
 Match depth to complexity. A 3-file bug fix needs a paragraph, not a document.
 
+## Consume research first
+
+If research exists for this task (`docs/research/...` or provided as argument), **read it fully** in main context before planning. Do not delegate the read — the planner is the consumer of research, and summary-via-subagent loses the file:line specifics that make the plan precise.
+
+If the task is complex or brownfield and no research exists, stop and invoke `/research` first. Planning on top of incomplete understanding is the highest-leverage place a plan goes wrong.
+
 ## Exploration
 
 Explore until you can articulate *why* one approach beats alternatives — then stop and write. If you can't articulate the tradeoffs, you haven't explored enough. If you're still reading files after the picture is clear, you've explored too much.
 
-Two axes, pursued concurrently via read-only exploration teammates:
+When research is already in hand, exploration is thin — validate assumptions against the findings, note anything the research missed, proceed.
 
-- **Codebase** — existing implementations, patterns, conventions. Reference them so the executor follows established precedent.
-- **External** — web search for how others solved this. Libraries, vendor docs, open-source implementations. Borrow before inventing.
+When no research: two axes pursued concurrently via read-only teammates (see `/research` for the explorer shapes):
+
+- **Codebase** — existing implementations, patterns, conventions.
+- **External** — how others solved this. Vendor docs, libraries, RFCs.
 
 ## Decomposition
 
@@ -43,21 +51,42 @@ Litmus tests:
 
 ## Plan Format
 
-Required:
+### Required sections
 
 - **Goal** — One sentence. What exists after that didn't before.
-- **Files** — Exact paths with `[NEW]`/`[MOD]`/`[DEL]` prefix. Map the change surface before decomposing into steps.
-- **Steps** — Ordered, checkboxed (`- [ ]`), each naming the file(s) it touches.
-- **Verification** — Per-step: command + expected result. Final: acceptance criteria the executor checks before declaring done.
+- **What We're NOT Doing** — Explicit scope fence. Out-of-scope bugs, adjacent refactors, tempting cleanups the executor must leave alone. This section is load-bearing; omit it and the executor will drift.
+- **Files** — Exact paths with `[NEW]`/`[MOD]`/`[DEL]` prefix. Map the change surface before decomposing into phases.
+- **Phases** — Ordered. Each phase contains:
+  - **Steps** — Checkboxed (`- [ ]`), each naming the file(s) it touches.
+  - **Automated Verification** — Commands the executor can run alone: `pytest path/to/test.py::test_x`, `npm run typecheck`, `curl localhost:3000/api/foo | jq .status`. Every check the agent can run without human eyes.
+  - **Manual Verification** — Things only a human can confirm: "Open /settings, click Save, confirm the toast appears." "SSH to staging, check the log line fires." If a phase has no manual checks, write "None" — do not leave the section out.
+- **Final Acceptance** — The criteria the executor checks before declaring done across all phases.
 
-Add when the task warrants:
+### Add when the task warrants
 
 - **Background** — The *why*, when not obvious from the goal.
+- **References** — Research doc paths, tickets, ADRs, docs the executor should re-read.
 - **Key Concepts** — Domain terms, sentinel values, non-obvious patterns. Table format.
 - **Approach & Rejected Alternatives** — What you chose and rejected, with rationale. Prevents re-litigating decisions.
 - **Edge Cases** — The 3–5 most likely failure modes and how the plan handles each. If you can't name them, you haven't understood the problem deeply enough.
 - **Risks** — Only non-obvious ones with mitigations.
-- **Work Decomposition** — For `/orch`: which steps run in parallel vs. sequential, and why.
+- **Work Decomposition** — For `/orch`: which phases run in parallel vs. sequential, and why.
+
+## Open questions block planning
+
+If writing the plan surfaces a question that research didn't answer, **stop**. Do not write the plan with unresolved questions — the executor will guess. Either:
+
+1. Narrow the scope to what you *can* plan, note the unknown in "What We're NOT Doing."
+2. Return to `/research` with a tighter question.
+3. Ask the user if the question is about intent, not code.
+
+A plan with "TBD" sections is worse than no plan — it creates the illusion of readiness.
+
+## Review gate before execution
+
+Plans are reviewed **before** `/code` runs, not after. A bad plan becomes a hundred bad lines of code; a plan caught at review stage costs one revision cycle.
+
+Present the plan. Wait for approval or request review via `/judge` on the plan file. Do not hand off to `/code` or `/orch` until the plan has been read.
 
 ## Save & Handoff
 

@@ -42,24 +42,39 @@ When decomposing yourself: **one file, one teammate.** If two units need the sam
 
 <analyzer_constraints>
 Analyzers are read-only: `Glob`, `Grep`, `Read` only. Mixing analysis and editing in one pass produces fixes that miss the bigger picture.
+
+**Description-vs-evaluation fence.** Analyzers describe the codebase — they do not critique it, recommend fixes, or grade patterns. Findings, not opinions. "Function X at file:line does Y" — not "Function X should be refactored." Evaluation is the lead's job after reading all reports; a subagent that drifts into advice biases every downstream implementer. Include this fence verbatim in each analyzer's task prompt.
 </analyzer_constraints>
 
-Each analyzer reports via `SendMessage` with:
-- Current state of the relevant code.
-- Specific changes needed, with `file:line` references.
-- Edge cases and concrete implementation steps.
+### Analyzer types
 
-Wait for every analyzer to finish before spawning implementers. Partial reports lead to contradictory plans across units.
+Pick the right shape for the question. Mixing them in one role produces mush.
+
+| Type | Job | Returns |
+|------|-----|---------|
+| **Locator** | *Where* relevant code lives. Grep/Glob/LS only, no deep reads. | File list grouped by role (impl/test/config/wiring). |
+| **Analyzer** | *How* a specific flow works. Traces data + control flow. | `file:line`-cited call graph and state transitions. |
+| **Pattern Finder** | *What* the codebase's idiom looks like. Returns working snippets. | 2–3 representative snippets with paths, ranked by frequency. |
+
+Use Locator first when the surface is unclear; Analyzer when the shape is known but the mechanism isn't; Pattern Finder when the implementer needs a template to follow. See `/research` for the full agent prompts.
+
+Each analyzer reports via `SendMessage` with:
+- Current state of the relevant code (description).
+- `file:line` references for every claim.
+- Edge cases visible in the code.
+
+The *lead* translates findings into implementer contracts — not the analyzer. Wait for every analyzer to finish before spawning implementers. Partial reports lead to contradictory plans across units.
 
 ## Implementation phase
 
-Each implementer receives the analyzer's report (or your direct instructions) as their contract. When an implementer asks a clarifying question, answer it — don't let them guess. Guessing at scale compounds into inconsistent implementations that surface at integration.
+Each implementer receives a contract derived from the analyzers' reports (or from an approved plan) — not the raw analyzer outputs. The lead's job is to turn neutral findings into directive instructions. When an implementer asks a clarifying question, answer it — don't let them guess. Guessing at scale compounds into inconsistent implementations that surface at integration.
 
 When a question reveals the plan is wrong — not just ambiguous — pause the unit, revise the contract, relay back. An implementer executing a broken contract produces confidently wrong code.
 
 ## Quality
 
 After all implementers complete, in parallel:
+- `/validate` teammate — plan-conformance check (did we do what the plan said).
 - `/qual` teammate — multi-lens quality analysis on changed files.
 - `/qg` teammate — quality gates (format, lint, typecheck, tests, build).
 
