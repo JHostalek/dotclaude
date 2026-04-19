@@ -1,6 +1,6 @@
 ---
 name: research
-description: Use when a task is complex, brownfield, or requires understanding a subsystem before planning. Produces a reviewable research artifact — description only, no recommendations — that /plan consumes.
+description: Use when a task is complex, brownfield, or requires understanding a subsystem before planning. Produces a reviewable research artifact — description only, no recommendations — that /plan consumes. Do NOT trigger when an approved plan already exists — route to /code.
 argument-hint: [question or task description]
 ---
 
@@ -77,6 +77,10 @@ commit: <short sha>
 ```
 
 No "Recommendations," "Proposed approach," or evaluative sections.
+
+## Review gate
+
+Research is reviewed **before** `/plan` runs. Present the artifact; wait for approval, a scope correction, or a re-research request. Research is cheap to redirect, expensive to plan against when wrong — a wrong premise becomes a wrong plan becomes a hundred wrong lines.
 
 ## Save & handoff
 

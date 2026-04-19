@@ -11,7 +11,7 @@ Implement the plan. CLAUDE.md standards and quality gates apply throughout.
 
 If a plan file is in scope, read it fully in main context; also read files referenced by the plan's **Files** section before editing. Do not delegate these reads.
 
-Check existing `- [x]` markers — plans are resumable.
+Check existing `- [x]` markers — plans are resumable. Advance the plan's frontmatter `status:` from `approved` to `in-progress` on start via Edit.
 
 ## Phase-based execution
 
@@ -30,11 +30,11 @@ One phase at a time. After each:
 
 **Consecutive-phase mode.** User says "run all phases" → skip the manual gate until the last; still pause before final done.
 
-**No manual checks in this phase?** Still print "Phase N complete" and wait for a brief ack — the pause is the circuit breaker against runaway execution on a wrong plan.
+**No manual checks in this phase?** Automated PASS is sufficient — proceed to the next phase without a user ack. CLAUDE.md §2.2 "default to maximum autonomy" applies: authors who want a forced pause add a manual check ("confirm phase N output looks right").
 
 ## Commit per phase
 
-A failing change on top of 5 uncommitted phases is much harder to debug than one on top of a clean commit.
+A failing change on top of 5 uncommitted phases is much harder to debug than one on top of a clean commit. Use `/commit` — it carries the conventional-commit format and branch-safety checks already.
 
 ## Completion check
 

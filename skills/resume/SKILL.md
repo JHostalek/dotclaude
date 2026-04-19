@@ -18,11 +18,17 @@ Read the handoff **fully** in main context, then every file under **Critical Ref
 
 ## Verify against reality
 
-Handoff is a snapshot at write time. Spawn **parallel read-only** drift-check teammates:
+Handoff is a snapshot at write time. Two-stage drift check — cheap checks before user confirms direction, expensive ones after:
+
+**Pre-approval (always run, parallel read-only teammates):**
 
 1. **Git drift** — `git log <handoff-commit>..HEAD --oneline` + `--stat`. Report files touched since that overlap with Critical References or Recent Changes.
 2. **Symbol drift** — for each `file:line` in Recent Changes, verify the symbol is still what the handoff says.
-3. **Test drift** — run Automated Verification for the relevant plan phase. Report pass/fail.
+3. **Plan state** — if handoff's Artifacts reference a plan, read it in main context. Report frontmatter `status:` and first unchecked `- [ ]` Automated or Manual box. This is the real "where we are"; git inference is a proxy.
+
+**Post-approval (after user confirms continuation):**
+
+4. **Test drift** — run Automated Verification for the current phase. Expensive suites burn tokens on abandoned resumes; defer until the user has acknowledged direction.
 
 No edits in this phase.
 

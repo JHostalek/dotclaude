@@ -27,6 +27,7 @@ In parallel:
 1. **Diff survey.** `git log <base>..HEAD --oneline` + `git diff <base>..HEAD --stat`. `<base>` = commit before first implementation commit, or default-branch merge-base.
 2. **Automated Verification.** Re-run each phase's Automated commands. Record PASS/FAIL.
 3. **Claim check.** For each `- [x]` Automated checkbox, verify the corresponding change is in the diff.
+4. **Research alignment.** If plan frontmatter's `research:` field points to a doc, read it. For each entry in the research's **Open Questions**, confirm the resolution is visible in plan or code. Surface unresolved questions the plan silently absorbed.
 
 No edits in this phase.
 
@@ -90,5 +91,7 @@ Per-phase status row:
 | **MINOR DEVIATIONS** | Small internal differences; plan outcome achieved. | Proceed; note in PR description. |
 | **MAJOR DEVIATIONS** | Different approach; plan should be updated or PR must explain. | Stop; report; update plan or revert. |
 | **SCOPE VIOLATION** | Files outside plan scope, or "NOT Doing" crossed. | Stop. Do not auto-revert (work loss); present leak, ask keep (update plan) or remove. |
+
+On MATCHES or MINOR DEVIATIONS, advance plan frontmatter `status:` to `validated` via Edit before handing to `/pr`.
 
 **Stop after the report.** Do not fix issues unless asked.

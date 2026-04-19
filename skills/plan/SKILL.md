@@ -1,6 +1,6 @@
 ---
 name: plan
-description: Use when a task is multi-step, ambiguous, or high-impact and you need an executable implementation plan before editing code.
+description: Use when a task is multi-step, ambiguous, or high-impact and you need an executable implementation plan before editing code. Do NOT trigger for brownfield subsystems lacking research — route to /research first.
 argument-hint: [task description or path to research artifact]
 ---
 
@@ -52,6 +52,20 @@ Litmus:
 ## Plan Format
 
 ### Required
+
+Frontmatter at top of plan file — pipeline state machine, consumed by `/code`, `/validate`, `/resume`:
+
+```
+---
+slug: <short-slug>
+status: draft | approved | in-progress | validated | merged
+research: <path to docs/research/... or "none">
+---
+```
+
+Start at `draft`. User approval flips to `approved`. `/code` sets `in-progress` on start. `/validate` stamps `validated` on MATCHES/MINOR verdict. PR merge flips to `merged`.
+
+Body sections:
 
 - **Goal** — one sentence. What exists after that didn't before.
 - **What We're NOT Doing** — explicit scope fence. Out-of-scope bugs, adjacent refactors, tempting cleanups. Load-bearing.
