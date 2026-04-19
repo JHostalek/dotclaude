@@ -6,24 +6,22 @@ argument-hint: [short slug or ticket id, e.g. feat-auth or ENG-421]
 
 slug = $ARGUMENTS
 
-Write a structured artifact another agent can use to resume with clean context. This is **not** a chat transcript. It is pointers + learnings, optimized for re-hydration.
+Structured artifact another agent uses to resume with clean context. Pointers + learnings, not a chat transcript.
 
-## When a handoff is worth writing
+## When to write one
 
-- Context window ≥ 50% used and work isn't done.
-- Pausing the session (end of day, switching tasks).
-- Work will continue in a new session (worktree, different machine).
+- Context ≥ 50% and work isn't done.
+- Pausing the session (end of day, task switch).
+- Work continues in a new session (worktree, other machine).
 - User asks to checkpoint.
 
-If none of these, don't write one. Handoffs have a maintenance cost.
+Otherwise skip — handoffs have a maintenance cost.
 
 ## Core discipline
 
-**Pointers over payloads.** Use `file:line` references. Reject the instinct to paste code. The next agent will re-read the files — your job is to tell them which files and why.
-
-**More information, not less** (within that constraint). The next agent has zero context. A short handoff that omits a gotcha is worse than a verbose one that includes it.
-
-**Write for an amnesiac version of you.** If the handoff only makes sense to someone who was in this session, it's broken.
+- **Pointers over payloads.** `file:line` references, not pasted code. The next agent re-reads the files; your job is to name which and why.
+- **More information, not less** within that constraint. The next agent has zero context; omitting a gotcha is worse than verbosity.
+- **Write for an amnesiac version of you.** If it only makes sense to someone who was in this session, it's broken.
 
 ## Required sections
 
@@ -41,71 +39,61 @@ worktree: <path if applicable>
 ## Status
 
 - **Task:** <what we're building / fixing>
-- **Phase:** <which plan phase, or "exploration" / "debugging">
+- **Phase:** <plan phase, or "exploration" / "debugging">
 - **State:** completed | wip | blocked
 - **Blocker (if any):** <one line>
 
 ## Critical References
 
-The 2–3 files the next agent MUST read before doing anything. Ranked.
+2–3 files the next agent MUST read first. Ranked.
 
-1. <path> — <why it matters in one line>
-2. <path> — <why>
+1. <path> — <why, one line>
 
 ## Recent Changes
 
-`file:line` deltas from this session. Group by file.
+`file:line` deltas from this session, grouped by file.
 
 - `src/auth/session.py:42-58` — added TTL check
-- `tests/test_session.py:120` — new test for expired session path
 
 ## Learnings
 
-Non-obvious things discovered during the session. The next agent must not rediscover these.
-
-- <pattern, gotcha, root cause, dead-end tried>
-- <API quirk, library version issue>
-- <test infrastructure detail>
-
-This section is load-bearing. A handoff without Learnings is just a file list.
+Non-obvious things from this session — patterns, gotchas, root causes, dead-ends tried, API quirks, library version issues, test infrastructure details. Load-bearing section; without it, the handoff is just a file list.
 
 ## Artifacts
 
-Everything the next agent should read to resume. Exhaustive.
+Everything to read to resume. Exhaustive.
 
 - Plan: `docs/plans/<path>`
 - Research: `docs/research/<path>`
-- Tickets / issues: <link>
-- Related PRs: <link>
-- Relevant code files: <paths>
+- Tickets / PRs: <link>
+- Relevant code: <paths>
 
 ## Next Steps
 
 Ordered. Each step references an artifact or file path.
 
-1. <concrete next action>
-2. ...
+1. <concrete action>
 
 ## Open Questions
 
-Unresolved, human-gated, or not-yet-investigated. Do not speculate — list the question and where the next agent could start looking.
+Unresolved or human-gated. List the question and where the next agent could start.
 
 ## Notes
 
-Free-form. Environment state, running processes, uncommitted changes, anything that doesn't fit above.
+Free-form: environment state, running processes, uncommitted changes.
 ```
 
 ## Save location
 
 `docs/handoffs/<slug>/<YYYY-MM-DD_HH-MM-SS>_<short-desc>.md`
 
-Timestamp to second resolution. Multiple handoffs per slug are expected; most recent wins. Never overwrite — always a new timestamped file.
+Second-resolution timestamp. Multiple handoffs per slug expected; most recent wins. Never overwrite.
 
-Commit the handoff file. Handoffs are history; they live in git.
+Commit the handoff — handoffs are history.
 
 ## Hand-off protocol
 
-After writing, print to the user:
+After writing, print:
 
 ```
 Handoff saved: <path>

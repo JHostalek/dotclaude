@@ -6,92 +6,84 @@ argument-hint: [task description or path to research artifact]
 
 task = $ARGUMENTS
 
-Produce the minimum artifact that prevents the executor from going wrong. The executor starts with an empty context window: they get this plan and the codebase, nothing else. Every ambiguity becomes a wrong guess they make confidently.
+Minimum artifact that prevents the executor from going wrong. The executor starts with an empty context: every ambiguity becomes a wrong guess.
 
 Match depth to complexity. A 3-file bug fix needs a paragraph, not a document.
 
 ## Consume research first
 
-If research exists for this task (`docs/research/...` or provided as argument), **read it fully** in main context before planning. Do not delegate the read — the planner is the consumer of research, and summary-via-subagent loses the file:line specifics that make the plan precise.
+If research exists (`docs/research/...` or provided as argument), read it **fully** in main context before planning. Do not delegate the read — planner is the consumer, and summaries lose the file:line specifics that make the plan precise.
 
-If the task is complex or brownfield and no research exists, stop and invoke `/research` first. Planning on top of incomplete understanding is the highest-leverage place a plan goes wrong.
+Complex or brownfield and no research exists → stop and invoke `/research` first.
 
 ## Exploration
 
-Explore until you can articulate *why* one approach beats alternatives — then stop and write. If you can't articulate the tradeoffs, you haven't explored enough. If you're still reading files after the picture is clear, you've explored too much.
+Explore until you can articulate *why* one approach beats alternatives — then stop and write. Still reading files after the picture is clear = too much.
 
-When research is already in hand, exploration is thin — validate assumptions against the findings, note anything the research missed, proceed.
+With research in hand: validate assumptions, note gaps, proceed.
 
-When no research: two axes pursued concurrently via read-only teammates (see `/research` for the explorer shapes):
+Without research: two axes concurrently via read-only teammates (see `/research` for explorer shapes):
 
 - **Codebase** — existing implementations, patterns, conventions.
 - **External** — how others solved this. Vendor docs, libraries, RFCs.
 
 ## Decomposition
 
-Choose based on task shape, not habit. Default to vertical slice; switch when the task clearly fits another:
+Pick by task shape; default to vertical slice.
 
-| Strategy | When | Risk it mitigates |
-|----------|------|---------------------|
+| Strategy | When | Risk mitigated |
+|----------|------|----------------|
 | **Vertical slice** | Multiple independent behaviors | Integration surprises — each slice proves end-to-end |
 | **Walking skeleton** | Uncertain integration path | Late-stage "it doesn't connect" — proves wiring first |
-| **Layer-by-layer** | Clear layers, different complexity zones | Allows parallel work; natural when data model drives everything |
+| **Layer-by-layer** | Clear layers, different complexity | Parallel work; natural when data model drives everything |
 
 ## Specificity
 
-The hard part of planning is identifying the *surface of change* — which files, which functions, which call sites. Once the surface is named, the edits are obvious. Name concrete files and functions; describe *what* changes and *why*; reference precedent for the pattern to follow. Leave *how* to the executor — they need goals and constraints, not pseudocode.
+The hard part is naming the *surface of change* — files, functions, call sites. Once named, edits are obvious. Describe *what* changes and *why*; reference precedent. Leave *how* to the executor.
 
 - **Under-specified:** `Add a rate limiter to the API.`
-- **Over-specified:** Pseudocode of the rate-limit check, variable names, HTTP status codes.
-- **Calibrated:** `Add per-user rate limiting to authenticated endpoints. New middleware in src/api/middleware/ratelimit.py following the pattern of src/api/middleware/auth.py (middleware class + decorator registration in src/api/app.py:42). Use the existing Redis client from src/infra/redis.py.`
+- **Over-specified:** Pseudocode, variable names, HTTP status codes.
+- **Calibrated:** `Add per-user rate limiting to authenticated endpoints. New middleware in src/api/middleware/ratelimit.py following src/api/middleware/auth.py (middleware class + decorator registration in src/api/app.py:42). Reuse Redis client from src/infra/redis.py.`
 
-Litmus tests:
-- "Could the executor start in the wrong file?" → be more specific.
-- "Could the executor implement this without reading my plan?" → the step is too detailed.
+Litmus:
+- "Could the executor start in the wrong file?" → more specific.
+- "Could the executor implement this without reading my plan?" → too detailed.
 
 ## Plan Format
 
-### Required sections
+### Required
 
-- **Goal** — One sentence. What exists after that didn't before.
-- **What We're NOT Doing** — Explicit scope fence. Out-of-scope bugs, adjacent refactors, tempting cleanups the executor must leave alone. This section is load-bearing; omit it and the executor will drift.
-- **Files** — Exact paths with `[NEW]`/`[MOD]`/`[DEL]` prefix. Map the change surface before decomposing into phases.
-- **Phases** — Ordered. Each phase contains:
-  - **Steps** — Checkboxed (`- [ ]`), each naming the file(s) it touches.
-  - **Automated Verification** — Commands the executor can run alone: `pytest path/to/test.py::test_x`, `npm run typecheck`, `curl localhost:3000/api/foo | jq .status`. Every check the agent can run without human eyes.
-  - **Manual Verification** — Things only a human can confirm: "Open /settings, click Save, confirm the toast appears." "SSH to staging, check the log line fires." If a phase has no manual checks, write "None" — do not leave the section out.
-- **Final Acceptance** — The criteria the executor checks before declaring done across all phases.
+- **Goal** — one sentence. What exists after that didn't before.
+- **What We're NOT Doing** — explicit scope fence. Out-of-scope bugs, adjacent refactors, tempting cleanups. Load-bearing.
+- **Files** — exact paths with `[NEW]`/`[MOD]`/`[DEL]`.
+- **Phases** — ordered. Each:
+  - **Steps** — `- [ ]`, each naming files touched.
+  - **Automated Verification** — commands the executor runs alone: `pytest path/to/test.py::test_x`, `npm run typecheck`.
+  - **Manual Verification** — human-only checks: "Open /settings, click Save, confirm the toast." Write "None" if none; never omit the section.
+- **Final Acceptance** — criteria before declaring done.
 
-### Add when the task warrants
+### Add when warranted
 
-- **Background** — The *why*, when not obvious from the goal.
-- **References** — Research doc paths, tickets, ADRs, docs the executor should re-read.
-- **Key Concepts** — Domain terms, sentinel values, non-obvious patterns. Table format.
-- **Approach & Rejected Alternatives** — What you chose and rejected, with rationale. Prevents re-litigating decisions.
-- **Edge Cases** — The 3–5 most likely failure modes and how the plan handles each. If you can't name them, you haven't understood the problem deeply enough.
-- **Risks** — Only non-obvious ones with mitigations.
-- **Work Decomposition** — For `/orch`: which phases run in parallel vs. sequential, and why.
+- **Background** — *why*, when not obvious.
+- **References** — research docs, tickets, ADRs.
+- **Key Concepts** — domain terms, sentinel values. Table.
+- **Approach & Rejected Alternatives** — prevents re-litigating.
+- **Edge Cases** — 3–5 likely failure modes and how the plan handles each.
+- **Risks** — non-obvious, with mitigations.
+- **Work Decomposition** — for `/orch`: parallel vs. sequential phases.
 
 ## Open questions block planning
 
-If writing the plan surfaces a question that research didn't answer, **stop**. Do not write the plan with unresolved questions — the executor will guess. Either:
+Unresolved question surfaces while writing → **stop**. Don't write with "TBD" — the executor will guess. Either narrow scope (note unknown in "What We're NOT Doing"), return to `/research`, or ask the user.
 
-1. Narrow the scope to what you *can* plan, note the unknown in "What We're NOT Doing."
-2. Return to `/research` with a tighter question.
-3. Ask the user if the question is about intent, not code.
+## Review gate
 
-A plan with "TBD" sections is worse than no plan — it creates the illusion of readiness.
-
-## Review gate before execution
-
-Plans are reviewed **before** `/code` runs, not after. A bad plan becomes a hundred bad lines of code; a plan caught at review stage costs one revision cycle.
-
-Present the plan. Wait for approval or request review via `/judge` on the plan file. Do not hand off to `/code` or `/orch` until the plan has been read.
+Plans are reviewed **before** `/code` runs. Present the plan; wait for approval or request `/judge` on it. Do not hand off until read.
 
 ## Save & Handoff
 
-Save to `docs/plans/<type>-<short-name>.md` (adapt to project conventions if established). Types: `feat-`, `fix-`, `refactor-`, `chore-`.
+Save to `docs/plans/<type>-<short-name>.md` (types: `feat-`, `fix-`, `refactor-`, `chore-`). Adapt to project conventions.
 
-To update an existing plan, re-read it, diff against new requirements, and revise in place.
+To update an existing plan, re-read, diff against new requirements, revise in place.
 
-Hand off to `/code` for single-agent execution or `/orch` for parallel work.
+Hand off to `/code` (single-agent) or `/orch` (parallel).

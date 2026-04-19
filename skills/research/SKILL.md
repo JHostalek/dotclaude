@@ -6,38 +6,36 @@ argument-hint: [question or task description]
 
 question = $ARGUMENTS
 
-You are producing a research artifact that a human reviews before a plan exists. Research catches misunderstandings cheaply; a bad line of research becomes a hundred bad lines of code.
+Produce a research artifact a human reviews before a plan exists.
 
 ## Hard constraint
 
-**Document the codebase as it exists. No recommendations. No critique. No "should."** Description belongs here; evaluation belongs in `/plan`, `/judge`, or `/qual`. A researcher that drifts into advice biases every downstream step.
+**Document the codebase as it exists. No recommendations. No critique. No "should."** Evaluation belongs in `/plan`, `/judge`, or `/qual`. A researcher that drifts into advice biases every downstream step.
 
-If you find something that looks wrong, record it as a neutral observation with `file:line` evidence. Do not prescribe a fix.
+Observations that look like bugs: record with `file:line` evidence, neutrally. Do not prescribe.
 
 ## Scope before dispatch
 
-Read any file the user referenced **fully** in main context before spawning teammates. Critical context lives in the controller; noise lives in workers. A subagent that needs to re-read those files wastes its window.
+Read user-referenced files **fully** in main context before spawning teammates — a subagent that re-reads those files wastes its window.
 
-If scope is ambiguous (which subsystem, which flow, what "fix" means), ask before dispatching. Ambiguity at research stage compounds through plan and implementation.
+If scope is ambiguous (which subsystem, which flow, what "fix" means), ask before dispatching.
 
 ## Parallel explorer teammates
 
-All teammates are **read-only**. Spawn in parallel; wait for all before synthesizing. Use `TeamCreate` + `Task` per §12 of CLAUDE.md.
+All teammates are **read-only**. Spawn in parallel; wait for all before synthesizing. Use `TeamCreate` + `Task` per CLAUDE.md §12.
 
 | Teammate | Agent file | Job |
 |----------|-----------|-----|
-| Locator | `codebase-locator.md` | *Where* relevant code lives. Grep/Glob/LS only. Groups files by role (impl/test/config/types). Does not read deeply. |
-| Analyzer | `codebase-analyzer.md` | *How* specific code works. Traces data flow with `file:line` refs. Returns call graphs, not opinions. |
-| Pattern Finder | `codebase-pattern-finder.md` | Working code snippets of existing patterns to model after. Returns concrete examples, not abstractions. |
-| External | `external-researcher.md` | Library docs, RFCs, prior art via WebSearch/WebFetch. Source-attributed. |
+| Locator | `codebase-locator.md` | *Where* code lives. Grep/Glob/LS only. Groups files by role. |
+| Analyzer | `codebase-analyzer.md` | *How* code works. Traces data flow with `file:line` refs. |
+| Pattern Finder | `codebase-pattern-finder.md` | Working snippets of existing patterns. |
+| External | `external-researcher.md` | Library docs, RFCs, prior art via WebSearch/WebFetch. |
 
-**Each teammate's contract includes the description-only fence.** Do not let a subagent return "I recommend…" — reject and respawn if it does.
-
-Pick only the teammates the question needs. Routine: Locator + Analyzer. Add Pattern Finder when planning changes to an existing pattern. Add External when the question involves a library or spec.
+Routine pair: Locator + Analyzer. Add Pattern Finder when planning changes to an existing pattern; add External when a library or spec is involved. Reject + respawn any teammate that returns "I recommend…".
 
 ## Synthesis
 
-Main agent reads teammate reports, reads the referenced files directly (do not delegate the final read of critical files — their subagents saw snippets, you need the whole picture), and writes the artifact.
+Read teammate reports, then read the referenced files directly in main context — subagents saw snippets, you need the whole picture. Write the artifact.
 
 ### Required sections
 
@@ -52,45 +50,38 @@ commit: <short sha>
 # Research: <question>
 
 ## Question
-<what we're trying to understand, in one paragraph>
+<one paragraph>
 
 ## Summary
-<3–6 bullets — the findings a reviewer needs to see first>
+<3–6 bullets — findings a reviewer needs first>
 
 ## Findings
 
 ### <area 1>
-<prose with file:line refs — src/auth/session.py:42>
-
-### <area N>
+<prose with file:line refs>
 
 ## Data & Control Flow
-<trace the request/call/data path end-to-end when relevant, file:line at each hop>
+<end-to-end trace when relevant, file:line at each hop>
 
 ## Existing Patterns
-<when pattern finder ran — concrete snippets with paths and line numbers>
+<when pattern finder ran — snippets with paths>
 
 ## External References
 <when external researcher ran — URL + one-line summary + relevance>
 
 ## Historical Context
-<prior decisions from git log, ADRs, docs/ — file:line or commit sha>
+<prior decisions from git log, ADRs, docs/>
 
 ## Open Questions
-<things the research cannot answer from code alone — these block planning>
+<things code alone cannot answer — these block planning>
 ```
 
-### Forbidden sections
-
-- "Recommendations"
-- "Proposed approach"
-- "Next steps" beyond "see /plan"
-- Anything evaluative
+No "Recommendations," "Proposed approach," or evaluative sections.
 
 ## Save & handoff
 
-Save to `docs/research/<YYYY-MM-DD>-<slug>.md`. Adapt to project conventions if an established path exists (e.g., `thoughts/research/`).
+Save to `docs/research/<YYYY-MM-DD>-<slug>.md` (adapt to project conventions, e.g. `thoughts/research/`).
 
-Follow-up research on the same question appends `## Follow-up [timestamp]` to the same file — never a new file.
+Follow-up research on the same question appends `## Follow-up [timestamp]` to the same file.
 
-Hand off to `/plan` with the research path as argument. The plan skill is required to read it fully before writing.
+Hand off to `/plan` with the research path. The plan skill reads it fully before writing.
