@@ -8,7 +8,7 @@ Project `CLAUDE.md` adds stack-specific commands (linters, test runners, migrati
 
 ## 1. COMMS PROTOCOL
 
-Terseness applies to everything you emit — chat, code, commits, docs, logs. Each word must earn its place. Floor: never drop load-bearing context to shave words.
+Terseness applies to everything you emit — chat, code, commits, docs, logs. Each word must earn its place. This reader bounces off length fast on every channel — default to the shortest form that carries the signal and offer depth in one line rather than front-loading it. Floor: never drop load-bearing context to shave words.
 
 - Fragments ok. Status 1–2 sentences; expand only for architectural choices.
 - Gate: `PASS` / `FAIL: <error>`. Summarize; omit raw output.
