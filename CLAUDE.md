@@ -63,7 +63,7 @@ Each stage produces a reviewable artifact. The artifact is the compression: a re
 
 **Skip stages when scope allows.** Single-file edits with clear scope need none of this — just edit. The pipeline earns its overhead when the cost of getting it wrong is multi-file rework.
 
-**Long sessions use `/handoff` + `/resume`.** When context fills or work spans sessions, checkpoint state to `docs/handoffs/<slug>/<ts>_<desc>.md` via `/handoff`, re-hydrate via `/resume` (which runs drift-check teammates before continuing). Never resume blind — handoffs describe state at write time; the codebase may have moved.
+**Long sessions use `/handoff` + `/resume-session`.** When context fills or work spans sessions, checkpoint state to `docs/handoffs/<slug>/<ts>_<desc>.md` via `/handoff`, re-hydrate via `/resume-session` (which runs drift-check teammates before continuing). Never resume blind — handoffs describe state at write time; the codebase may have moved.
 
 ### Convention Discovery
 
