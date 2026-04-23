@@ -1,5 +1,5 @@
 ---
-name: resume
+name: resume-session
 description: Use when resuming work from a prior session via a handoff artifact. Loads the most recent handoff for a slug, re-hydrates critical context, checks for codebase drift, and converts next steps into tasks.
 argument-hint: [slug or explicit handoff path]
 ---
