@@ -16,14 +16,14 @@ Two waves: **detect** then **simplify**. Wave 2 exists because LLMs reliably ove
 
 ## Wave 1: Detect
 
-Spawn specialist teammates from `${CLAUDE_SKILL_DIR}/agents/`. Each teammate gets the target file list and the project's detected stack.
+Spawn specialist teammates per the table. Each gets the target file list and the project's detected stack.
 
-| Teammate | Agent file | Focus |
-|----------|-----------|-------|
-| Skeptic | `skeptic.md` | Bugs, security, performance, correctness |
-| Silent-failure hunter | `silent-failure.md` | Hidden errors, swallowed exceptions |
-| Pattern harmonizer | `patterns.md` | Divergent implementations, inconsistent patterns |
-| Comment auditor | `comments.md` | Misleading/stale/useless comments |
+| Teammate | Prompt | Focus |
+|----------|--------|-------|
+| Skeptic | `${CLAUDE_SKILL_DIR}/agents/skeptic.md` | Bugs, security, performance, correctness |
+| Silent-failure hunter | `~/.claude/skills/silent-failures/SKILL.md` | Hidden errors, swallowed exceptions (skill's qual-mode section applies) |
+| Pattern harmonizer | `${CLAUDE_SKILL_DIR}/agents/patterns.md` | Divergent implementations, inconsistent patterns |
+| Comment auditor | `~/.claude/skills/comment-audit/SKILL.md` | Misleading/stale/useless comments (skill's qual-mode section applies) |
 
 **Wave 1 teammates are read-only** — analysis tools only, no editing. Mixing analysis and editing in one pass leads to fixes that miss the bigger picture.
 
