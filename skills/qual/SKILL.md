@@ -21,9 +21,9 @@ Spawn specialist teammates per the table. Each gets the target file list and the
 | Teammate | Prompt | Focus |
 |----------|--------|-------|
 | Skeptic | `${CLAUDE_SKILL_DIR}/agents/skeptic.md` | Bugs, security, performance, correctness |
-| Silent-failure hunter | `~/.claude/skills/silent-failures/SKILL.md` | Hidden errors, swallowed exceptions (skill's qual-mode section applies) |
+| Silent-failure hunter | `~/.claude/skills/audit-silent-failures/SKILL.md` | Hidden errors, swallowed exceptions (skill's qual-mode section applies) |
 | Pattern harmonizer | `${CLAUDE_SKILL_DIR}/agents/patterns.md` | Divergent implementations, inconsistent patterns |
-| Comment auditor | `~/.claude/skills/comment-audit/SKILL.md` | Misleading/stale/useless comments (skill's qual-mode section applies) |
+| Comment auditor | `~/.claude/skills/audit-comments/SKILL.md` | Misleading/stale/useless comments (skill's qual-mode section applies) |
 
 **Wave 1 teammates are read-only** — analysis tools only, no editing. Mixing analysis and editing in one pass leads to fixes that miss the bigger picture.
 

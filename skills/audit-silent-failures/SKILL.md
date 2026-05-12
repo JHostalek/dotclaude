@@ -1,5 +1,5 @@
 ---
-name: silent-failures
+name: audit-silent-failures
 description: Use when hunting silent failures in a scope — bugs that don't crash but produce wrong results, like swallowed exceptions, defaults returned on error, or optional chaining masking missing data. Triggers on "hunt silent failures", "find swallowed errors", "audit error handling", "check error swallowing".
 argument-hint: [path]
 ---

@@ -1,5 +1,5 @@
 ---
-name: test-audit
+name: audit-tests
 description: Use when the user wants a thorough audit of the existing test suite — aggressively cutting tests that exist just to exist, rewriting weak ones to actually catch the bugs they should, identifying production code that is uncovered or thinly covered, and adding tests where coverage would catch real defects. Trigger on "audit tests", "find test bloat", "tests don't catch anything", or similar requests.
 argument-hint: [path-glob or module name; empty for full sweep]
 ---

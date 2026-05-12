@@ -1,5 +1,5 @@
 ---
-name: distill
+name: audit-complexity
 description: Use when the goal is to reduce code size, remove unnecessary complexity, or simplify a module without removing user-facing behavior.
 ---
 

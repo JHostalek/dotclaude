@@ -1,5 +1,5 @@
 ---
-name: razor
+name: audit-necessity
 description: Use when questioning whether code in a folder should exist, whether a solution is over-engineered, or where maintenance cost can be cut.
 argument-hint: <path>
 ---
@@ -44,7 +44,7 @@ Discard findings that fail any of these:
 - **Alternative-bearing** — "delete this" is not actionable. "Replace this 400-line custom parser with `{library}`" is.
 - **Honest about migration cost** — removing/replacing code has a cost too. Acknowledge it.
 
-Discard findings where the reviewer misunderstood the feature's purpose. Discard findings about code that's necessary but could be slightly shorter — that's refactoring territory, not razor territory.
+Discard findings where the reviewer misunderstood the feature's purpose. Discard findings about code that's necessary but could be slightly shorter — that's refactoring territory, not this skill's job.
 
 ### Severity
 
