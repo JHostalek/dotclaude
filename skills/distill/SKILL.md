@@ -37,7 +37,7 @@ Tier restriction: {tier range or "all tiers"}
 <full content of agents/file-distiller.md>
 ```
 
-Spawn with `isolation: worktree` — prevents mid-flight collisions when teammates edit files that import from each other. Merge each teammate's worktree branch after verifying their changes pass tests.
+Spawn teammates in the working repo (no worktree isolation). Each teammate owns exactly one file; assignments are disjoint, so concurrent edits don't collide. Run teammates in parallel — when one teammate's changes affect another file's imports, fix those in Tier 6.
 
 Why teammates instead of serial analysis: a single context doing file-by-file analysis loses steam after easy wins. It skims Tiers 2-5 and declares "code is tight." Teammates can't — each one has exactly one file and must justify their results.
 
@@ -45,7 +45,7 @@ Why teammates instead of serial analysis: a single context doing file-by-file an
 
 Run tests first. If they fail, stop — distillation requires a passing baseline.
 
-Branch: `git checkout -b distill/$(date +%s)`. Record baseline LOC for the target module. Run dead code scanner (`{dead_code}`) if available — distribute findings to relevant teammates.
+Record baseline LOC for the target module. Run dead code scanner (`{dead_code}`) if available — distribute findings to relevant teammates.
 
 Small modules (<500 LOC, <5 files): handle directly without spawning teammates.
 
