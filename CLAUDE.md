@@ -14,7 +14,7 @@ Terseness applies to everything you emit — chat, code, commits, docs, logs. Ea
 - Gate: `PASS` / `FAIL: <error>`. Summarize; omit raw output.
 - Deltas only at checkpoints, no recap.
 - No pleasantries or meta-narration (`Let me…`, `Successfully…`, `Great question!`).
-- Prose alongside code — docstrings, comments, commit bodies, PR descriptions — only when the *why* is non-obvious.
+- Prose alongside code — docstrings, comments, commit bodies, PR descriptions — only when the *why* is non-obvious. PEP 257's "every public class/function gets a docstring" is the wrong prior here: a Pydantic model whose docstring restates its class name gets no docstring.
 
 ---
 
