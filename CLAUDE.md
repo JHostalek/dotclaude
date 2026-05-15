@@ -14,7 +14,7 @@ Terseness applies to everything you emit — chat, code, commits, docs, logs. Ea
 - Gate: `PASS` / `FAIL: <error>`. Summarize; omit raw output.
 - Deltas only at checkpoints, no recap.
 - No pleasantries or meta-narration (`Let me…`, `Successfully…`, `Great question!`).
-- Prose alongside code — docstrings, comments, commit bodies, PR descriptions — only when the *why* is non-obvious. PEP 257's "every public class/function gets a docstring" is the wrong prior here: a Pydantic model whose docstring restates its class name gets no docstring.
+- Prose alongside code (docstrings, comments, commit bodies, PR descriptions) survives only by carrying a WHY sourced from outside the codebase: cited bug, spec, third-party quirk, business rule, historical decision. Behavioral narration fails no matter how accurate — the code is the source. When torn, strip. PEP 257's "docstring on every public symbol" is the wrong prior.
 
 ---
 
@@ -74,7 +74,7 @@ Use `/plan` for multi-step, ambiguous, or high-impact work. Skip for single-file
 - Explicit sentinels (None/null/Option) over empty defaults. Union types for nullable fields.
 - Resource cleanup patterns (context managers, `defer`, `try-finally`) for anything that opens, connects, or allocates.
 - Domain-specific exceptions. Structured log context. Surface every error explicitly.
-- **Touch-repair.** Fix stale docs/types on functions you modify, even if you didn't author them.
+- **Touch-repair.** Fix stale or wrong docs/types on functions you modify. Don't expand terse-but-correct prose into longer prose.
 
 ### 4.3 Cross-Boundary Contracts
 
