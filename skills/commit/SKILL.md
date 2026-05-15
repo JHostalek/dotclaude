@@ -9,7 +9,6 @@ Committing to the wrong branch is the most common costly mistake — it bypasses
 
 - **Default branches (`main`/`master`) are off-limits.** Auto-create a `<type>/<short-slug>` feature branch from the changes (e.g., `fix/dialog-overflow`, `feat/oauth-flow`).
 - **Verify after context switches.** Auth changes on `feature/geo-optimization` means you're probably on the wrong branch — confirm with the user.
-- **Submodules have independent branches.** Check each submodule with changes via `git -C <submodule> branch --show-current`. A submodule can be on `main` while the parent is on a feature branch.
 
 ## Commit Format
 
