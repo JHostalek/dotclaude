@@ -12,6 +12,7 @@ Commit after each step.
 /audit-patterns
 /audit-correctness
 /audit-silent-failures
+/audit-logs
 /audit-perf
 /audit-security
 /audit-tests (if there are any)
