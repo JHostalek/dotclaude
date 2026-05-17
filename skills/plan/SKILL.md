@@ -8,16 +8,16 @@ task = $ARGUMENTS
 
 Produce the minimum artifact that prevents the executor from going wrong. The executor starts with an empty context window: they get this plan and the codebase, nothing else. Every ambiguity becomes a wrong guess they make confidently.
 
-Match depth to complexity. A 3-file bug fix needs a paragraph, not a document.
+Match depth to complexity. A 3-file bug fix needs a paragraph, not a document. If you could describe the diff in one sentence, skip the plan entirely.
 
 ## Exploration
 
-Explore until you can articulate *why* one approach beats alternatives — then stop and write. If you can't articulate the tradeoffs, you haven't explored enough. If you're still reading files after the picture is clear, you've explored too much.
+Explore until you can articulate *why* one approach beats alternatives — then stop and write. If you can't articulate the tradeoffs, you haven't explored enough. If you're still reading files after the picture is clear, you've explored too much. External-axis stop: a borrowable pattern is identified, or you've confirmed nobody solved it cleanly — inventing is the fallback, not the default.
 
-Two axes, pursued concurrently via read-only exploration teammates:
+Two axes, pursued concurrently via read-only subagents that return summaries (not raw file dumps):
 
-- **Codebase** — existing implementations, patterns, conventions. Reference them so the executor follows established precedent.
-- **External** — web search for how others solved this. Libraries, vendor docs, open-source implementations. Borrow before inventing.
+- **Codebase** — existing implementations, patterns, conventions. For every new pattern the plan introduces, cite the precedent `file:line` the executor should mirror. Without the citation, the executor will reinvent — even when the precedent exists.
+- **External** — web search for how others solved this. Libraries, vendor docs, open-source implementations. Prefer borrowing a named approach over inventing; name the source (URL or library) in the plan.
 
 ## Decomposition
 
@@ -32,6 +32,8 @@ Choose based on task shape, not habit. Default to vertical slice; switch when th
 ## Specificity
 
 The hard part of planning is identifying the *surface of change* — which files, which functions, which call sites. Once the surface is named, the edits are obvious. Name concrete files and functions; describe *what* changes and *why*; reference precedent for the pattern to follow. Leave *how* to the executor — they need goals and constraints, not pseudocode.
+
+When a step would otherwise contain a guess, ask the user before saving. The plan is a closed contract — the executor cannot resolve ambiguity, only act on it.
 
 - **Under-specified:** `Add a rate limiter to the API.`
 - **Over-specified:** Pseudocode of the rate-limit check, variable names, HTTP status codes.
@@ -58,6 +60,13 @@ Add when the task warrants:
 - **Edge Cases** — The 3–5 most likely failure modes and how the plan handles each. If you can't name them, you haven't understood the problem deeply enough.
 - **Risks** — Only non-obvious ones with mitigations.
 - **Work Decomposition** — For `/orch`: which steps run in parallel vs. sequential, and why.
+
+## Self-Review
+
+Before saving, check:
+- Every goal-implied change has a step.
+- No placeholders survive: `TBD`, "implement later", "add error handling" without specifics. No open questions — every ambiguity was resolved with the user before save.
+- Function/type names referenced across steps match each other and the codebase.
 
 ## Save & Handoff
 
