@@ -33,6 +33,32 @@ No placeholders, no filler — a `## Summary` with `[Description of changes]` is
 - **Changes** — one bullet per meaningful change, grouped by area. A change list, not a file list.
 - **Self-Review** — what the agent verified (`[x]`) vs. couldn't (`[ ]`). Name the evidence per item.
 - **Human Review** — specific things where human judgment is load-bearing.
+- **Architecture** (when warranted, see below) — always the last section, after Human Review.
+
+### Before/after diagram
+
+When the PR reshapes data flow, control flow, ownership, or sync boundaries — anything where the reviewer has to hold "old shape" and "new shape" in their head to judge the diff — embed a before/after Mermaid as a `## Architecture` block at the **bottom of the PR body**, after `## Human Review`. Not in `## Summary` — the diagram is reference material reviewers scroll to, not the lede. GitLab and GitHub both render ```` ```mermaid ```` fences inline; no images, no Kroki.
+
+**Stacked TB layout — BEFORE on top, AFTER below.** Outer `flowchart TB`, each subgraph `direction TB`, force ordering with an invisible `BEFORE ~~~ AFTER` link between the subgraph IDs themselves (not inner nodes — a node-level cross-subgraph edge collapses internal `direction TB` back to horizontal under the dagre renderer):
+
+````
+```mermaid
+flowchart TB
+  subgraph BEFORE["BEFORE — <one-line label>"]
+    direction TB
+    B_x["..."]
+  end
+  subgraph AFTER["AFTER — <one-line label>"]
+    direction TB
+    A_x["..."]
+  end
+  BEFORE ~~~ AFTER
+```
+````
+
+Side-by-side LR is tempting but unreliable on the dagre renderer GitLab/GitHub ship — internal `direction TB` only holds when subgraphs are fully isolated, and any cross-subgraph edge (including the ordering hack) flips them to horizontal. Stack instead.
+
+Skip the diagram for pure refactors, bugfixes, dep bumps, copy changes — anything where the shape didn't move.
 
 ### Template
 
@@ -54,6 +80,10 @@ $(cat <<'EOF'
 ## Human Review
 
 - [ ]
+
+## Architecture
+
+<!-- Only when the PR reshapes data/control flow. Otherwise delete this section. -->
 
 EOF
 )
