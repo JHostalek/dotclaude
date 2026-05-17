@@ -27,18 +27,20 @@ All work flows through teammates. Match pipeline depth to scope:
 
 ## Specialist Teammates
 
-Each file under `agents/` is a self-contained specialist prompt with two modes:
+Each agent is a self-contained specialist prompt run in one of two modes:
 - **Analyzer**: Read-only. Produces a findings report. Never edits.
 - **Implementer**: Receives an analyzer report. Executes fixes. Never freelances.
 
-To spawn: read the prompt file from `${CLAUDE_SKILL_DIR}/agents/<name>.md`, pass its full content as the teammate's prompt. Prepend mode and scope:
+Refactor-local specialists live at `${CLAUDE_SKILL_DIR}/agents/<name>.md`. `typing`, `perf`, and `patterns` delegate to the standalone audit skills at `~/.claude/skills/audit-{typing,perf,patterns}/SKILL.md` — those skills are mode-agnostic, so the prepended mode line is what enforces analyzer/implementer discipline.
+
+To spawn: read the prompt file, pass its content as the teammate's prompt, prepend mode and scope:
 
 ```
-You are in ANALYZER mode. Scope: <path or "entire codebase">.
-<full content of agents/<name>.md>
+You are in ANALYZER mode. Scope: <path or "entire codebase">. Read-only — produce a findings report, do not edit files.
+<full content of the prompt file>
 ```
 
-For implementer mode, also append the analyzer's findings report.
+For implementer mode, swap the mode line to "IMPLEMENTER mode — execute fixes from the report below; do not freelance." and append the analyzer's findings report.
 
 ### Ordering and Rationale
 

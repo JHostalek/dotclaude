@@ -6,26 +6,35 @@ skills for agentic coding tools. extremely opinionated. updated (almost) daily.
 
 ### build
 
-start here. `plan` decomposes the problem, `code` implements it solo, `orch` scales to parallel agents when the task is too large for one.
+start here. `sparring` pressure-tests the proposal, `plan` decomposes the problem, `code` implements it solo, `orch` scales to parallel agents when the task is too large for one.
 
 | skill | |
 |-------|-|
+| `sparring` | adversarial pressure-test a proposal before committing |
 | `plan` | executable implementation plans |
 | `code` | implement plans with quality gates |
 | `orch` | multi-agent parallel execution |
 
 ### quality
 
-before you ship. review what you built, refactor what's messy, distill what's bloated.
+before you ship. review what you built, refactor what's messy, audit what's bloated or stale.
 
 | skill | |
 |-------|-|
 | `pr-review` | code review — correctness, security, quality |
-| `qual` | multi-lens analysis with specialist agents |
 | `judge` | independent expert review before accepting work |
-| `razor` | question whether code should exist, cut maintenance cost |
+| `audit` | full audit sweep — sequences every focused audit below |
+| `audit-necessity` | question whether code should exist, cut maintenance cost |
+| `audit-patterns` | unify divergent implementations, kill reimplementations |
+| `audit-correctness` | hunt logic bugs — off-by-one, inverted conditions, boundary cases |
+| `audit-silent-failures` | hunt swallowed errors and defaults masking bugs |
+| `audit-logs` | fix missing observability, INFO bloat, wrong-level messages |
+| `audit-perf` | catch N+1, overfetching, blocking hot paths, unbounded growth |
+| `audit-security` | injection, auth/authz gaps, secrets, weak crypto, OWASP |
+| `audit-tests` | find redundant/weak tests, cover uncovered code |
+| `audit-complexity` | maximize LOC reduction |
+| `audit-comments` | strip stale or bloated comments and docstrings |
 | `refactor` | architectural refactoring with parallel agents |
-| `distill` | maximize LOC reduction |
 | `ux` | UI evaluation across Nielsen's heuristics |
 | `qg` | quality gates — format, lint, typecheck, tests, build |
 
@@ -45,14 +54,12 @@ git workflow from branch to PR to merge.
 
 ### improve
 
-level up your setup. find community skills, benchmark your own, let `intern` analyze your sessions and auto-improve.
+level up your setup. find community skills, assess your own, sharpen prompts.
 
 | skill | |
 |-------|-|
 | `find-skills` | discover and install from registries |
 | `improve-skill` | assess skills against ecosystem + competing tools |
-| `skill-creator` | create, modify, benchmark, eval skills |
-| `intern` | analyze sessions, detect patterns, auto-improve |
 | `prompt` | design production-grade LLM prompts |
 | `transformer` | rewrite skills for reasoning model performance |
 
@@ -65,15 +72,6 @@ specialized tools for specific problem spaces.
 | `design` | divergent exploration with independent reasoning agents |
 | `color-system` | color palettes, themes, tokens, contrast, dark/light mode |
 | `seo-geo` | SEO + generative engine optimization |
-
-### experimental — [Pencil](https://www.pencil.dev/)
-
-design-to-code workflow for [Pencil](https://www.pencil.dev/) `.pen` files. requires the Pencil MCP server — see [AI integration docs](https://docs.pencil.dev/getting-started/ai-integration) for setup.
-
-| skill | |
-|-------|-|
-| `pen-design` | design UIs in `.pen` files — design thinking + visual systems |
-| `pen-code` | convert between `.pen` designs and React/Tailwind code |
 
 ### hooks
 
@@ -89,7 +87,7 @@ skills work out of the box, but some features require `settings.json` entries:
 
 | setting | why |
 |---------|-----|
-| `env.CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS: "1"` | required for skills that spawn agent teams (`orch`, `qual`, `judge`, `refactor`, `intern`, `design`) |
+| `env.CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS: "1"` | required for skills that spawn agent teams (`orch`, `judge`, `refactor`, `design`, `audit`) |
 | `permissions.additionalDirectories: ["~/.claude/skills"]` | lets teammates read skill files — needed if you symlink skills into `~/.claude/skills/` |
 
 hook scripts ship in `hooks/` but must be wired in `settings.json` under the `hooks` key to take effect — see [Claude Code docs on hooks](https://docs.anthropic.com/en/docs/claude-code/hooks).
@@ -111,7 +109,6 @@ some skills in this repo were created by other authors and are included under th
 
 | skill | author | license | source |
 |-------|--------|---------|--------|
-| `skill-creator` | [Anthropic](https://github.com/anthropics) | [Apache 2.0](skills/skill-creator/LICENSE.txt) | [anthropics/skills](https://github.com/anthropics/skills) |
 | `seo-geo` | [ReScienceLab](https://github.com/ReScienceLab) | [MIT](skills/seo-geo/.claude-plugin/plugin.json) | [ReScienceLab/opc-skills](https://github.com/ReScienceLab/opc-skills) |
 
 ## license
@@ -129,34 +126,32 @@ some skills in this repo were created by other authors and are included under th
 
 ### What Problem Does This Solve?
 
-Claude Code ships with general-purpose intelligence but no opinionated workflows. dotclaude adds battle-tested skills for the full development lifecycle: planning (`plan`), implementation (`code`), code review (`pr-review`, `qual`), refactoring (`refactor`, `distill`), git workflow (`commit`, `pr`, `worktree`, `worktree-clean`), team orchestration (`orch`), and SEO/GEO optimization (`seo-geo`). Each skill encodes specific methodologies — the pr-review skill checks for correctness, security, and quality; the design skill spawns independent agents with different reasoning methods to prevent convergence bias; the intern skill analyzes past sessions to detect recurring patterns and auto-improve your configuration; the seo-geo skill applies Princeton GEO research methods and DataForSEO API integration to optimize for both traditional and AI search engines.
+Claude Code ships with general-purpose intelligence but no opinionated workflows. dotclaude adds battle-tested skills for the full development lifecycle: proposal pressure-testing (`sparring`), planning (`plan`), implementation (`code`), code review (`pr-review`, `judge`), refactoring (`refactor`, `audit-complexity`), audit (`audit` umbrella plus focused `audit-necessity`, `audit-patterns`, `audit-correctness`, `audit-silent-failures`, `audit-logs`, `audit-perf`, `audit-security`, `audit-tests`, `audit-comments`), git workflow (`commit`, `pr`, `worktree`, `worktree-clean`), team orchestration (`orch`), and SEO/GEO optimization (`seo-geo`). Each skill encodes specific methodologies — the pr-review skill checks for correctness, security, and quality; the design skill spawns independent agents with different reasoning methods to prevent convergence bias; the sparring skill adversarially attacks proposals before commit; the seo-geo skill applies Princeton GEO research methods and DataForSEO API integration to optimize for both traditional and AI search engines.
 
 ### How dotclaude Compares to Alternatives
 
 | Feature | dotclaude | [anthropics/skills](https://github.com/anthropics/skills) | [travisvn/awesome-claude-skills](https://github.com/travisvn/awesome-claude-skills) |
 |---|---|---|---|
 | Actively maintained | Yes (updated (almost) daily) | Occasional | No (curated links) |
-| Agent team orchestration | Yes (orch, qual, judge, refactor, intern) | No | No |
+| Agent team orchestration | Yes (orch, judge, refactor, design, audit) | No | No |
 | Multi-agent design exploration | Yes (design skill) | No | No |
-| Skill meta-tooling | Yes (skill-creator, improve-skill, find-skills) | No | No |
+| Adversarial proposal review | Yes (sparring skill) | No | No |
+| Code audit suite | Yes (audit umbrella plus audit-necessity, audit-patterns, audit-correctness, audit-silent-failures, audit-logs, audit-perf, audit-security, audit-tests, audit-complexity, audit-comments) | No | No |
+| Skill meta-tooling | Yes (improve-skill, find-skills, transformer) | No | No |
 | SEO/GEO optimization | Yes (seo-geo: free audit + 9 DataForSEO scripts) | No | No |
 | Git workflow automation | Yes (commit, pr, merge, rebase, worktree, worktree-clean) | No | Partial |
-| Design-to-code (Pencil) | Yes (pen-design, pen-code) | No | No |
-| Self-improving configuration | Yes (intern skill) | No | No |
 | Agent Skills standard compliant | Yes | Yes | Varies |
 | Cross-tool compatible | Yes (Codex, Cursor, Copilot) | Claude Code only | Claude Code only |
 
 ### Skill Categories
 
-**Workflow skills** automate the development loop: `plan` creates decomposed implementation plans with verification criteria; `code` executes plans with incremental testing and legacy cleanup; `commit` enforces conventional commits with branch guards; `pr` creates pull requests with conventional formatting; `merge` integrates branches with conflict resolution; `worktree` and `worktree-clean` manage git worktree lifecycle for isolated feature development; `rebase` rebases branches onto targets with conflict safety heuristics; `orch` orchestrates multi-agent teams for parallel implementation; `timesheet` generates monthly work summaries from git history.
+**Workflow skills** automate the development loop: `sparring` adversarially pressure-tests proposals before commitment; `plan` creates decomposed implementation plans with verification criteria; `code` executes plans with incremental testing and legacy cleanup; `commit` enforces conventional commits with branch guards; `pr` creates pull requests with conventional formatting; `merge` integrates branches with conflict resolution; `worktree` and `worktree-clean` manage git worktree lifecycle for isolated feature development; `rebase` rebases branches onto targets with conflict safety heuristics; `orch` orchestrates multi-agent teams for parallel implementation; `timesheet` generates monthly work summaries from git history.
 
-**Quality skills** catch issues before they reach production: `pr-review` performs multi-dimensional code review (correctness, security, quality); `qual` spawns specialist agent teammates that analyze code from different angles then consolidate findings; `judge` provides independent expert review of work before accepting or extending it; `razor` questions whether code should exist and identifies where maintenance cost can be cut; `refactor` runs comprehensive architectural analysis with parallel agent teams per module; `distill` maximizes line-of-code reduction while maintaining readability; `ux` evaluates user interfaces across 13 dimensions mapped to Nielsen's heuristics; `qg` runs all quality gates (format, lint, typecheck, tests, build) and reports PASS/FAIL per gate.
+**Quality skills** catch issues before they reach production: `pr-review` performs multi-dimensional code review (correctness, security, quality); `judge` provides independent expert review of work before accepting or extending it; `audit` is the umbrella skill that sequences every focused audit below, committing after each step; `audit-necessity` questions whether code should exist and identifies where maintenance cost can be cut; `audit-patterns` unifies divergent implementations of the same concern and kills reimplementations of existing utilities; `audit-correctness` hunts logic bugs — off-by-one, inverted conditions, unit/dimension mismatches, code that doesn't do what its name claims; `audit-silent-failures` hunts swallowed exceptions, defaults masking missing data, and optional chaining that hides bugs; `audit-logs` fixes missing observability, INFO bloat that doesn't scale, stale or wrong-level messages, and payload dumps on routine paths; `audit-perf` catches N+1 queries, overfetching, wasted recomputation, blocking hot paths, and unbounded growth; `audit-security` covers injection, auth/authz gaps, secrets in code or logs, weak crypto, and OWASP-style trust-boundary issues; `audit-tests` finds redundant or weak tests and adds coverage where it would catch real defects; `audit-complexity` maximizes line-of-code reduction while maintaining readability; `audit-comments` strips bloated or stale comments and docstrings; `refactor` runs comprehensive architectural analysis with parallel agent teams per module; `ux` evaluates user interfaces across 13 dimensions mapped to Nielsen's heuristics; `qg` runs all quality gates (format, lint, typecheck, tests, build) and reports PASS/FAIL per gate.
 
-**Meta skills** improve your Claude Code setup itself: `skill-creator` creates, modifies, benchmarks, and evaluates skills with variance analysis; `improve-skill` compares your skills against the open ecosystem and competing AI coding tools; `find-skills` discovers installable skills from community registries; `intern` analyzes recent Claude Code sessions to detect recurring patterns and automatically write skill and rule improvements; `prompt` designs production-grade LLM prompts through interactive collaboration; `transformer` rewrites skills so reasoning models perform them better — strips scaffolding, preserves domain knowledge, adds calibration.
+**Meta skills** improve your Claude Code setup itself: `improve-skill` compares your skills against the open ecosystem and competing AI coding tools; `find-skills` discovers installable skills from community registries; `prompt` designs production-grade LLM prompts through interactive collaboration; `transformer` rewrites skills so reasoning models perform them better — strips scaffolding, preserves domain knowledge, adds calibration.
 
 **Domain skills** solve specific problems: `design` runs divergent design exploration by spawning independent agents with clean contexts and different reasoning methods (morphological analysis, TRIZ, constraint relaxation, biomimicry) to prevent convergence bias; `color-system` helps choose, evaluate, fix, extend, and operationalize colors for interfaces — palettes, themes, tokens, contrast, dark/light mode, and semantic color roles; `seo-geo` handles SEO and Generative Engine Optimization for both traditional search engines (Google, Bing) and AI search engines (ChatGPT, Perplexity, Gemini, Google AI Overview, Microsoft Copilot, Claude) — includes a free technical SEO audit script, 9 DataForSEO-powered Python scripts (keyword research, related keywords, autocomplete ideas, SERP analysis, backlinks, domain overview, competitor gap analysis), 6 reference guides (Princeton GEO research, platform-specific ranking algorithms, JSON-LD schema templates, SEO audit checklist, tools and APIs), and a real-world optimization case study.
-
-**Experimental — Pencil integration:** `pen-design` creates production-quality UI designs in Pencil `.pen` files with design thinking and visual systems methodology; `pen-code` converts between `.pen` designs and React/Tailwind code (export from design or sync changes back). These skills require the [Pencil](https://www.pencil.dev/) desktop app and its MCP server — see [AI integration docs](https://docs.pencil.dev/getting-started/ai-integration) for setup.
 
 ### Installation and Usage
 
@@ -165,7 +160,7 @@ Install by copying skill directories into `~/.claude/skills/` or by cloning the 
 ### Frequently Asked Questions
 
 **What is dotclaude?**
-dotclaude is an actively maintained collection of Agent Skills for Claude Code that add extremely opinionated workflows for planning, implementation, code review, refactoring, git operations, team orchestration, color systems, SEO/GEO optimization, and self-improving configuration. Each skill follows the Agent Skills open standard and works across Claude Code, Codex CLI, Cursor, and VS Code Copilot.
+dotclaude is an actively maintained collection of Agent Skills for Claude Code that add extremely opinionated workflows for proposal pressure-testing, planning, implementation, code review, refactoring, a full audit suite (necessity, patterns, correctness, silent failures, logs, perf, security, tests, complexity, comments), git operations, team orchestration, color systems, and SEO/GEO optimization. Each skill follows the Agent Skills open standard and works across Claude Code, Codex CLI, Cursor, and VS Code Copilot.
 
 **How do I install dotclaude skills?**
 Clone the repository and copy or symlink individual skill directories into `~/.claude/skills/`. Each skill is self-contained — no dependencies, no build step, no configuration beyond placing the directory. Skills are automatically discovered by Claude Code on next session start.
@@ -174,13 +169,13 @@ Clone the repository and copy or symlink individual skill directories into `~/.c
 Yes. All skills follow the Agent Skills open standard (agentskills.io) adopted by Anthropic, Microsoft (VS Code Copilot), OpenAI (Codex CLI), Cursor, GitHub, Atlassian, and Figma. Any tool that reads `SKILL.md` files with YAML frontmatter can use these skills.
 
 **What makes dotclaude different from other skill collections?**
-Three things: (1) agent team orchestration — skills like `orch`, `qual`, `judge`, `refactor`, and `intern` spawn multiple agents working in parallel; (2) self-improving meta-tooling — `skill-creator`, `improve-skill`, and `intern` let you create, benchmark, and auto-improve skills; (3) depth — each skill encodes specific methodologies rather than generic checklists (e.g., seo-geo includes 9 DataForSEO scripts and 6 reference guides based on Princeton GEO research).
+Three things: (1) agent team orchestration — skills like `orch`, `judge`, `refactor`, `design`, and the `audit` umbrella spawn multiple agents working in parallel; (2) adversarial and audit tooling — `sparring` pressure-tests proposals before commitment, while the `audit-*` suite (`audit-necessity`, `audit-patterns`, `audit-correctness`, `audit-silent-failures`, `audit-logs`, `audit-perf`, `audit-security`, `audit-tests`, `audit-complexity`, `audit-comments`) cuts unnecessary code, divergent patterns, logic bugs, swallowed errors, log noise, slow paths, security holes, weak tests, complexity, and stale comments; (3) depth — each skill encodes specific methodologies rather than generic checklists (e.g., seo-geo includes 9 DataForSEO scripts and 6 reference guides based on Princeton GEO research).
 
 **What does the seo-geo skill do?**
 The `seo-geo` skill optimizes websites for both traditional search engines (Google, Bing) and AI search engines (ChatGPT, Perplexity, Gemini, Google AI Overview, Microsoft Copilot, Claude). It includes a free technical SEO audit script (no API key needed), 9 Python scripts powered by the DataForSEO API for keyword research, SERP analysis, backlink analysis, domain overview, competitor gap analysis, related keywords, and autocomplete ideas. Reference guides cover the 9 Princeton GEO optimization methods, platform-specific ranking algorithms for each AI search engine, JSON-LD schema templates, and a comprehensive SEO audit checklist.
 
 ### Tags
 
-`claude-code-skills` `agent-skills` `claude-code-plugins` `claude-code-configuration` `ai-coding-tools` `ai-code-review` `ai-refactoring` `code-quality` `git-workflow-automation` `conventional-commits` `pull-request-automation` `git-merge` `git-worktree` `multi-agent-orchestration` `agent-teams` `design-exploration` `color-system` `color-palettes` `design-tokens` `seo-optimization` `generative-engine-optimization` `geo-optimization` `ai-search-optimization` `chatgpt-optimization` `perplexity-seo` `google-ai-overview` `dataforseo` `keyword-research` `serp-analysis` `backlink-analysis` `schema-markup` `json-ld` `skill-creator` `claude-code-setup` `dotfiles` `anthropic` `claude-sonnet` `claude-opus` `codex-cli` `cursor-rules` `copilot-skills` `agent-skills-standard` `prompt-engineering` `ux-evaluation` `code-distillation` `pencil-dev` `design-to-code` `pen-files` `mcp-server` `developer-tools` `ai-developer-tools` `typescript` `python` `open-source`
+`claude-code-skills` `agent-skills` `claude-code-plugins` `claude-code-configuration` `ai-coding-tools` `ai-code-review` `ai-refactoring` `code-quality` `audit-necessity` `audit-patterns` `audit-correctness` `audit-silent-failures` `audit-logs` `audit-perf` `audit-security` `audit-tests` `audit-complexity` `audit-comments` `adversarial-review` `git-workflow-automation` `conventional-commits` `pull-request-automation` `git-merge` `git-worktree` `multi-agent-orchestration` `agent-teams` `design-exploration` `color-system` `color-palettes` `design-tokens` `seo-optimization` `generative-engine-optimization` `geo-optimization` `ai-search-optimization` `chatgpt-optimization` `perplexity-seo` `google-ai-overview` `dataforseo` `keyword-research` `serp-analysis` `backlink-analysis` `schema-markup` `json-ld` `claude-code-setup` `dotfiles` `anthropic` `claude-sonnet` `claude-opus` `codex-cli` `cursor-rules` `copilot-skills` `agent-skills-standard` `prompt-engineering` `ux-evaluation` `code-distillation` `mcp-server` `developer-tools` `ai-developer-tools` `typescript` `python` `open-source`
 
 </details>

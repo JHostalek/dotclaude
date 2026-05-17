@@ -33,24 +33,6 @@ After creation, symlink gitignored files so the worktree runs without a reinstal
 bash ~/.claude/skills/worktree/scripts/symlink-gitignored.sh {repo_root} {directory}
 ```
 
-## Submodules
-
-`git worktree add` on a parent repo does NOT initialize submodules — their directories will be empty. Each worktree gets its own independent submodule git dir at `.git/worktrees/{name}/modules/{submodule}`, so submodules can be on different branches without conflicting with the original checkout.
-
-Inside the new worktree:
-
-1. Initialize: `git -C {directory} submodule update --init`
-2. If the submodule needs a specific branch (not just the commit pinned by the parent): `git -C {directory}/{submodule} checkout {branch}`
-3. Symlink gitignored files per submodule:
-   ```
-   bash ~/.claude/skills/worktree/scripts/symlink-gitignored.sh {repo_root}/{submodule} {directory}/{submodule}
-   ```
-
-**Scope determination** — before creating anything:
-- **Single submodule only** — worktree in that submodule alone
-- **Parent + submodule(s)** — parent worktree + submodule init inside it
-- **Ambiguous** — ask
-
 ## Output
 
 Show: worktree path, `claude --cwd {directory}` command, reminder to use `/worktree-clean` when done, and `git worktree list`.

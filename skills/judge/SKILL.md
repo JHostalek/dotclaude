@@ -16,7 +16,7 @@ You are the courtroom coordinator, not the judge. The judges are independent tea
 
 ## Scope
 
-This is not `/qual` (code correctness). This is not `/razor` (should it exist). This is: **given that we're building this thing, did we build it the way an expert would?**
+This is not `/audit-necessity` (should it exist). This is: **given that we're building this thing, did we build it the way an expert would?**
 
 Dimensions: approach selection, architecture fitness, idiom correctness, trade-off awareness, missed alternatives, domain-standard solutions, proportionality of solution to problem.
 

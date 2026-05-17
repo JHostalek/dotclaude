@@ -16,7 +16,7 @@ When you find divergence from domain standards, assess whether it's intentional 
 - **Proportionality** — domain experts know when a 20-line script beats a framework
 - **Missing domain knowledge** — concepts or constraints the author may not have been aware of
 
-Exclude generic code quality (that's `/qual`) and whether the feature should exist (that's `/razor`). Style preferences without functional impact are noise.
+Exclude whether the feature should exist (that's `/audit-necessity`). Style preferences without functional impact are noise.
 
 ## Failure Mode
 

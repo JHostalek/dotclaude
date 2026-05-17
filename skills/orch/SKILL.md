@@ -60,7 +60,6 @@ When a question reveals the plan is wrong — not just ambiguous — pause the u
 ## Quality
 
 After all implementers complete, in parallel:
-- `/qual` teammate — multi-lens quality analysis on changed files.
 - `/qg` teammate — quality gates (format, lint, typecheck, tests, build).
 
 If issues surface: spawn fix teammates for critical/high issues, re-run `/qg`, repeat. Escalate to the user when the same gate fails 3 times.
@@ -78,7 +77,6 @@ If issues surface: spawn fix teammates for critical/high issues, re-run `/qg`, r
 ### Quality
 | Check | Status | Issues |
 |-------|--------|--------|
-| /qual | PASS/FAIL | N critical, N high |
 | /qg | PASS/FAIL | details |
 
 ### Issues / Deferred
