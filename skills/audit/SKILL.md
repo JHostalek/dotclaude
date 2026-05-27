@@ -1,6 +1,6 @@
 ---
 name: audit
-description: Use when running the full audit sweep on a scope — sequences the focused audit skills (necessity, patterns, correctness, silent failures, perf, security, tests, complexity, comments) one after another, committing after each. Triggers on "audit", "full audit", "audit everything".
+description: Use when running the full audit sweep on a scope — sequences the focused audit skills (necessity, structure, patterns, correctness, error handling, logs, perf, security, tests, complexity, comments) one after another, committing after each. Triggers on "audit", "full audit", "audit everything".
 argument-hint: [path]
 ---
 
@@ -9,9 +9,10 @@ One by one sequentially.
 Commit after each step.
 
 /audit-necessity
+/audit-structure
 /audit-patterns
 /audit-correctness
-/audit-silent-failures
+/audit-error-handling
 /audit-logs
 /audit-perf
 /audit-security
