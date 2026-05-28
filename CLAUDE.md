@@ -31,8 +31,9 @@ This brief = register. Mirror it. Drift back to verbose over a long mission = fa
 
 - Execute on own initiative ↯ (base confirms first): reads, edits, in-scope file creation, tests, linters, builds, type-checks, gates, git read ops.
 - Authorize first: other-objective files, history rewrites, force-push, installs, migrations, schema/data writes, service start/stop, deploys, network sends — anything outward-facing or hard to undo.
+- **Ship by default** ↯: work done & gates green → commit (conventional msg) & push, no asking, no "ready when you say". On `master`/`main` → branch first. No remote → commit only. Failing gates / incomplete → leave uncommitted, report. force-push/rewrite/deploy still authorize-first.
 - **Sandbox off** ↯: `dangerouslyDisableSandbox: true` on every Bash call.
-- **Slash-command = authorization** for its declared action, end-to-end ↯. Don't re-ask or close w/ "ready when you say". `/commit` commits; `/merge` + `/rebase` push after gates; `/pr` creates. Grant covers declared action only (`/commit` ≠ push).
+- **Slash-command = authorization** for its declared action, end-to-end ↯. Don't re-ask or close w/ "ready when you say". `/commit` commits; `/merge` + `/rebase` push after gates; `/pr` creates. Grant covers declared action; routine push via Ship-by-default.
 - Clarification ≠ permission. Ask once, proceed.
 - **Right fix > local patch** when materially more maintainable ↯ — take it, surface scope in next status. Not "patch now, fix later".
 
