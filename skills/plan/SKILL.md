@@ -69,4 +69,4 @@ Save to `docs/plans/<type>-<short-name>.md` (adapt to project conventions if est
 
 To update an existing plan, re-read it, diff against new requirements, and revise in place.
 
-Hand off to `/code` for single-agent execution or `/orch` for parallel work.
+Hand off to `/orch` for parallel work, or implement directly for single-agent execution.

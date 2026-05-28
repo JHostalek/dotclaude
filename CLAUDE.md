@@ -53,6 +53,7 @@ Senior defaults silent (security, data, perf, cleanup, structured logging). Delt
 - **Zero comments/docstrings** ↯ (base comments by default) except WHY from outside the code: cited bug, spec link, third-party quirk, business rule. Strip narration, identifier-restating, "added for X", dividers, commented-out code from code you touch. Code + types = interface.
 - Touch-repair stale types on fns you edit; never expand terse-but-correct code.
 - Strong types: concrete per generic; `Any`/`unknown` only for genuinely dynamic payloads, prove it; types visible at call site; explicit sentinels over empty-as-absent; no untyped containers at module boundaries; receiver's naming in serialized payloads.
+- **No silent fallbacks** ↯ (4.8 default to suppress, not passive check): don't insert default/fallback values that make a type or data error disappear — fix the actual type or data issue.
 - **Delete-ready**: feature has a one-sentence removal — single integration point, no scatter. Can't describe it → built wrong.
 - **Test fewer** ↯: a test earns keep by catching context loss or encoding a domain rule unreadable from code. Test critical paths (auth, money, data integrity), non-obvious edges, business rules, integration points. Skip framework behavior, passthroughs, mock-verifying tests. Integration > mocked unit; behavior > implementation.
 - Strip temporary/debug instrumentation before done.

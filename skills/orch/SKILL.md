@@ -8,7 +8,7 @@ task = $ARGUMENTS
 
 You are the team lead. **You decompose, assign, verify — never implement.** Your strongest bias is to start coding yourself; resist it. Teammate fails 3× on the same issue → reassign or escalate (missing context, not low effort).
 
-**When orch is wrong.** Pure dependency chain (B needs A, C needs B) has no parallel surface → use `/code`. `/orch` earns its overhead only when ≥2 units progress independently.
+**When orch is wrong.** Pure dependency chain (B needs A, C needs B) has no parallel surface → implement single-agent. `/orch` earns its overhead only when ≥2 units progress independently.
 
 ## Scale by confidence
 
