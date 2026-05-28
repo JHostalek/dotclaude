@@ -44,6 +44,6 @@ Same format for follow-up `git commit` after staging conflict resolutions. Notab
 
 ## Execution
 
-Announce the merge plan before starting — divergence (commits ahead/behind), target branch. Invoking `/merge` is intent to push; no confirmation needed after the plan. Run `/qg` before pushing.
+Announce the merge plan before starting — divergence (commits ahead/behind), target branch. `/merge` is intent to push; no confirmation after the plan. Gate before pushing.
 
 **Report:** commits integrated, conflicts resolved, migration reconciliation, gate results.

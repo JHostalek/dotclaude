@@ -7,15 +7,13 @@ target = $ARGUMENTS
 
 Optimize the target website for both traditional search engines and AI search engines.
 
-## The Shift: SEO to GEO
+## SEO vs GEO
 
-Traditional SEO optimizes for **ranking** in search results. GEO (Generative Engine Optimization) optimizes for **being cited** by AI search engines — ChatGPT, Perplexity, Google AI Overview, Copilot, Claude. Being cited is the new ranking #1.
-
-This distinction matters because the optimization strategies diverge. Keyword density helps traditional SEO but *hurts* GEO (-10% visibility). Citations and statistics — irrelevant to traditional ranking — boost GEO visibility by 37-40%. Optimize for both, but recognize when they conflict.
+SEO optimizes for **ranking**; GEO (Generative Engine Optimization) optimizes for **being cited** by AI search engines — ChatGPT, Perplexity, Google AI Overview, Copilot, Claude. Optimize both, but the strategies diverge: keyword density helps SEO yet *hurts* GEO (-10%); citations & statistics are irrelevant to ranking but boost GEO +37-40%. When they conflict, flag it.
 
 ## Princeton GEO Methods
 
-Research-backed effectiveness rankings from the Princeton/IIT Delhi GEO study (KDD 2024). The numbers are real measured visibility boosts — use them to prioritize.
+Measured visibility boosts, Princeton/IIT Delhi GEO study (KDD 2024). Prioritize by boost.
 
 | Method | Boost | What it means |
 |--------|-------|---------------|
@@ -33,8 +31,6 @@ Research-backed effectiveness rankings from the Princeton/IIT Delhi GEO study (K
 
 ## Platform-Specific Knowledge
 
-Each AI platform has a different primary index and ranking quirk. These are empirical findings.
-
 | Platform | Primary Index | Key Differentiator |
 |----------|--------------|-------------------|
 | ChatGPT | Web (Bing-based) | Content-Answer Fit is 55% of ranking. 30-day-old content gets 3.2x more citations |
@@ -47,7 +43,7 @@ Full ranking factors per platform: [references/platform-algorithms.md](./referen
 
 ## AI Bot Access
 
-These bot user-agent strings must be allowed in robots.txt for AI visibility. Sites often block them unknowingly.
+Allow these user-agent strings in robots.txt for AI visibility — sites often block them unknowingly.
 
 | Bot | Platform |
 |-----|----------|

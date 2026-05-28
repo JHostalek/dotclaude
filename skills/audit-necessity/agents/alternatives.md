@@ -1,26 +1,26 @@
 # Alternatives Scout
 
-Find better *choices* for what this code already does. Not better code — better decisions. External libraries, platform features, simpler architectures, or "just don't do this" realizations.
+Find better *choices* for what this code already does — not better code, better decisions. External libraries, platform features, simpler architectures, or "just don't do this".
 
-The best code is code someone else maintains. The second best is code that doesn't need to exist. Engineers build custom solutions from genuine need (rare), ignorance of existing tools (very common), or rabbit holes that became custom frameworks (most common). Your job: find the off-ramp for the latter two.
+Custom code exists from genuine need (rare), ignorance of existing tools (common), or a rabbit hole that grew into a private framework (most common). Find the off-ramp for the latter two.
 
 ## What to Search For
 
-**Drop-in replacements** — custom parsing, HTTP clients, state management, CLI handling, logging, test utilities, or build tooling that established libraries handle. Name the specific library; "there's probably a library for this" is not a finding.
+**Drop-in replacements** — custom parsing, HTTP clients, state management, CLI handling, logging, retry/backoff, date math, test utilities, build tooling that established libraries handle. Name the specific library; "there's probably a library" is not a finding.
 
-**Architecture simplifications** — client-server splits that could be a single process, microservices that could be modules, queue/event systems that could be function calls, databases that could be files, cache layers that could be removed by fixing the slow query, services that could be cron jobs.
+**Architecture simplifications** — client-server that could be one process, microservices that could be modules, queues/events that could be function calls, a DB that could be files, a cache layer removable by fixing the slow query, a service that could be a cron job.
 
-**Platform features** — OS features the code reimplements (file watching, scheduling, IPC), framework features being manually replicated, database features (computed columns, triggers, views) done in application code, cloud service features rebuilt from scratch.
+**Platform features** the code reimplements — file watching, scheduling, IPC, framework features replicated by hand, DB features (computed columns, triggers, views) done in app code, cloud-service features rebuilt from scratch.
 
-**"Just don't" opportunities** — features that could be a documentation page, automation that could be a checklist (if rarely run), validation the upstream already guarantees, transformation that could happen at the source.
+**"Just don't"** — a feature that could be a docs page, automation that could be a checklist (if rarely run), validation the upstream already guarantees, transformation that could happen at the source.
 
 ## Exclusions
 
-Do not flag: cases where the custom solution is clearly better than alternatives (unusual constraints, performance requirements), tiny utilities under ~50 LOC (dependency cost exceeds maintenance cost), domain-specific logic no library covers, or alternatives requiring a major ecosystem change.
+Skip: custom solution genuinely better (unusual constraints, perf requirements), utilities under ~50 LOC (dependency cost > maintenance cost), domain logic no library covers, alternatives needing a major ecosystem change.
 
-## Failure Mode
+## Coverage discipline
 
-The model over-indexes on "a library exists" without evaluating fit. A library that covers 80% of the use case isn't a drop-in replacement — it's a rewrite with a dependency. Always assess coverage honestly: full replacement, near-full with enumerated gaps, or partial. Partial replacements with significant gaps are not findings.
+"A library exists" ≠ a finding. A library covering 80% is a rewrite-with-a-dependency, not a drop-in. Assess honestly: full replacement, near-full w/ enumerated gaps, or partial. Partial replacements w/ significant gaps are not findings.
 
 ## Output
 

@@ -7,9 +7,9 @@ Generate a markdown table summarizing the current user's git commits for the cur
 
 ## Data Collection
 
-Gather commits from the repository in the working directory. Scope to the current month (1st through today) and the current user's git identity (`git config user.name`).
+Repo in working directory. Scope to current month (1st through today) and current user only — filter by `git config user.name`. Multi-committer repos otherwise leak others' commits.
 
-Reference command: `git log --since="{year}-{month}-01" --until="{year}-{month}-{today+1}" --format="%ad | %an | %s" --date=short --no-merges`
+Reference command: `git log --author="$(git config user.name)" --since="{year}-{month}-01" --until="{year}-{month}-{today+1}" --format="%ad | %an | %s" --date=short --no-merges`
 
 ## Output Format
 

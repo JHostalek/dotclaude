@@ -34,7 +34,7 @@ Rebase re-chains revision pointers in migration files but does NOT execute the t
 ## Flow
 
 1. **Present rebase plan.** Commits ahead, target branch. Start after presenting.
-2. **Rebase.** Resolve conflicts per heuristics above. Run formatter/parser after each conflict resolution to catch structural damage early.
+2. **Rebase.** Resolve conflicts per heuristics above; run the formatter/parser after *each* resolution to catch structural damage early.
 3. **Reconcile migrations** if any migration files were touched (re-chain + apply to local DB if running).
 4. **Run quality gates** — rebase bypasses pre-commit hooks; QG is the only safety net. Use the project's gate commands from TOOLS.md.
 5. **Force-push with `--force-with-lease`.** Invoking `/rebase` is intent to push; no additional confirmation needed.

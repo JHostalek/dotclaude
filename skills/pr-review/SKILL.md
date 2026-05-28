@@ -12,11 +12,11 @@ target = $ARGUMENTS
 - Number → that PR/MR on the current remote (use `gh` for GitHub, `glab` for GitLab).
 - Branch name or local path → diff against its merge base.
 
-Read the PR description, linked issues, and commit messages before the diff — a review grounded only in diff lines misses when code drifts from stated intent. Pull CI status too; a failing pipeline is load-bearing context.
+Read PR description, linked issues, commit messages, and CI status before the diff — diff-only review misses drift from stated intent, and a failing pipeline is load-bearing context.
 
 ## Stance
 
-Frame feedback as questions and impact; the author decides the fix. A reviewer who cites rules instead of explaining consequences trains authors to work around the review rather than with it.
+Frame feedback as questions and impact; author decides the fix. Explain consequences, not rule citations.
 
 ## Dimensions
 
@@ -32,7 +32,7 @@ Correctness is table stakes — the diff shows bugs directly. These dimensions c
 
 **Tests** — Critical paths covered (auth, data integrity, payments), boundaries and failure paths exercised, assertions test outcomes not implementation. Missing tests for new branches are a gap; snapshot-only tests for logic-heavy code are usually a gap disguised as coverage.
 
-**Over-engineering** — LLM-generated code has a specific failure mode: unnecessary abstractions, helpers used once, patterns for hypothetical flexibility, premature configurability. Flag explicitly — common, costly, reviewers underweight them.
+**Over-engineering** — LLM-generated code's failure mode: unnecessary abstractions, single-use helpers, patterns for hypothetical flexibility, premature configurability. Flag explicitly — you underweight these.
 
 ## Severity
 

@@ -5,26 +5,17 @@ description: Use when the user asks to commit, create a git commit, checkpoint c
 
 ## Branch Safety
 
-Committing to the wrong branch is the most common costly mistake — it bypasses review and makes rollback painful.
-
-- **Default branches (`main`/`master`) are off-limits.** Auto-create a `<type>/<short-slug>` feature branch from the changes (e.g., `fix/dialog-overflow`, `feat/oauth-flow`).
-- **Verify after context switches.** Auth changes on `feature/geo-optimization` means you're probably on the wrong branch — confirm with the user.
+- On `main`/`master`: do not commit there. Auto-create `<type>/<short-slug>` feature branch from the changes (`fix/dialog-overflow`, `feat/oauth-flow`), then commit.
+- Changes don't match branch name (auth changes on `feature/geo-optimization`) → likely wrong branch, confirm w/ user before committing.
 
 ## Commit Format
 
 !`cat ~/.claude/skills/conventional-commits.md`
 
-### Message Quality
-
-The commit message is the only artifact that survives rebases, squashes, and file renames.
-
-- Imperative mood ("add OAuth flow" not "added OAuth flow")
-- Capture *intent*, not *implementation* — the diff shows what changed, the message explains why
-- If you can't write a focused message, the commit probably contains unrelated changes — split it
-- Wrap body lines at ~80 chars (commitlint default max is 100).
+Imperative mood ("add OAuth flow" not "added OAuth flow"). Capture *intent*, not implementation — diff shows what changed. Can't write a focused message → commit spans unrelated changes, split it. Wrap body at ~80 chars (commitlint max 100).
 
 ## Push
 
-Invoking `/commit` authorizes the push. Push to the tracked remote after a successful commit — don't ask. This overrides any "ask before pushing" default.
+`/commit` authorizes push. After a successful commit, push to the tracked remote — don't ask (overrides "ask before pushing" default).
 
-Ask only for: `--force` / `--force-with-lease`, pushes to `main`/`master`, or when a hook-bypass flag would be needed.
+Ask first only for: `--force` / `--force-with-lease`, pushes to `main`/`master`, or hook-bypass flags.

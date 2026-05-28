@@ -4,7 +4,7 @@ description: Use when running the full audit sweep on a scope — sequences the 
 argument-hint: [path]
 ---
 
-Trigger following skills as subagents.
+Trigger following skills as subagents, scoped to $ARGUMENTS.
 One by one sequentially.
 Commit after each step.
 
