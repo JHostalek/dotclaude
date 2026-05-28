@@ -1,21 +1,9 @@
 ---
 name: audit
-description: Use when running the full audit sweep on a scope — sequences the focused audit skills (necessity, structure, patterns, correctness, error handling, logs, perf, security, tests, complexity, comments) one after another, committing after each. Triggers on "audit", "full audit", "audit everything".
+description: Use when running the full audit sweep on a scope — runs the focused audit dimensions (necessity, structure, patterns, correctness, error handling, logs, perf, security, tests, complexity, comments) as a parallel-worktree workflow that integrates in dependency order. Triggers on "audit", "full audit", "audit everything".
 argument-hint: [path]
 ---
 
-Trigger following skills as subagents, scoped to $ARGUMENTS.
-One by one sequentially.
-Commit after each step.
+!`cat ~/.claude/skills/audit-workflow.md`
 
-/audit-necessity
-/audit-structure
-/audit-patterns
-/audit-correctness
-/audit-error-handling
-/audit-logs
-/audit-perf
-/audit-security
-/audit-tests (if there are any)
-/audit-complexity
-/audit-comments
+Run all eleven dimensions through the workflow above, in the integration order it lists. Each dimension's lens is its own skill — the worktree agent reads `~/.claude/skills/audit-<dimension>/SKILL.md` for what that dimension looks for and how it classifies findings. `tests` only if the scope has tests.

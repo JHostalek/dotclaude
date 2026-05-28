@@ -4,12 +4,10 @@ description: Use when auditing comments, docstrings, or embedded documentation p
 argument-hint: [path]
 ---
 
-target = $ARGUMENTS
+!`cat ~/.claude/skills/audit-workflow.md`
 
-If target provided, audit that path. Otherwise, files changed since the default branch. Full-codebase audit requires explicit user request.
+Run as the `comments` dimension. Lens:
 
-Strip comments that don't earn their place; rewrite those that do but bury the signal.
+Strip comments that don't earn their place; rewrite those that do but bury the signal. Type annotations are primary documentation; every comment competes against the signature, body, and adjacent declarations. A comment survives only by carrying a WHY sourced from outside the codebase — a cited bug, a spec, a third-party quirk, a business rule, a historical decision. Behavioral narration ("idempotent", "no-op when empty", "callers rely on X") fails the test no matter how accurate — the code is the source; strip it. Named symbols must resolve. A missing comment beats a wrong one — when torn, strip. Skip user-facing strings, log templates, and generated code.
 
-Type annotations are primary documentation; every comment competes against the signature, body, and adjacent declarations. A comment survives only by carrying a WHY sourced from outside the codebase — a cited bug, a spec, a third-party quirk, a business rule, a historical decision. Behavioral narration ("idempotent", "no-op when empty", "callers rely on X") fails the test no matter how accurate — the code is the source; strip it. Named symbols must resolve. A missing comment beats a wrong one — when torn, strip. Skip user-facing strings, log templates, and generated code.
-
-Report `git diff --stat` and lines stripped / rewritten.
+Stripping or rewriting a comment is auto-fix — the prose is internal and the code is unchanged. Nothing here is sign-off.

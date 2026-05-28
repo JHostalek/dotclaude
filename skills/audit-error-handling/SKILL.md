@@ -4,9 +4,9 @@ description: Use when auditing and fixing error handling in a scope — swallowe
 argument-hint: [path]
 ---
 
-target = $ARGUMENTS
+!`cat ~/.claude/skills/audit-workflow.md`
 
-If target provided, scan that path. Otherwise, files changed since the default branch. Full-codebase scan requires explicit user request.
+Run as the `error-handling` dimension. Lens:
 
 Core principle: every error must be **observable** — by a user, a caller, or a log. An error that occurs while nothing in the system changes behavior or records it is the bug. This spans synchronous swallows, async errors that vanish, unguarded entry points, and resource leaks on error exit paths.
 
@@ -22,4 +22,4 @@ Surface mechanism is contextual: contract violations and programmer errors fail 
 
 Out of scope — cross-reference, don't fix here: race conditions, TOCTOU, stale reads, missing atomicity belong to `audit-correctness` (they produce wrong answers, not vanished errors).
 
-Run tests after the batch; report `git diff --stat` and per-fix the error that was hidden, what now surfaces it, and the caller behavior. When a swallow appears intentional (a known recoverable case with a fallback the surrounding code depends on), surface for sign-off — removing it changes user-visible behavior, and "looks like a bug" is not the same as "is a bug".
+Per-fix, record the error that was hidden, what now surfaces it, and the caller behavior. A swallow that appears intentional (a known recoverable case with a fallback the surrounding code depends on) is sign-off, not auto-fix — removing it changes user-visible behavior, and "looks like a bug" is not "is a bug".
