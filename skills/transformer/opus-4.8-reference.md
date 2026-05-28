@@ -36,3 +36,15 @@ Out of the box 4.8 **narrates intent before acting**, **confirms before reversib
 - Anthropic — Migrating to Claude Opus 4.8: https://platform.claude.com/docs/en/about-claude/models/migration-guide
 - Anthropic — What's new in Claude Opus 4.8: https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-8
 - Anthropic — Introducing Claude Opus 4.8: https://www.anthropic.com/news/claude-opus-4-8
+
+## Provenance — verbatim source quotes
+
+Each claim above pinned to its source text. Verified against live docs 2026-05-28. Re-verify against the source on the next model bump; if a quote no longer matches the page, the derived directive is stale.
+
+- **Self-checking strong** ← "around four times less likely than its predecessor to allow flaws in code it has written to pass unremarked"; "more likely to flag uncertainties about its work and less likely to make unsupported claims".
+- **Tool triggering improved** ← "Tool calling is meaningfully more efficient, using fewer steps for the same intelligence".
+- **Long-horizon agentic / dynamic workflows** ← "Claude can plan the work and then run hundreds of parallel subagents in a single session"; enables "codebase-scale migrations across hundreds of thousands of lines of code".
+- **Effort is the depth lever** ← "The effort parameter default on Claude Opus 4.8 is `high` across all surfaces… For coding and high-autonomy work, set `xhigh` explicitly"; "Effort is more important for this model than for any prior Opus."
+- **Effort recalibrated vs 4.7** ← "`medium` allows somewhat more thinking, `high` somewhat less, and `xhigh` substantially more."
+- **Literal (carried from 4.7)** ← 4.7 behavior-changes section, carried forward: "It will not silently generalize an instruction from one item to another, and it will not infer requests you didn't make."
+- **Length self-calibrates (carried from 4.7)** ← "calibrates response length to how complex it judges the task to be, rather than defaulting to a fixed verbosity."
