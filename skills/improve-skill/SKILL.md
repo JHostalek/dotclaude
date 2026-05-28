@@ -9,43 +9,31 @@ skill_name = $ARGUMENTS
 
 If no argument, ask.
 
-## Finding the Skill
+## Find the skill
 
 Search in order: `~/.claude/skills/{skill_name}/SKILL.md` → `~/.claude/skills/{skill_name}/*.md` → `.rulesync/skills/{skill_name}/SKILL.md`. Read completely, including referenced files.
 
-## Philosophy
+## Self-assessment first
 
-The goal is often making a skill *shorter*, not longer — cutting bloat is as valuable as adding techniques. Subtraction requires independent judgment formed *before* seeing what competitors do. Research without a prior assessment just produces parroting.
+Form your own verdict *before* research — research without a prior assessment produces parroting, not judgment. Default bias: a skill usually wants to get *shorter*. Cutting bloat is worth as much as adding technique.
 
-## Self-Assessment
+Assess the skill as a **prompt for an executing agent**, not a doc for a human — this is the higher-value lens; most skills have adequate coverage but weak prompt engineering. Note for each finding which competitive source would confirm or refute it. Also flag capability gaps and self-contradiction — what the skill should do but doesn't, where it contradicts its own stated philosophy — not just prompt-craft.
 
-Form hypotheses before external research. Assess two dimensions:
-
-### Capability Gaps & Contradictions
-
-What the skill likely should do but doesn't. Where it contradicts its own philosophy.
-
-### Agent-Execution Quality
-
-Evaluate the skill as a *prompt for an executing agent*, not a document for a human. This is the higher-value analysis — most skills have acceptable coverage but poor prompt engineering.
+Rubric (these feed the report's section-2 table):
 
 | Check | What to look for |
 |-------|-----------------|
-| **Why-motivation** | Unmotivated directives (MUST/NEVER/ALWAYS without reasoning) get dropped by agents under pressure. Count them. |
-| **Adaptive scaling** | Does workflow adjust to task complexity? A 2-file task shouldn't trigger the same pipeline as a 50-file task. |
-| **Progressive disclosure** | Skills over ~300 lines of core workflow suffer attention dilution. Are details in reference files loaded on demand? |
-| **Failure mode awareness** | "You'll be tempted to skip this because..." outperforms "MUST complete this step." Does the skill anticipate agent failure modes? |
-| **Escape hatches** | Can the agent skip phases that don't apply? |
-| **Constraint density** | Above ~5 unmotivated constraints per 100 lines = attention dilution risk. |
-| **Tone** | Explanatory ("because X, do Y") > directive ("NEVER do X"). Explanatory tone lets the agent reason about edge cases. |
-| **File references** | `!path/to/file.md` (inline injection) > plain paths (requires extra read). |
-| **Phantom constraints** | Instructions the model would follow anyway. If no competitor bothers instructing it, the model handles it without being told. |
+| Unmotivated constraints | MUST/NEVER/ALWAYS w/o a reason get dropped under pressure. Explanatory ("because X, do Y") survives & lets the agent reason about edges. Count the bare ones; >~5 per 100 lines = attention dilution. |
+| Adaptive scaling | Does workflow scale to task size? A 2-file task shouldn't fire the same pipeline as a 50-file one. |
+| Progressive disclosure | Core workflow >~300 lines dilutes attention. Are details in reference files loaded on demand? |
+| Failure-mode framing | "You'll be tempted to skip this because…" outperforms "MUST do this step." Does it anticipate where the agent fails? |
+| Escape hatches | Can the agent skip phases that don't apply? |
+| File references | Inline-injection (`!path/to/file.md`) beats a plain path the agent must separately read. |
+| Phantom constraints | Instructions the model follows anyway. If no competitor bothers stating it, cut it. |
 
-Write down all hypotheses. Research will validate or invalidate them.
+## Competitive research
 
-## Competitive Research
-
-Spawn **three research teammates in parallel**. For each: read the prompt file from `${CLAUDE_SKILL_DIR}/agents/<name>.md`, pass its full content as the teammate's prompt, prepend the skill summary and your hypotheses for context.
+Spawn **three research teammates in parallel**. For each: read the prompt file from `${CLAUDE_SKILL_DIR}/agents/<name>.md`, pass its full content as the teammate's prompt, prepend the skill summary + your hypotheses for context.
 
 | Teammate | File | Purpose |
 |----------|------|---------|
@@ -53,15 +41,15 @@ Spawn **three research teammates in parallel**. For each: read the prompt file f
 | Ecosystem Scanner | `agents/ecosystem.md` | Search open skills registry for similar skills |
 | Vendor Docs Researcher | `agents/vendor-docs.md` | Search vendor docs and best practices |
 
-## Synthesis & Report
+## Synthesis & report
 
-After all teammates complete, look for: which hypotheses research validated, insights that emerge from *combining* sources, and what to cut — apply the **phantom constraint test**: if no competitor instructs it and the model would do it anyway, flag for removal.
+After all teammates return, surface: which hypotheses research confirmed, insights that emerge only from *combining* sources, and what to cut — phantom-constraint test: no competitor instructs it AND the model does it anyway → flag for removal.
 
-Present as a single consolidated report:
+Single consolidated report:
 
-**1. Executive summary** (2-3 sentences) — ahead, behind, or on par? Over-engineered, under-engineered, or right-sized?
+**1. Executive summary** (2-3 sentences) — ahead, behind, or on par? Over-, under-, or right-sized?
 
-**2. Agent-execution quality assessment:**
+**2. Agent-execution quality:**
 
 | Check | Current State | Recommendation | Priority |
 |-------|--------------|----------------|----------|
@@ -73,18 +61,16 @@ Present as a single consolidated report:
 
 **4. Recommended removals** — concrete sections to delete, with rationale.
 
-**5. Recommended additions** — highest-impact first, with concrete text. Severity: CRITICAL (most competitors have it, significantly impacts quality) → HIGH → MEDIUM → LOW.
+**5. Recommended additions** — highest-impact first, concrete text. Severity CRITICAL (most competitors have it, big quality impact) → HIGH → MEDIUM → LOW.
 
-**6. Net effect** — will the skill get longer, shorter, or stay the same? Aim for shorter-or-same.
+**6. Net effect** — longer, shorter, or same? Aim shorter-or-same.
 
 **7. Unique strengths** to preserve.
 
-**8. Anti-patterns** — techniques from competitors to explicitly NOT adopt, with reasoning.
+**8. Anti-patterns** — competitor techniques to explicitly NOT adopt, with reasoning.
 
 **STOP.** Wait for user approval before modifying anything.
 
-## Implementation (After Approval)
+## Implementation (after approval)
 
-Apply removals before additions — models default to additive changes; subtract first to prevent the skill from growing. Convert plain file paths to `!path/to/file.md` inline injection where appropriate. Report net line count change — a negative number is a good sign.
-
-When rewriting, apply the `/prompt` skill's design principles.
+Apply removals before additions — models default to additive, so subtract first to keep the skill from growing. Convert plain file paths to `!path/to/file.md` inline injection where appropriate. Report net line-count change. Apply the `/prompt` skill's design principles when rewriting.

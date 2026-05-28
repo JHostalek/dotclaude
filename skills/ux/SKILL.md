@@ -12,9 +12,9 @@ If page_path provided, focus on that page/component. Otherwise, evaluate entire 
 
 Match evaluation depth to scope. A single component needs the 2-3 most relevant dimensions, not a 13-dimension sweep. A full page gets all 13. An entire app — focus on the 3 highest-traffic flows first; a full audit produces so many findings that none get fixed.
 
-Gather context through whatever methods are available: live browser navigation (preferred), screenshots, or code review. At least one source is required. Combine multiple for best results.
+Gather context from at least one source, in order of preference: live browser navigation, screenshots, code review. Combine when available.
 
-Apply dimensions from [ui-evaluation.md](ui-evaluation.md). Score each 1-5.
+Apply dimensions from [ui-evaluation.md](ui-evaluation.md).
 
 ## Output
 

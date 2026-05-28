@@ -6,22 +6,20 @@ argument-hint: [task or plan reference]
 
 task = $ARGUMENTS
 
-You are the team lead. **You decompose, assign, verify — never implement.** Your strongest bias will be to start coding yourself; resist it. When a teammate fails 3 times on the same issue, reassign or escalate — repeated failure signals missing context, not insufficient effort.
+You are the team lead. **You decompose, assign, verify — never implement.** Your strongest bias is to start coding yourself; resist it. Teammate fails 3× on the same issue → reassign or escalate (missing context, not low effort).
 
-**When orch is wrong.** A sequential dependency chain (B needs A, C needs B) has no parallel surface. Use `/code` instead. `/orch` earns its coordination overhead only when at least two units can progress independently.
+**When orch is wrong.** Pure dependency chain (B needs A, C needs B) has no parallel surface → implement single-agent. `/orch` earns its overhead only when ≥2 units progress independently.
 
-## Scale by confidence, not by task size
+## Scale by confidence
 
-All work flows through teammates. The only variable is analysis depth.
+All work flows through teammates; the only variable is analysis depth.
 
-- **You can write confident, file-specific instructions right now.** Spawn implementers directly.
-- **You cannot.** Spawn read-only analyzer teammates first. Their reports become the implementer's contract.
+- Can write confident, file-specific instructions now → spawn implementers directly.
+- Cannot → spawn read-only analyzer teammates first; their reports become the implementers' contract.
 
-Implementers working from ad-hoc exploration produce inconsistent results and duplicate effort. The analyzer creates a single source of truth so parallel units don't contradict each other.
+Err toward analyzers for cross-cutting changes, unfamiliar subsystems, or anything where you'd say "figure out the shape, then do it" — that's where implementers drift and contradict each other.
 
-Err toward analyzers for cross-cutting changes, unfamiliar subsystems, or anything where you're tempted to say "figure out the shape and then do it." That temptation is where implementers drift.
-
-**Example.** "Rename `UserService` to `AccountService` across the codebase" — spawn implementers directly; grep finds the callsites and the rename is mechanical. "Migrate our auth from session cookies to JWT" — analyzer first; the shape isn't knowable without reading the current auth flow end-to-end.
+**Example.** "Rename `UserService` to `AccountService` across the codebase" → implementers direct; grep finds callsites, rename is mechanical. "Migrate auth from session cookies to JWT" → analyzer first; shape isn't knowable without reading the auth flow end-to-end.
 
 ## Team protocol
 
@@ -34,35 +32,18 @@ Err toward analyzers for cross-cutting changes, unfamiliar subsystems, or anythi
 
 ## Decomposition
 
-First check `docs/plans/` (or a path passed in `$ARGUMENTS`) for an existing plan. A plan with file paths and acceptance criteria is the work breakdown — use it.
+Check `docs/plans/` (or path in `$ARGUMENTS`) first. A plan with file paths + acceptance criteria *is* the work breakdown — use it.
 
-When decomposing yourself: **one file, one teammate.** If two units need the same file, merge them or assign the shared file to one unit and have the other depend on its output. Concurrent edits to shared files cause merge conflicts that cost more than the parallelism saves.
+Decomposing yourself: **one file, one teammate.** Two units need the same file → merge them, or assign the file to one and have the other depend on its output. Concurrent edits to a shared file cost more in conflicts than the parallelism saves.
 
-## Analysis phase
+## Phases
 
-<analyzer_constraints>
-Analyzers are read-only: `Glob`, `Grep`, `Read` only. Mixing analysis and editing in one pass produces fixes that miss the bigger picture.
-</analyzer_constraints>
-
-Each analyzer reports via `SendMessage` with:
-- Current state of the relevant code.
-- Specific changes needed, with `file:line` references.
-- Edge cases and concrete implementation steps.
-
-Wait for every analyzer to finish before spawning implementers. Partial reports lead to contradictory plans across units.
-
-## Implementation phase
-
-Each implementer receives the analyzer's report (or your direct instructions) as their contract. When an implementer asks a clarifying question, answer it — don't let them guess. Guessing at scale compounds into inconsistent implementations that surface at integration.
-
-When a question reveals the plan is wrong — not just ambiguous — pause the unit, revise the contract, relay back. An implementer executing a broken contract produces confidently wrong code.
+- **Analyzers** read-only (`Glob`, `Grep`, `Read`). Report via `SendMessage`: current state, changes needed w/ `file:line` refs, edge cases. Wait for all analyzers before spawning implementers.
+- **Implementers** receive the analyzer report (or your instructions) as contract. Answer clarifying questions — don't let them guess. When a question reveals the contract is *wrong* (not just ambiguous), pause the unit, revise, relay back.
 
 ## Quality
 
-After all implementers complete, in parallel:
-- `/qg` teammate — quality gates (format, lint, typecheck, tests, build).
-
-If issues surface: spawn fix teammates for critical/high issues, re-run `/qg`, repeat. Escalate to the user when the same gate fails 3 times.
+After all implementers complete: spawn `/qg` teammate (format, lint, typecheck, tests, build). Issues → spawn fix teammates for critical/high, re-run `/qg`, repeat. Escalate to user when the same gate fails 3×.
 
 ## Report
 

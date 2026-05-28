@@ -4,11 +4,11 @@ description: Use when auditing repo topology in a scope — code grouped by type
 argument-hint: [path]
 ---
 
-target = $ARGUMENTS
+!`cat ~/.claude/skills/audit-workflow.md`
 
-If target provided, audit that path. Otherwise, files changed since the default branch. Full-codebase audit requires explicit user request.
+Run as the `structure` dimension. Lens:
 
-Find and fix code that lives in the wrong place — wrong module, wrong layer, wrong grouping — against the repo's own conventions, never an imported ideal.
+Find code that lives in the wrong place — wrong module, wrong layer, wrong grouping — against the repo's own conventions, never an imported ideal.
 
 Structure has no universal shape, so establish the convention before judging, in priority order. First, materialized policy: a written structure doc (`*structure*.md`, `ARCHITECTURE.md`, `CONTRIBUTING.md`) or an enforcement config (import-linter, eslint boundaries, dependency-cruiser, ArchUnit) — when one exists it is the authority; audit against its rules and flag violations of *it*, don't reinvent a scheme. Otherwise infer from what dominates: grouping axis (by-feature folders holding their own routes+models+logic, vs by-type `models/`+`routes/`+`services/`), the recurring file-role vocabulary, and layer direction from the import graph. Directory listings give shape; `git log` co-change is ground truth for what belongs together. Apply audit-patterns' >60% rule — converge outliers toward the dominant pattern; never impose one the repo doesn't use.
 
@@ -16,4 +16,4 @@ Flag: a feature scattered across by-type dirs when the repo groups by feature (o
 
 Filter hard. Framework-mandated layouts (Next.js, Rails, Django) are conventions to respect, not findings. A by-type repo that is by-type throughout is consistent — only flag the outlier breaking the dominant grouping. Size alone is not yours: a thin or oversized file is audit-complexity (merges, collapse) or audit-necessity (should it exist); you own *placement and boundaries* — a correctly-sized file in the wrong module. Dynamically-resolved layouts (plugin dirs, registry walks, convention-scanned folders) look misplaced but are wired by mechanism — confirm no loader depends on the path before moving. `git log` dates divergence: recent drift is accidental and worth fixing; long-standing structure is load-bearing.
 
-Apply in the direction the repo prefers: move the file to where co-change points, route through the existing public-surface convention, collapse a stray by-type split back into the feature folder, break a cycle by promoting the shared concept to a layer both may depend on. Moves are high-blast-radius — grep every reference, fix all import sites in one pass, gates after. Where a structural linter or policy doc exists, extend its rules so the convention stays pinned. Run tests and lint after the batch; report `git diff --stat`, the authority used (policy doc / linter / inferred), and per-fix where the unit moved and why. Tree-reshaping — re-grouping a directory, splitting or merging modules, changing the layer scheme — is a separate call: sketch the before/after tree and surface for sign-off.
+Apply in the direction the repo prefers: move the file to where co-change points, route through the existing public-surface convention, collapse a stray by-type split back into the feature folder, break a cycle by promoting the shared concept to a layer both may depend on. Moves are high-blast-radius — grep every reference, fix all import sites in one pass. Where a structural linter or policy doc exists, extend its rules so the convention stays pinned. Auto-fix: a behavior-preserving move/route/collapse with all references updated in the same commit. Sign-off: tree-reshaping — re-grouping a directory, splitting or merging modules, changing the layer scheme — sketch the before/after tree as the evidence.

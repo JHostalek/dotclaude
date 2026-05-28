@@ -56,7 +56,7 @@ flowchart TB
 ```
 ````
 
-Side-by-side LR is tempting but unreliable on the dagre renderer GitLab/GitHub ship — internal `direction TB` only holds when subgraphs are fully isolated, and any cross-subgraph edge (including the ordering hack) flips them to horizontal. Stack instead.
+Side-by-side LR is unreliable on the dagre renderer GitLab/GitHub ship: any cross-subgraph edge (including the ordering hack) flips internal `direction TB` to horizontal. Stack instead.
 
 Skip the diagram for pure refactors, bugfixes, dep bumps, copy changes — anything where the shape didn't move.
 

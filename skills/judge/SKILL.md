@@ -6,66 +6,59 @@ argument-hint: "[description of what to review, or omit for recent work]"
 
 subject = $ARGUMENTS
 
-If no subject provided, review the most recent substantive work in this conversation. Identify it from context and confirm with the user before spawning.
+No subject → review most recent substantive work in this conversation; identify from context, confirm with user before spawning. Subject references a path → read enough to know full scope before dispatching.
 
-If the subject references a file path or folder, read enough to understand full scope before dispatching.
+## Role
 
-## Purpose
-
-You are the courtroom coordinator, not the judge. The judges are independent teammates with clean context windows who haven't watched you build the thing — that independence is the entire value. Your implementation context is bias; their fresh eyes are the asset.
+You coordinate; the teammates judge. Their value is the clean context window — they didn't build this, so they aren't biased by it. Don't run the review yourself; your job is dispatch + synthesis.
 
 ## Scope
 
-This is not `/audit-necessity` (should it exist). This is: **given that we're building this thing, did we build it the way an expert would?**
-
-Dimensions: approach selection, architecture fitness, idiom correctness, trade-off awareness, missed alternatives, domain-standard solutions, proportionality of solution to problem.
+Not `/audit-necessity` (should it exist). This is: **given we're building it, did we build it the way an expert would?** — approach selection, architecture fitness, idiom correctness, trade-off awareness, missed alternatives, domain-standard solutions, proportionality of solution to problem.
 
 ## Teammates
 
-Spawn from `${CLAUDE_SKILL_DIR}/agents/`. All teammates are **read-only** — analysis only, no edits.
+Spawn all three in parallel from `${CLAUDE_SKILL_DIR}/agents/`. Read-only, analysis only.
 
 | Teammate | Agent file | Lens |
 |----------|-----------|------|
 | Domain Expert | `domain-expert.md` | Would a senior specialist in this exact domain do it this way? |
 | Pragmatist | `pragmatist.md` | Is this the most direct path to the goal? |
-| Alt-Path | `alt-path.md` | What fundamentally different approaches exist that we didn't consider? |
+| Alt-Path | `alt-path.md` | What fundamentally different approaches did we not consider? |
 
-Spawn all three in parallel. Each gets:
-- The subject description
-- All relevant file paths / code / context
-- The project's stack and conventions (detect from codebase)
+Each gets: subject description, all relevant file paths / code / context, and the project's stack + conventions (detect from codebase).
 
 ## Synthesis
 
-### Credibility Filter
+### Credibility filter
 
-LLM reviewers reliably produce "sounds expert" observations that don't survive scrutiny. Every finding must pass all four criteria — without this filter, the report will be 40%+ noise:
+LLM reviewers reliably emit "sounds expert" findings that don't survive scrutiny. Drop any finding that fails one of:
 
-1. **Substantiated** — references specific code, decisions, or patterns. "Generally speaking" observations get discarded.
+1. **Substantiated** — cites specific code/decision/pattern, not "generally speaking".
 2. **Actionable** — proposes a concrete alternative, not just criticism.
-3. **Trade-off honest** — the alternative has costs too. State them.
-4. **Calibrated** — distinguish "this is wrong" from "this is one valid approach but here's another" from "this is fine, minor style preference." Overclaiming kills trust and is the single most common failure mode of this skill.
+3. **Trade-off honest** — states the alternative's costs too.
+4. **Calibrated** — separates "this is wrong" from "valid but here's another" from "fine, style preference". Overclaiming is this skill's #1 failure mode.
 
-Discard style preferences disguised as expertise. Discard findings where the teammate clearly misunderstood the constraints.
+Also drop: style preferences dressed as expertise, findings where the teammate misread the constraints.
 
-### Convergence Signal
+### Convergence
 
-When 2+ teammates independently flag the same concern, elevate it — independent convergence is strong signal. When teammates contradict each other, present both positions with reasoning; don't pick a winner.
+2+ teammates independently flag the same concern → elevate it (independent convergence = strong signal). Teammates contradict → present both with reasoning, don't pick a winner.
 
-### Verdict Scale
+### Verdict scale
 
 | Verdict | Meaning |
 |---------|---------|
-| **EXPERT-GRADE** | A domain expert would recognize this as their own work. Teammates found style nits at most. |
-| **SOLID** | Sound approach. Real improvements found but no fundamental issues. |
-| **RETHINK** | Functional but an expert would take a meaningfully different approach. |
+| **EXPERT-GRADE** | A domain expert would recognize this as their own work. Style nits at most. |
+| **SOLID** | Sound approach. Real improvements found, no fundamental issues. |
+| **RETHINK** | Functional, but an expert would take a meaningfully different approach. |
 | **RED FLAG** | Fundamental approach issue. Specific alternative(s) strongly recommended. |
 
 ### Report
 
-1. **Verdict** — one word + one sentence justification
-2. **What's strong** — what teammates validated. Pure criticism is dishonest when things were done well, and the user will distrust a report that only finds fault.
+1. **Verdict** — one word + one-sentence justification
+2. **What's strong** — what teammates validated (criticism-only reports read as dishonest and lose trust)
 3. **Findings** — grouped by importance. Each: concern, evidence, proposed alternative, trade-off of alternative, source teammate(s)
-4. **If we could start over** — the single highest-leverage change, if any
+4. **If we could start over** — single highest-leverage change, if any
 
 **Stop after the report. Do not implement changes unless asked.**

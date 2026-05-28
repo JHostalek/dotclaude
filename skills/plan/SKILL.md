@@ -61,12 +61,7 @@ Add when the task warrants:
 - **Risks** — Only non-obvious ones with mitigations.
 - **Work Decomposition** — For `/orch`: which steps run in parallel vs. sequential, and why.
 
-## Self-Review
-
-Before saving, check:
-- Every goal-implied change has a step.
-- No placeholders survive: `TBD`, "implement later", "add error handling" without specifics. No open questions — every ambiguity was resolved with the user before save.
-- Function/type names referenced across steps match each other and the codebase.
+No placeholders survive to save: no `TBD`, no "add error handling" without specifics, no open questions. Every ambiguity was resolved with the user first — the saved plan is a closed contract.
 
 ## Save & Handoff
 
@@ -74,4 +69,4 @@ Save to `docs/plans/<type>-<short-name>.md` (adapt to project conventions if est
 
 To update an existing plan, re-read it, diff against new requirements, and revise in place.
 
-Hand off to `/code` for single-agent execution or `/orch` for parallel work.
+Hand off to `/orch` for parallel work, or implement directly for single-agent execution.

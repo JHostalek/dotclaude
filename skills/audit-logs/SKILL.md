@@ -4,10 +4,10 @@ description: Use when auditing and fixing logging in a scope — missing observa
 argument-hint: [path]
 ---
 
-target = $ARGUMENTS
+!`cat ~/.claude/skills/audit-workflow.md`
 
-If target provided, audit that path. Otherwise, files changed since the default branch. Full-codebase audit requires explicit user request.
+Run as the `logs` dimension. Lens:
 
-Find and fix logging across three dimensions: missing, bloat, wrong. A reader reconstructing a production run from logs alone should see state changes, stage outcomes, and errors with enough context to debug — and nothing else. INFO is what production pays for and scales with traffic; DEBUG is local-dev. Missing: long-running stages with no completion line, fan-outs without per-iteration progress at DEBUG, exceptions logged without stack, state transitions invisible. Bloat: entry+exit duplicates, per-iteration INFO, timing scaffolding when a trace store already records it, heartbeats on every poll regardless of outcome, payload dumps on routine paths. Wrong: f-strings breaking aggregation, wrong level, field-name drift across the same concept, stale templates that no longer match the code.
+Logging across three dimensions: missing, bloat, wrong. A reader reconstructing a production run from logs alone should see state changes, stage outcomes, and errors with enough context to debug — and nothing else. INFO is what production pays for and scales with traffic; DEBUG is local-dev. Missing: long-running stages with no completion line, fan-outs without per-iteration progress at DEBUG, exceptions logged without stack, state transitions invisible. Bloat: entry+exit duplicates, per-iteration INFO, timing scaffolding when a trace store already records it, heartbeats on every poll regardless of outcome, payload dumps on routine paths. Wrong: f-strings breaking aggregation, wrong level, field-name drift across the same concept, stale templates that no longer match the code.
 
-Prefer demotion to deletion for INFO bloat — restoration is harder than demotion. PII, session tokens, credentials in log fields are the exception: redact or hash, not demote — DEBUG still leaks in dev. Architectural changes (wiring a logging library, adopting a trace store, restructuring routing) are a separate decision: sketch and surface for sign-off. Report `git diff --stat` and lines demoted / promoted / removed / added.
+Prefer demotion to deletion for INFO bloat — restoration is harder than demotion (auto-fix). PII, session tokens, credentials in log fields are the exception: redact or hash, not demote — DEBUG still leaks in dev (sign-off). Architectural changes (wiring a logging library, adopting a trace store, restructuring routing) are sign-off.
