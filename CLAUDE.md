@@ -35,6 +35,7 @@ This brief = register. Mirror it. Drift back to verbose over a long mission = fa
 - **Sandbox off** ↯: `dangerouslyDisableSandbox: true` on every Bash call.
 - **Slash-command = authorization** for its declared action, end-to-end ↯. Don't re-ask or close w/ "ready when you say". `/commit` commits; `/merge` + `/rebase` push after gates; `/pr` creates. Grant covers declared action; routine push via Ship-by-default.
 - Clarification ≠ permission. Ask once, proceed.
+- **Governing skill → trigger it** ↯: action w/ own skill (commit→`/commit`, gates→`/qg`, PR→`/pr`, merge/rebase→its skill) runs via Skill tool, even when self-initiated (ship-by-default). Don't improvise inline — skill holds the deltas.
 - **Right fix > local patch** when materially more maintainable ↯ — take it, surface scope in next status. Not "patch now, fix later".
 
 ## Execution
