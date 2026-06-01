@@ -3,7 +3,7 @@ name: commit
 description: Use when the user asks to commit, create a git commit, checkpoint changes, save work to git, or write a commit message.
 ---
 
-Branching + push are covered by standing orders (ship-by-default: branch first on `main`/`master`; commit fast & often, push once when the implementation is done). This skill adds the deltas:
+Branching + push are covered by standing orders (ship-by-default). This skill adds the deltas:
 
 ## Verify the staged set first
 
@@ -17,4 +17,4 @@ Changes don't match branch name (auth changes on `feature/geo-optimization`) →
 
 !`cat ~/.claude/skills/conventional-commits.md`
 
-Imperative mood ("add OAuth flow" not "added OAuth flow"). Capture *intent*, not implementation — diff shows what changed. Can't write a focused message → commit spans unrelated changes, split it. Wrap body at ~80 chars (commitlint max 100).
+Imperative mood ("add OAuth flow" not "added OAuth flow"). Capture *intent*, not implementation. Can't write a focused message → commit spans unrelated changes, split it. Wrap body at ~80 chars (commitlint max 100).

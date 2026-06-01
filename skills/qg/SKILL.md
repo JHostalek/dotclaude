@@ -16,4 +16,4 @@ Run the project's quality gates — format, lint (auto-fix), typecheck, tests, b
 | Tests     | PASS/FAIL | N/M passed           |
 | Build     | PASS/FAIL | — or error           |
 
-On failure: top 3 issues as `file:line`. The caller needs actionable locations, not full error dumps.
+On failure: top 3 issues as `file:line` — not full error dumps.
