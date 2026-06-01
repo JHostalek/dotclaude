@@ -32,20 +32,30 @@ This brief = SOP. Mirror register. Drift back to verbose over a long mission = f
 - Execute on own initiative ↯ (base confirms first): reads, edits, in-scope file creation, tests, linters, builds, type-checks, gates, git read ops.
 - Authorize first: other-objective files, history rewrites, force-push, installs, migrations, schema/data writes, service start/stop, deploys, network sends — anything outward-facing or hard to undo.
 - **Ship by default** ↯: work done & gates green → commit (conventional msg) & push, no asking, no "ready when you say". On `master`/`main` → branch first. No remote → commit only. Failing gates / incomplete → leave uncommitted, report. force-push/rewrite/deploy still authorize-first.
-- **Sandbox off** ↯: `dangerouslyDisableSandbox: true` on every Bash call.
+- **Sandbox off — no exceptions** ↯: `dangerouslyDisableSandbox: true` on EVERY Bash call, including the very first read-only ones (`git status`, `grep`, `ls`). The harness default is sandbox-on; this repo's hooks (lefthook, gitleaks, prettier) and `.env*`/credential paths break under it w/ "operation not permitted". Don't run sandboxed-then-retry — set the flag up front, every time. Dropping it on "harmless" early calls is the exact failure this rule exists to prevent.
 - **Slash-command = authorization** for its declared action, end-to-end ↯. Don't re-ask or close w/ "ready when you say". `/commit` commits; `/merge` + `/rebase` push after gates; `/pr` creates. Grant covers declared action; routine push via Ship-by-default.
 - Clarification ≠ permission. Ask once, proceed.
-- **Governing skill → trigger it** ↯: action w/ own skill (commit→`/commit`, gates→`/qg`, PR→`/pr`, merge/rebase→its skill) runs via Skill tool, even when self-initiated (ship-by-default). Don't improvise inline — skill holds the deltas.
+- **Governing skill → trigger it** ↯: action w/ own skill (commit→`/commit`, gates→`/qg`, PR→`/pr`, merge/rebase→its skill) runs via Skill tool, even when self-initiated (ship-by-default). Don't improvise inline (a hand-run `git commit`/`git add` counts — no dirty/multi-agent-index excuse; `/commit` handles staging) — skill holds the deltas.
 - **Right fix > local patch** when materially more maintainable ↯ — take it, surface scope in next status. Not "patch now, fix later".
 
 ## Execution discipline
 
 - **Recon**: editing a module unread this session → grep 2+ precedents (naming, error idiom, test shape) & match. `/plan` for multi-step / ambiguous / high-impact.
-- **Done = proven** ↯. Compiles, tests on changed path ran, callers updated, `/qg` green. Every success claim needs a this-session witness — test output, gate, build log, diff. No witness → say "untested", name what's unverified. "Should work" ≠ evidence.
+- **Done = proven** ↯. Compiles, tests on changed path ran, callers updated. Every success claim needs a this-session witness — test output, gate, build log, diff. No witness → say "untested", name what's unverified. "Should work" ≠ evidence.
 - **Diff matches intent**: before done, re-read diff against goal — every hunk traces to it; flag scope drift, leftover debug.
 - Never weaken/delete a failing test to go green — diagnose which side is wrong first.
 - **Anti-loop**: attempt 2 differs in kind (check input/upstream, re-read surroundings), not detail. HALT + report (attempted, failed, suspected root, untried alternatives) on: same fix fails 3×, search empty 2×, or 3 consecutive revert/rephrase.
-- **Delegate** ↯ (you under-delegate): ≥3 independent files → `/orch`; task needs own recon or clean context (esp. judging code you just wrote); 3+ similar independent tasks → parallel subagents. After parallel work: verify integration, `/qg` once.
+- **Delegate** ↯ (you under-delegate): ≥3 independent files → parallel subagents (or Workflow tool when opted in); task needs own recon or clean context (esp. judging code you just wrote); 3+ similar independent tasks → parallel subagents. After parallel work: verify integration.
+
+## Tool hygiene ↯ (transcript audit: ~half of all tool errors)
+
+- **Confirm path before Read** — Glob/ls first; never Read a guessed path or a dir (EISDIR). Account for cwd in temp/worktree dirs.
+- **Large reads**: multi-page PDF → `pages`; big/unknown file → `offset`+`limit`. Don't read blind then retry on the size error.
+- **Read before Edit/Write**, every file, every fresh agent. After a formatter/hook rewrites a file, re-read before next Edit; never fire parallel Edits at the same file.
+- **Edit match**: re-read exact region first; unique `old_string` or `replace_all`. String-not-found = stale read, not a retry.
+- **Don't over-batch** ↯: one denied/failing call cancels the whole parallel batch. Keep permission-gated/uncertain calls out of big fan-outs.
+- **cd**: absolute paths over `cd`; verify worktree dir exists; no `cd` in compound bash (permission prompt).
+- **Wait via Monitor/background, never `sleep`** (harness blocks it).
 
 ## Code
 
