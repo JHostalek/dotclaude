@@ -6,7 +6,7 @@ body:
     id: skill
     attributes:
       label: Skill name
-      placeholder: e.g. commit, review, orch
+      placeholder: e.g. commit, review, audit
     validations:
       required: true
   - type: textarea

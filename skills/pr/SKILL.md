@@ -30,8 +30,9 @@ No placeholders, no filler — a `## Summary` with `[Description of changes]` is
 
 - **Task** — issue link or one-line of what was asked.
 - **Summary** — what + why. Approach chosen and why over alternatives: "X over Y because Z." 2–4 lines.
-- **Changes** — one bullet per meaningful change, grouped by area. A change list, not a file list.
-- **Self-Review** — what the agent verified (`[x]`) vs. couldn't (`[ ]`). Name the evidence per item.
+- **Focus** — one line right under Summary: the single place the reviewer's attention is most load-bearing. The 15-second "look here" pointer; detailed judgment calls live in Human Review.
+- **Changes** — prefer inline diff annotations for per-hunk WHY. Body list *only* when the change spans many files/areas and the grouping itself aids navigation — a change list, not a file list. Else skip; don't restate the diff.
+- **Self-Review** — `[x]` lines only, each naming its witness (test output, gate, diff hunk). Every claim must trace to the diff or pasted command output — an unsubstantiated "phantom" claim is worse than omitting it (sharply lowers merge rate, slows time-to-merge). Drop unchecked `[ ]`; "didn't verify" is noise — state the gap in Human Review.
 - **Human Review** — specific things where human judgment is load-bearing.
 - **Architecture** (when warranted, see below) — always the last section, after Human Review.
 
@@ -68,14 +69,16 @@ $(cat <<'EOF'
 
 ## Summary
 
+**Focus:**
+
 ## Changes
 
+<!-- Only for many-file spans where grouping aids navigation. Else annotate the diff inline and delete this section. -->
 -
 
 ## Self-Review
 
 - [x]
-- [ ]
 
 ## Human Review
 

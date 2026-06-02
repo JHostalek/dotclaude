@@ -59,7 +59,7 @@ Add when the task warrants:
 - **Approach & Rejected Alternatives** — What you chose and rejected, with rationale. Prevents re-litigating decisions.
 - **Edge Cases** — The 3–5 most likely failure modes and how the plan handles each. If you can't name them, you haven't understood the problem deeply enough.
 - **Risks** — Only non-obvious ones with mitigations.
-- **Work Decomposition** — For `/orch`: which steps run in parallel vs. sequential, and why.
+- **Work Decomposition** — For parallel execution (Workflow tool or subagents): which steps run in parallel vs. sequential, and why.
 
 No placeholders survive to save: no `TBD`, no "add error handling" without specifics, no open questions. Every ambiguity was resolved with the user first — the saved plan is a closed contract.
 
@@ -69,4 +69,4 @@ Save to `docs/plans/<type>-<short-name>.md` (adapt to project conventions if est
 
 To update an existing plan, re-read it, diff against new requirements, and revise in place.
 
-Hand off to `/orch` for parallel work, or implement directly for single-agent execution.
+Hand off to the Workflow tool (or parallel subagents) for parallel work, or implement directly for single-agent execution.
