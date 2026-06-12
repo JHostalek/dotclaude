@@ -6,10 +6,15 @@ argument-hint: [path]
 
 !`cat ~/.claude/skills/audit-workflow.md`
 
-Run as the `perf` dimension. Lens:
+Run as the `perf` dimension.
 
-Find code doing unnecessary work — too many calls, too much data, too frequent recomputation. The patterns that actually pay: N+1 (one call per item where one batched call would do), overfetching (full objects loaded when IDs or counts suffice; unbounded queries without pagination), wasted recomputation (derived data recalculated every call; in React, re-renders from unstable references or missing memoization where deps are stable), blocking hot paths (synchronous I/O inside request handlers or render paths), unbounded growth (in-memory collections without a cap).
+Find code doing unnecessary work. Patterns that pay:
+- N+1 — one call per item where one batched call suffices
+- Overfetching — full objects loaded when IDs or counts suffice; unbounded queries w/o pagination
+- Wasted recomputation — derived data recalculated every call; in React, re-renders from unstable refs or missing memoization where deps are stable
+- Blocking hot paths — synchronous I/O inside request handlers or render paths
+- Unbounded growth — in-memory collections w/o a cap
 
-Fix concrete patterns visible in the code, not "this might be slow under load." Apply UI lenses only when a UI exists; weigh cache layers only when one would land on a hot path.
+Fix concrete patterns visible in the code, not "might be slow under load." Apply UI lenses only when UI exists; weigh cache layers only when one would land on a hot path.
 
-Auto-fix the behavior-preserving moves: batch the loop, add the memo with stable deps, paginate the query, move blocking I/O off the hot path, cap the unbounded collection. State per-fix impact concretely — "O(N) queries → O(1)", "re-renders on every keystroke → memoized" — so value is legible without a profiler. Architectural changes (introducing a cache tier, adding an index, switching transport, denormalizing a schema) are sign-off: they trade complexity for speed, the call belongs to the operator — name the hot path, sketch the change, surface it.
+Auto-fix behavior-preserving moves: batch the loop, add memo w/ stable deps, paginate the query, move blocking I/O off hot path, cap unbounded collection. State per-fix impact concretely — "O(N) queries → O(1)", "re-renders on every keystroke → memoized." Architectural changes (cache tier, index, transport swap, schema denormalization) → sign-off: name the hot path, sketch the change, surface it.

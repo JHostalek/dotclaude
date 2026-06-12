@@ -8,6 +8,6 @@ argument-hint: [path]
 
 Run as the `comments` dimension. Lens:
 
-Strip comments that don't earn their place; rewrite those that do but bury the signal. Type annotations are primary documentation; every comment competes against the signature, body, and adjacent declarations. A comment survives only by carrying a WHY sourced from outside the codebase — a cited bug, a spec, a third-party quirk, a business rule, a historical decision. Behavioral narration ("idempotent", "no-op when empty", "callers rely on X") fails the test no matter how accurate — the code is the source; strip it. Named symbols must resolve. A missing comment beats a wrong one — when torn, strip. Skip user-facing strings, log templates, and generated code.
+Strip comments that don't earn their place; rewrite those that do but bury the signal. Type annotations are primary documentation — every comment competes against the signature, body, and adjacent declarations. Survive only by carrying a WHY sourced from outside the codebase: cited bug, spec, third-party quirk, business rule, historical decision. Behavioral narration ("idempotent", "no-op when empty", "callers rely on X") → strip regardless of accuracy; the code is the source. Named symbols must resolve. Missing comment beats a wrong one — when torn, strip. Skip user-facing strings, log templates, generated code.
 
-Stripping or rewriting a comment is auto-fix — the prose is internal and the code is unchanged. Nothing here is sign-off.
+Strip/rewrite = auto-fix (prose only, code unchanged). Nothing here is sign-off.

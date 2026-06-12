@@ -12,36 +12,18 @@ model: haiku
 
 # codemap
 
-Builds a `codemap/` folder: a few **whole-system** documents, each viewing the
-entire codebase from one perspective. A reader browses these *instead of* the
-code, then drills into source. The output is the **mental model** — concepts,
-flows, rules. Not a restatement of code: no file listings, no method/class
-enumeration, no signatures.
+Builds `codemap/`: a few **whole-system** documents, each viewing the entire codebase from one perspective. Reader browses these *instead of* the code, then drills into source. Output = **mental model** — concepts, flows, rules. No file listings, no method/class enumeration, no signatures.
 
-## Non-negotiable rules
+## Rules
 
-1. **Haiku only.** This skill and *every* subagent run on `haiku`. Always pass
-   `model: haiku` when spawning. Never escalate.
-2. **Blind orchestrator.** You (running this skill) never read source content
-   and never read generated docs. You only: list paths, count lines, spawn
-   subagents, run the Step 4.5 diagram validator (reading only its pass/fail +
-   error text), and collect each subagent's one-line completion (path + count).
-   No reading, auditing, editing, or stitching of content yourself.
-3. **One file, one owner.** Each output file is written by exactly one subagent.
-   Write-exclusive: a tier-2 lens agent *may read* tier-1 fragment files as
-   read-only input, but writes **only** its own file. No agent ever writes
-   outside the single file it owns.
-4. **Mermaid for all visuals. No ASCII.** Every diagram, tree, flow, or
-   relationship graphic is a fenced ```mermaid``` block. ASCII art / box-drawing
-   / indented trees as visuals are forbidden. Prose, lists, and data tables are
-   fine. Every block must PARSE — see the **Mermaid syntax contract** below; the
-   Step 4.5 gate enforces it.
+1. **Haiku only.** Skill and every subagent run on `haiku`. Pass `model: haiku` when spawning. No escalation.
+2. **Blind orchestrator.** Never read source content or generated docs. Only: list paths, count lines, spawn subagents, run Step 4.5 diagram validator (read pass/fail + error text only), collect each subagent's one-line completion (path + count). No reading, auditing, editing, or stitching.
+3. **One file, one owner.** Each output file written by exactly one subagent. Tier-2 lens agent may read tier-1 fragment files (read-only) but writes only its own file. No agent writes outside its owned file.
+4. **Mermaid for all visuals. No ASCII.** Every diagram, tree, flow, or relationship graphic → fenced ```mermaid``` block. ASCII art / box-drawing / indented trees as visuals forbidden. Prose, lists, data tables fine. Every block must PARSE — see **Mermaid syntax contract** below; Step 4.5 gate enforces it.
 
 ## Mermaid syntax contract
 
-Prepend this block **verbatim** to every subagent prompt (tier-1, DB, tier-2).
-It is the syntax half of "Mermaid for all visuals"; Step 4.5 mechanically
-enforces it by rendering each diagram.
+Prepend this block **verbatim** to every subagent prompt (tier-1, DB, tier-2). Syntax half of "Mermaid for all visuals"; Step 4.5 mechanically enforces it by rendering each diagram.
 
 > MERMAID — every ```mermaid``` block you emit MUST parse (it is rendered by
 > mermaid-cli; a parse error fails the build). NO ASCII diagrams. Obey exactly:
@@ -80,28 +62,17 @@ flowchart TB
   T1 -. "read-only input" .-> T2
 ```
 
-Outputs: `codemap/_fragments/<subsystem>.md` (tier-1); `codemap/00-overview.md`,
-`01-capabilities.md`, `02-dataflow.md`, `03-codemap.md`, `04-domain.md` (tier-2);
-and `codemap/05-db-schema.md` (ground-truth DB schema — conditional, only if the
-repo has a database layer).
+Outputs: `codemap/_fragments/<subsystem>.md` (tier-1); `codemap/00-overview.md`, `01-capabilities.md`, `02-dataflow.md`, `03-codemap.md`, `04-domain.md` (tier-2); `codemap/05-db-schema.md` (ground-truth DB schema — conditional, only if repo has a database layer).
 
 ## Procedure
 
 ### Step 1 — Partition into subsystems (paths only)
 
-Without reading file content, split the source tree into subsystems sized to fit
-one Haiku agent. Skip caches/vendored dirs (`__pycache__`, `node_modules`,
-`.venv`, `dist`, `.git`). For each top-level source dir, measure LOC; if it
-exceeds ~8k LOC or ~60 files, descend one level and treat children as separate
-subsystems (split a flat bag of files by name/domain prefix). Otherwise treat
-the dir as one subsystem. Produce a list of `{name, paths, fragment_file}`. Use
-`find`/`wc` only — never `cat`/Read source.
+Without reading file content, split source tree into subsystems sized to fit one Haiku agent. Skip `__pycache__`, `node_modules`, `.venv`, `dist`, `.git`. For each top-level source dir, measure LOC; >~8k LOC or >~60 files → descend one level, treat children as separate subsystems (split flat file bags by name/domain prefix). Produce `{name, paths, fragment_file}` list. Use `find`/`wc` only — never `cat`/Read source.
 
 ### Step 2 — Tier-1 fan-out (parallel, one agent per subsystem)
 
-Each agent (`model: haiku`) owns one `_fragments/<subsystem>.md`, reads its
-code, writes its fragment. Prepend the **Mermaid syntax contract** verbatim to
-the prompt:
+Each agent (`model: haiku`) owns one `_fragments/<subsystem>.md`, reads its code, writes its fragment. Prepend **Mermaid syntax contract** verbatim to prompt:
 
 > You write ONE fragment of a high-altitude architecture doc, later read (not
 > edited) by stitching agents. Write the MENTAL MODEL, not a restatement of code.
@@ -133,16 +104,9 @@ the prompt:
 
 ### Step 3 — DB-schema doc (conditional; runs in parallel with Step 4)
 
-ONLY if the repo has a database layer — an ORM schema/model dir (Drizzle, Prisma,
-TypeORM, SQLAlchemy, ActiveRecord, …), raw SQL DDL, or a migrations dir. No DB →
-skip this step AND drop `05-db-schema.md` from the outputs; never emit an empty or
-guessed schema. This agent reads CODE (the schema source), not the fragments, so it
-can launch in the same wave as Step 4 without waiting on tier-1.
+Only if repo has a DB layer — ORM schema/model dir (Drizzle, Prisma, TypeORM, SQLAlchemy, ActiveRecord, …), raw SQL DDL, or migrations dir. No DB → skip, drop `05-db-schema.md` from outputs; never emit empty or guessed schema. Agent reads CODE (schema source), not fragments → can launch in same wave as Step 4.
 
-Spawn ONE agent (`model: haiku`) that owns `codemap/05-db-schema.md`. Unlike the
-lens docs, this is GROUND TRUTH, not a mental model — it must mirror the real
-schema. Don't prescribe a method: the agent picks how to get an accurate result.
-Prepend the **Mermaid syntax contract** verbatim to the prompt:
+Spawn ONE agent (`model: haiku`) owning `codemap/05-db-schema.md`. GROUND TRUTH, not mental model — must mirror real schema. Don't prescribe method: agent picks how to get accurate result. Prepend **Mermaid syntax contract** verbatim to prompt:
 
 > You own ONE doc: the database schema exactly as it is. OUTPUT: write ONLY to
 > `codemap/05-db-schema.md`.
@@ -167,9 +131,7 @@ Prepend the **Mermaid syntax contract** verbatim to the prompt:
 
 ### Step 4 — Tier-2 fan-out (parallel, one agent per lens)
 
-After all tier-1 agents report done, spawn the lens agents (`model: haiku`).
-Each reads **all** `_fragments/*.md` (read-only) and writes only its lens.
-Prepend the **Mermaid syntax contract** verbatim to each lens prompt.
+After all tier-1 agents report done, spawn lens agents (`model: haiku`). Each reads **all** `_fragments/*.md` (read-only), writes only its lens. Prepend **Mermaid syntax contract** verbatim to each lens prompt.
 
 Shared preamble:
 
@@ -203,13 +165,9 @@ Per lens — file · purpose · required mermaid:
 
 ### Step 4.5 — Validate diagrams (parse gate)
 
-Goal: the shipped docs contain only diagrams that actually render — valid
-snippets, not just hopefully-valid ones. This is a mechanical check: running a
-validator and reading its pass/fail + error text is NOT "reading content", so it
-doesn't breach the blind-orchestrator rule.
+Shipped docs must contain only diagrams that actually render. Running validator + reading pass/fail + error text is NOT "reading content" — doesn't breach blind-orchestrator rule.
 
-For every written `codemap/*.md` that contains a ```mermaid``` block, render it
-with mermaid-cli via `npx` (no global install — the `-y` form):
+For every written `codemap/*.md` containing a ```mermaid``` block, render with mermaid-cli via `npx` (no global install — `-y` form):
 
 ````bash
 out="$TMPDIR/codemap-validate"; mkdir -p "$out"
@@ -228,20 +186,10 @@ for f in codemap/*.md; do
 done
 ````
 
-(If Chromium refuses to launch, pass `-p` a puppeteer config of
-`{"args":["--no-sandbox"]}`. If `npx`/node is unavailable, skip this step and
-note "diagram validation skipped — no npx" in the report; do NOT fail the run.)
+(Chromium refuses to launch → pass `-p` puppeteer config `{"args":["--no-sandbox"]}`. `npx`/node unavailable → skip step, note "diagram validation skipped — no npx" in report; do NOT fail the run.)
 
-For each `FAIL <file>`: re-spawn a `haiku` agent that owns ONLY that file. Give it
-the file path, the extracted parse-error block (the `::` payload above), and the
-**Mermaid syntax contract**, and instruct it to edit ONLY that file so every block
-parses, then re-report. Re-run
-the validator on that file. Bound to 2 fix attempts per file; if it still fails,
-carry it into the report as an unresolved ⚠️ with the error.
+For each `FAIL <file>`: re-spawn `haiku` agent owning ONLY that file. Give it the file path, extracted parse-error block (`::` payload above), and **Mermaid syntax contract**; instruct it to edit ONLY that file so every block parses, then re-report. Re-run validator on that file. Bound to 2 fix attempts per file; still fails → carry as unresolved ⚠️ with error.
 
 ### Step 5 — Report
 
-Collect completion lines. Report only files written + line counts, the Step 4.5
-validation result (all PASS / unresolved ⚠️ files with their errors / skipped —
-no npx), and any ⚠️ conflicts agents surfaced (note if `05-db-schema.md` was
-skipped for lack of a DB). Do not summarize content you have not read.
+Report: files written + line counts; Step 4.5 validation result (all PASS / unresolved ⚠️ files with errors / skipped — no npx); ⚠️ conflicts agents surfaced (note if `05-db-schema.md` skipped — no DB). No summarizing content not read.

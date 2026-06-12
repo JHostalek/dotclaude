@@ -8,10 +8,10 @@ argument-hint: [path-glob or module name; empty for full sweep]
 
 Run as the `tests` dimension. Lens:
 
-Bias hard toward cutting. A test earns its keep only if it catches context loss between changes or encodes domain knowledge the code itself can't express. Bloat to delete: restated-behavior, getter/setter coverage, mock-the-world ceremonies, framework smoke checks, "it returns what I told it to return", assertions that mirror the implementation line for line. When in doubt, delete — deletion is auto-fix.
+Bias hard toward cutting. A test earns its keep only if it catches context loss between changes or encodes domain knowledge the code can't express. Delete bloat: restated-behavior, getter/setter coverage, mock-the-world ceremonies, framework smoke checks, "returns what I told it to return", assertions mirroring implementation line-for-line. Doubt → delete; deletion is auto-fix.
 
-Rewrite weak ones to catch the bug they nominally guard: tests that pass against a broken implementation, assert on incidental output rather than the contract, or are so heavily mocked the unit under test never runs. A rewrite that preserves what the test was meant to verify is auto-fix; one that changes which behavior is considered correct is sign-off.
+Rewrite weak tests to catch the bug they nominally guard: tests passing against a broken implementation, asserting incidental output over contract, or so heavily mocked the unit under test never runs. Rewrite preserving intended behavior = auto-fix; rewrite changing which behavior is correct = sign-off.
 
-Find production code that's uncovered or thinly covered and add tests where coverage would catch real defects — critical paths (auth, money, data integrity), non-obvious edges, business rules, integration seams. Skip framework behavior and passthroughs. Prefer integration over mocked unit, behavior over implementation. Added coverage for existing behavior is auto-fix.
+Add tests where coverage would catch real defects in uncovered or thinly covered production code — critical paths (auth, money, data integrity), non-obvious edges, business rules, integration seams. Skip framework behavior and passthroughs. Prefer integration over mocked unit, behavior over implementation. Coverage for existing behavior = auto-fix.
 
-Don't flag: absent tests for trivial passthroughs, the lack of a unit test where an integration test already exercises the path, or coverage gaps in throwaway/generated code. A green baseline before cutting is the engine's concern, not a finding.
+No flag: absent tests for trivial passthroughs, missing unit test where integration test already exercises the path, coverage gaps in throwaway/generated code. Green baseline before cutting = engine's concern, not a finding.

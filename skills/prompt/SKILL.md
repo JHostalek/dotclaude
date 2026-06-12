@@ -5,7 +5,7 @@ description: Use when the user asks to create, refine, evaluate, or optimize an 
 
 task = $ARGUMENTS
 
-Design a production-grade prompt. If `$task` is clear, draft immediately; ask only when a blocking fact is missing.
+Draft immediately if `$task` is clear; ask only when a blocking fact is missing.
 
 ## Four facts before drafting
 
@@ -19,17 +19,17 @@ Infer from `$task` when obvious.
 ## Principles
 
 <principles>
-- **Positive directives beat negatives.** "Return JSON matching schema X" outperforms "don't add prose." Negatives prime the behavior they forbid. Refactor any "don't X" into "do A; if not applicable, say so."
+- **Positive directives beat negatives.** "Return JSON matching schema X" outperforms "don't add prose." Negatives prime the behavior they forbid. Refactor any "don't X" → "do A; if not applicable, say so."
 - **Motivate constraints.** One sentence of *why* lets the model apply the rule to novel cases. "Cite sources — users cannot verify unsourced claims" beats bare "Cite sources."
-- **Concept-first, examples-last.** Lead with what and why. Few-shot exemplars *inside* the prompt bias output toward the demonstrated shape — add only when principles demonstrably fail to generalize. Diagnostic mediocre→final contrasts used while drafting are a separate tool and don't count against this rule.
+- **Concept-first, examples-last.** Lead w/ what and why. Few-shot exemplars *inside* the prompt bias output toward the demonstrated shape — add only when principles demonstrably fail to generalize. Diagnostic mediocre→final contrasts used while drafting are a separate tool and don't count against this rule.
 - **Density discipline.** Every rule competes for attention. Include only what changes behavior from the target's default; on reasoning models, extra rules cause over-triggering.
 - **Invariants as XML.** Wrap content the model must retrieve verbatim — output contracts, refusal boundaries, safety rules — in semantic tags: `<output_contract>`, `<security>`, `<refusal>`.
-- **Enumerations close silently.** A category list reads as closed to instruction-tuned models — borderline items get force-fit or skipped. Closed output spaces (enums, score bands): enumerate exhaustively. Open spaces: frame as *lenses* (axes of thought, not closed types) with an explicit escape clause, or drop the list.
+- **Enumerations close silently.** A category list reads as closed to instruction-tuned models — borderline items get force-fit or skipped. Closed output spaces (enums, score bands): enumerate exhaustively. Open spaces: frame as *lenses* (axes of thought, not closed types) w/ an explicit escape clause, or drop the list.
 </principles>
 
 ## Target-model branching
 
-- **Reasoning models.** Strip explicit CoT scaffolding — "think carefully before responding" over written step plans; trust internal decomposition. Depth comes from the effort setting, not prose. Density low, literalism high (a rule won't generalize across a class unless you say so), invariants tagged.
+- **Reasoning models.** Strip explicit CoT scaffolding — "think carefully before responding" over written step plans; trust internal decomposition. Depth from effort setting, not prose. Density low, literalism high (a rule won't generalize across a class unless stated); invariants tagged.
 - **Instruction-tuned chat.** Light structure earns its keep. Positive exemplars move the needle more than abstract principles. Role preambles occasionally useful.
 - **Small / open-weights.** Retain explicit decomposition (Self-Ask, Least-to-Most, ReAct), few-shot for format normalization, clear boundaries on every field. Higher density tolerated and often required.
 

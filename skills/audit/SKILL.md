@@ -6,4 +6,4 @@ argument-hint: [path]
 
 !`cat ~/.claude/skills/audit-workflow.md`
 
-Run all eleven dimensions through the workflow above, in the integration order it lists. Each dimension's lens is its own skill — the worktree agent reads `~/.claude/skills/audit-<dimension>/SKILL.md` for what that dimension looks for and how it classifies findings. `tests` only if the scope has tests.
+Run all eleven dimensions through the workflow above, in the integration order it lists. Each dimension's lens: `~/.claude/skills/audit-<dimension>/SKILL.md`. Skip `tests` if scope has no tests.
