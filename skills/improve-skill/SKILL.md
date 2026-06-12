@@ -15,11 +15,11 @@ Search in order: `~/.claude/skills/{skill_name}/SKILL.md` → `~/.claude/skills/
 
 ## Self-assessment first
 
-Form your own verdict *before* research — research without a prior assessment produces parroting, not judgment. Default bias: a skill usually wants to get *shorter*. Cutting bloat is worth as much as adding technique.
+Form verdict *before* research — prior assessment prevents parroting. Default bias: shorter. Cutting bloat = as much value as adding technique.
 
-Assess the skill as a **prompt for an executing agent**, not a doc for a human — this is the higher-value lens; most skills have adequate coverage but weak prompt engineering. Note for each finding which competitive source would confirm or refute it. Also flag capability gaps and self-contradiction — what the skill should do but doesn't, where it contradicts its own stated philosophy — not just prompt-craft.
+Assess as **prompt for an executing agent**, not a human doc. Flag capability gaps and self-contradiction (what the skill should do but doesn't; where it contradicts its own stated philosophy), not just prompt-craft. Note for each finding which competitive source would confirm or refute it.
 
-Rubric (these feed the report's section-2 table):
+Rubric (feeds report section-2 table):
 
 | Check | What to look for |
 |-------|-----------------|
@@ -33,7 +33,7 @@ Rubric (these feed the report's section-2 table):
 
 ## Competitive research
 
-Spawn **three research teammates in parallel**. For each: read the prompt file from `${CLAUDE_SKILL_DIR}/agents/<name>.md`, pass its full content as the teammate's prompt, prepend the skill summary + your hypotheses for context.
+Spawn **three research teammates in parallel**. For each: read prompt file from `${CLAUDE_SKILL_DIR}/agents/<name>.md`, pass full content as teammate's prompt, prepend skill summary + hypotheses for context.
 
 | Teammate | File | Purpose |
 |----------|------|---------|
@@ -43,7 +43,7 @@ Spawn **three research teammates in parallel**. For each: read the prompt file f
 
 ## Synthesis & report
 
-After all teammates return, surface: which hypotheses research confirmed, insights that emerge only from *combining* sources, and what to cut — phantom-constraint test: no competitor instructs it AND the model does it anyway → flag for removal.
+Surface: which hypotheses research confirmed, insights from *combining* sources, what to cut — phantom-constraint test: no competitor instructs it AND model does it anyway → flag for removal.
 
 Single consolidated report:
 
@@ -73,4 +73,4 @@ Single consolidated report:
 
 ## Implementation (after approval)
 
-Apply removals before additions — models default to additive, so subtract first to keep the skill from growing. Convert plain file paths to `!path/to/file.md` inline injection where appropriate. Report net line-count change. Apply the `/prompt` skill's design principles when rewriting.
+Apply removals before additions — models default additive, subtract first to prevent growth. Convert plain file paths to `!path/to/file.md` inline injection where appropriate. Report net line-count change. Apply `/prompt` skill's design principles when rewriting.

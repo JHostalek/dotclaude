@@ -8,9 +8,9 @@ input = $ARGUMENTS
 
 ## Branch Name
 
-Derive from user input (ask if missing). Default format: `<type>/<kebab-description>` using conventional commit types (`feat` when ambiguous). **Check `git branch` first** — if the repo uses a different convention (e.g., `feature/JIRA-123-desc`), match it.
+Derive from input; ask if missing. Default: `<type>/<kebab-description>`, conventional commit types (`feat` when ambiguous). Check `git branch` first — if repo uses different convention (e.g., `feature/JIRA-123-desc`), match it.
 
-Show the derived name before proceeding.
+Show derived name before proceeding.
 
 ## Worktree Location
 
@@ -20,15 +20,15 @@ Show the derived name before proceeding.
 
 ## Base Branch
 
-Branch from the latest remote default, not from `HEAD` — `HEAD` can be stale or on an unrelated branch, silently seeding the worktree with the wrong history.
+Branch from latest remote default, not `HEAD` — `HEAD` can be stale or on an unrelated branch, silently seeding the worktree with wrong history.
 
 1. Detect default: `git symbolic-ref refs/remotes/origin/HEAD | sed 's|refs/remotes/origin/||'` (fallback: try `main`, then `master`)
 2. Fetch: `git fetch origin {default_branch}`
 3. Create: `git worktree add -b {branch} {directory} origin/{default_branch}`
 
-If the branch already exists: `git worktree add {directory} {branch}` (no `-b`).
+Branch already exists → `git worktree add {directory} {branch}` (no `-b`).
 
-After creation, symlink gitignored files so the worktree runs without a reinstall:
+After creation, symlink gitignored files so worktree runs without reinstall:
 ```
 bash ~/.claude/skills/worktree/scripts/symlink-gitignored.sh {repo_root} {directory}
 ```

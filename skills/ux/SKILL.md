@@ -6,11 +6,11 @@ argument-hint: [page path or URL]
 
 page_path = $ARGUMENTS
 
-If page_path provided, focus on that page/component. Otherwise, evaluate entire application UI.
+page_path provided → focus on that page/component. Otherwise evaluate entire application UI.
 
 ## Approach
 
-Match evaluation depth to scope. A single component needs the 2-3 most relevant dimensions, not a 13-dimension sweep. A full page gets all 13. An entire app — focus on the 3 highest-traffic flows first; a full audit produces so many findings that none get fixed.
+Match evaluation depth to scope: single component → 2-3 most relevant dimensions; full page → all 13; entire app → 3 highest-traffic flows first (full audit produces too many findings to act on).
 
 Gather context from at least one source, in order of preference: live browser navigation, screenshots, code review. Combine when available.
 
@@ -33,4 +33,4 @@ Rate each evaluated dimension 1-5 (1=broken, 5=excellent). Compact table. Overal
 
 For each critical/high fix: what to test (user action) and what success looks like (behavior or outcome).
 
-After presenting: offer to implement top 3 critical/high fixes immediately.
+After presenting, offer to implement top 3 critical/high fixes immediately.

@@ -10,11 +10,11 @@ No subject → review most recent substantive work in this conversation; identif
 
 ## Role
 
-You coordinate; the teammates judge. Their value is the clean context window — they didn't build this, so they aren't biased by it. Don't run the review yourself; your job is dispatch + synthesis.
+You coordinate; teammates judge. Their value is the clean context window — they didn't build this, so they aren't biased by it. Don't run the review yourself; dispatch + synthesize.
 
 ## Scope
 
-Not `/audit-necessity` (should it exist). This is: **given we're building it, did we build it the way an expert would?** — approach selection, architecture fitness, idiom correctness, trade-off awareness, missed alternatives, domain-standard solutions, proportionality of solution to problem.
+Not `/audit-necessity` (should it exist). Given we're building it, **did we build it the way an expert would?** — approach selection, architecture fitness, idiom correctness, trade-off awareness, missed alternatives, domain-standard solutions, proportionality of solution to problem.
 
 ## Teammates
 
@@ -32,7 +32,7 @@ Each gets: subject description, all relevant file paths / code / context, and th
 
 ### Credibility filter
 
-LLM reviewers reliably emit "sounds expert" findings that don't survive scrutiny. Drop any finding that fails one of:
+Drop any finding that fails one of:
 
 1. **Substantiated** — cites specific code/decision/pattern, not "generally speaking".
 2. **Actionable** — proposes a concrete alternative, not just criticism.
@@ -43,7 +43,7 @@ Also drop: style preferences dressed as expertise, findings where the teammate m
 
 ### Convergence
 
-2+ teammates independently flag the same concern → elevate it (independent convergence = strong signal). Teammates contradict → present both with reasoning, don't pick a winner.
+2+ teammates independently flag the same concern → elevate it. Teammates contradict → present both with reasoning, don't pick a winner.
 
 ### Verdict scale
 

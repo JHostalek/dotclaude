@@ -5,11 +5,11 @@ description: Use when the user wants to improve website search visibility, AI se
 
 target = $ARGUMENTS
 
-Optimize the target website for both traditional search engines and AI search engines.
+Optimize the target for both traditional search engines and AI search engines.
 
 ## SEO vs GEO
 
-SEO optimizes for **ranking**; GEO (Generative Engine Optimization) optimizes for **being cited** by AI search engines — ChatGPT, Perplexity, Google AI Overview, Copilot, Claude. Optimize both, but the strategies diverge: keyword density helps SEO yet *hurts* GEO (-10%); citations & statistics are irrelevant to ranking but boost GEO +37-40%. When they conflict, flag it.
+SEO optimizes for **ranking**; GEO (Generative Engine Optimization) optimizes for **being cited** by AI search engines — ChatGPT, Perplexity, Google AI Overview, Copilot, Claude. Optimize both, but strategies diverge: keyword density helps SEO yet *hurts* GEO (-10%); citations & statistics are irrelevant to ranking but boost GEO +37-40%. When they conflict, flag it.
 
 ## Princeton GEO Methods
 
@@ -43,7 +43,7 @@ Full ranking factors per platform: [references/platform-algorithms.md](./referen
 
 ## AI Bot Access
 
-Allow these user-agent strings in robots.txt for AI visibility — sites often block them unknowingly.
+Allow these user-agent strings in robots.txt — sites often block them unknowingly.
 
 | Bot | Platform |
 |-----|----------|
@@ -56,7 +56,7 @@ Allow these user-agent strings in robots.txt for AI visibility — sites often b
 
 ## Schema Markup
 
-FAQPage schema provides the single highest GEO impact (+40% AI visibility). Prioritize it over other schema types. For ready-to-use JSON-LD templates (FAQPage, Article, WebPage, SoftwareApplication, Organization, Product, HowTo, BreadcrumbList, LocalBusiness, SpeakableSpecification): [references/schema-templates.md](./references/schema-templates.md)
+FAQPage schema → single highest GEO impact (+40% AI visibility). Prioritize over other schema types. For ready-to-use JSON-LD templates (FAQPage, Article, WebPage, SoftwareApplication, Organization, Product, HowTo, BreadcrumbList, LocalBusiness, SpeakableSpecification): [references/schema-templates.md](./references/schema-templates.md)
 
 ## Tools
 
@@ -73,7 +73,7 @@ FAQPage schema provides the single highest GEO impact (+40% AI visibility). Prio
 | `competitor_gap.py <domains>` | DataForSEO | Keyword gap analysis |
 | `related_keywords.py <keyword>` | DataForSEO | Related keyword suggestions |
 
-DataForSEO scripts require `DATAFORSEO_LOGIN` and `DATAFORSEO_PASSWORD` environment variables.
+DataForSEO scripts require `DATAFORSEO_LOGIN` and `DATAFORSEO_PASSWORD` env vars.
 
 ### Validation
 

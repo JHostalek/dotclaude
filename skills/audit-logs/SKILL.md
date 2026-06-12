@@ -8,6 +8,12 @@ argument-hint: [path]
 
 Run as the `logs` dimension. Lens:
 
-Logging across three dimensions: missing, bloat, wrong. A reader reconstructing a production run from logs alone should see state changes, stage outcomes, and errors with enough context to debug — and nothing else. INFO is what production pays for and scales with traffic; DEBUG is local-dev. Missing: long-running stages with no completion line, fan-outs without per-iteration progress at DEBUG, exceptions logged without stack, state transitions invisible. Bloat: entry+exit duplicates, per-iteration INFO, timing scaffolding when a trace store already records it, heartbeats on every poll regardless of outcome, payload dumps on routine paths. Wrong: f-strings breaking aggregation, wrong level, field-name drift across the same concept, stale templates that no longer match the code.
+Three dimensions: missing, bloat, wrong. A reader reconstructing a production run from logs alone should see state changes, stage outcomes, and errors w/ enough context to debug — nothing else. INFO is what production pays for and scales w/ traffic; DEBUG is local-dev.
 
-Prefer demotion to deletion for INFO bloat — restoration is harder than demotion (auto-fix). PII, session tokens, credentials in log fields are the exception: redact or hash, not demote — DEBUG still leaks in dev (sign-off). Architectural changes (wiring a logging library, adopting a trace store, restructuring routing) are sign-off.
+Missing: long-running stages w/o completion line; fan-outs w/o per-iteration progress at DEBUG; exceptions logged w/o stack; invisible state transitions.
+
+Bloat: entry+exit duplicates; per-iteration INFO; timing scaffolding when trace store already records it; heartbeats on every poll regardless of outcome; payload dumps on routine paths.
+
+Wrong: f-strings breaking aggregation; wrong level; field-name drift across same concept; stale templates no longer matching code.
+
+Prefer demotion over deletion for INFO bloat — restoration harder than demotion (auto-fix). Exception: PII, session tokens, credentials in log fields → redact or hash, not demote — DEBUG still leaks in dev (sign-off). Architectural changes (wiring logging library, adopting trace store, restructuring routing) → sign-off.

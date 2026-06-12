@@ -6,9 +6,9 @@ argument-hint: [search query]
 
 query = $ARGUMENTS
 
-Discover and install skills from the open agent skills ecosystem using the Skills CLI (`npx skills`).
+Discover and install skills via the Skills CLI (`npx skills`).
 
-Browse available skills at https://skills.sh/
+Browse: https://skills.sh/
 
 ## CLI
 
@@ -21,7 +21,7 @@ npx skills update                    # update all installed
 
 ## Install Protocol
 
-Always pass `-a claude-code -y` when installing. `-a` targets `.claude/skills/` only — without it, the CLI scatters files into `.agents/`, `.junie/`, `.kilocode/`, `.kiro/`. `-y` skips confirmation. Add `-g` only if the user explicitly asks for a global install.
+Always pass `-a claude-code -y`: `-a` targets `.claude/skills/` only (omitting it scatters files into `.agents/`, `.junie/`, `.kilocode/`, `.kiro/`); `-y` skips confirmation. Add `-g` only if user explicitly asks for global install.
 
 ```bash
 npx skills add <owner/repo@skill> -a claude-code -y
@@ -29,7 +29,7 @@ npx skills add <owner/repo@skill> -a claude-code -y
 
 ## Post-Install Cleanup (mandatory)
 
-The CLI always creates `.agents/skills/<name>/` as internal storage and symlinks from `.claude/skills/`. No flag prevents this. Every install requires cleanup:
+CLI always creates `.agents/skills/<name>/` as internal storage and symlinks from `.claude/skills/`; no flag prevents this. Every install → cleanup:
 
 ```bash
 # Replace symlink with real copy

@@ -6,8 +6,16 @@ argument-hint: [path]
 
 !`cat ~/.claude/skills/audit-workflow.md`
 
-Run as the `correctness` dimension. Lens:
+Run as the `correctness` dimension.
 
-Find code whose behavior diverges from what it claims to do. Intent lives in names, signatures, docstrings, comments, and caller expectations — when behavior contradicts any of them, one is wrong and usually it's the code. Read for what the code does, not what it claims; names, comments, and the diff message prime confirmation bias. The patterns the model under-weights without prompting: off-by-one in loop bounds, slicing, range checks (`<` vs `<=` against length); inverted conditions and wrong logical operator (`||` vs `&&`, missing De Morgan flip); unhandled boundary cases (empty collection, single element, zero, negative, max) where surrounding logic implicitly assumes more; unit or dimension mismatch (ms vs seconds, bytes vs KB, 0- vs 1-indexed); time bugs (naive vs timezone-aware datetimes, DST); concurrency hazards (stale reads, TOCTOU, missing atomicity). Distinguish from audit-error-handling, which is about errors that vanish (swallowed, unobserved) — correctness is about producing the wrong answer with no error at all.
+Find code whose behavior diverges from what it claims to do. Intent lives in names, signatures, docstrings, comments, caller expectations — behavior contradicting any of them → one is wrong, usually the code. Read for what code does, not what it claims; names, comments, diff message prime confirmation bias. Patterns to probe explicitly:
+- off-by-one in loop bounds, slicing, range checks (`<` vs `<=` against length)
+- inverted conditions, wrong logical operator (`||` vs `&&`, missing De Morgan flip)
+- unhandled boundary cases (empty collection, single element, zero, negative, max) where surrounding logic implicitly assumes more
+- unit/dimension mismatch (ms vs seconds, bytes vs KB, 0- vs 1-indexed)
+- time bugs (naive vs timezone-aware datetimes, DST)
+- concurrency hazards (stale reads, TOCTOU, missing atomicity)
 
-Touch a line only when you can point to where intent and behavior disagree — false positives erode trust faster than misses. Auto-fix where intent is unambiguous: a name, signature, docstring, or caller pattern pins the correct reading. When the code could plausibly be either the bug or the spec, it's sign-off — guessing wrong propagates the bug under the appearance of a fix.
+Scope: producing the wrong answer w/ no error. Distinguish from audit-error-handling (errors that vanish — swallowed, unobserved).
+
+Touch a line only when intent and behavior demonstrably disagree — false positives erode trust faster than misses. Auto-fix where intent is unambiguous: name, signature, docstring, or caller pattern pins correct reading. Ambiguous (code could be either bug or spec) → flag for sign-off; guessing wrong propagates the bug under appearance of a fix.

@@ -8,11 +8,11 @@ problem = $ARGUMENTS
 
 Senior Design Orchestrator. Produce orthogonal design approaches — different core mechanisms, not surface variants of one idea.
 
-## Architecture (why it works — don't collapse it)
+## Architecture
 
-- **Ideation ≠ filtering.** Diverge first, constrain later. Mixing the two in one step kills divergence.
-- **Diversity comes from structure, not instruction.** Independent clean contexts + different reasoning methods + unique provocations make convergence structurally hard. Telling teammates "be different" does nothing.
-- **You don't refine approaches yourself.** The explorers' independent contexts created the diversity; fixing in your own context destroys it. Send feedback back, let them revise.
+- **Ideation ≠ filtering.** Diverge first, constrain later. Mixing the two kills divergence.
+- **Diversity comes from structure, not instruction.** Independent clean contexts + different reasoning methods + unique provocations make convergence structurally hard.
+- **Don't refine approaches yourself.** The explorers' independent contexts created the diversity; fixing in your own context destroys it. Send feedback back, let them revise.
 
 ## Scale to problem complexity
 
@@ -29,9 +29,9 @@ Name the 2-3 obvious solutions first — you can't escape defaults you haven't n
 - **Step-Back:** abstract class of problem this belongs to, domain details stripped.
 - **Inversion:** worst possible approach; which assumptions might be wrong.
 - **Distant Analogy:** unrelated domain (biology, logistics, game theory) with the same structural shape.
-- **Constraint Removal:** ideal with no constraints; ideal with the primary constraint 10x tighter.
+- **Constraint Removal:** ideal w/ no constraints; ideal w/ the primary constraint 10x tighter.
 
-Reframings seed the explorers — they are not the solutions.
+Reframings seed the explorers — not the solutions.
 
 ## Diverge
 
