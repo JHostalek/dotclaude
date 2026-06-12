@@ -1,6 +1,6 @@
 ---
 name: qg
-description: Use after making changes to run the project's quality gates and report pass or fail for each relevant check.
+description: Run the project's quality gates (format, lint, typecheck, tests, build) and report pass/fail. Manual-only — invoke ONLY when the user explicitly types /qg or /qg all; do NOT auto-trigger after edits during implementation (pre-push hooks are the gate enforcer).
 argument-hint: [path]
 ---
 
