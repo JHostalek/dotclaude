@@ -6,15 +6,11 @@ argument-hint: [PR number, branch name, or local path]
 
 target = $ARGUMENTS
 
-## Resolve the target
+Goal: surface bugs, regressions, and unsafe changes the author can't see from inside the diff. Frame findings so the author understands impact and owns the fix.
 
-- Empty → PR/MR of current branch.
-- Number → that PR/MR on current remote (`gh` for GitHub, `glab` for GitLab).
-- Branch name or local path → diff against merge base.
+Resolve target: empty → current branch PR/MR; number → that PR/MR on current remote (`gh` GitHub, `glab` GitLab); branch name or local path → diff against merge base.
 
 Read PR description, linked issues, commit messages, and CI status before the diff — diff-only review misses intent drift; failing pipeline is load-bearing context.
-
-## Stance
 
 Frame feedback as questions and impact; author decides the fix. Explain consequences, not rule citations.
 

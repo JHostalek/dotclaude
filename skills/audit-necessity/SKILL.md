@@ -6,13 +6,13 @@ argument-hint: <path>
 
 !`cat ~/.claude/skills/audit-workflow.md`
 
-Run as the `necessity` dimension. Question: **should this code exist at all, and if so, at this size?** Three sub-lenses:
+Necessity dimension: **should this code exist at all, and if so, at this size?** Three lenses:
 
 - **YAGNI** — code solving a problem nobody has: features w/o users, speculative architecture (single-impl interfaces, one-plugin plugin systems), premature generalization, future-proofing tax.
 - **Cost** — maintenance burden vs value delivered. Ratio is the finding, never numerator alone: high-cost/low-value = target; high-cost/high-value on hot path = justified.
 - **Alternatives** — specific library, platform feature, simpler architecture, or "just don't". Name the library; "there's probably a library" is not a finding. 80%-coverage library = rewrite-with-a-dependency, not a drop-in.
 
-Finding earns its keep only if: evidence-based (cites file / line-count / usage), proportionate (500-line abstraction wrapping 10-line op qualifies; 30-line utility does not), alternative-bearing where replacement proposed, honest about migration cost. Code necessary but slightly shorter = refactoring, not this skill.
+A finding must cite evidence (file / line-count / usage), be proportionate (500-line abstraction wrapping 10-line op qualifies; 30-line utility does not), and price migration cost when replacement is proposed. Code necessary but slightly shorter = refactoring, not this skill.
 
 **auto-fix** = cost clearly exceeds value w/ no user-facing capability lost (dead code, unused abstraction, internal helper), or justified feature whose implementation is 3-10x larger than needed w/ behavior preserved. Fix imports after cutting.
 

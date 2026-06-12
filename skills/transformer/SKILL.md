@@ -1,6 +1,6 @@
 ---
 name: transformer
-description: Use when rewriting an existing skill so Opus 4.8 (or any frontier reasoning model) executes it with better judgment, less scaffolding, and tighter calibration. Do NOT trigger for new skills from scratch (use skill-creator) or for prompt artifacts (use prompt).
+description: Use when rewriting an existing skill so Fable 5 (or any frontier reasoning model) executes it with better judgment, less scaffolding, and tighter calibration. Do NOT trigger for new skills from scratch (use skill-creator) or for prompt artifacts (use prompt).
 argument-hint: <path to SKILL.md or skill name>
 ---
 
@@ -10,7 +10,7 @@ Resolve `$input` to a path; if missing, try `~/.claude/skills/$input/SKILL.md` t
 
 ## The one test
 
-For every line: **what wrong behavior happens if this is gone?** Wrong output, skipped coordination, lost trigger, silent regression → keep. Model arrives here unaided → strip. Length is a side effect, not a target — "nothing to cut, much to add" is a valid verdict; removing more than adding ≠ automatically better.
+For every line: **what wrong behavior happens if this is gone?** Wrong output, skipped coordination, lost trigger, silent regression → keep. Model arrives here unaided → strip. On Fable 5 the bar is higher: over-prescription doesn't just waste tokens, it degrades output — prefer goal + constraints over enumerated steps. Length is a side effect, not a target — "nothing to cut, much to add" is a valid verdict; removing more than adding ≠ automatically better.
 
 Apply strip/keep lists, base tendencies, effort-vs-scaffolding rule from inlined reference below.
 
@@ -46,6 +46,6 @@ Steps 1–5: unaided reasoning. Step 6's structure is load-bearing; earns a cali
 
 !`cat ~/.claude/skills/prompt/SKILL.md`
 
-## Opus 4.8 reference
+## Fable 5 reference
 
-!`cat ~/.claude/skills/transformer/opus-4.8-reference.md`
+!`cat ~/.claude/skills/transformer/fable-5-reference.md`

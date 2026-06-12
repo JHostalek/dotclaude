@@ -33,7 +33,7 @@ Rubric (feeds report section-2 table):
 
 ## Competitive research
 
-Spawn **three research teammates in parallel**. For each: read prompt file from `${CLAUDE_SKILL_DIR}/agents/<name>.md`, pass full content as teammate's prompt, prepend skill summary + hypotheses for context.
+Delegate to three research subagents; pass each their prompt file from `${CLAUDE_SKILL_DIR}/agents/<name>.md` with the skill summary + hypotheses prepended as context. Run concurrently.
 
 | Teammate | File | Purpose |
 |----------|------|---------|

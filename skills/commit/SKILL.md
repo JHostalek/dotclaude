@@ -3,11 +3,11 @@ name: commit
 description: Use when the user asks to commit, create a git commit, checkpoint changes, save work to git, or write a commit message.
 ---
 
-Branching + push covered by standing orders (ship-by-default). This skill adds the deltas:
+Branching + push covered by standing orders (ship-by-default). This skill adds the deltas — the goal is a commit whose staged set, branch, and message are all intentional.
 
 ## Verify the staged set first
 
-Reconcile state before composing the message: `git diff --cached` (what you're committing) vs `git diff HEAD` (net worktree). Pre-existing index is NOT implicitly yours or intended — divergence (`index ≠ worktree`) is often aborted-hook `stage_fixed` residue, rebase leftovers, or another agent's partial stage. Investigate; no blind-commits. Stage whole files (`git add <path>`), never partial hunks — partial staging + aborted commit orphans fixer output into the index; so does a path-scoped `git commit -- <paths>` (git `--only`) on success (restores pre-hook index, drops fixer's re-stage) → follow such commits with `git reset -q -- <paths>`.
+Check `git diff --cached` (staged) against `git diff HEAD` (full worktree) before composing the message. When they diverge, the pre-existing index is likely residue from an aborted hook, rebase leftover, or another agent's partial stage — treat it as suspect, not yours, until confirmed. Stage whole files (`git add <path>`); partial-hunk staging orphans fixer output into the index if the commit is aborted later. One gotcha: a path-scoped `git commit -- <paths>` (git's `--only` mode) restores the pre-hook index on success and drops any fixer re-staging — follow such commits with `git reset -q -- <paths>` to clear it.
 
 ## Wrong-branch check
 

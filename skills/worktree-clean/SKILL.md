@@ -16,4 +16,4 @@ Remote branches carry invisible state — open MRs, CI pipelines, review comment
 
 `git worktree remove` fails on unclean state; `git branch -d` fails on unmerged branches. Trivial leftovers (build artifacts, debug logs, already-pushed-or-merged work) → force autonomously. Substantive uncommitted or unmerged work → describe findings, let user decide.
 
-Run `git worktree prune` after removal to clear stale internal references.
+Run `git worktree prune` after removal — git's internal worktree registry retains stale entries that can cause false conflicts on future `git worktree add` calls.

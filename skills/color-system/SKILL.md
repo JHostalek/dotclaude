@@ -6,7 +6,7 @@ argument-hint: [color problem, interface context, or palette goal]
 
 color_goal = $ARGUMENTS
 
-Judgment sets intent, relationships, and direction; deterministic helpers handle where math beats intuition.
+Color systems fail more often from absent judgment than absent math — this skill exists to supply that judgment, backed by deterministic helpers when scale or consistency require them.
 
 For methods, review loops, and helper-script patterns:
 !references/color-method.md

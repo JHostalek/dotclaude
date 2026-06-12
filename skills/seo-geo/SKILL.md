@@ -5,15 +5,19 @@ description: Use when the user wants to improve website search visibility, AI se
 
 target = $ARGUMENTS
 
-Optimize the target for both traditional search engines and AI search engines.
+<intent>
+Improve visibility in both traditional search (ranking signals) and AI search (citation signals). These overlap but diverge — a single recommendation can help one and hurt the other. Surface conflicts explicitly; don't silently optimize for only one dimension.
+</intent>
+
+Identify what `$target` is — URL, content block, domain, keyword — and scope recommendations accordingly. A URL warrants a technical audit (`seo_audit.py`); raw content warrants GEO rewrites; a domain warrants competitive gap analysis.
 
 ## SEO vs GEO
 
-SEO optimizes for **ranking**; GEO (Generative Engine Optimization) optimizes for **being cited** by AI search engines — ChatGPT, Perplexity, Google AI Overview, Copilot, Claude. Optimize both, but strategies diverge: keyword density helps SEO yet *hurts* GEO (-10%); citations & statistics are irrelevant to ranking but boost GEO +37-40%. When they conflict, flag it.
+SEO optimizes for **ranking**; GEO (Generative Engine Optimization) optimizes for **being cited** by AI search engines — ChatGPT, Perplexity, Google AI Overview, Copilot, Claude. Strategies diverge: keyword density is a ranking signal yet *hurts* GEO (-10%); citations and statistics are irrelevant to ranking but boost GEO +37-40%. When a recommendation conflicts across dimensions, flag it — don't silently prefer one.
 
 ## Princeton GEO Methods
 
-Measured visibility boosts, Princeton/IIT Delhi GEO study (KDD 2024). Prioritize by boost.
+Measured visibility boosts, Princeton/IIT Delhi GEO study (KDD 2024).
 
 | Method | Boost | What it means |
 |--------|-------|---------------|
@@ -27,7 +31,7 @@ Measured visibility boosts, Princeton/IIT Delhi GEO study (KDD 2024). Prioritize
 | Fluency | +15-30% | Readability and flow |
 | Keyword Stuffing | **-10%** | **Actively harmful for GEO** |
 
-**Best combination:** Fluency + Statistics. For domain-specific guidance, see [references/geo-research.md](./references/geo-research.md).
+For domain-specific guidance, see [references/geo-research.md](./references/geo-research.md).
 
 ## Platform-Specific Knowledge
 

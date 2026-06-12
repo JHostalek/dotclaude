@@ -8,7 +8,9 @@ argument-hint: [path]
 
 Run as the `correctness` dimension.
 
-Find code whose behavior diverges from what it claims to do. Intent lives in names, signatures, docstrings, comments, caller expectations — behavior contradicting any of them → one is wrong, usually the code. Read for what code does, not what it claims; names, comments, diff message prime confirmation bias. Patterns to probe explicitly:
+Find code whose behavior diverges from what it claims to do. Intent lives in names, signatures, docstrings, comments, caller expectations — behavior contradicting any of them → one is wrong, usually the code. Read for what code does, not what it claims; names, comments, and diff messages prime confirmation bias toward the claimed intent.
+
+High-yield patterns (not exhaustive — apply the same lens to any mismatch between contract and implementation):
 - off-by-one in loop bounds, slicing, range checks (`<` vs `<=` against length)
 - inverted conditions, wrong logical operator (`||` vs `&&`, missing De Morgan flip)
 - unhandled boundary cases (empty collection, single element, zero, negative, max) where surrounding logic implicitly assumes more
@@ -18,4 +20,6 @@ Find code whose behavior diverges from what it claims to do. Intent lives in nam
 
 Scope: producing the wrong answer w/ no error. Distinguish from audit-error-handling (errors that vanish — swallowed, unobserved).
 
-Touch a line only when intent and behavior demonstrably disagree — false positives erode trust faster than misses. Auto-fix where intent is unambiguous: name, signature, docstring, or caller pattern pins correct reading. Ambiguous (code could be either bug or spec) → flag for sign-off; guessing wrong propagates the bug under appearance of a fix.
+<fix_gate>
+Auto-fix only when intent is unambiguous — name, signature, docstring, or caller pattern pins the correct reading. Ambiguous (code could be either bug or intentional spec) → flag for sign-off, do not guess. False positives erode trust faster than misses; a wrong fix propagates the bug under the appearance of a correction.
+</fix_gate>

@@ -22,9 +22,7 @@ Show derived name before proceeding.
 
 Branch from latest remote default, not `HEAD` — `HEAD` can be stale or on an unrelated branch, silently seeding the worktree with wrong history.
 
-1. Detect default: `git symbolic-ref refs/remotes/origin/HEAD | sed 's|refs/remotes/origin/||'` (fallback: try `main`, then `master`)
-2. Fetch: `git fetch origin {default_branch}`
-3. Create: `git worktree add -b {branch} {directory} origin/{default_branch}`
+Detect default: `git symbolic-ref refs/remotes/origin/HEAD | sed 's|refs/remotes/origin/||'` (fallback: try `main`, then `master`). Fetch: `git fetch origin {default_branch}`. Create: `git worktree add -b {branch} {directory} origin/{default_branch}`.
 
 Branch already exists → `git worktree add {directory} {branch}` (no `-b`).
 

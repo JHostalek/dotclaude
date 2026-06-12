@@ -6,7 +6,7 @@ argument-hint: [path]
 
 !`cat ~/.claude/skills/audit-workflow.md`
 
-Run as the `perf` dimension.
+Run as the `perf` dimension. Goal: surface work the runtime does more than once when once suffices, or at O(N) cost when O(1) is available — then fix or gate it.
 
 Find code doing unnecessary work. Patterns that pay:
 - N+1 — one call per item where one batched call suffices

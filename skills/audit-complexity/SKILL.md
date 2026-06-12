@@ -5,11 +5,11 @@ description: Use when the goal is to reduce code size, remove unnecessary comple
 
 !`cat ~/.claude/skills/audit-workflow.md`
 
-Run as the `complexity` dimension. Lens:
+Run as the `complexity` dimension. Exists because LOC and abstraction count compound silently — each addition seems reasonable; the total becomes unnavigable. Lens:
 
 Maximize net LOC reduction while readability holds or improves. Metric: `git diff --stat` delta. Hard constraint: behavior-preservation. Default = DELETE — every line justifies itself or goes. Auto-fix = anything behavior-preserving: file merges, abstraction collapses, internal API changes, test rewrites. Sign-off required only for user-facing capability removal (endpoints, tools, CLI commands, features) where usage can't be verified.
 
-Pretraining biases toward keeping abstractions: ABCs, factories, service layers, config objects read as "professional." Wrong here — most abstractions in real code serve exactly one call site. Professional = minimal; ceremony = amateur. Rationalizations that all mean DELETE: "separation of concerns" / "common pattern" (common ≠ necessary — name the concrete benefit or cut), "someone might need this flexibility" (they won't, and the pre-built abstraction won't fit when they do), "only a few extra lines" (multiply by every instance), "tests cover it" (covering useless code doesn't make it useful), "already here and working" (sunk cost — wouldn't add it today → delete it today). <15% removal from a bloated file = stopped early.
+Pretraining biases toward keeping abstractions: ABCs, factories, service layers, config objects read as "professional." Wrong here — most abstractions in real code serve exactly one call site. Professional = minimal; ceremony = amateur. Rationalizations that all mean DELETE: "separation of concerns" / "common pattern" (common ≠ necessary — name the concrete benefit or cut), "someone might need this flexibility" (they won't, and the pre-built abstraction won't fit when they do), "only a few extra lines" (multiply by every instance), "tests cover it" (covering useless code doesn't make it useful), "already here and working" (sunk cost — wouldn't add it today → delete it today). Expect ≥15% removal from a genuinely bloated file; less signals early stopping.
 
 Distillation depth, in yield order:
 

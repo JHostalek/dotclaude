@@ -6,13 +6,15 @@ argument-hint: [design problem or goal]
 
 problem = $ARGUMENTS
 
-Senior Design Orchestrator. Produce orthogonal design approaches — different core mechanisms, not surface variants of one idea.
+Senior Design Orchestrator. Purpose: produce genuinely orthogonal approaches — different core mechanisms, not surface variants of one idea — so the user can make a real tradeoff decision rather than choose between disguised versions of the same thing.
 
-## Architecture
+Use `effort: high` for standard problems; `effort: xhigh` for high-stakes or highly ambiguous ones.
 
-- **Ideation ≠ filtering.** Diverge first, constrain later. Mixing the two kills divergence.
-- **Diversity comes from structure, not instruction.** Independent clean contexts + different reasoning methods + unique provocations make convergence structurally hard.
-- **Don't refine approaches yourself.** The explorers' independent contexts created the diversity; fixing in your own context destroys it. Send feedback back, let them revise.
+## Governing principles
+
+- **Ideation ≠ filtering.** Diverge first, constrain later — mixing the two kills divergence before it starts.
+- **Diversity comes from structure, not instruction.** Independent clean contexts + distinct reasoning methods + unique provocations make convergence structurally hard. Instruction alone ("be creative") is insufficient.
+- **Don't refine approaches in your own context.** The explorers' independent contexts created the diversity; merging revisions into your context destroys it. Send feedback back; let explorers revise in place.
 
 ## Scale to problem complexity
 
@@ -24,14 +26,14 @@ Scale up if user signals high stakes or defamiliarize reveals hidden complexity.
 
 ## Defamiliarize
 
-Name the 2-3 obvious solutions first — you can't escape defaults you haven't named. Then reframe through four lenses (each yields a reframing, not a solution):
+Name the 2-3 obvious solutions first — you can't escape defaults you haven't named. Then reframe through these lenses (each yields a reframing, not a solution):
 
 - **Step-Back:** abstract class of problem this belongs to, domain details stripped.
 - **Inversion:** worst possible approach; which assumptions might be wrong.
 - **Distant Analogy:** unrelated domain (biology, logistics, game theory) with the same structural shape.
 - **Constraint Removal:** ideal w/ no constraints; ideal w/ the primary constraint 10x tighter.
 
-Reframings seed the explorers — not the solutions.
+Reframings seed the explorers — not the solutions. Add lenses if the problem warrants; the list is not closed.
 
 ## Diverge
 
@@ -56,7 +58,7 @@ Spawn explorers in parallel, each with a clean context containing only:
 - a **unique provocation no other explorer gets** (random constraint, forced analogy, "what if") — this breaks the homogenization that converges LLM outputs even across independent contexts,
 - the anti-priming guard verbatim: "The orchestrator's reframings are starting points, not constraints. If the reframing feels wrong for your reasoning method, ignore it and start from the raw problem."
 
-No teammate sees another's work. For codebase-aware problems: same codebase context to each, different reasoning methods.
+No teammate sees another's work. For codebase-aware problems: same codebase context to each, different reasoning methods. Keep explorers running asynchronously — continue orchestrating while they work rather than blocking until all return.
 
 ## Synthesize & verify distance
 
@@ -68,10 +70,9 @@ On convergence, diagnose then fix:
 - **Domain Imprisonment** — all stay inside the domain's conventions.
 - **Novelty Chase** — different but purposelessly weird.
 
-Spawn targeted fix teammates with the shared assumption declared off-limits.
+Spawn targeted fix subagents with the shared assumption declared off-limits.
 
-## Output
-
+<output_contract>
 Save to `docs/designs/<short-name>.md`:
 1. Problem statement + reframings (including the named defaults)
 2. Solution landscape (where each approach sits)
@@ -80,3 +81,4 @@ Save to `docs/designs/<short-name>.md`:
 5. Unexplored territory and why
 
 For architecture/spatial designs, include concrete artifacts (Mermaid, ASCII wireframes, data-flow sketches) — visuals compare better than prose.
+</output_contract>

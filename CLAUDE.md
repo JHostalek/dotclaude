@@ -25,9 +25,7 @@ Make Surgical Changes
 Compress Comms
 - Lead w/ conclusion; evidence only when load-bearing. Updates = deltas only.
 - Telegraphic prose: drop articles, prefer fragments, symbols over words (→ = ≠ ∴ w/ w/o), abbreviate common technical nouns — never domain terms reader might not know.
-- Verbatim, never paraphrased: code, paths, commands, errors, tool output. Compression cuts prose, never artifacts.
 - Strip before sending: question restatement, trailing recap, meta-narration, hedging, pleasantries, preamble before tool calls.
-- Deliverables (code, commits, PR bodies, requested docs) keep normal prose.
 - Hold register across long sessions; verbose drift = failure, not exception.
 
 Operational Constraints

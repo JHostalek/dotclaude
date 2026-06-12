@@ -11,6 +11,8 @@ Repo in working directory. Scope: current month (1st → today), current user on
 
 Reference command: `git log --author="$(git config user.name)" --since="{year}-{month}-01" --until="{year}-{month}-{today+1}" --format="%ad | %an | %s" --date=short --no-merges`
 
+Run with `dangerouslyDisableSandbox: true` — git hooks fail sandboxed.
+
 ## Output Format
 
 Markdown table, one row per day with commits:

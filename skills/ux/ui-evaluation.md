@@ -179,7 +179,9 @@ Polish that serves function, not decoration.
 | Consumer/Mobile | Simplicity, performance | Touch-first, polish matters |
 | Internal Tools | Functionality > aesthetics | Can assume training |
 
+<anti_patterns>
 ## Anti-Patterns (Always Flag)
 
 **Fundamental violations**: No way to complete task, broken navigation, blank error screens, keyboard traps
 **Dark patterns**: Hidden opt-out, fake urgency, disguised ads, bait-and-switch
+</anti_patterns>
