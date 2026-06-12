@@ -4,7 +4,11 @@ description: Run the project's quality gates (format, lint, typecheck, tests, bu
 argument-hint: [path]
 ---
 
-Run format, lint (auto-fix), typecheck, tests, build — scoped to $ARGUMENTS when provided, else **touched package/workspace** (e.g. `pnpm --filter <pkg> typecheck`), NOT the whole tree. Whole-tree (`pnpm -r …`) only on explicit `/qg all` — pre-push/CI backstop, not the inner loop. Detect configured gates; skip absent ones (no test script → skip Tests).
+Quality gates exist to catch regressions before push — this is a spot-check, not CI. Run fast; never block on slow full-tree scans unless asked.
+
+Run format, lint (auto-fix), typecheck, tests, build — scoped to $ARGUMENTS when provided, else **touched package/workspace** (e.g. `pnpm --filter <pkg> typecheck`), NOT the whole tree. When multiple packages are touched, run gates per-package, not once across the union. Whole-tree (`pnpm -r …`) only on explicit `/qg all` — pre-push/CI backstop, not the inner loop.
+
+Detect configured gates from `package.json` scripts and config files present in the workspace root; skip absent ones (no test script → skip Tests, no eslint config → skip Lint). Don't invent gates that aren't configured.
 
 ## Report Format
 

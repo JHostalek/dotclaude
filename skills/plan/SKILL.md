@@ -14,7 +14,7 @@ Match depth to complexity. 3-file bug fix → paragraph, not document. Describab
 
 Explore until you can articulate *why* one approach beats alternatives — then stop and write. Can't articulate tradeoffs → haven't explored enough. Still reading files after picture is clear → explored too much. External-axis stop: borrowable pattern identified, or confirmed nobody solved it cleanly — inventing is the fallback, not the default.
 
-Two axes, pursued concurrently via read-only subagents returning summaries (not raw file dumps):
+Two axes, pursued concurrently:
 
 - **Codebase** — existing implementations, patterns, conventions. For every new pattern, cite precedent `file:line` the executor should mirror. No citation → executor reinvents, even when precedent exists.
 - **External** — web search for how others solved this. Libraries, vendor docs, open-source implementations. Prefer borrowing a named approach; name the source (URL or library) in the plan.

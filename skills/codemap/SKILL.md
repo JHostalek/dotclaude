@@ -14,6 +14,10 @@ model: haiku
 
 Builds `codemap/`: a few **whole-system** documents, each viewing the entire codebase from one perspective. Reader browses these *instead of* the code, then drills into source. Output = **mental model** — concepts, flows, rules. No file listings, no method/class enumeration, no signatures.
 
+**Why this workflow exists:** a single agent reading a large codebase produces surface-skimming summaries. Blind orchestration with per-subsystem Haiku agents produces independent fragments without cross-contamination, then lens agents synthesize across them. The split-then-synthesize pattern reliably produces higher-altitude docs than direct summarization. Do not collapse tiers or let the orchestrator read source — it defeats the architecture.
+
+**Memory:** on refresh runs, record lessons in `codemap/_fragments/_lessons.md` (one lesson per line, newest first, update-don't-duplicate). Example: "auth subsystem uses Drizzle, not TypeORM — skip Prisma schema search". Reference before Step 1 on next run.
+
 ## Rules
 
 1. **Haiku only.** Skill and every subagent run on `haiku`. Pass `model: haiku` when spawning. No escalation.
@@ -68,7 +72,7 @@ Outputs: `codemap/_fragments/<subsystem>.md` (tier-1); `codemap/00-overview.md`,
 
 ### Step 1 — Partition into subsystems (paths only)
 
-Without reading file content, split source tree into subsystems sized to fit one Haiku agent. Skip `__pycache__`, `node_modules`, `.venv`, `dist`, `.git`. For each top-level source dir, measure LOC; >~8k LOC or >~60 files → descend one level, treat children as separate subsystems (split flat file bags by name/domain prefix). Produce `{name, paths, fragment_file}` list. Use `find`/`wc` only — never `cat`/Read source.
+Split source tree into subsystems sized to fit one Haiku agent. Skip `__pycache__`, `node_modules`, `.venv`, `dist`, `.git`. For each top-level source dir, measure LOC; >~8k LOC or >~60 files → descend one level, treat children as separate subsystems (split flat file bags by name/domain prefix). Produce `{name, paths, fragment_file}` list. Use `find`/`wc` only — never `cat`/Read source.
 
 ### Step 2 — Tier-1 fan-out (parallel, one agent per subsystem)
 
@@ -165,7 +169,7 @@ Per lens — file · purpose · required mermaid:
 
 ### Step 4.5 — Validate diagrams (parse gate)
 
-Shipped docs must contain only diagrams that actually render. Running validator + reading pass/fail + error text is NOT "reading content" — doesn't breach blind-orchestrator rule.
+Shipped docs must contain only diagrams that actually render. Reading pass/fail + error text from the validator is NOT "reading content" — doesn't breach the blind-orchestrator rule.
 
 For every written `codemap/*.md` containing a ```mermaid``` block, render with mermaid-cli via `npx` (no global install — `-y` form):
 

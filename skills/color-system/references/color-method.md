@@ -4,8 +4,6 @@ Use this reference when you need more concrete help than the main skill provides
 
 ## 1. Read Color As Behavior
 
-Before proposing any values, ask what color is supposed to do here.
-
 Color may be carrying one or more of these jobs:
 - atmosphere
 - hierarchy
@@ -20,12 +18,7 @@ Most interfaces fail when one color is trying to do too many jobs at once.
 
 ## 1.5 Appropriateness Principle
 
-An effective color system fits the product, the audience, and the situation of use.
-
-Ask:
-- does this feel appropriate for this interface?
-- does it support the trust level, energy, and seriousness the product needs?
-- does it feel right for the audience and context, not just attractive in isolation?
+An effective color system fits the product, the audience, and the situation of use. The test: does it feel appropriate for this interface, support the trust level and energy the product needs, and hold up for the actual audience and context — not just look attractive in isolation.
 
 Fit beats abstract theory. A palette can be harmonious and still feel wrong.
 
@@ -183,24 +176,9 @@ Output:
 
 Use when formalizing a system so future agents or developers apply it consistently.
 
-## 6. What Scripts Should Not Decide
+## 6. Scripts And Judgment — The Boundary
 
-Do not hard-code design categories and let them choose the palette.
-Do not let scripts choose the emotional tone.
-Do not let scripts replace judgment about restraint, hierarchy, trust, or visual character.
-
-Scripts are best at:
-- interpolation
-- validation
-- comparison
-- detection
-- repeatability
-
-They are not best at:
-- deciding what the product should feel like
-- deciding where emphasis belongs
-- deciding whether a warning should feel tense or calm
-- deciding whether a system feels too sterile, too playful, too loud, or too generic
+Scripts own: interpolation, validation, comparison, detection, repeatability. Keep design categories, emotional tone, restraint, hierarchy, trust, and visual character in plain-language reasoning — these require judgment, not calculation.
 
 ## 6.5 First-Impression Check
 
@@ -267,15 +245,7 @@ The numbers may be clean while the interface still feels generic, mismatched, or
 
 ## 9. Review Loop
 
-Use this loop when refining a system:
-
-1. state the intended feeling in plain language
-2. do the 2-second first-impression read
-3. point to the current failure mode
-4. decide whether the fix is judgmental or mechanical
-5. if mechanical, use or write a helper script
-6. review the result in real UI context
-7. keep what improved the intended feeling; roll back what only made the numbers cleaner
+Start by stating the intended feeling in plain language — this is the anchor every subsequent judgment is measured against. For each failure mode: decide whether the fix is judgmental (palette logic, hierarchy, emotional character) or mechanical (contrast math, ramp interpolation, state derivation). Mechanical fixes get a helper script; judgmental fixes stay in reasoning. Keep only changes that improve the intended feeling; roll back changes that clean numbers without improving the experience.
 
 ## 10. Validation Checklist
 

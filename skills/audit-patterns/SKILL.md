@@ -8,7 +8,7 @@ argument-hint: [path]
 
 Run as the `patterns` dimension.
 
-Count occurrences — >60% of the codebase solves a problem one way → that's the target. Never introduce a pattern the project doesn't already use, even if theoretically superior: consistency outweighs local optimality. Priority order:
+Count occurrences — >60% of the codebase solves a problem one way → that's the target. Introduce only patterns already present in the project; consistency outweighs local optimality. Apply these lenses in priority order (use judgment for cases that don't fit neatly):
 1. Same problem solved the same way (data access, error handling, async, validation, configuration)
 2. Reimplementations of existing utilities — inline duplicate is the divergence; fix is to import
 3. Naming conventions detected from existing code, not imposed
@@ -17,4 +17,6 @@ Count occurrences — >60% of the codebase solves a problem one way → that's t
 
 Justified variance exists — external library requirements, proven constraints, framework boundaries. Check `git log` on divergent files: recent divergence → usually accidental; old divergence → may be intentional.
 
+<approval_gate>
 Auto-fix (behavior-preserving, internal only): import existing utility, rename to dominant convention, reorder imports, drop unused dependencies. Sign-off required when the dominant pattern itself is wrong — name it, sketch the right unified fix, surface it. Sweeping the majority pattern is a separate decision from cleaning up outliers.
+</approval_gate>

@@ -6,7 +6,7 @@ argument-hint: [path]
 
 !`cat ~/.claude/skills/audit-workflow.md`
 
-Run as the `logs` dimension. Lens:
+Run as the `logs` dimension.
 
 Three dimensions: missing, bloat, wrong. A reader reconstructing a production run from logs alone should see state changes, stage outcomes, and errors w/ enough context to debug — nothing else. INFO is what production pays for and scales w/ traffic; DEBUG is local-dev.
 

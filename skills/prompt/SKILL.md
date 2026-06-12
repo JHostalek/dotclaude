@@ -12,7 +12,7 @@ Draft immediately if `$task` is clear; ask only when a blocking fact is missing.
 Infer from `$task` when obvious.
 
 1. **Surface** — system prompt (first-person, structure-heavy), user message, tool description (~200-token ceiling, second-person imperative, markdown renders as raw text), few-shot exemplar, agent-loop instruction. Craft differs by surface.
-2. **Target model class** — reasoning (Opus 4.8/4.7, Sonnet 4.x, GPT-5.x, o-series) / instruction-tuned chat (GPT-4o, Gemini) / small or open-weights (<32B, local). Techniques that help one family hurt another.
+2. **Target model class** — reasoning (Fable 5, Mythos 5, Opus 4.8/4.7, Sonnet 4.x, GPT-5.x, o-series) / instruction-tuned chat (GPT-4o, Gemini) / small or open-weights (<32B, local). Techniques that help one family hurt another. On Fable 5 specifically: thinking is always on (depth = effort setting, not prose); over-prescription degrades output — keep density low.
 3. **Task shape** — classifier, generator, extractor, agent/tool-user, judge. Each has distinct failure modes.
 4. **Output contract** — format, boundaries, error-state, length.
 

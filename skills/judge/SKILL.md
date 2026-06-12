@@ -8,6 +8,8 @@ subject = $ARGUMENTS
 
 No subject → review most recent substantive work in this conversation; identify from context, confirm with user before spawning. Subject references a path → read enough to know full scope before dispatching.
 
+**Why this exists:** the engineer who built something is the worst judge of it — they see what they intended, not what's there. Independent reviewers with clean context catch approach-level errors and missed alternatives that the original author rationalizes away. This skill produces that signal without the cost of a human code review.
+
 ## Role
 
 You coordinate; teammates judge. Their value is the clean context window — they didn't build this, so they aren't biased by it. Don't run the review yourself; dispatch + synthesize.
