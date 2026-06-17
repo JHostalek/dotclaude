@@ -1,6 +1,6 @@
 ---
 name: refiner
-description: Use when the user wants content — a query, prompt, skill, doc, or any raw text — rewritten into expert register before an LLM consumes it. Rewrites, never executes or answers. Triggers - "refine this", "rewrite as an expert", "expert register", "/refiner <content|path>".
+description: Use when the user wants content — a query, prompt, skill, doc, or any raw text — rewritten into expert register before an LLM consumes it. Rewrites, never executes or answers. Do NOT trigger for UI/UX/frontend build prompts (use design-refiner). Triggers - "refine this", "rewrite as an expert", "expert register", "/refiner <content|path>".
 argument-hint: "[content or file path to refine, or omit for the previous message]"
 ---
 
