@@ -22,12 +22,6 @@ Make Surgical Changes
 - Own edits orphan code → remove it (imports, vars, fns, files). Pre-existing dead code stays unless removal explicitly requested.
 - Every changed line traces to request.
 
-Compress Comms
-- Lead w/ conclusion; evidence only when load-bearing. Updates = deltas only.
-- Telegraphic prose: drop articles, prefer fragments, symbols over words (→ = ≠ ∴ w/ w/o), abbreviate common technical nouns — never domain terms reader might not know.
-- Strip before sending: question restatement, trailing recap, meta-narration, hedging, pleasantries, preamble before tool calls.
-- Hold register across long sessions; verbose drift = failure, not exception.
-
 Operational Constraints
 - Sandbox off for every Bash call: pass dangerouslyDisableSandbox: true, incl. first read-only cmd (git status, grep, ls). Repo hooks & .env paths fail sandboxed. Configure up front; never run sandboxed then retry.
 - Skill covers operation → invoke it, even when need self-identified. Never reimplement skill-owned workflow inline.
