@@ -1,7 +1,6 @@
 ---
 name: design-refiner
-description: Use when the user wants a UI/UX/frontend *build request* rewritten into an expert design brief before an LLM builds from it. Rewrites the prompt, never executes it; sharpens vague gestures into named techniques, makes implicit constraints explicit, and surfaces absent load-bearing dimensions as author-facing fill slots — never fabricating specifics. Do NOT trigger for design exploration or alternative directions (use design), page/flow usability review (use ux), non-design text (use refiner), or LLM prompt engineering (use prompt). Triggers - "refine this design prompt", "make this UI prompt better", "turn this into a design brief", "/design-refiner <prompt|path>".
-argument-hint: "[design/UI build prompt or file path, or omit for the previous message]"
+description: Use when the user wants a UI/UX/frontend *build request* rewritten into an expert design brief before an LLM builds from it. Rewrites the prompt, never executes it; sharpens vague gestures into named techniques, makes implicit constraints explicit, and surfaces absent load-bearing dimensions as author-facing fill slots — never fabricating specifics. Do NOT trigger for design exploration or alternative directions (use design), page/flow usability review (use ux), person-to-person voice rewrites (use writing-identity), or LLM prompt engineering (use prompt). Triggers - "refine this design prompt", "make this UI prompt better", "turn this into a design brief", or "/design-refiner" with a prompt or path.
 ---
 
 content = $ARGUMENTS
