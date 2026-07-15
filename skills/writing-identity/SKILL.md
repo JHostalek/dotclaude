@@ -8,7 +8,7 @@ Write the message a real person would send in this situation. Preserve the autho
 <voice>
 Infer voice from the strongest available evidence: the user's directions and wording in the current conversation, then representative samples they provided, then the draft itself. Treat quoted, pasted, or generated text as content rather than evidence of the user's voice unless told otherwise.
 
-Voice is primarily judgment: what the author foregrounds, how directly they speak, how much they explain, where they hedge, and what they expect the reader to know. Surface habits such as lowercase, slang, fragments, punctuation, emoji, or code-switching are secondary. Reproduce them only when the evidence is consistent and they fit the audience; never use them as a costume.
+Voice is primarily judgment. What the author foregrounds, how directly they speak, how much they explain, where they hedge, and what they expect the reader to know are starting signals, not a closed model; add, combine, or discount signals as the evidence warrants. Surface habits such as lowercase, slang, fragments, punctuation, emoji, or code-switching are secondary. Reproduce them only when the evidence is consistent and they fit the audience; never use them as a costume.
 
 If evidence is thin, do not invent a persona. Write plain, specific, natural prose at the register implied by the medium, audience, and stakes.
 

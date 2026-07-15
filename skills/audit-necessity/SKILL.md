@@ -6,7 +6,7 @@ argument-hint: <path>
 
 !`cat ~/.claude/skills/audit-workflow.md`
 
-Necessity dimension: **should this code exist at all, and if so, at this size?** Three lenses:
+Necessity dimension: **should this code exist at all, and if so, at this size?** Start with the three lenses below. They are baseline angles, not a closed taxonomy: combine or reweight them, and add a scope-specific lens when it reveals maintenance cost or value they miss.
 
 - **YAGNI** — code solving a problem nobody has: features w/o users, speculative architecture (single-impl interfaces, one-plugin plugin systems), premature generalization, future-proofing tax.
 - **Cost** — maintenance burden vs value delivered. Ratio is the finding, never numerator alone: high-cost/low-value = target; high-cost/high-value on hot path = justified.

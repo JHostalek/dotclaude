@@ -49,7 +49,7 @@ Reframings seed the explorers — not the solutions. Add lenses if the problem w
 | Temporal | `temporal.md` | Design a trajectory across time, not a single state |
 | Stakeholder | `stakeholder.md` | Design for conflicting stakeholder needs simultaneously |
 
-Minimum set: Forward Build-Up, Backward from Ideal, Constraint-First, + one other relevant.
+This catalog is a starting set, not a closed menu. Invent, combine, or reframe a reasoning style when the problem needs a genuinely different axis. Minimum coverage: Forward Build-Up, Backward from Ideal, Constraint-First, + one other relevant style.
 
 Spawn explorers in parallel, each with a clean context containing only:
 - the problem statement,

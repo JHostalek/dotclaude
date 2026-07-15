@@ -8,7 +8,7 @@ argument-hint: [path]
 
 Run as the `perf` dimension. Goal: surface work the runtime does more than once when once suffices, or at O(N) cost when O(1) is available — then fix or gate it.
 
-Find code doing unnecessary work. Patterns that pay:
+Find code doing unnecessary work. The patterns below are high-yield probes, not an exhaustive model of performance: skip those the scoped runtime cannot exercise and add workload- or stack-specific probes supported by evidence.
 - N+1 — one call per item where one batched call suffices
 - Overfetching — full objects loaded when IDs or counts suffice; unbounded queries w/o pagination
 - Wasted recomputation — derived data recalculated every call; in React, re-renders from unstable refs or missing memoization where deps are stable

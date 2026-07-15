@@ -11,7 +11,7 @@ Run as the `structure` dimension. Purpose: catch code in the wrong place — wro
 **Establish the convention first.** Priority order: (1) materialized policy — a written structure doc (`*structure*.md`, `ARCHITECTURE.md`, `CONTRIBUTING.md`) or enforcement config (import-linter, eslint boundaries, dependency-cruiser, ArchUnit); when one exists it is the authority, audit against its rules, don't reinvent a scheme. (2) Infer from what dominates: grouping axis (by-feature folders vs by-type `models/`+`routes/`+`services/`), the recurring file-role vocabulary, and layer direction from the import graph. Directory listings give shape; `git log` co-change is ground truth for what belongs together. Apply audit-patterns' >60% rule — converge outliers toward the dominant pattern; never impose one the repo doesn't use.
 
 <findings_scope>
-Flag these placement and boundary failures — not size, not style:
+Flag these placement and boundary failures — not size, not style. They anchor the lens rather than close it: combine overlapping categories and add repository-specific placement or boundary failures that satisfy the same scope.
 - Feature scattered across by-type dirs when the repo groups by feature (or the reverse) — one change touches five folders.
 - God-modules failing the proportionality test: one-sentence job, yet 5+ files or 3+ classes.
 - Misplaced files; co-changing files split across the tree.

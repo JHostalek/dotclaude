@@ -18,6 +18,8 @@ Apply strip/keep lists, base tendencies, effort-vs-scaffolding rule from inlined
 
 Under-specification = twin failure of over-scaffolding. Target is principle-only w/ no anchoring → ADD: one example showing core judgment call; 2–3 domain facts model can't infer, phrased positively; explicit invariants, XML-tagged when load-bearing.
 
+Audit every enumeration for closure. A true contract, finite output space, invariant set, or required baseline may stay closed. A list of lenses, scenarios, failure modes, examples, or review dimensions must explicitly permit the model to add, combine, split, reweight, or skip entries as the task warrants while preserving any named minimum coverage. Do not rely on "such as" or an unlabeled list to imply that freedom.
+
 Preserve verbatim: frontmatter `description` trigger phrases + `Do NOT trigger` disambiguation, `allowed-tools`, output contracts/templates, approval gates, and `!`​`cat path`` inline-injection directives. Breaking any breaks the skill silently.
 
 ## Worked transformation

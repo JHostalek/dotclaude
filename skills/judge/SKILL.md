@@ -16,11 +16,11 @@ You coordinate; teammates judge. Their value is the clean context window — the
 
 ## Scope
 
-Not `/audit-necessity` (should it exist). Given we're building it, **did we build it the way an expert would?** — approach selection, architecture fitness, idiom correctness, trade-off awareness, missed alternatives, domain-standard solutions, proportionality of solution to problem.
+Not `/audit-necessity` (should it exist). Given we're building it, **did we build it the way an expert would?** Approach selection, architecture fitness, idiom correctness, trade-off awareness, missed alternatives, domain-standard solutions, and proportionality are starting axes, not a closed review taxonomy; add or reshape axes for the subject while staying within that question.
 
 ## Teammates
 
-Spawn all three in parallel from `${CLAUDE_SKILL_DIR}/agents/`. Read-only, analysis only.
+Spawn clean-context reviewers in parallel, read-only and analysis-only. The three lenses below are minimum coverage, not a ceiling: adapt their emphasis and add or combine a reviewer lens when the subject has a material axis they miss. Do not drop domain, proportionality, or alternative-path coverage merely to reduce the panel.
 
 | Teammate | Agent file | Lens |
 |----------|-----------|------|

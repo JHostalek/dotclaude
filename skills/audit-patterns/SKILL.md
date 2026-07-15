@@ -8,7 +8,7 @@ argument-hint: [path]
 
 Run as the `patterns` dimension.
 
-Count occurrences — >60% of the codebase solves a problem one way → that's the target. Introduce only patterns already present in the project; consistency outweighs local optimality. Apply these lenses in priority order (use judgment for cases that don't fit neatly):
+Count occurrences — >60% of the codebase solves a problem one way → that's the target. Introduce only patterns already present in the project; consistency outweighs local optimality. Apply these baseline lenses in typical priority order; combine, reweight, or extend them for concerns the repository expresses differently:
 1. Same problem solved the same way (data access, error handling, async, validation, configuration)
 2. Reimplementations of existing utilities — inline duplicate is the divergence; fix is to import
 3. Naming conventions detected from existing code, not imposed

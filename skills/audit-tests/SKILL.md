@@ -8,6 +8,8 @@ argument-hint: [path-glob or module name; empty for full sweep]
 
 Run as the `tests` dimension. Lens:
 
+The categories below are calibration examples, not a closed test taxonomy. Add, combine, or discard categories according to the production risks and test architecture in scope while preserving the governing keep/rewrite/add criteria.
+
 Bias hard toward cutting. A test earns its keep only if it catches context loss between changes or encodes domain knowledge the code can't express. Delete bloat: restated-behavior, getter/setter coverage, mock-the-world ceremonies, framework smoke checks, "returns what I told it to return", assertions mirroring implementation line-for-line. Doubt → delete; deletion is auto-fix.
 
 Rewrite weak tests to catch the bug they nominally guard: tests passing against a broken implementation, asserting incidental output over contract, or so heavily mocked the unit under test never runs. Rewrite preserving intended behavior = auto-fix; rewrite changing which behavior is correct = sign-off.

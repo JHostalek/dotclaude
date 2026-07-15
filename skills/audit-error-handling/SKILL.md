@@ -10,6 +10,8 @@ Run as the `error-handling` dimension. Lens:
 
 Every error must be **observable** — by a user, a caller, or a log. Error occurs while nothing changes behavior or records it → that's the bug. Spans synchronous swallows, async vanishes, unguarded entry points, resource leaks on error exit.
 
+The mechanisms below are required probes when applicable, not the boundary of the audit. Add, combine, or refine probes for framework- and domain-specific failure paths; omit one only when the scoped code cannot exercise it.
+
 Surface mechanism is contextual: contract violations and programmer errors → fail fast; expected environmental failures → handle and observe. "Log and continue" is observability bolted onto a path running with corrupted state — rarely the fix.
 
 **Swallowed errors (core).** Empty catch blocks, defaults on required data, optional chaining masking missing data. Per catch/fallback: optional data → default allowed; required data → propagate. Fix in the direction the surrounding code already prefers: callers branch on errors → propagate; function returns Optional/Result and callers pattern-match → return failure case; swallow masked missing data caller silently treated as empty → restore fail-fast.

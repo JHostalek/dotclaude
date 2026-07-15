@@ -9,6 +9,8 @@ Merge target branch into current branch via `git merge origin/{target}` (remote-
 
 ## Conflict Resolution
 
+The cases below are high-risk anchors, not an exhaustive conflict taxonomy. Apply the same intent-first reasoning to other conflict shapes, and combine or refine the heuristics when a conflict spans categories.
+
 - **Lockfiles, migrations, config, version bumps** → accept target version; regenerate lockfiles.
 - **Refactored-away code** → target's removal wins; rewire to new location/API.
 - **Additive conflicts** (both sides add independent code) → keep both, then run formatter/parser. Conflict boundaries leave orphan closing tags, duplicate brackets, stray blocks — parser catches what grep misses.

@@ -1,10 +1,12 @@
-# UX Evaluation: 13 Dimensions
+# UX Evaluation: 13 Baseline Dimensions
 
 **Principle**: Fundamentals first, trends second. Master the basics before polish.
 
 **Priority**: Always evaluate 1-10 first. Only evaluate 11-13 if relevant. "Ugly but works" beats "pretty but broken."
 
 **Scoring**: Rate each dimension 1-5 (1=broken, 2=poor, 3=adequate, 4=good, 5=excellent).
+
+**Coverage**: These dimensions anchor the review; they do not exhaust UX. Add, combine, split, or reweight dimensions for the product, domain, users, and context while preserving every applicable fundamental. Treat the checks under each dimension as prompts, not a completion checklist.
 
 **Lineage**: Dimensions 1-10 map to Nielsen's 10 usability heuristics. Dimensions 11-13 extend into modern product expectations.
 

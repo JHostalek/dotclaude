@@ -8,7 +8,7 @@ argument-hint: [path]
 
 Run as the `security` dimension. Lens: find vulnerabilities where untrusted input or weak controls let an attacker change behavior, exfiltrate data, or escalate privilege. Tag each finding w/ a CWE.
 
-Patterns under-detected in practice — probe each explicitly:
+Patterns under-detected in practice — probe each applicable category explicitly. This is a required baseline, not a closed threat model: add, split, or refine categories for the actual stack, assets, actors, and trust boundaries; skip one only when the scoped system cannot expose it.
 
 - **Injection** — subprocess via string arg (command injection); SQL via concatenation, template literal, or ORM escape hatch (`.raw()`, `.extra()`, `RawSQL`) — parameterized queries non-negotiable; template engines / DOM APIs rendering user input unescaped (`dangerouslySetInnerHTML`, `innerHTML`, unescaped template vars).
 - **Deserialization / parsing** — untrusted input into `pickle`, `yaml.load`, JSON-into-class hydrators; XML parsers at default settings (XXE); parsers w/o size/depth limits.

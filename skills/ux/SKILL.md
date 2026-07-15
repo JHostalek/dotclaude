@@ -10,7 +10,7 @@ page_path provided → focus on that page/component. Otherwise evaluate entire a
 
 ## Approach
 
-Match evaluation depth to scope: single component → 2-3 most relevant dimensions; full page → all 13; entire app → 3 highest-traffic flows first (full audit produces too many findings to act on).
+Match evaluation depth to scope: single component → the 2-3 most relevant dimensions; full page → every applicable baseline dimension; entire app → 3 highest-traffic flows first (full audit produces too many findings to act on). The referenced dimensions are a baseline, not a ceiling: combine or reweight them and add product-, domain-, or context-specific dimensions when they expose material usability risk. Do not skip a relevant fundamental merely because another lens overlaps it.
 
 Gather context from at least one source, in order of preference: live browser navigation, screenshots, code review. Combine when available.
 

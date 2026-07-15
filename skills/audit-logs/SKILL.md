@@ -8,7 +8,7 @@ argument-hint: [path]
 
 Run as the `logs` dimension.
 
-Three dimensions: missing, bloat, wrong. A reader reconstructing a production run from logs alone should see state changes, stage outcomes, and errors w/ enough context to debug — nothing else. INFO is what production pays for and scales w/ traffic; DEBUG is local-dev.
+Start with three dimensions: missing, bloat, wrong. They are a baseline taxonomy, not a ceiling: split, combine, or add a dimension when the system's observability model exposes a distinct concern. A reader reconstructing a production run from logs alone should see state changes, stage outcomes, and errors w/ enough context to debug — nothing else. INFO is what production pays for and scales w/ traffic; DEBUG is local-dev.
 
 Missing: long-running stages w/o completion line; fan-outs w/o per-iteration progress at DEBUG; exceptions logged w/o stack; invisible state transitions.
 
