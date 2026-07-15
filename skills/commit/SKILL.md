@@ -3,7 +3,7 @@ name: commit
 description: Use when the user asks to commit, create a git commit, checkpoint changes, save work to git, or write a commit message.
 ---
 
-Branching + push covered by standing orders (ship-by-default). This skill adds the deltas — the goal is a commit whose staged set, branch, and message are all intentional.
+The global instruction authorizes committing and pushing verified work. This skill ensures the staged set, branch, and message are intentional before that happens.
 
 ## Verify the staged set first
 

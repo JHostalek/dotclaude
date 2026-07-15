@@ -1,72 +1,58 @@
 ---
 name: plan
-description: Use when a task is multi-step, ambiguous, or high-impact and you need an executable implementation plan before editing code.
-argument-hint: [task description]
+description: Use when a task needs an implementation-ready design document before code changes begin.
 ---
 
 task = $ARGUMENTS
 
-Produce the minimum artifact that prevents the executor from going wrong. Executor starts with an empty context window: plan + codebase, nothing else. Every ambiguity → a wrong confident guess.
+Create the minimum implementation-ready design document, called the plan: one canonical, self-contained HTML artifact describing the reviewed target state. It is both the human approval surface and the binding contract for a fresh coding agent with access to the plan and repository.
 
-Match depth to complexity. 3-file bug fix → paragraph, not document. Describable in one sentence → skip the plan.
+The plan specifies what must exist and why, one abstraction level above pseudocode. It does not prescribe implementation order or mechanics.
 
-## Exploration
+Match depth to the requested change. Stop researching when the relevant behavior, change surface, decisive tradeoffs, and acceptance boundary are clear. Do not design infrastructure, governance, extensibility, or future integrations that the current scope does not require.
 
-Explore until you can articulate *why* one approach beats alternatives — then stop and write. Can't articulate tradeoffs → haven't explored enough. Still reading files after picture is clear → explored too much. External-axis stop: borrowable pattern identified, or confirmed nobody solved it cleanly — inventing is the fallback, not the default.
+## Develop the design
 
-Two axes, pursued concurrently:
+1. Research the repository until its relevant behavior, change surface, constraints, and reusable patterns are understood. Research prior art and external solutions only when they could change the current decision.
+2. Resolve uncertainties that materially affect the frozen scope, behavior, architecture, interfaces, security, data, or acceptance. Turn hypothetical future concerns into explicit non-goals instead of designing them. Ask the user when evidence cannot settle an in-scope choice.
+3. Save or update `docs/plans/<type>-<short-name>.html` as HTML, not renamed Markdown. Do not create companion requirements, research, design, task, or handoff artifacts.
+4. Freeze a review brief from the plan's goals, non-goals, acceptance criteria, and explicit complexity boundary. Have fresh, clean-context Judge subagents review once, in parallel, through the domain-expert, pragmatist, and alternative-path lenses defined below.
+5. Apply evidence-backed blockers that stay inside the review brief. Treat preferences, speculative future hardening, and requests to broaden capability as advisory; do not enlarge the plan to satisfy them.
+6. If a revision materially changes the issue behind a blocker, use at most one fresh targeted follow-up reviewer for that issue. Never rerun the full panel. The hard limit is two review rounds total: one panel plus one targeted follow-up.
+7. If an in-scope blocker remains after that budget, or resolving it requires broader scope or a user tradeoff, stop and present it to the user. Do not continue review until consensus or a prestige verdict.
+8. Present the reviewed plan for explicit human approval and stop. Review informs quality; only the user authorizes implementation.
 
-- **Codebase** — existing implementations, patterns, conventions. For every new pattern, cite precedent `file:line` the executor should mirror. No citation → executor reinvents, even when precedent exists.
-- **External** — web search for how others solved this. Libraries, vendor docs, open-source implementations. Prefer borrowing a named approach; name the source (URL or library) in the plan.
+## Bound independent review
 
-## Decomposition
+Each reviewer returns `READY` or `BLOCKED`, with no more than three blockers. A blocker must cite evidence that the plan would otherwise:
 
-Choose based on task shape, not habit. Default to vertical slice; switch when task clearly fits another:
+- fail an explicit goal or acceptance criterion;
+- introduce a correctness, security, privacy, or data-loss defect;
+- contradict a known repository or platform constraint; or
+- be infeasible to implement as designed.
 
-| Strategy | When | Risk it mitigates |
-|----------|------|---------------------|
-| **Vertical slice** | Multiple independent behaviors | Integration surprises — each slice proves end-to-end |
-| **Walking skeleton** | Uncertain integration path | Late-stage "it doesn't connect" — proves wiring first |
-| **Layer-by-layer** | Clear layers, different complexity zones | Allows parallel work; natural when data model drives everything |
+The domain expert checks behavioral and domain correctness. The pragmatist checks implementability, proportionality, and operational fit. The alternative-path reviewer actively seeks a materially simpler design and flags scope creep; this lens is not permission to invent additional production architecture.
 
-## Specificity
+Suggestions without that blocker standard are optional observations. Do not revise the plan merely to obtain unanimous taste, eliminate every hypothetical risk, or reach `EXPERT-GRADE`. On targeted follow-up, a new concern unrelated to the revision is advisory unless it exposes an immediate correctness, security, privacy, or data-loss defect.
 
-Identify the *surface of change* — which files, which functions, which call sites. Once the surface is named, edits are obvious. Name concrete files and functions; describe *what* changes and *why*; reference precedent for the pattern. Leave *how* to the executor — they need goals and constraints, not pseudocode.
+## Structure the artifact
 
-Step would contain a guess → ask the user before saving. Plan is a closed contract — executor cannot resolve ambiguity, only act on it.
+Use the established design-document structure below. Omit inapplicable detail instead of filling sections ceremonially.
 
-- **Under-specified:** `Add a rate limiter to the API.`
-- **Over-specified:** Pseudocode of the rate-limit check, variable names, HTTP status codes.
-- **Calibrated:** `Add per-user rate limiting to authenticated endpoints. New middleware in src/api/middleware/ratelimit.py following the pattern of src/api/middleware/auth.py (middleware class + decorator registration in src/api/app.py:42). Use the existing Redis client from src/infra/redis.py.`
+- **Executive summary** — the decision-relevant problem and current state, followed by the outcome and selected design in the smallest reviewable form.
+- **Goals and boundaries** — goals, explicit non-goals, scope, observable behavior, and acceptance criteria.
+- **Target design** — system context; components and responsibilities; every architecturally intentional file and affected symbol; interface contracts in prose; dependencies; data and runtime flow; relevant user-visible states. Explain why each referenced location changes.
+- **Decision record** — why the design wins; decisive repository evidence; decision-relevant prior art when found; and a compact table comparing every seriously considered alternative, including doing nothing, by advantages, drawbacks, and rejection reason.
+- **Operational consequences** — only where relevant: compatibility, migration and rollback, failure recovery, security, privacy, observability, performance, scalability, deployment, and consequential edge cases, with mitigations.
+- **Verification** — map each acceptance criterion and material invariant to required test coverage or observable evidence without restating it; never prescribe commands.
+- **References** — cite repository evidence as `file:line`. Include the decision-relevant fact from external evidence and cite its URL or library as provenance; links must not be required context.
 
-Litmus tests:
-- "Could the executor start in the wrong file?" → be more specific.
-- "Could the executor implement this without reading my plan?" → step is too detailed.
+Use diagrams, state models, flows, or UI demonstrations only when they communicate relationships or behavior better than structured text. Prefer the minimum useful view; do not mechanically reproduce every C4 or arc42 level.
 
-## Plan Format
+## Preserve the abstraction boundary
 
-Required:
+Exclude code, pseudocode, code-shaped examples, statement-level logic, ordered implementation steps, task decomposition, execution sequencing, verification commands, decision-irrelevant background, placeholders, open questions, and deferred design decisions.
 
-- **Goal** — One sentence. What exists after that didn't before.
-- **Files** — Exact paths with `[NEW]`/`[MOD]`/`[DEL]` prefix. Map the change surface before decomposing into steps.
-- **Steps** — Ordered, checkboxed (`- [ ]`), each naming the file(s) it touches.
-- **Verification** — Per-step: command + expected result. Final: acceptance criteria the executor checks before declaring done.
+Be as short as completeness against the review brief allows; conceivable future production concerns do not count as missing completeness. Within the same HTML file, lead with the concise human review surface and progressively disclose the detailed executor contract without duplicating it. Use semantic HTML, in-file CSS, and concise tables or visuals; do not teach HTML in the plan. Declare an explicit page background and text color on `body` (never rely on the viewer's defaults) so the plan renders identically in browsers and embedded webviews such as VS Code preview.
 
-Add when the task warrants:
-
-- **Background** — The *why*, when not obvious from the goal.
-- **Key Concepts** — Domain terms, sentinel values, non-obvious patterns. Table format.
-- **Approach & Rejected Alternatives** — What you chose and rejected, with rationale. Prevents re-litigating decisions.
-- **Edge Cases** — The 3–5 most likely failure modes and how the plan handles each. Can't name them → haven't understood the problem deeply enough.
-- **Risks** — Only non-obvious ones with mitigations.
-- **Work Decomposition** — For parallel execution (Workflow tool or subagents): which steps run in parallel vs. sequential, and why.
-
-No placeholders survive to save: no `TBD`, no "add error handling" without specifics, no open questions. Every ambiguity resolved with the user first — saved plan is a closed contract.
-
-## Save & Handoff
-
-Save to `docs/plans/<type>-<short-name>.md` (adapt to project conventions if established). Types: `feat-`, `fix-`, `refactor-`, `chore-`.
-
-Update existing plan → re-read, diff against new requirements, revise in place.
-
-Hand off to the Workflow tool (or parallel subagents) for parallel work, or implement directly for single-agent execution.
+Approval freezes the entire artifact. A material execution conflict stops implementation; revise only the affected design, use the same bounded review protocol when target behavior changes, and obtain approval again.

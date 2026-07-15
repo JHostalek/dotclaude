@@ -2,7 +2,7 @@
 
 Integrating a branch re-chains revision pointers in migration files but does NOT execute the target's new migrations against the local database. The DB version marker still holds the old revision — the app crashes at runtime on missing schema objects.
 
-**Re-chain:** update the feature migration's parent revision to point to the target's chain tip. Update declared head tracking if the project tracks migration head outside alembic (check project CLAUDE.md/TOOLS.md).
+**Re-chain:** update the feature migration's parent revision to point to the target's chain tip. If the project tracks the migration head outside Alembic, locate and update that declaration in the repository configuration or migration tooling.
 
 **Re-ID if non-monotonic.** Re-pointing `down_revision` alone is not sufficient. If the feature's own revision ID is now ≤ any upstream ID in the new chain, the chain violates monotonic-timestamp rules and silently breaks any DB already stamped at that ID — alembic reports head, skips the inserted middle, app crashes on missing columns. Fix: generate a fresh `date +%Y%m%d%H%M%S`, update `revision: str = …` inside the file, rename the file to match, update project head tracking.
 

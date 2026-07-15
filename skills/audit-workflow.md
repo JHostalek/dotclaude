@@ -1,6 +1,6 @@
 # Audit Workflow Engine
 
-Shared shape for the audit skills. Run it with the `Workflow` tool; handle git inline (don't pull in the `worktree`/`merge` skills — heavyweight, overkill here).
+Shared shape for the audit skills. Run it with the `Workflow` tool; handle branch setup and integration inline instead of pulling in separate git-workflow skills.
 
 **Shape.** One agent per dimension, each in its own worktree (`agent(..., { isolation: 'worktree' })`) off the same base — fan out in parallel; each finds → verifies by trying to refute → applies its auto-fix findings → gates → commits on its branch. Then integrate the green branches **sequentially** (never octopus) in the order below, gating after each. A merge that conflicts or turns the gate red goes to a reconcile agent handed both sides' *findings* — resolve by intent, not by splicing diffs. Revert-on-red. Then gate once on the result, commit, open/update the PR, tear the worktrees down.
 

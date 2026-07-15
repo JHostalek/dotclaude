@@ -24,7 +24,7 @@ Announce commits ahead + target, then proceed without waiting for confirmation.
 Resolve conflicts per heuristics above. After the rebase:
 
 - If any migration files were touched: reconcile per the migration guide above (re-chain + apply to local DB if running).
-- Run quality gates — rebase bypasses pre-commit hooks; QG is the only safety net. Use gate commands from TOOLS.md.
+- Run the repository's configured quality gates — rebase bypasses pre-commit hooks, so inspect its scripts and configuration rather than relying on a separate instruction document.
 - Force-push with `--force-with-lease`. Invoking `/rebase` = intent to push; no additional confirmation needed.
 
 **Report:** commits applied/dropped, conflicts resolved, migration reconciliation results, quality gate results.
