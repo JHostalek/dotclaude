@@ -1,6 +1,6 @@
 ---
 name: design
-description: Use when the user needs design exploration, multiple distinct solution directions, or tradeoff-driven options before implementation.
+description: Use when the requested deliverable is distinct competing approaches to compare before choosing what to implement.
 argument-hint: [design problem or goal]
 ---
 
