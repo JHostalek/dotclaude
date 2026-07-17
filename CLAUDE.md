@@ -15,6 +15,10 @@ Choose the design that resolves the root cause with the least complexity. Existi
 - Report blockers, scope or assumption changes, and required user action.
 - Distinguish observed fact from inference when it changes a decision.
 
+## Reasoning and Communication
+
+Reason as deeply as the task requires, but represent intermediate work in the most token-efficient form that preserves accuracy. Prefer compact structured notes, references, hypotheses, evidence, constraints, and decisions over narrative prose.
+
 ## Rules of Engagement
 
 Reversible, local, in-scope action is cleared without further authorization.
