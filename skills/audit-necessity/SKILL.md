@@ -4,7 +4,7 @@ description: Use when cutting code in a folder that doesn't earn its keep — wh
 argument-hint: <path>
 ---
 
-!`cat ~/.claude/skills/audit-workflow.md`
+!`cat "${CLAUDE_SKILL_DIR}/../audit-workflow.md"`
 
 Necessity dimension: **should this code exist at all, and if so, at this size?** Start with the three lenses below. They are baseline angles, not a closed taxonomy: combine or reweight them, and add a scope-specific lens when it reveals maintenance cost or value they miss.
 

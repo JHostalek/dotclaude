@@ -27,6 +27,10 @@
 !.github/
 !.github/**
 
+# --- Claude Code plugin distribution ---
+!.claude-plugin/
+!.claude-plugin/**
+
 # --- Skills (the actual value) ---
 !skills/
 !skills/**
@@ -39,4 +43,3 @@ skills/graphify
 !skills/conventional-commits.md
 !skills/audit-workflow.md
 !skills/migration-reconciliation.md
-

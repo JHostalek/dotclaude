@@ -1,0 +1,47 @@
+{
+  "name": "jhostalek-skills",
+  "version": "1.0.0",
+  "description": "JHostalek's opinionated agent skills for planning, auditing, shipping, and improving software.",
+  "author": {
+    "name": "Jan Hostalek",
+    "url": "https://github.com/JHostalek"
+  },
+  "homepage": "https://github.com/JHostalek/dotclaude",
+  "repository": "https://github.com/JHostalek/dotclaude",
+  "license": "CC0-1.0",
+  "keywords": [
+    "engineering",
+    "skills",
+    "audit",
+    "git",
+    "design"
+  ],
+  "skills": [
+    "./skills/audit-comments",
+    "./skills/audit-complexity",
+    "./skills/audit-correctness",
+    "./skills/audit-error-handling",
+    "./skills/audit-logs",
+    "./skills/audit-necessity",
+    "./skills/audit-patterns",
+    "./skills/audit-perf",
+    "./skills/audit-security",
+    "./skills/audit-structure",
+    "./skills/audit-tests",
+    "./skills/audit",
+    "./skills/commit",
+    "./skills/design-refiner",
+    "./skills/design",
+    "./skills/judge",
+    "./skills/merge",
+    "./skills/plan",
+    "./skills/pr",
+    "./skills/prompt",
+    "./skills/rebase",
+    "./skills/sparring",
+    "./skills/timesheet",
+    "./skills/transformer",
+    "./skills/ux",
+    "./skills/writing-identity"
+  ]
+}

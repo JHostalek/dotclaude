@@ -17,7 +17,7 @@ The cases below are high-risk anchors, not an exhaustive conflict taxonomy. Appl
 
 **Partial survival check:** When a resolution keeps *usage* of a symbol (component, function, import), verify the *declaration* and *import* also survived — grep the resolved file for every feature-side symbol before continuing.
 
-!`cat ~/.claude/skills/migration-reconciliation.md`
+!`cat "${CLAUDE_SKILL_DIR}/../migration-reconciliation.md"`
 
 ## Execution
 

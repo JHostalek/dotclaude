@@ -18,7 +18,7 @@ Ground the PR in repository truth, not memory:
 
 ## Conventional commits
 
-!`cat ~/.claude/skills/conventional-commits.md`
+!`cat "${CLAUDE_SKILL_DIR}/../conventional-commits.md"`
 
 ## CLI invocation
 

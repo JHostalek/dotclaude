@@ -4,7 +4,7 @@ description: Use when auditing repo topology in a scope — code grouped by type
 argument-hint: [path]
 ---
 
-!`cat ~/.claude/skills/audit-workflow.md`
+!`cat "${CLAUDE_SKILL_DIR}/../audit-workflow.md"`
 
 Run as the `structure` dimension. Purpose: catch code in the wrong place — wrong module, wrong layer, wrong grouping — so that related changes stay co-located and module boundaries mean something. Judge against the repo's own conventions, never an imported ideal.
 

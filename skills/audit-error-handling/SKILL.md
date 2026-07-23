@@ -4,7 +4,7 @@ description: Use when auditing and fixing error handling in a scope — swallowe
 argument-hint: [path]
 ---
 
-!`cat ~/.claude/skills/audit-workflow.md`
+!`cat "${CLAUDE_SKILL_DIR}/../audit-workflow.md"`
 
 Run as the `error-handling` dimension. Lens:
 

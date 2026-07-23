@@ -3,7 +3,7 @@ name: audit-complexity
 description: Use when the goal is to reduce code size, remove unnecessary complexity, or simplify a module without removing user-facing behavior.
 ---
 
-!`cat ~/.claude/skills/audit-workflow.md`
+!`cat "${CLAUDE_SKILL_DIR}/../audit-workflow.md"`
 
 Run as the `complexity` dimension. Exists because LOC and abstraction count compound silently — each addition seems reasonable; the total becomes unnavigable. Lens:
 

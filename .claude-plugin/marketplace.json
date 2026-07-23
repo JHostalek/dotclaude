@@ -1,0 +1,23 @@
+{
+  "name": "jhostalek",
+  "owner": {
+    "name": "Jan Hostalek",
+    "url": "https://github.com/JHostalek"
+  },
+  "description": "JHostalek's skills for agentic software work, as an installable Claude Code plugin.",
+  "plugins": [
+    {
+      "name": "jhostalek-skills",
+      "source": "./",
+      "description": "Opinionated skills for planning, auditing, shipping, and improving software.",
+      "category": "engineering",
+      "keywords": [
+        "engineering",
+        "skills",
+        "audit",
+        "git",
+        "design"
+      ]
+    }
+  ]
+}

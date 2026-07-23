@@ -4,7 +4,7 @@ description: Use when auditing and fixing performance hot paths in a scope — N
 argument-hint: [path]
 ---
 
-!`cat ~/.claude/skills/audit-workflow.md`
+!`cat "${CLAUDE_SKILL_DIR}/../audit-workflow.md"`
 
 Run as the `perf` dimension. Goal: surface work the runtime does more than once when once suffices, or at O(N) cost when O(1) is available — then fix or gate it.
 
