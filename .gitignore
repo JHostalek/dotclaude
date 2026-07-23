@@ -31,6 +31,13 @@
 !.claude-plugin/
 !.claude-plugin/**
 
+# --- Codex plugin distribution ---
+!.codex-plugin/
+!.codex-plugin/**
+!.agents/
+!.agents/plugins/
+!.agents/plugins/marketplace.json
+
 # --- Skills (the actual value) ---
 !skills/
 !skills/**
