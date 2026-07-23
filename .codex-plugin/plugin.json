@@ -1,0 +1,36 @@
+{
+  "name": "jhostalek-skills",
+  "version": "1.0.0",
+  "description": "JHostalek's opinionated agent skills for planning, auditing, shipping, and improving software.",
+  "author": {
+    "name": "Jan Hostalek",
+    "url": "https://github.com/JHostalek"
+  },
+  "homepage": "https://github.com/JHostalek/dotclaude",
+  "repository": "https://github.com/JHostalek/dotclaude",
+  "license": "CC0-1.0",
+  "keywords": [
+    "engineering",
+    "skills",
+    "audit",
+    "git",
+    "design"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "JHostalek Skills",
+    "shortDescription": "Opinionated workflows for agentic software engineering",
+    "longDescription": "Reusable workflows for planning, auditing, shipping, and improving software with coding agents.",
+    "developerName": "Jan Hostalek",
+    "category": "Productivity",
+    "capabilities": [
+      "Write"
+    ],
+    "websiteURL": "https://github.com/JHostalek/dotclaude",
+    "defaultPrompt": [
+      "Turn this request into an implementation-ready plan.",
+      "Audit these changes before I ship them.",
+      "Prepare these changes for a pull request."
+    ]
+  }
+}

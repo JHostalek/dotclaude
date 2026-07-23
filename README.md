@@ -79,6 +79,15 @@ hook scripts ship in `hooks/` but must be wired in `settings.json` under the `ho
 
 ## install
 
+### Codex plugin
+
+Add the marketplace and install the plugin:
+
+```bash
+codex plugin marketplace add JHostalek/dotclaude
+codex plugin add jhostalek-skills@jhostalek
+```
+
 ### Claude Code plugin
 
 Add the marketplace and install the plugin:
