@@ -15,6 +15,6 @@ Changes don't match branch name (auth changes on `feature/geo-optimization`) →
 
 ## Commit Format
 
-!`cat ~/.claude/skills/conventional-commits.md`
+!`cat "${CLAUDE_SKILL_DIR}/../conventional-commits.md"`
 
 Imperative mood ("add OAuth flow" not "added OAuth flow"). Capture *intent*, not implementation. Can't write a focused message → commit spans unrelated changes, split it. Wrap body at ~80 chars (commitlint max 100).

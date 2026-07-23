@@ -4,7 +4,7 @@ description: Use when auditing and fixing security in a scope — injection (SQL
 argument-hint: [path]
 ---
 
-!`cat ~/.claude/skills/audit-workflow.md`
+!`cat "${CLAUDE_SKILL_DIR}/../audit-workflow.md"`
 
 Run as the `security` dimension. Lens: find vulnerabilities where untrusted input or weak controls let an attacker change behavior, exfiltrate data, or escalate privilege. Tag each finding w/ a CWE.
 

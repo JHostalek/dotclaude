@@ -79,8 +79,23 @@ hook scripts ship in `hooks/` but must be wired in `settings.json` under the `ho
 
 ## install
 
+### Claude Code plugin
+
+Add the marketplace and install the plugin:
+
+```text
+/plugin marketplace add JHostalek/dotclaude
+/plugin install jhostalek-skills@jhostalek
+```
+
+Skills are versioned with the plugin and invoked as
+`/jhostalek-skills:<skill-name>`. The plugin intentionally contains skills
+only; configure hooks separately if you want to use them.
+
+### Editable standalone skills
+
 ```bash
-# clone and symlink (recommended — stays updated)
+# clone and symlink
 git clone git@github.com:JHostalek/dotclaude.git ~/dotclaude
 ln -s ~/dotclaude/skills/* ~/.claude/skills/
 

@@ -6,7 +6,7 @@ argument-hint: <path to SKILL.md or skill name>
 
 input = $ARGUMENTS
 
-Resolve `$input` to a path; if missing, try `~/.claude/skills/$input/SKILL.md` then `./.claude/skills/$input/SKILL.md` — if none resolve, ask. Read completely. Rewrite in place — diff is the review surface.
+Resolve `$input` to a path; if missing, try `${CLAUDE_SKILL_DIR}/../$input/SKILL.md` then `./.claude/skills/$input/SKILL.md` — if none resolve, ask. Read completely. Rewrite in place — diff is the review surface.
 
 ## The one test
 
@@ -46,8 +46,8 @@ Steps 1–5: unaided reasoning. Step 6's structure is load-bearing; earns a cali
 
 ## Drafting craft (authoritative in the prompt skill, inlined here)
 
-!`cat ~/.claude/skills/prompt/SKILL.md`
+!`cat "${CLAUDE_SKILL_DIR}/../prompt/SKILL.md"`
 
 ## Fable 5 reference
 
-!`cat ~/.claude/skills/transformer/fable-5-reference.md`
+!`cat "${CLAUDE_SKILL_DIR}/fable-5-reference.md"`

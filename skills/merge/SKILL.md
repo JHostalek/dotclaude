@@ -17,7 +17,7 @@ The cases below are high-risk anchors, not an exhaustive conflict taxonomy. Appl
 
 **Partial survival:** resolution keeps *usage* of a symbol → verify *declaration* and *import* also survived. Grep resolved file for every feature-side symbol before continuing.
 
-!`cat ~/.claude/skills/migration-reconciliation.md`
+!`cat "${CLAUDE_SKILL_DIR}/../migration-reconciliation.md"`
 
 ## Merge Commit Message
 

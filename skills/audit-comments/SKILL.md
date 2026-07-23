@@ -4,7 +4,7 @@ description: Use when auditing comments, docstrings, or embedded documentation p
 argument-hint: [path]
 ---
 
-!`cat ~/.claude/skills/audit-workflow.md`
+!`cat "${CLAUDE_SKILL_DIR}/../audit-workflow.md"`
 
 Run as the `comments` dimension. Comments run last because structure, patterns, and correctness edits change what the code does — a comment accurate before those passes may be stale after them. Lens:
 
