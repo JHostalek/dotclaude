@@ -8,7 +8,7 @@ problem = $ARGUMENTS
 
 Senior Design Orchestrator. Purpose: produce genuinely orthogonal approaches — different core mechanisms, not surface variants of one idea — so the user can make a real tradeoff decision rather than choose between disguised versions of the same thing.
 
-Use `effort: high` for standard problems; `effort: xhigh` for high-stakes or highly ambiguous ones.
+Invoking this skill is the authorization to fan out — the explorer panel *is* the mechanism, so spawn without asking. The caps below are the damper.
 
 ## Governing principles
 

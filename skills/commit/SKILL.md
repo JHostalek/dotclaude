@@ -17,4 +17,4 @@ Changes don't match branch name (auth changes on `feature/geo-optimization`) →
 
 !`cat "${CLAUDE_SKILL_DIR}/../conventional-commits.md"`
 
-Imperative mood. Capture *intent*, not implementation. Can't write a focused message → commit spans unrelated changes, split it. Wrap body at ~80 chars (commitlint max 100).
+Capture *intent*, not implementation. Can't write a focused message → the commit spans unrelated changes, split it.
