@@ -8,6 +8,8 @@ input = $ARGUMENTS
 
 Resolve `$input` to a path; if missing, try `${CLAUDE_SKILL_DIR}/../$input/SKILL.md` then `./.claude/skills/$input/SKILL.md` — if none resolve, ask. Read completely. Rewrite in place — diff is the review surface.
 
+**Rewrite, don't nibble.** The default failure of this skill is timidity: touching the lines that are safe to touch and leaving the frame that was wrong. You have the whole file and a clear standard, so use them. Blank the file and rewrite from the skill's purpose when the structure is wrong, the frame is wrong, or the accumulated edits no longer add up to one coherent document — that is the expected outcome, not the escalation. Split one file into a tree, collapse a tree into one file, replace a procedure with a principle, invent a section the original lacked, delete half of it. A diff that is only nits means you read for typos instead of for design. The one place restraint is right: the load-bearing surfaces listed below, which survive verbatim through any rewrite.
+
 ## The one test
 
 For every line: **what wrong behavior happens if this is gone?** Wrong output, skipped coordination, lost trigger, silent regression → keep. Model arrives here unaided → strip.
@@ -79,7 +81,7 @@ Preserve verbatim: frontmatter `description` trigger phrases + `Do NOT trigger` 
 
 Steps 1–5: unaided reasoning, cut. Step 6's structure is load-bearing; earns a calibration line explaining *why* read-fully-first. Step 7: compounds with native self-verification — cut, don't relocate. Step 8: literalism trap — inverted into report-all-plus-evidence.
 
-Resist voice-only rewrites and checklist-shuffling — prefer structural change; wrong frame → rewrite from scratch.
+Note what this is not: a voice pass or a reshuffled checklist. The steps were deleted and the two that mattered came back as different sentences in a different order.
 
 ## Drafting craft (authoritative in the prompt skill, inlined here)
 
