@@ -42,7 +42,7 @@ Optional, only when needed:
 - **Review notes** — specific judgment calls, residual risk, rollout concerns, or skipped verification.
 - **Architecture** — keep the Mermaid diagram when data flow, control flow, ownership, or sync boundaries changed.
 
-Do not include separate Task, Focus, Changes, Self-Review, and Human Review sections by default. Fold the useful parts into Summary, Verification, or Review notes. Prefer inline diff annotations for per-hunk WHY; use the body for context the diff cannot show.
+Those four sections are the whole body; anything else you'd reach for folds into one of them. Prefer inline diff annotations for per-hunk WHY — the body carries only what the diff cannot show.
 
 ### Architecture diagram
 

@@ -1,6 +1,6 @@
 # Audit Integration
 
-Orchestration for a sweep of two or more dimensions: fan out in parallel worktrees, integrate in dependency order, land one PR. Assumes the shared discipline in `audit-workflow.md`.
+Orchestration for a sweep of two or more dimensions: fan out in parallel worktrees, integrate in dependency order, land one PR. Assumes the shared discipline in `audit-workflow.md`. Requesting a sweep is the authorization to fan out — spawn the group agents without asking; the one-agent-per-group rule is the damper.
 
 **Phase groups — restructuring before content, comments last:**
 

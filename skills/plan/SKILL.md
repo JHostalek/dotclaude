@@ -36,7 +36,7 @@ Use diagrams, state models, flows, or UI demonstrations only when they communica
 
 ## Preserve the abstraction boundary
 
-Exclude code, pseudocode, code-shaped examples, statement-level logic, ordered implementation steps, task decomposition, execution sequencing, verification commands, decision-irrelevant background, placeholders, open questions, and deferred design decisions.
+Every part of the plan sits one abstraction level above pseudocode: what must exist and why, never the statements or the order that realize it. An open question, placeholder, or deferred decision means the plan isn't ready — settle it with evidence, ask the user, or record it as an explicit non-goal.
 
 Be as short as completeness against the goals and acceptance criteria allows; conceivable future production concerns do not count as missing completeness. Within the same HTML file, lead with the concise human review surface and progressively disclose the detailed executor contract without duplicating it. Use semantic HTML, in-file CSS, and concise tables or visuals; do not teach HTML in the plan. Declare an explicit page background and text color on `body` (never rely on the viewer's defaults) so the plan renders identically in browsers and embedded webviews such as VS Code preview.
 

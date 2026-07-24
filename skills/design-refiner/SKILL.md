@@ -13,7 +13,7 @@ content = $ARGUMENTS
 
 ## Why
 
-A builder LLM inherits the specificity of its input: a request that names the aesthetic anchor, the interaction technique, the stack, and the scope steers toward high-craft output; a vague one degrades to generic, template-default UI. Three moves carry that load — name vague gestures with their real techniques, make implicit constraints explicit, elicit the absent dimensions the model must not invent. Expert register is the vehicle, not the goal.
+A builder LLM inherits the specificity of its input: a request that names the aesthetic anchor, the interaction technique, the stack, and the scope steers toward high-craft output; a vague one degrades to generic, template-default UI. Expert register is the vehicle, not the goal.
 
 ## Transformation
 
@@ -33,7 +33,7 @@ The `[specify]` block is addressed to the human, to resolve *before* building �
 ## Calibration
 
 - **Expert register ≠ jargon stuffing.** Terms designers/FE engineers actually use. "Scroll-triggered timeline" = register; "immersive synergistic experience" = noise. Hollow filler that reads design-y but adds no build-steering value — "immersive", "cutting-edge", "seamless", "next-gen", "pixel-perfect" — is noise too; cut it.
-- **Fidelity over creativity.** Translate, don't redesign — same intent, scope, taste. Nothing added the author didn't mean; nothing dropped they did. Fidelity is uniform across every dimension — verification no exception: don't inject a verification mandate (or a stack) the author didn't imply.
+- **Fidelity over creativity.** Translate, don't redesign — same intent, scope, taste. Nothing added the author didn't mean; nothing dropped they did. Fidelity is uniform across every dimension — verification no exception: don't inject a verification mandate the author didn't imply.
 - **Technique vs stack.** A library named as a technique *class* is register — "Lenis-style inertial scroll", "GSAP-style scroll timeline", "R3F-style WebGL scene", "shader-style mesh gradient"; the `-style` hedge signals the class. A bare library the author didn't choose ("use Lenis", "add GSAP", "use Three/R3F", "in WebGPU") is stack fabrication → slot. The spectacle tier raises the ceiling of *technique* vocabulary, never the licence to pick the *stack*: each project runs a different stack, so an unchosen GPU/motion/shader lib is always a slot, never a default.
 - **Preserve verbatim:** URLs, Figma links, node-ids, file paths, asset names, libraries the author *did* choose, explicit constraints ("not X", "type-heavy"), and emotional/uncertainty signals. Register changes prose only.
 - **Match request type:** recreate-a-reference → keep the reference + fidelity target, sharpen which qualities to match (slots rare); improve/modernize → keep the don't-break constraints, name the implied upgrades; greenfield → strongest slot need (anchor/stack/motion usually absent).

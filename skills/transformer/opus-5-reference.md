@@ -33,6 +33,7 @@ Model ID `claude-opus-5`. 1M context (default = max), 128k max output, thinking 
 Model-facts above are about one artifact in isolation. These are about the assembled context — system prompt + CLAUDE.md + skills + tool descriptions + references — which is where the remaining waste lives.
 
 - **Conflicts cost reasoning even when resolvable.** Real transcripts show a single request carrying "leave documentation as appropriate" from one layer and "DO NOT add comments" from another. The model resolves it correctly and pays for the resolution. Contradiction between layers is a defect to fix at the source, not a tie for the model to break. Overlap is the milder version: two layers stating the same rule pushes past the right amount of the behavior.
+- **A damper in one layer disables the mechanism of another.** "Don't delegate unless asked" in a harness prompt or CLAUDE.md meets a fan-out skill and the model re-derives permission every invocation. The skill states its own authorization once and carries its own cap; the damper stays where it is, for everything else.
 - **One home per instruction.** Guidance about a tool lives in that tool's description; guidance about a workflow lives in its skill; repeating it in a parent layer is the old workaround for end-of-context recency bias, which is gone. Reference the home, don't restate it.
 - **Interfaces over examples.** Examples pin the model to the exploration space they describe — with a model more imaginative than the example, that's a downgrade. Prefer making the interface self-describing: expressive parameter names, enums whose values imply the state machine (`pending`/`in_progress`/`completed`), field names in an output contract, a one-line constraint on the shape ("keep exactly one item in_progress"). Keep an example where the output space is genuinely closed, or where the judgment call has a failure mode that prose can't show.
 - **Progressive disclosure is the default shape for anything long.** A skill is a lightweight guide to finding information when it's needed, not a repository of everything that might come up. Split a long skill into a tree of files loaded at the point of use. Note the mechanism difference: `!`​`cat path`` inlines eagerly and costs its tokens every invocation — right for material every run needs; a plain path reference costs nothing until read — right for material some runs need.
@@ -58,6 +59,8 @@ Un-steered Opus 5: **longer visible responses and longer written files**, **more
 - Rules restated from a layer that already carries them, and rules that contradict one — fix at the source instead.
 - Examples that demonstrate a procedure the interface could describe itself.
 - Generic best practice with nothing team- or product-specific in it.
+- Restatements of a public standard the model knows cold (conventional commits, HTTP semantics, WCAG clause text, a library's own API) — keep only the local deviation: the lint limit, the chosen type vocabulary, the version pinned.
+- Effort/model/token-budget guidance in a skill file — unreachable from inside a skill, so it changes nothing; keep it only in prompts that ship to an API surface.
 
 **Keep & sharpen:**
 - Length calibration — conversational *and* written-deliverable, with a short end-of-prompt reminder in long skills.

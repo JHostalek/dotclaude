@@ -42,6 +42,8 @@ A skill never arrives by itself — CLAUDE.md, the harness system prompt, siblin
 - **Contradiction** — one layer says never, another says as appropriate. The model resolves it and pays for the resolution every run. Fix at the source: decide which layer owns the call and delete the other side, don't add a tiebreak line.
 - **Restatement** — the target repeats what a parent layer already carries, or what a tool's own description carries. Cut it here; end-of-context recency bias is gone, so the repeat buys nothing and pushes the behavior past calibration.
 - **Ownership** — guidance about a tool belongs in that tool's description, about a workflow in its skill. Reference the home; don't copy it.
+- **Damper vs mechanism** — a parent layer damping a behavior (don't delegate unless asked, don't write files) collides with any skill whose mechanism *is* that behavior. The skill owns the resolution and states it once — "invoking this skill is the authorization to fan out" — then carries its own cap. Without that line the model re-derives permission on every run.
+- **Inert knobs** — effort, model, and token settings are not reachable from inside a Claude Code skill; guidance about them only lands in a prompt that ships to an API surface. Elsewhere it reads as instruction and does nothing. Cut it.
 
 ## Split what's long
 
@@ -83,9 +85,11 @@ Steps 1–5: unaided reasoning, cut. Step 6's structure is load-bearing; earns a
 
 Note what this is not: a voice pass or a reshuffled checklist. The steps were deleted and the two that mattered came back as different sentences in a different order.
 
-## Drafting craft (authoritative in the prompt skill, inlined here)
+## Drafting craft
 
-!`cat "${CLAUDE_SKILL_DIR}/../prompt/SKILL.md"`
+Prefer positive directives, motivate every constraint you keep, and keep rule density low — on a reasoning model, fewer rules land harder. The rest of the craft you need is already above: anchor through the interface, XML-tag load-bearing invariants, state floors instead of freedoms.
+
+Composing a prompt artifact rather than a skill — a tool description, a judge rubric, an API system prompt — is a different surface: read `${CLAUDE_SKILL_DIR}/../prompt/SKILL.md`, which owns target-model calibration and assembly order.
 
 ## Opus 5 reference
 
