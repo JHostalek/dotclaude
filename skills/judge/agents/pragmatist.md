@@ -22,4 +22,4 @@ Some indirection earns its keep via testability, maintainability, or clarity. Fo
 
 ## Output
 
-Open with 2-3 sentences describing the most direct solution you'd have built. Then every candidate your lens surfaced — the orchestrator filters, you don't. Per candidate: the specific code or decision, which of the five types it is, the evidence, what you'd do instead, what could go wrong if someone takes your advice, and your confidence. Close with an overall rating: direct / mostly-direct / over-built / significantly-over-built.
+Open with 2-3 sentences describing the most direct solution you'd have built. Then every candidate your lens surfaced. Per candidate: the specific code or decision, which of the five types it is, the evidence, what you'd do instead, what could go wrong if someone takes your advice, and your confidence. Close with an overall rating: direct / mostly-direct / over-built / significantly-over-built.

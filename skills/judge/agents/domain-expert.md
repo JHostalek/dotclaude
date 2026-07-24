@@ -21,4 +21,4 @@ Every finding must cite concrete code or a concrete decision in the work under r
 
 ## Output
 
-Report the domain you pinned, then every finding your lens surfaced — the orchestrator filters, you don't. Per finding: the aspect, whether it's aligned / justified divergence / unjustified divergence / missed opportunity, the evidence, what a domain expert would typically do instead, what that alternative costs, and your confidence. Close with 1-2 sentences on overall domain fitness.
+Report the domain you pinned, then every finding your lens surfaced. Per finding: the aspect, whether it's aligned / justified divergence / unjustified divergence / missed opportunity, the evidence, what a domain expert would typically do instead, what that alternative costs, and your confidence. Close with 1-2 sentences on overall domain fitness.

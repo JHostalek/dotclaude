@@ -15,7 +15,7 @@ Count occurrences — >60% of the codebase solves a problem one way → that's t
 4. Predictable API/CLI/interface shape across public surfaces
 5. Import ordering; zero unused imports or dependencies
 
-Collect every divergence, then pass over the list dropping justified variance — external library requirements, proven constraints, framework boundaries. Check `git log` on divergent files: recent divergence → usually accidental; old divergence → may be intentional.
+Drop justified variance — external library requirements, proven constraints, framework boundaries. Check `git log` on divergent files: recent divergence → usually accidental; old divergence → may be intentional.
 
 <approval_gate>
 Auto-fix: import existing utility, rename to dominant convention, reorder imports, drop unused dependencies. Sign-off when the dominant pattern itself is wrong — sweeping the majority pattern is a separate decision from cleaning up outliers.

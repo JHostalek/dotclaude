@@ -20,8 +20,6 @@ High-yield patterns:
 
 Scope: producing the wrong answer w/ no error. Distinguish from audit-error-handling (errors that vanish — swallowed, unobserved).
 
-Report every divergence you find. Then split the collected list: intent unambiguous — name, signature, docstring, or caller pattern pins the correct reading — is auto-fix; anything where the code could be either bug or intentional spec goes to sign-off unfixed. The split decides who fixes it, never whether it gets reported.
-
 <fix_gate>
-A wrong auto-fix propagates the bug under the appearance of a correction. When the reading isn't pinned, sign-off is the answer, not a guess.
+Auto-fix only where intent is pinned — by name, signature, docstring, or caller pattern. The split decides who fixes a divergence, never whether it gets reported.
 </fix_gate>

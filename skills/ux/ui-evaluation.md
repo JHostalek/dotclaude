@@ -1,8 +1,8 @@
 # UX Evaluation Dimensions
 
-Fundamentals first, trends second — "ugly but works" beats "pretty but broken". Evaluate 1-10 always; 11-13 only when relevant.
+Fundamentals first, trends second — "ugly but works" beats "pretty but broken".
 
-## Fundamentals (always)
+## Fundamentals
 
 1. **Task completion** — primary goal achievable, critical path unblocked, no dead ends.
 2. **Comprehension** — controls read as interactive, labels use the user's words not internal jargon, CTA visible.

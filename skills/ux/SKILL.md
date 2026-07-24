@@ -14,7 +14,9 @@ Match evaluation depth to scope: single component → the 2-3 most relevant dime
 
 Gather context from at least one source, in order of preference: live browser navigation, screenshots, code review. Combine when available.
 
-Apply dimensions from [ui-evaluation.md](ui-evaluation.md).
+Apply the dimensions below.
+
+!`cat "${CLAUDE_SKILL_DIR}/ui-evaluation.md"`
 
 ## Output
 
@@ -33,4 +35,4 @@ Rate each evaluated dimension 1-5 (1=broken, 5=excellent). Compact table. Overal
 
 For each critical/high fix: what to test (user action) and what success looks like (behavior or outcome).
 
-After presenting, offer to implement top 3 critical/high fixes immediately.
+After presenting, offer to implement the top 3 critical/high fixes. Change nothing before the user accepts.

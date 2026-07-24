@@ -13,7 +13,7 @@ Match depth to the requested change. Stop researching when the relevant behavior
 
 ## Develop the design
 
-1. Research the repository until its relevant behavior, change surface, constraints, and reusable patterns are understood. Research prior art and external solutions only when they could change the current decision.
+1. Research the repository until its relevant behavior, change surface, constraints, and reusable patterns are understood. Research prior art and external solutions only when they could change the current decision. Delegate research only when the repository is large enough that separate subsystems can be read in parallel; a change surface you can reach in a handful of tool calls is faster read directly.
 2. Resolve uncertainties that materially affect the frozen scope, behavior, architecture, interfaces, security, data, or acceptance. Turn hypothetical future concerns into explicit non-goals instead of designing them. Ask the user when evidence cannot settle an in-scope choice.
 3. Save or update `docs/plans/<type>-<short-name>.html` as HTML, not renamed Markdown. Do not create companion requirements, research, design, task, or handoff artifacts.
 4. Present the plan for explicit human approval and stop. Only the user authorizes implementation.

@@ -15,7 +15,7 @@ Different mechanism, architecture, or framing — not a swap within the same par
 - Existing solution: a library, service, or platform feature that already does this
 - Non-technical: process change, docs, or user education instead of code
 
-"Use Redux instead of Zustand" = same approach (variation). "Put this state in the URL instead of client state" = different approach (alternative). Same mechanism → variation, not alternative.
+Same mechanism → variation, not alternative.
 
 ## Calibration
 
@@ -23,4 +23,4 @@ Rate each alternative on whether the team could realistically adopt it given the
 
 ## Output
 
-Open with the core problem in one sentence and a neutral characterization of the approach that was taken. Then every alternative your lens surfaced — the orchestrator filters, you don't. Per alternative: its name, how it fundamentally differs, what it does better, what it does worse, the key insight it offers, a verdict (clearly-better / trade-off / clearly-worse / context-dependent), and your confidence. Close with an overall assessment: well-explored / reasonable-but-narrow / significant-blind-spot.
+Open with the core problem in one sentence and a neutral characterization of the approach that was taken. Then every alternative your lens surfaced. Per alternative: its name, how it fundamentally differs, what it does better, what it does worse, the key insight it offers, a verdict (clearly-better / trade-off / clearly-worse / context-dependent), and your confidence. Close with an overall assessment: well-explored / reasonable-but-narrow / significant-blind-spot.

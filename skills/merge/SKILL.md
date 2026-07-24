@@ -7,9 +7,9 @@ input = $ARGUMENTS
 
 Merge target branch into current branch via `git merge origin/{target}` (remote-tracking ref, not local). Goal: integrate upstream changes with no orphaned symbols, no broken migration chain, and a conventional commit message that passes hooks.
 
-!`cat "${CLAUDE_SKILL_DIR}/../conflict-heuristics.md"`
-
-!`cat "${CLAUDE_SKILL_DIR}/../migration-reconciliation.md"`
+Read at the point of use, not up front:
+- Conflicts → `~/.claude/skills/conflict-heuristics.md`
+- Migration files touched → `~/.claude/skills/migration-reconciliation.md`
 
 ## Merge Commit Message
 
@@ -23,7 +23,9 @@ Same format for follow-up `git commit` after staging resolutions. Notable decisi
 
 ## Execution
 
-State divergence (commits ahead/behind) and target branch before merging — do not skip to the merge without the check. `/merge` = authorization to push; no additional confirmation needed after the plan. Gate before pushing.
+State divergence (commits ahead/behind) and target branch before merging — do not skip to the merge without the check.
+
+Before pushing, run the repository's configured quality gates: a conflict resolution staged after the merge started can land without ever passing a pre-commit hook, so read the repo's hook scripts and config for what actually runs rather than assuming. `/merge` = authorization to push; no additional confirmation needed after the plan.
 
 <output_contract>
 Report: commits integrated, conflicts resolved (per-conflict decision), migration reconciliation outcome, gate results.

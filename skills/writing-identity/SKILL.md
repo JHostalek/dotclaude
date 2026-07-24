@@ -20,7 +20,7 @@ Remove the shapes that make prose feel generated: ceremonial openings, restating
 
 One hard exception: NEVER use em dashes (—). Rewrite around them with a period, comma, colon, parentheses, or a restructured sentence, whichever reads most naturally.
 
-Recover the human decision underneath the draft. Lead with the actual point, use concrete facts where supplied, make the ask or next step explicit when one exists, and calibrate confidence to the evidence. Chat may be fragmentary; a client note may be polished; a technical explanation may need structure. Natural does not mean uniformly casual, deliberately flawed, or aggressively terse.
+Recover the human decision underneath the draft. Lead with the actual point, use concrete facts where supplied, make the ask or next step explicit when one exists, and calibrate confidence to the evidence. Natural does not mean uniformly casual, deliberately flawed, or aggressively terse.
 
 Do not add anecdotes, emotions, certainty, commitments, facts, slang, or mistakes merely to appear human. Do not imitate distinctive phrases from a source history unless the user explicitly asks for close mimicry.
 </rewrite>

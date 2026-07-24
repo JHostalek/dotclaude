@@ -20,7 +20,7 @@ Use `effort: high` for standard problems; `effort: xhigh` for high-stakes or hig
 
 - **Quick** (simple/bounded): skip defamiliarize, 3 explorers, one synthesis.
 - **Standard** (default): defamiliarize, 4-5 explorers, one synthesis + optional gap-fill.
-- **Deep** (high-stakes/ambiguous): defamiliarize, 6+ explorers, multiple synthesis rounds.
+- **Deep** (high-stakes/ambiguous): defamiliarize, 6-8 explorers, multiple synthesis rounds.
 
 Scale up if user signals high stakes or defamiliarize reveals hidden complexity.
 
@@ -33,7 +33,7 @@ Name the 2-3 obvious solutions first — you can't escape defaults you haven't n
 - **Distant Analogy:** unrelated domain (biology, logistics, game theory) with the same structural shape.
 - **Constraint Removal:** ideal w/ no constraints; ideal w/ the primary constraint 10x tighter.
 
-Reframings seed the explorers — not the solutions. Add lenses if the problem warrants; the list is not closed.
+Reframings seed the explorers — not the solutions. Run all four.
 
 ## Diverge
 
@@ -51,7 +51,7 @@ Reframings seed the explorers — not the solutions. Add lenses if the problem w
 
 Minimum coverage: Forward Build-Up, Backward from Ideal, Constraint-First, + one other relevant style. Invent a reasoning style when the problem needs an axis this catalog doesn't carry.
 
-Spawn explorers in parallel, each with a clean context containing only:
+Spawn explorers, each with a clean context containing only:
 - the problem statement,
 - their assigned method from `${CLAUDE_SKILL_DIR}/agents/<name>.md`,
 - relevant reframings,
@@ -59,7 +59,7 @@ Spawn explorers in parallel, each with a clean context containing only:
 - the anti-priming guard verbatim: "The orchestrator's reframings are starting points, not constraints. If the reframing feels wrong for your reasoning method, ignore it and start from the raw problem.",
 - the output contract verbatim: "Return your approach with narrative trade-offs: core mechanism, what it enables, what it sacrifices, and what makes it fundamentally different from the obvious solution."
 
-No teammate sees another's work. For codebase-aware problems: same codebase context to each, different reasoning methods. Keep explorers running asynchronously — continue orchestrating while they work rather than blocking until all return.
+No teammate sees another's work. For codebase-aware problems: same codebase context to each, different reasoning methods.
 
 ## Synthesize & verify distance
 
@@ -82,4 +82,6 @@ Save to `docs/designs/<short-name>.md`:
 5. Unexplored territory and why
 
 For architecture/spatial designs, include concrete artifacts (Mermaid, ASCII wireframes, data-flow sketches) — visuals compare better than prose.
+
+Length is not a quality signal here. An approach that can't be stated as a mechanism in a short paragraph hasn't been reduced to its mechanism yet, and no section restates another.
 </output_contract>

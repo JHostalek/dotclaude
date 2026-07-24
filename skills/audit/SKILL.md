@@ -6,4 +6,6 @@ argument-hint: [path]
 
 !`cat "${CLAUDE_SKILL_DIR}/../audit-workflow.md"`
 
+!`cat "${CLAUDE_SKILL_DIR}/../audit-integration.md"`
+
 Run all eleven baseline dimensions through the workflow above, in its phase groups. Each dimension's lens: `${CLAUDE_SKILL_DIR}/../audit-<dimension>/SKILL.md`. Skip `tests` if scope has no tests.
