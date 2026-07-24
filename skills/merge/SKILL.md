@@ -7,17 +7,9 @@ input = $ARGUMENTS
 
 Merge target branch into current branch via `git merge origin/{target}` (remote-tracking ref, not local). Goal: integrate upstream changes with no orphaned symbols, no broken migration chain, and a conventional commit message that passes hooks.
 
-## Conflict Resolution
-
-The cases below are high-risk anchors, not an exhaustive conflict taxonomy. Apply the same intent-first reasoning to other conflict shapes, and combine or refine the heuristics when a conflict spans categories.
-
-- **Lockfiles, migrations, config, version bumps** → accept target version; regenerate lockfiles.
-- **Refactored-away code** → target's removal wins; rewire to new location/API.
-- **Additive conflicts** (both sides add independent code) → keep both, then run formatter/parser. Conflict boundaries leave orphan closing tags, duplicate brackets, stray blocks — parser catches what grep misses.
-
-**Partial survival:** resolution keeps *usage* of a symbol → verify *declaration* and *import* also survived. Grep resolved file for every feature-side symbol before continuing.
-
-!`cat "${CLAUDE_SKILL_DIR}/../migration-reconciliation.md"`
+Read at the point of use, not up front:
+- Conflicts → `~/.claude/skills/conflict-heuristics.md`
+- Migration files touched → `~/.claude/skills/migration-reconciliation.md`
 
 ## Merge Commit Message
 
@@ -31,7 +23,9 @@ Same format for follow-up `git commit` after staging resolutions. Notable decisi
 
 ## Execution
 
-State divergence (commits ahead/behind) and target branch before merging — do not skip to the merge without the check. `/merge` = authorization to push; no additional confirmation needed after the plan. Gate before pushing.
+State divergence (commits ahead/behind) and target branch before merging — do not skip to the merge without the check.
+
+Before pushing, run the repository's configured quality gates: a conflict resolution staged after the merge started can land without ever passing a pre-commit hook, so read the repo's hook scripts and config for what actually runs rather than assuming. `/merge` = authorization to push; no additional confirmation needed after the plan.
 
 <output_contract>
 Report: commits integrated, conflicts resolved (per-conflict decision), migration reconciliation outcome, gate results.

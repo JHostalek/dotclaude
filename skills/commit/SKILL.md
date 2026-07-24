@@ -3,7 +3,7 @@ name: commit
 description: Use when the user asks to commit, create a git commit, checkpoint changes, save work to git, or write a commit message.
 ---
 
-The global instruction authorizes committing and pushing verified work. This skill ensures the staged set, branch, and message are intentional before that happens.
+Invoking this skill is the authorization to commit. What it adds is the check that the staged set, branch, and message are intentional first.
 
 ## Verify the staged set first
 
@@ -17,4 +17,4 @@ Changes don't match branch name (auth changes on `feature/geo-optimization`) →
 
 !`cat "${CLAUDE_SKILL_DIR}/../conventional-commits.md"`
 
-Imperative mood ("add OAuth flow" not "added OAuth flow"). Capture *intent*, not implementation. Can't write a focused message → commit spans unrelated changes, split it. Wrap body at ~80 chars (commitlint max 100).
+Imperative mood. Capture *intent*, not implementation. Can't write a focused message → commit spans unrelated changes, split it. Wrap body at ~80 chars (commitlint max 100).

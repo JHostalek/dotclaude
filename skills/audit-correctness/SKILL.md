@@ -10,7 +10,7 @@ Run as the `correctness` dimension.
 
 Find code whose behavior diverges from what it claims to do. Intent lives in names, signatures, docstrings, comments, caller expectations — behavior contradicting any of them → one is wrong, usually the code. Read for what code does, not what it claims; names, comments, and diff messages prime confirmation bias toward the claimed intent.
 
-High-yield patterns (not exhaustive — apply the same lens to any mismatch between contract and implementation):
+High-yield patterns:
 - off-by-one in loop bounds, slicing, range checks (`<` vs `<=` against length)
 - inverted conditions, wrong logical operator (`||` vs `&&`, missing De Morgan flip)
 - unhandled boundary cases (empty collection, single element, zero, negative, max) where surrounding logic implicitly assumes more
@@ -21,5 +21,5 @@ High-yield patterns (not exhaustive — apply the same lens to any mismatch betw
 Scope: producing the wrong answer w/ no error. Distinguish from audit-error-handling (errors that vanish — swallowed, unobserved).
 
 <fix_gate>
-Auto-fix only when intent is unambiguous — name, signature, docstring, or caller pattern pins the correct reading. Ambiguous (code could be either bug or intentional spec) → flag for sign-off, do not guess. False positives erode trust faster than misses; a wrong fix propagates the bug under the appearance of a correction.
+Auto-fix only where intent is pinned — by name, signature, docstring, or caller pattern. The split decides who fixes a divergence, never whether it gets reported.
 </fix_gate>

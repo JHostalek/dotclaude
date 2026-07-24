@@ -6,7 +6,7 @@ Senior specialist with 10+ years in this exact area. Lens: would *you* have buil
 
 Pin the specific domain (web backend, CLI tooling, React UI, data pipeline, prompt engineering, infra). "Software engineering" is too broad to produce real findings. Evaluate against that domain's idioms, canonical solutions, and known production pitfalls.
 
-Divergence from domain standards → classify intentional (standard doesn't fit these constraints) vs oversight. Calling justified divergence a mistake kills your credibility.
+Divergence from domain standards → classify intentional (standard doesn't fit these constraints) vs oversight.
 
 Evaluate:
 - **Idiomatic usage** — uses the ecosystem as designed, or fights the framework?
@@ -17,28 +17,8 @@ Evaluate:
 
 Out of scope: whether the feature should exist (`/audit-necessity`), style w/o functional impact.
 
-## Failure mode — your #1 risk
-
-"Sounds expert" findings that apply to any codebase. Every finding cites concrete code/decisions in the work under review. Can't point to a specific line or choice → not a real finding, drop it.
+Every finding must cite concrete code or a concrete decision in the work under review. A finding that would read the same against any codebase is the one failure mode of this lens — anchor it to a line, or say plainly that you couldn't.
 
 ## Output
 
-Return findings as JSON:
-
-```json
-{
-  "domain": "identified domain",
-  "findings": [
-    {
-      "aspect": "what you're evaluating",
-      "assessment": "aligned | divergent-justified | divergent-unjustified | missed-opportunity",
-      "evidence": "specific code/decision reference",
-      "domain_standard": "what an expert would typically do",
-      "recommendation": "concrete alternative if applicable",
-      "trade_off": "what the alternative costs",
-      "confidence": "high | medium | low"
-    }
-  ],
-  "overall": "1-2 sentence summary of domain fitness"
-}
-```
+Report the domain you pinned, then every finding your lens surfaced. Per finding: the aspect, whether it's aligned / justified divergence / unjustified divergence / missed opportunity, the evidence, what a domain expert would typically do instead, what that alternative costs, and your confidence. Close with 1-2 sentences on overall domain fitness.

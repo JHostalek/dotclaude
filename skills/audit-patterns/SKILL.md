@@ -8,15 +8,15 @@ argument-hint: [path]
 
 Run as the `patterns` dimension.
 
-Count occurrences — >60% of the codebase solves a problem one way → that's the target. Introduce only patterns already present in the project; consistency outweighs local optimality. Apply these baseline lenses in typical priority order; combine, reweight, or extend them for concerns the repository expresses differently:
+Count occurrences — >60% of the codebase solves a problem one way → that's the target. Introduce only patterns already present in the project; consistency outweighs local optimality. Lenses, in priority order:
 1. Same problem solved the same way (data access, error handling, async, validation, configuration)
 2. Reimplementations of existing utilities — inline duplicate is the divergence; fix is to import
 3. Naming conventions detected from existing code, not imposed
 4. Predictable API/CLI/interface shape across public surfaces
 5. Import ordering; zero unused imports or dependencies
 
-Justified variance exists — external library requirements, proven constraints, framework boundaries. Check `git log` on divergent files: recent divergence → usually accidental; old divergence → may be intentional.
+Drop justified variance — external library requirements, proven constraints, framework boundaries. Check `git log` on divergent files: recent divergence → usually accidental; old divergence → may be intentional.
 
 <approval_gate>
-Auto-fix (behavior-preserving, internal only): import existing utility, rename to dominant convention, reorder imports, drop unused dependencies. Sign-off required when the dominant pattern itself is wrong — name it, sketch the right unified fix, surface it. Sweeping the majority pattern is a separate decision from cleaning up outliers.
+Auto-fix: import existing utility, rename to dominant convention, reorder imports, drop unused dependencies. Sign-off when the dominant pattern itself is wrong — sweeping the majority pattern is a separate decision from cleaning up outliers.
 </approval_gate>

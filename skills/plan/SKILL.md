@@ -13,27 +13,12 @@ Match depth to the requested change. Stop researching when the relevant behavior
 
 ## Develop the design
 
-1. Research the repository until its relevant behavior, change surface, constraints, and reusable patterns are understood. Research prior art and external solutions only when they could change the current decision.
+1. Research the repository until its relevant behavior, change surface, constraints, and reusable patterns are understood. Research prior art and external solutions only when they could change the current decision. Delegate research only when the repository is large enough that separate subsystems can be read in parallel; a change surface you can reach in a handful of tool calls is faster read directly.
 2. Resolve uncertainties that materially affect the frozen scope, behavior, architecture, interfaces, security, data, or acceptance. Turn hypothetical future concerns into explicit non-goals instead of designing them. Ask the user when evidence cannot settle an in-scope choice.
 3. Save or update `docs/plans/<type>-<short-name>.html` as HTML, not renamed Markdown. Do not create companion requirements, research, design, task, or handoff artifacts.
-4. Freeze a review brief from the plan's goals, non-goals, acceptance criteria, and explicit complexity boundary. Have fresh, clean-context Judge subagents review once, in parallel. Domain expertise, pragmatism, and an alternative path are minimum coverage, not a closed panel: adapt their emphasis and add or combine a lens when the subject has a material review axis they do not cover. Do not drop minimum coverage merely to reduce the panel.
-5. Apply evidence-backed blockers that stay inside the review brief. Treat preferences, speculative future hardening, and requests to broaden capability as advisory; do not enlarge the plan to satisfy them.
-6. If a revision materially changes the issue behind a blocker, use at most one fresh targeted follow-up reviewer for that issue. Never rerun the full panel. The hard limit is two review rounds total: one panel plus one targeted follow-up.
-7. If an in-scope blocker remains after that budget, or resolving it requires broader scope or a user tradeoff, stop and present it to the user. Do not continue review until consensus or a prestige verdict.
-8. Present the reviewed plan for explicit human approval and stop. Review informs quality; only the user authorizes implementation.
+4. Present the plan for explicit human approval and stop. Only the user authorizes implementation.
 
-## Bound independent review
-
-Each reviewer returns `READY` or `BLOCKED`, with no more than three blockers. A blocker must cite evidence that the plan would otherwise:
-
-- fail an explicit goal or acceptance criterion;
-- introduce a correctness, security, privacy, or data-loss defect;
-- contradict a known repository or platform constraint; or
-- be infeasible to implement as designed.
-
-The domain expert checks behavioral and domain correctness. The pragmatist checks implementability, proportionality, and operational fit. The alternative-path reviewer actively seeks a materially simpler design and flags scope creep; this lens is not permission to invent additional production architecture. Added lenses inherit the same blocker standard and review brief.
-
-Suggestions without that blocker standard are optional observations. Do not revise the plan merely to obtain unanimous taste, eliminate every hypothetical risk, or reach `EXPERT-GRADE`. On targeted follow-up, a new concern unrelated to the revision is advisory unless it exposes an immediate correctness, security, privacy, or data-loss defect.
+Independent review is the user's call, not a built-in stage: they run `/judge` on the plan if they want a panel. Don't spawn reviewers to check your own design, and don't broaden the plan to pre-empt objections nobody raised — a wider plan is a worse plan when the extra scope wasn't asked for.
 
 ## Structure the artifact
 
@@ -43,7 +28,7 @@ Use the established design-document structure below. Omit inapplicable detail in
 - **Goals and boundaries** — goals, explicit non-goals, scope, observable behavior, and acceptance criteria.
 - **Target design** — system context; components and responsibilities; every architecturally intentional file and affected symbol; interface contracts in prose; dependencies; data and runtime flow; relevant user-visible states. Explain why each referenced location changes.
 - **Decision record** — why the design wins; decisive repository evidence; decision-relevant prior art when found; and a compact table comparing every seriously considered alternative, including doing nothing, by advantages, drawbacks, and rejection reason.
-- **Operational consequences** — cover every material in-scope consequence. Compatibility, migration and rollback, failure recovery, security, privacy, observability, performance, scalability, deployment, and consequential edge cases are prompts, not a closed taxonomy; combine, omit, or extend them according to the design, with mitigations.
+- **Operational consequences** — every material in-scope consequence, with mitigations: compatibility, migration and rollback, failure recovery, security, privacy, observability, performance, scalability, deployment, consequential edge cases. Omit one when the design cannot incur it.
 - **Verification** — map each acceptance criterion and material invariant to required test coverage or observable evidence without restating it; never prescribe commands.
 - **References** — cite repository evidence as `file:line`. Include the decision-relevant fact from external evidence and cite its URL or library as provenance; links must not be required context.
 
@@ -53,6 +38,6 @@ Use diagrams, state models, flows, or UI demonstrations only when they communica
 
 Exclude code, pseudocode, code-shaped examples, statement-level logic, ordered implementation steps, task decomposition, execution sequencing, verification commands, decision-irrelevant background, placeholders, open questions, and deferred design decisions.
 
-Be as short as completeness against the review brief allows; conceivable future production concerns do not count as missing completeness. Within the same HTML file, lead with the concise human review surface and progressively disclose the detailed executor contract without duplicating it. Use semantic HTML, in-file CSS, and concise tables or visuals; do not teach HTML in the plan. Declare an explicit page background and text color on `body` (never rely on the viewer's defaults) so the plan renders identically in browsers and embedded webviews such as VS Code preview.
+Be as short as completeness against the goals and acceptance criteria allows; conceivable future production concerns do not count as missing completeness. Within the same HTML file, lead with the concise human review surface and progressively disclose the detailed executor contract without duplicating it. Use semantic HTML, in-file CSS, and concise tables or visuals; do not teach HTML in the plan. Declare an explicit page background and text color on `body` (never rely on the viewer's defaults) so the plan renders identically in browsers and embedded webviews such as VS Code preview.
 
-Approval freezes the entire artifact. A material execution conflict stops implementation; revise only the affected design, use the same bounded review protocol when target behavior changes, and obtain approval again.
+Approval freezes the entire artifact. A material execution conflict stops implementation; revise only the affected design and obtain approval again.

@@ -9,16 +9,11 @@ Open a reviewable PR/MR for the current branch. Reviewer arrives cold — the bo
 
 ## Preflight
 
-Ground the PR in repository truth, not memory:
-- Find the repo root, current branch, default branch, remote host, and available CLI (`gh` or `glab`).
-- Check `git status --short`; do not create a PR for uncommitted work unless the user explicitly asked.
-- Inspect commits and diff against the target branch: `git log --oneline <target>..HEAD` and `git diff --stat <target>...HEAD`.
-- Check for an existing PR/MR for the branch. If one exists, update it instead of creating a duplicate.
-- Ensure the branch is pushed; set upstream if missing.
+Write the body from `git log --oneline <target>..HEAD` and `git diff <target>...HEAD`, never from memory of the session — what you remember doing and what the branch actually contains diverge.
 
-## Conventional commits
+Uncommitted work is not PR material unless the user explicitly said to include it. A branch that already has an open PR/MR gets updated, not duplicated. Push and set upstream before invoking the CLI — an unpushed branch drops `gh`/`glab` into an interactive prompt that cannot be answered here.
 
-!`cat "${CLAUDE_SKILL_DIR}/../conventional-commits.md"`
+Title: conventional commit, same type/scope vocabulary as the commits it covers. Full spec if a case is unclear: `~/.claude/skills/conventional-commits.md`.
 
 ## CLI invocation
 
