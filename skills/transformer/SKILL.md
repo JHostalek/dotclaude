@@ -12,6 +12,8 @@ Resolve `$input` to a path; if missing, try `${CLAUDE_SKILL_DIR}/../$input/SKILL
 
 For every line: **what wrong behavior happens if this is gone?** Wrong output, skipped coordination, lost trigger, silent regression → keep. Model arrives here unaided → strip.
 
+Second test, for what survives: **is this particular to this user, team, or product?** A skill earns its keep by encoding opinion, taste, or a gotcha — generic good practice is the thing being cut.
+
 Opus 5 is not a de-prescribe-everything migration — it runs prior-generation prompts well out of the box. The wins are targeted, and they cut both ways:
 
 - **Compounding instructions** — lines that duplicate a now-native behavior (verify, re-check, delegate, default-to-tool) don't just waste tokens, they push the model past the right amount of it. Strip.
@@ -21,13 +23,33 @@ Length is a side effect, not a target — "nothing to cut, much to add" is a val
 
 ## Both-directions guardrail
 
-Under-specification = twin failure of over-scaffolding. Target is principle-only w/ no anchoring → ADD: one example showing the core judgment call; 2–3 domain facts the model can't infer, phrased positively; explicit invariants, XML-tagged when load-bearing.
+Under-specification = twin failure of over-scaffolding. Target is principle-only w/ no anchoring → ADD: 2–3 domain facts the model can't infer, phrased positively; explicit invariants, XML-tagged when load-bearing; anchoring for the core judgment call.
+
+Anchor through the interface first. An example pins the model to the exploration space it describes, so reach for the self-describing form before the demonstration: expressive names, an enum whose values imply the state machine, named fields in the output contract, a one-line constraint on shape. Spend an example only where the output space is genuinely closed, or where the judgment call fails in a way prose can't show — the worked transformation below is that case.
 
 Two Opus 5-specific additions are almost always missing and almost always earn their keep: **length calibration** (effort no longer shortens visible output — calibrate conversation and written files separately; in a long skill, echo it in one short line near the end) and a **scope fence** for narrow-deliverable skills.
 
 Watch for literalism inversions. Conservative qualifiers get obeyed literally — a review or audit skill saying "only flag high-severity" or "be conservative" will report *less*. Rewrite to report everything, filter in a named second pass. Same principle for tool defaults: "default to X" / "if in doubt use X" → "use X when it would sharpen your understanding of the problem."
 
 Strip closure-freedom prose. A list of lenses, scenarios, or dimensions is already open to the model; a sentence granting permission to "add, combine, split, reweight, or skip entries" changes nothing and signals that every entry is optional. What does earn its place is the opposite: a named floor where coverage is genuinely required — "required baseline; skip a probe only when the scoped system cannot expose it." State the floor, not the freedom.
+
+## Read the skill in its context, not alone
+
+A skill never arrives by itself — CLAUDE.md, the harness system prompt, sibling skills, and tool descriptions land in the same window. Check the target against them:
+
+- **Contradiction** — one layer says never, another says as appropriate. The model resolves it and pays for the resolution every run. Fix at the source: decide which layer owns the call and delete the other side, don't add a tiebreak line.
+- **Restatement** — the target repeats what a parent layer already carries, or what a tool's own description carries. Cut it here; end-of-context recency bias is gone, so the repeat buys nothing and pushes the behavior past calibration.
+- **Ownership** — guidance about a tool belongs in that tool's description, about a workflow in its skill. Reference the home; don't copy it.
+
+## Split what's long
+
+A skill is a guide to finding what's needed, not a repository of everything that might come up. Long target → split into a tree of files loaded at the point of use, with the entry file carrying trigger, scope, and pointers.
+
+Mind which loading mechanism you use: `!`​`cat path`` inlines eagerly and costs its tokens on every invocation — correct only for material every run needs. A plain path reference costs nothing until read — correct for material some runs need. Converting an eager inline of rarely-needed material into a reference is a real win; the reverse is a regression.
+
+Prefer high-fidelity references over prose about them: a test suite, a function to port, a mockup, a rubric a scoring agent applies. Code says it more exactly than a description of the code.
+
+## Load-bearing surfaces
 
 Preserve verbatim: frontmatter `description` trigger phrases + `Do NOT trigger` disambiguation, `allowed-tools`, output contracts/templates, approval gates, and `!`​`cat path`` inline-injection directives. Breaking any breaks the skill silently.
 
