@@ -16,11 +16,11 @@ You coordinate; teammates judge. Their value is the clean context window — the
 
 ## Scope
 
-Not `/audit-necessity` (should it exist). Given we're building it, **did we build it the way an expert would?** Approach selection, architecture fitness, idiom correctness, trade-off awareness, missed alternatives, domain-standard solutions, and proportionality are starting axes, not a closed review taxonomy; add or reshape axes for the subject while staying within that question.
+Not `/audit-necessity` (should it exist). Given we're building it, **did we build it the way an expert would?** Approach selection, architecture fitness, idiom correctness, trade-off awareness, missed alternatives, domain-standard solutions, proportionality.
 
 ## Teammates
 
-Spawn clean-context reviewers in parallel, read-only and analysis-only. The three lenses below are minimum coverage, not a ceiling: adapt their emphasis and add or combine a reviewer lens when the subject has a material axis they miss. Do not drop domain, proportionality, or alternative-path coverage merely to reduce the panel.
+Spawn three clean-context reviewers in parallel, read-only and analysis-only. Domain, proportionality, and alternative-path coverage is the minimum panel.
 
 | Teammate | Agent file | Lens |
 |----------|-----------|------|
@@ -30,11 +30,13 @@ Spawn clean-context reviewers in parallel, read-only and analysis-only. The thre
 
 Each gets: subject description, all relevant file paths / code / context, and the project's stack + conventions (detect from codebase).
 
+Each reports **everything its lens surfaces**, unfiltered — the credibility pass below is yours, and it only works on a complete list. A teammate that pre-filters hands you a short list you can't distinguish from a thorough one.
+
 ## Synthesis
 
 ### Credibility filter
 
-Drop any finding that fails one of:
+This is the filter stage; teammates do not run it. Drop any finding that fails one of:
 
 1. **Substantiated** — cites specific code/decision/pattern, not "generally speaking".
 2. **Actionable** — proposes a concrete alternative, not just criticism.

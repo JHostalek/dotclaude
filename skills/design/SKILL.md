@@ -49,14 +49,15 @@ Reframings seed the explorers — not the solutions. Add lenses if the problem w
 | Temporal | `temporal.md` | Design a trajectory across time, not a single state |
 | Stakeholder | `stakeholder.md` | Design for conflicting stakeholder needs simultaneously |
 
-This catalog is a starting set, not a closed menu. Invent, combine, or reframe a reasoning style when the problem needs a genuinely different axis. Minimum coverage: Forward Build-Up, Backward from Ideal, Constraint-First, + one other relevant style.
+Minimum coverage: Forward Build-Up, Backward from Ideal, Constraint-First, + one other relevant style. Invent a reasoning style when the problem needs an axis this catalog doesn't carry.
 
 Spawn explorers in parallel, each with a clean context containing only:
 - the problem statement,
 - their assigned method from `${CLAUDE_SKILL_DIR}/agents/<name>.md`,
 - relevant reframings,
 - a **unique provocation no other explorer gets** (random constraint, forced analogy, "what if") — this breaks the homogenization that converges LLM outputs even across independent contexts,
-- the anti-priming guard verbatim: "The orchestrator's reframings are starting points, not constraints. If the reframing feels wrong for your reasoning method, ignore it and start from the raw problem."
+- the anti-priming guard verbatim: "The orchestrator's reframings are starting points, not constraints. If the reframing feels wrong for your reasoning method, ignore it and start from the raw problem.",
+- the output contract verbatim: "Return your approach with narrative trade-offs: core mechanism, what it enables, what it sacrifices, and what makes it fundamentally different from the obvious solution."
 
 No teammate sees another's work. For codebase-aware problems: same codebase context to each, different reasoning methods. Keep explorers running asynchronously — continue orchestrating while they work rather than blocking until all return.
 

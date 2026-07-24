@@ -24,11 +24,11 @@ A builder LLM inherits the specificity of its input: a request that names the ae
 
 ## Lenses (what a build-ready brief specifies)
 
-Reference / aesthetic anchor · tech stack & tools · motion & interaction spec · aesthetic direction + preserve-list · scope boundary / focus · fidelity target · verification mandate — and any other load-bearing dimension this request implies. Axes to check, not a closed set.
+Reference / aesthetic anchor · tech stack & tools · motion & interaction spec · aesthetic direction + preserve-list · scope boundary / focus · fidelity target · verification mandate — plus any other load-bearing dimension this request implies.
 
 ## Slots are author-facing
 
-The `[specify]` block is addressed to the human, to resolve *before* building — out-of-band from the brief. A downstream build agent must never fill a slot; an unanswered slot is a question, not a spec. Keep slots terse; a slot may offer 2-4 example directions as scaffolding when that helps the author choose — examples, not a closed menu.
+The `[specify]` block is addressed to the human, to resolve *before* building — out-of-band from the brief. A downstream build agent must never fill a slot; an unanswered slot is a question, not a spec. Keep slots terse; a slot may offer 2-4 example directions as scaffolding when that helps the author choose.
 
 ## Calibration
 

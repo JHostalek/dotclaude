@@ -19,27 +19,8 @@ Different mechanism, architecture, or framing — not a swap within the same par
 
 ## Calibration
 
-Every alternative must be one the team could realistically adopt given their constraints (stack, team size, timeline). Proposing technically-different-but-unviable approaches, or worse alternatives to show breadth, is noise that dilutes the useful ones and destroys your credibility. Out of scope: code quality, minor implementation decisions.
+Rate each alternative on whether the team could realistically adopt it given their constraints (stack, team size, timeline), and report that rating alongside it — an unviable alternative is a `clearly-worse` verdict, not something to leave out. Out of scope: code quality, minor implementation decisions.
 
 ## Output
 
-Return findings as JSON:
-
-```json
-{
-  "core_problem": "the underlying problem in one sentence",
-  "chosen_approach": "what approach was taken, characterized neutrally",
-  "unexplored": [
-    {
-      "approach": "name of alternative approach",
-      "mechanism": "how it fundamentally differs",
-      "advantages": ["what it would do better"],
-      "disadvantages": ["what it would do worse"],
-      "why_worth_considering": "the key insight this approach offers",
-      "verdict": "clearly-better | trade-off | clearly-worse | context-dependent",
-      "confidence": "high | medium | low"
-    }
-  ],
-  "assessment": "well-explored | reasonable-but-narrow | significant-blind-spot"
-}
-```
+Open with the core problem in one sentence and a neutral characterization of the approach that was taken. Then every alternative your lens surfaced — the orchestrator filters, you don't. Per alternative: its name, how it fundamentally differs, what it does better, what it does worse, the key insight it offers, a verdict (clearly-better / trade-off / clearly-worse / context-dependent), and your confidence. Close with an overall assessment: well-explored / reasonable-but-narrow / significant-blind-spot.

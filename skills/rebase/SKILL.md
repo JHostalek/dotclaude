@@ -7,15 +7,7 @@ input = $ARGUMENTS
 
 Goal: clean linear history, ready to push.
 
-## Conflict resolution heuristics
-
-The cases below are high-risk anchors, not an exhaustive conflict taxonomy. Apply the same intent-first reasoning to other conflict shapes, and combine or refine the heuristics when a conflict spans categories.
-
-- **Lockfiles, migrations, config, version bumps** — accept the target branch version (latest agreed-upon state).
-- **Refactored-away code** — the target's removal wins; rewire usages to the new location/API.
-- **Additive conflicts** (both sides add independent code) — keep both; run the project's formatter/parser immediately after each resolution. Conflict boundaries often leave orphan closing tags, duplicate brackets, or stray blocks that grep won't catch but a parser will.
-
-**Partial survival check:** When a resolution keeps *usage* of a symbol (component, function, import), verify the *declaration* and *import* also survived — grep the resolved file for every feature-side symbol before continuing.
+!`cat "${CLAUDE_SKILL_DIR}/../conflict-heuristics.md"`
 
 !`cat "${CLAUDE_SKILL_DIR}/../migration-reconciliation.md"`
 
