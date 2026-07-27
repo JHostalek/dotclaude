@@ -1,8 +1,7 @@
 # dotclaude
 
-skills for agentic coding tools. extremely opinionated. updated (almost) daily.
-
-> **heads up:** this is a global `~/.claude` configuration repo — skills, hooks, and settings that apply across all projects. project-specific instructions (`CLAUDE.md`, `TOOLS.md`, skills) live in individual repositories.
+opinionated software-engineering skills for Claude Code and Codex. install them
+as a plugin or copy individual skills into your user configuration.
 
 ### build
 
@@ -21,12 +20,15 @@ before you ship. review what you built, refactor what's messy, audit what's bloa
 | skill | |
 |-------|-|
 | `judge` | independent expert review before accepting work |
-| `audit` | full audit sweep — sequences every focused audit below |
+| `audit` | full baseline audit sweep in parallel worktrees |
 | `audit-necessity` | question whether code should exist, cut maintenance cost |
 | `audit-structure` | fix misplaced files, god-modules, leaky boundaries, layering violations |
 | `audit-patterns` | unify divergent implementations, kill reimplementations |
 | `audit-correctness` | hunt logic bugs — off-by-one, inverted conditions, boundary cases |
 | `audit-error-handling` | hunt swallowed errors, missing awaits, unguarded entry points, resource leaks |
+| `audit-contracts` | check API, schema, event, CLI, and integration compatibility |
+| `audit-data-integrity` | check invariants, writes, migrations, precision, and drift |
+| `audit-reliability` | check timeouts, retries, partial failure, recovery, and shutdown |
 | `audit-logs` | fix missing observability, INFO bloat, wrong-level messages |
 | `audit-perf` | catch N+1, overfetching, blocking hot paths, unbounded growth |
 | `audit-security` | injection, auth/authz gaps, secrets, weak crypto, OWASP |
@@ -58,24 +60,12 @@ sharpen prompts, skills, and communication.
 | `design-refiner` | turn UI build requests into expert design briefs |
 | `writing-identity` | rewrite communication in the user's natural voice |
 
-### hooks
+## requirements
 
-| hook | |
-|------|-|
-| `approve-piped-bash` | auto-approves piped commands when every segment is already in your allowlist ([#1271](https://github.com/anthropics/claude-code/issues/1271)) |
-| `auto-approve-all` | auto-approves all tool permission requests |
-| `detect-skill-invocation` | type `/skillname` in a prompt, get the skill injected into context ([#19729](https://github.com/anthropics/claude-code/issues/19729)) |
-
-## configuration
-
-skills work out of the box, but some features require `settings.json` entries:
-
-| setting | why |
-|---------|-----|
-| `env.CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS: "1"` | required for skills that spawn agent teams (`judge`, `design`, `audit`) |
-| `permissions.additionalDirectories: ["~/.claude/skills"]` | lets teammates read skill files — needed if you symlink skills into `~/.claude/skills/` |
-
-hook scripts ship in `hooks/` but must be wired in `settings.json` under the `hooks` key to take effect — see [Claude Code docs on hooks](https://docs.anthropic.com/en/docs/claude-code/hooks).
+parallel skills use built-in [subagents](https://code.claude.com/docs/en/agents).
+they do not require experimental
+[agent teams](https://code.claude.com/docs/en/agent-teams) or its environment
+flag.
 
 ## install
 
@@ -98,14 +88,14 @@ Add the marketplace and install the plugin:
 ```
 
 Skills are versioned with the plugin and invoked as
-`/jhostalek-skills:<skill-name>`. The plugin intentionally contains skills
-only; configure hooks separately if you want to use them.
+`/jhostalek-skills:<skill-name>`. The plugin contains skills only.
 
 ### Editable standalone skills
 
 ```bash
 # clone and symlink
 git clone git@github.com:JHostalek/dotclaude.git ~/dotclaude
+mkdir -p ~/.claude/skills
 ln -s ~/dotclaude/skills/* ~/.claude/skills/
 
 # or just copy what you need

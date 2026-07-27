@@ -15,10 +15,6 @@
 !CLAUDE.md
 !SOUL.md
 
-# --- Hooks ---
-!hooks/
-!hooks/**
-
 # --- Rules ---
 !rules/
 !rules/**
