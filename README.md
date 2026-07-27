@@ -1,7 +1,8 @@
 # dotclaude
 
-opinionated software-engineering skills for Claude Code and Codex. install them
-as a plugin or copy individual skills into your user configuration.
+skills for agentic coding tools. extremely opinionated. updated (almost) daily.
+
+> **heads up:** this is a global `~/.claude` configuration repo — skills that apply across all projects. project-specific instructions (`CLAUDE.md`, `TOOLS.md`, skills) live in individual repositories.
 
 ### build
 
@@ -59,13 +60,6 @@ sharpen prompts, skills, and communication.
 | `transformer` | rewrite skills for reasoning model performance |
 | `design-refiner` | turn UI build requests into expert design briefs |
 | `writing-identity` | rewrite communication in the user's natural voice |
-
-## requirements
-
-parallel skills use built-in [subagents](https://code.claude.com/docs/en/agents).
-they do not require experimental
-[agent teams](https://code.claude.com/docs/en/agent-teams) or its environment
-flag.
 
 ## install
 
