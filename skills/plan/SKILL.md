@@ -5,39 +5,47 @@ description: Use when a task needs an implementation-ready design document befor
 
 task = $ARGUMENTS
 
-Create the minimum implementation-ready design document, called the plan: one canonical, self-contained HTML artifact describing the reviewed target state. It is both the human approval surface and the binding contract for a fresh coding agent with access to the plan and repository.
+Create the minimum implementation-ready plan: one canonical, self-contained HTML artifact that is both the human approval surface and the complete contract for a fresh coding agent with access to the plan and repository.
 
-The plan specifies what must exist and why, one abstraction level above pseudocode. It does not prescribe implementation order or mechanics.
+Research until the relevant behavior, change surface, constraints, reusable patterns, decisive tradeoffs, and acceptance boundary are clear. Cite repository precedent as `file:line` wherever the design adopts or departs from an existing pattern. Search current vendor documentation, libraries, and open-source prior art when an unfamiliar API, new pattern, or consequential design choice could change the decision; record the decisive fact and provenance, not the research process. Resolve every material in-scope uncertainty with evidence or user input. Treat hypothetical future needs as non-goals.
 
-Match depth to the requested change. Stop researching when the relevant behavior, change surface, decisive tradeoffs, and acceptance boundary are clear. Do not design infrastructure, governance, extensibility, or future integrations that the current scope does not require.
+<artifact_contract>
+Save or update `docs/plans/<type>-<short-name>.html`. Do not create companion requirements, research, task, or handoff files.
 
-## Develop the design
+Describe the reviewed target state: what must exist and why, one abstraction level above pseudocode. Exclude code, pseudocode, statement-level mechanics, implementation order, task decomposition, verification commands, placeholders, open questions, and deferred decisions.
 
-1. Research the repository until its relevant behavior, change surface, constraints, and reusable patterns are understood. Research prior art and external solutions only when they could change the current decision. Delegate research only when the repository is large enough that separate subsystems can be read in parallel; a change surface you can reach in a handful of tool calls is faster read directly.
-2. Resolve uncertainties that materially affect the frozen scope, behavior, architecture, interfaces, security, data, or acceptance. Turn hypothetical future concerns into explicit non-goals instead of designing them. Ask the user when evidence cannot settle an in-scope choice.
-3. Save or update `docs/plans/<type>-<short-name>.html` as HTML, not renamed Markdown. Do not create companion requirements, research, design, task, or handoff artifacts.
-4. Present the plan for explicit human approval and stop. Only the user authorizes implementation.
+The artifact must carry all decision context required for implementation. External links are provenance, never required context. Use semantic HTML, in-file CSS, inline SVG where useful, explicit page and text colors, and no external assets or runtime.
+</artifact_contract>
 
-Independent review is the user's call, not a built-in stage: they run `/judge` on the plan if they want a panel. Don't spawn reviewers to check your own design, and don't broaden the plan to pre-empt objections nobody raised — a wider plan is a worse plan when the extra scope wasn't asked for.
+## Visual-first review surface
 
-## Structure the artifact
+The first screen is a visual nutshell: outcome, before → after, selected design, scope and non-goals, and observable acceptance. Every non-trivial plan includes at least one decision-bearing visual.
 
-Use the established design-document structure below. Omit inapplicable detail instead of filling sections ceremonially.
+Select views by the question they answer; combine, omit, or introduce another view as the design warrants:
 
-- **Executive summary** — the decision-relevant problem and current state, followed by the outcome and selected design in the smallest reviewable form.
-- **Goals and boundaries** — goals, explicit non-goals, scope, observable behavior, and acceptance criteria.
-- **Target design** — system context; components and responsibilities; every architecturally intentional file and affected symbol; interface contracts in prose; dependencies; data and runtime flow; relevant user-visible states. Explain why each referenced location changes.
-- **Decision record** — why the design wins; decisive repository evidence; decision-relevant prior art when found; and a compact table comparing every seriously considered alternative, including doing nothing, by advantages, drawbacks, and rejection reason.
-- **Operational consequences** — every material in-scope consequence, with mitigations: compatibility, migration and rollback, failure recovery, security, privacy, observability, performance, scalability, deployment, consequential edge cases. Omit one when the design cannot incur it.
-- **Verification** — map each acceptance criterion and material invariant to required test coverage or observable evidence without restating it; never prescribe commands.
-- **References** — cite repository evidence as `file:line`. Include the decision-relevant fact from external evidence and cite its URL or library as provenance; links must not be required context.
+- before/after for changed behavior;
+- component or boundary map for ownership and structure;
+- sequence or flow view for interactions;
+- state model for lifecycle behavior;
+- wireframe for user-visible states;
+- matrix for meaningful alternatives.
 
-Use diagrams, state models, flows, or UI demonstrations only when they communicate relationships or behavior better than structured text. Prefer the minimum useful view; do not mechanically reproduce every C4 or arc42 level.
+Visuals replace equivalent prose rather than repeat it. Keep labels, legends, and captions precise enough that each visual communicates an implementation constraint, not decoration.
 
-## Preserve the abstraction boundary
+## Executor contract
 
-Every part of the plan sits one abstraction level above pseudocode: what must exist and why, never the statements or the order that realize it. An open question, placeholder, or deferred decision means the plan isn't ready — settle it with evidence, ask the user, or record it as an explicit non-goal.
+Progressively disclose only what implementation requires:
 
-Be as short as completeness against the goals and acceptance criteria allows; conceivable future production concerns do not count as missing completeness. Within the same HTML file, lead with the concise human review surface and progressively disclose the detailed executor contract without duplicating it. Use semantic HTML, in-file CSS, and concise tables or visuals; do not teach HTML in the plan. Declare an explicit page background and text color on `body` (never rely on the viewer's defaults) so the plan renders identically in browsers and embedded webviews such as VS Code preview.
+- goals, boundaries, observable behavior, and acceptance criteria;
+- the intentional change map: relevant files, symbols, responsibilities, and why each changes;
+- behavioral, interface, data, runtime, and user-state contracts;
+- the selected design, seriously considered alternatives, and decisive evidence;
+- material consequences and mitigations;
+- acceptance criteria mapped to test coverage or observable evidence;
+- repository and external references.
 
-Approval freezes the entire artifact. A material execution conflict stops implementation; revise only the affected design and obtain approval again.
+Adapt, combine, or omit sections according to the task. Do not create ceremonial coverage. Keep the concise approval surface and detailed executor contract in the same file without duplicating them.
+
+Before saving, read the artifact as a fresh coding agent. If it could choose the wrong behavior, interface, boundary, or code location, add the missing contract or evidence. If a detail dictates statements or execution sequence, remove it.
+
+Present the completed artifact for explicit human approval and stop. Do not implement or run an independent review unless the user requests it. Approval freezes the artifact; a material execution conflict requires revising the affected design and obtaining approval again.
