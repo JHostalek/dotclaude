@@ -21,6 +21,12 @@ git merge origin/{target} -m "chore: merge {target} into {current-branch}"
 
 Same format for follow-up `git commit` after staging resolutions. Notable decisions → commit body.
 
+## Squash-Merged Target
+
+Targets that squash on merge keep no copy of the branch's commits, so merging back duplicates each one beside its squashed twin — count inflates, content does not.
+
+Counts cannot detect this; content can. `git diff origin/{target} HEAD` empty → already contained, `git reset --hard origin/{target}` is the lossless sync. Non-empty → real divergence, merge normally. Originals stay server-side at `refs/merge-requests/<iid>/head` or `refs/pull/<n>/head`, outside the default refspec.
+
 ## Execution
 
 State divergence (commits ahead/behind) and target branch before merging — do not skip to the merge without the check.

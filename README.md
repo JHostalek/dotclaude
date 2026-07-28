@@ -84,6 +84,12 @@ Add the marketplace and install the plugin:
 Skills are versioned with the plugin and invoked as
 `/jhostalek-skills:<skill-name>`. The plugin contains skills only.
 
+### releases
+
+Claude Code and Codex share one semantic version. Releases use annotated
+`vMAJOR.MINOR.PATCH` tags and are recorded in [CHANGELOG.md](CHANGELOG.md).
+See [RELEASING.md](RELEASING.md) for the release procedure.
+
 ### Editable standalone skills
 
 ```bash

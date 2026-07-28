@@ -14,6 +14,12 @@
 !CODE_OF_CONDUCT.md
 !CLAUDE.md
 !SOUL.md
+!CHANGELOG.md
+!RELEASING.md
+
+# --- Release tooling ---
+!scripts/
+!scripts/release.mjs
 
 # --- Rules ---
 !rules/
