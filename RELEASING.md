@@ -1,6 +1,6 @@
 # Releasing
 
-Claude Code and Codex always use the same semantic version.
+Claude Code, Codex, and Pi always use the same semantic version.
 
 - Patch: compatible corrections or wording improvements.
 - Minor: new skills or substantial compatible behavior.
@@ -16,8 +16,8 @@ Claude Code and Codex always use the same semantic version.
 6. Run `git tag -a vX.Y.Z -m "Release vX.Y.Z"`.
 7. Run `git push origin vX.Y.Z`.
 
-The tag workflow verifies both manifests, confirms the tag is on `main`, and
-creates the GitHub release.
+The tag workflow verifies all three package manifests, confirms the tag is on
+`main`, and creates the GitHub release.
 
 ## Reconstructed tags
 

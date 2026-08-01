@@ -1,0 +1,7 @@
+interface:
+  display_name: "SOTA"
+  short_description: "Get a current expert recommendation"
+  default_prompt: "Use $sota to recommend the best current solution."
+
+policy:
+  allow_implicit_invocation: false
