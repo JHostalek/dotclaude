@@ -42,6 +42,7 @@
     "./skills/prompt",
     "./skills/rebase",
     "./skills/sparring",
+    "./skills/sota",
     "./skills/timesheet",
     "./skills/transformer",
     "./skills/ux",

@@ -6,11 +6,12 @@ skills for agentic coding tools. extremely opinionated. updated (almost) daily.
 
 ### build
 
-start here. `sparring` pressure-tests a proposal, `design` explores alternatives, and `plan` turns the selected direction into an implementation-ready design document.
+start here. `sparring` examines a position through Socratic inquiry, `sota` finds a current expert recommendation, `design` explores alternatives, and `plan` turns the selected direction into an implementation-ready design document.
 
 | skill | |
 |-------|-|
-| `sparring` | adversarial pressure-test a proposal before committing |
+| `sparring` | rigorous Socratic inquiry before acting |
+| `sota` | current expert recommendation grounded in brief web research |
 | `design` | divergent exploration with independent reasoning agents |
 | `plan` | reviewed implementation-ready design documents |
 
@@ -84,9 +85,20 @@ Add the marketplace and install the plugin:
 Skills are versioned with the plugin and invoked as
 `/jhostalek-skills:<skill-name>`. The plugin contains skills only.
 
+### Pi package
+
+Install directly from Git:
+
+```bash
+pi install git:github.com/JHostalek/dotclaude
+```
+
+Invoke skills as `/skill:<skill-name>`. Use `pi update --extensions` to update
+the package.
+
 ### releases
 
-Claude Code and Codex share one semantic version. Releases use annotated
+Claude Code, Codex, and Pi share one semantic version. Releases use annotated
 `vMAJOR.MINOR.PATCH` tags and are recorded in [CHANGELOG.md](CHANGELOG.md).
 See [RELEASING.md](RELEASING.md) for the release procedure.
 

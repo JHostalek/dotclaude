@@ -16,6 +16,7 @@
 !SOUL.md
 !CHANGELOG.md
 !RELEASING.md
+!package.json
 
 # --- Release tooling ---
 !scripts/

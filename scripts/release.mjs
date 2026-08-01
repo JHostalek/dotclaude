@@ -5,6 +5,7 @@ import { readFile, writeFile } from "node:fs/promises";
 const manifests = [
   ".claude-plugin/plugin.json",
   ".codex-plugin/plugin.json",
+  "package.json",
 ];
 const versionPattern = /^\d+\.\d+\.\d+$/;
 const [command, argument] = process.argv.slice(2);
