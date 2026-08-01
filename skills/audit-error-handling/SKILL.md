@@ -4,7 +4,7 @@ description: Use when auditing and fixing error handling in a scope — swallowe
 argument-hint: [path]
 ---
 
-!`cat "${CLAUDE_SKILL_DIR}/../audit-workflow.md"`
+!`cat "${CLAUDE_SKILL_DIR}/../shared/audit-workflow.md"`
 
 Run as the `error-handling` dimension. Determine whether failures preserve the system's contracts: callers and users receive truthful outcomes, state remains valid, resources are released, recovery is bounded, and operators can diagnose what happened. Observability alone is insufficient when execution continues with corrupt, partial, duplicated, or falsely successful state.
 

@@ -3,7 +3,7 @@ name: audit-complexity
 description: Use when the goal is to reduce code size, remove unnecessary complexity, or simplify a module without removing user-facing behavior.
 ---
 
-!`cat "${CLAUDE_SKILL_DIR}/../audit-workflow.md"`
+!`cat "${CLAUDE_SKILL_DIR}/../shared/audit-workflow.md"`
 
 Run as the `complexity` dimension. Reduce the effort and risk required to understand, change, operate, and remove the scoped system while preserving its legitimate behavior. Net LOC reduction is useful evidence, not the objective: a smaller diff can still make state, coupling, or failure behavior harder to reason about.
 

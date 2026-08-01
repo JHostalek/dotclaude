@@ -4,7 +4,7 @@ description: Use when the user wants a thorough audit of the existing test suite
 argument-hint: [path-glob or module name; empty for full sweep]
 ---
 
-!`cat "${CLAUDE_SKILL_DIR}/../audit-workflow.md"`
+!`cat "${CLAUDE_SKILL_DIR}/../shared/audit-workflow.md"`
 
 Run as the `tests` dimension. Determine whether the suite gives proportionate, trustworthy evidence that the system preserves intended behavior through change. The goal is not more tests or higher coverage; it is strong defect detection with the smallest maintainable suite.
 

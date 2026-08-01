@@ -4,7 +4,7 @@ description: Use when auditing and fixing security in a scope — injection (SQL
 argument-hint: [path]
 ---
 
-!`cat "${CLAUDE_SKILL_DIR}/../audit-workflow.md"`
+!`cat "${CLAUDE_SKILL_DIR}/../shared/audit-workflow.md"`
 
 Run as the `security` dimension. This is defensive review of software the user authorized. Find how the system can violate confidentiality, integrity, availability, privacy, tenant isolation, or control of privileged actions; do not reduce the task to matching a vulnerability checklist.
 

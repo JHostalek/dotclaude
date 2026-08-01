@@ -4,7 +4,7 @@ description: Use when auditing and fixing end-to-end contracts and compatibility
 argument-hint: [path]
 ---
 
-!`cat "${CLAUDE_SKILL_DIR}/../audit-workflow.md"`
+!`cat "${CLAUDE_SKILL_DIR}/../shared/audit-workflow.md"`
 
 Run as the `contracts` dimension. Find where producers and consumers can disagree about the meaning, shape, sequencing, lifecycle, or failure behavior of an interface. Cover accidental as well as declared contracts; do not reduce compatibility to schema diffs or API version labels.
 

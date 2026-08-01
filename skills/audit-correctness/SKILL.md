@@ -4,7 +4,7 @@ description: Use when auditing and fixing logic bugs in a scope — off-by-one, 
 argument-hint: [path]
 ---
 
-!`cat "${CLAUDE_SKILL_DIR}/../audit-workflow.md"`
+!`cat "${CLAUDE_SKILL_DIR}/../shared/audit-workflow.md"`
 
 Run as the `correctness` dimension. Find behavior that can produce an observably wrong result or state, whether the defect is local, architectural, emergent between components, or visible only under particular lifecycle or operating conditions.
 
