@@ -4,7 +4,7 @@ description: Use when auditing and fixing performance hot paths in a scope — N
 argument-hint: [path]
 ---
 
-!`cat "${CLAUDE_SKILL_DIR}/../audit-workflow.md"`
+!`cat "${CLAUDE_SKILL_DIR}/../shared/audit-workflow.md"`
 
 Run as the `perf` dimension. Find where the system violates its latency, throughput, capacity, responsiveness, resource, scalability, or cost invariants under realistic workloads. Performance is end-to-end behavior: do not reduce the review to local micro-optimizations or repeated work.
 

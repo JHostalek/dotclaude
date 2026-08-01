@@ -4,7 +4,7 @@ description: Use when cutting code in a folder that doesn't earn its keep — wh
 argument-hint: <path>
 ---
 
-!`cat "${CLAUDE_SKILL_DIR}/../audit-workflow.md"`
+!`cat "${CLAUDE_SKILL_DIR}/../shared/audit-workflow.md"`
 
 Run as the `necessity` dimension. Ask: **which capabilities and mechanisms must exist to preserve the system's intended outcomes, and which impose more total cost and risk than the value they provide?** Necessity is not a small-code preference. Essential complex code stays; simple code that supports no legitimate outcome may go.
 

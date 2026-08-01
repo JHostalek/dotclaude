@@ -8,8 +8,8 @@ input = $ARGUMENTS
 Goal: clean linear history, ready to push.
 
 Read at the point of use, not up front:
-- Conflicts → `~/.claude/skills/conflict-heuristics.md`
-- Migration files touched → `~/.claude/skills/migration-reconciliation.md`
+- Conflicts → `~/.claude/skills/shared/conflict-heuristics.md`
+- Migration files touched → `~/.claude/skills/shared/migration-reconciliation.md`
 
 ## Execution
 

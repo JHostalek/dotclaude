@@ -4,7 +4,7 @@ description: Use when auditing and fixing reliability or resilience in a scope â
 argument-hint: [path]
 ---
 
-!`cat "${CLAUDE_SKILL_DIR}/../audit-workflow.md"`
+!`cat "${CLAUDE_SKILL_DIR}/../shared/audit-workflow.md"`
 
 Run as the `reliability` dimension. Determine whether the system continues to meet its essential correctness, availability, durability, recovery, and operability contracts through faults, overload, change, and lifecycle transitions. Reliability is end-to-end behavior; do not reduce it to retries, health checks, redundancy, or a resilience library.
 

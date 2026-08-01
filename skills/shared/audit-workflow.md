@@ -2,7 +2,7 @@
 
 Shared discipline for every audit dimension, whether it runs alone or inside a sweep. Handle branch setup and commits inline — don't invoke the `merge`/`rebase`/`pr` skills mid-audit, they gate and push on their own terms.
 
-Running more than one dimension? Orchestration — phase groups, parallel worktrees, integration order, reconcile, PR — is in `skills/audit-integration.md`.
+Running more than one dimension? Orchestration — phase groups, parallel worktrees, integration order, reconcile, PR — is in `skills/shared/audit-integration.md`.
 
 **Scope first.** Path arg → that subtree; none → files changed vs the default branch; full repo only on explicit request. Tiny scope or a single dimension → skip the worktrees and run inline.
 
