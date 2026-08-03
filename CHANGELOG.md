@@ -3,6 +3,12 @@
 All notable harness changes are recorded here. Versions before `1.0.0` were
 reconstructed from the repository history.
 
+## [1.2.0] - 2026-08-03
+
+- Add the `yeet` end-to-end delivery workflow.
+- Require implementation in a dedicated linked worktree.
+- Sync the local default-branch worktree after merging.
+
 ## [1.1.0] - 2026-07-28
 
 - Retune the skill corpus for Opus 5 behavior.
@@ -57,6 +63,7 @@ reconstructed from the repository history.
 
 - Introduce the Claude Code configuration and initial skill harness.
 
+[1.2.0]: https://github.com/JHostalek/dotclaude/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/JHostalek/dotclaude/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/JHostalek/dotclaude/compare/v0.7.0...v1.0.0
 [0.7.0]: https://github.com/JHostalek/dotclaude/compare/v0.6.0...v0.7.0
