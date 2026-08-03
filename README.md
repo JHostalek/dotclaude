@@ -2,8 +2,6 @@
 
 skills for agentic coding tools. extremely opinionated. updated (almost) daily.
 
-this project is owned and maintained by me alone. issues and pull requests are not accepted.
-
 > **heads up:** this is a global `~/.claude` configuration repo — skills that apply across all projects. project-specific instructions (`CLAUDE.md`, `TOOLS.md`, skills) live in individual repositories.
 
 ### build
@@ -116,6 +114,10 @@ ln -s ~/dotclaude/skills/* ~/.claude/skills/
 # or just copy what you need
 cp -r skills/pr ~/.claude/skills/
 ```
+
+## contributing
+
+this project is owned and maintained by me alone. issues and pull requests are not accepted.
 
 ## license
 
