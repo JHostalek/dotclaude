@@ -1517,19 +1517,12 @@ Rule:
 Problem:
 Required correction:
 
-2.
-Passage:
-Rule:
-Problem:
-Required correction:
+[Repeat this block for every material issue. Do not limit the number of findings.]
 
 UNSUPPORTED OR UNCERTAIN CLAIMS:
 - ...
 
 CZECH LANGUAGE RISKS:
-- ...
-
-NON-MATERIAL EDITS:
 - ...
 
 PASS CONDITIONS:
@@ -1543,7 +1536,7 @@ Rules:
 * For `FAIL`, report all material issues found across the complete audit, not a sample or the first few.
 * Consolidate duplicate or causally related defects into one finding when one correction can resolve them together.
 * Make findings specific and complete enough to resolve without a clarification round.
-* Do not list stylistic preferences as mandatory defects.
+* Do not report stylistic preferences or optional non-material edits.
 * For every `FAIL`, provide actionable corrections.
 * Quote only the minimum relevant passage.
 * Separate factual, linguistic, structural, and formatting issues.
