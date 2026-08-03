@@ -50,7 +50,7 @@ git workflow from branch to PR to merge.
 | `merge` | merge branch into current, resolve conflicts |
 | `rebase` | rebase branch onto target, resolve conflicts |
 | `timesheet` | monthly work summary from git |
-| `yeet` | implement, audit, merge, and sync from a dedicated worktree |
+| `yeet` | implement, merge, optionally audit, and sync from a dedicated worktree |
 
 ### improve
 
