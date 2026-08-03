@@ -8,10 +8,6 @@ argument-hint: [path]
 
 Run as the `reliability` dimension. Determine whether the system continues to meet its essential correctness, availability, durability, recovery, and operability contracts through faults, overload, change, and lifecycle transitions. Reliability is end-to-end behavior; do not reduce it to retries, health checks, redundancy, or a resilience library.
 
-<coverage_invariant>
-Every area, failure class, probe, and example below is minimum and non-exhaustive. Add, combine, split, reweight, or skip probes according to the system's architecture, dependencies, state model, workload, deployment, lifecycle, domain, and failure consequences. "Not listed" never means "out of scope." Skip a baseline area only when the scoped system cannot exercise it, and record the evidence.
-</coverage_invariant>
-
 ## Work top-down
 
 1. Reconstruct intended service behavior from product flows, contracts, schemas, configuration, infrastructure, telemetry, tests, runbooks, and deployment artifacts. Identify essential and degradable capabilities, state and durability guarantees, dependency and ownership boundaries, lifecycle states, workload envelope, recovery objectives, and consequences of delay, duplication, loss, stale results, or unavailability.
@@ -158,16 +154,10 @@ Do not inflate speculative failure stories. Rank confirmed defects by consequenc
 
 ## Fix and completion gate
 
-Auto-fix only within the shared workflow's boundary and preserve legitimate behavior. Safe examples may include propagating an existing deadline, closing an abandoned resource, bounding an internal queue with already-defined rejection semantics, or fixing a demonstrably incorrect health condition. These examples are non-exhaustive and authorize nothing by pattern alone.
+Apply validated reliability fixes under the shared auto-fix default and preserve legitimate behavior. Examples include propagating an existing deadline, closing an abandoned resource, bounding an internal queue with defined rejection semantics, or fixing a demonstrably incorrect health condition.
 
-Escalate changes to availability or durability guarantees, retry/idempotency semantics, acknowledgement or transaction boundaries, queue/admission policy, fail-open/closed behavior, fallback freshness, resource limits, failover topology, recovery formats, operational policy, SLOs, capacity spend, or user-visible degraded behavior. Include the invariant, evidence, tradeoff, correction, rollout/rollback, and verification plan.
+Treat availability or durability guarantees, retry/idempotency semantics, acknowledgement or transaction boundaries, queue/admission policy, fail-open/closed behavior, fallback freshness, resource limits, failover topology, recovery formats, operational policy, SLOs, capacity spend, or user-visible degraded behavior as critical only when evidence cannot safely choose the correction. Include the invariant, evidence, tradeoff, correction, rollout/rollback, and verification plan.
 
 Test the failed and recovered paths, important allowed behavior, state and resource aftermath, duplicate/late work, degraded operation, and return to normal. Do not claim resilience beyond the conditions exercised.
 
-Before sign-off, produce a completion ledger for every numbered baseline area and each newly derived lens:
-
-- `reviewed`: components, boundaries, states, faults, and invariants inspected; evidence used; retained findings; variants searched;
-- `not applicable`: evidence that the scoped system cannot exercise the area;
-- `deferred`: exact blocker, unresolved scenario, and residual risk.
-
-Completion requires every baseline area and material end-to-end failure path to be accounted for, including interactions across components, lifecycle states, mitigation, recovery, and failback. Report scope, assumptions, evidence limits, fixes, sign-off items, and residual risk. Never claim "reliable" or "resilient" beyond the verified model.
+Use the shared completion ledger. Account for material failure, mitigation, recovery, and failback paths; do not claim reliability beyond the verified model.

@@ -8,10 +8,6 @@ argument-hint: [path]
 
 Run as the `structure` dimension. Find topology and dependency design that makes ownership unclear, couples unrelated change, permits forbidden access, or fails under evolution, deployment, or runtime composition. Do not reduce structure to directory aesthetics.
 
-<coverage_invariant>
-Every lens, example, defect class, and probe in this skill is a minimum, non-exhaustive set. Add, combine, split, reweight, or skip probes according to the system's architecture, domains, technologies, lifecycle, and risks while covering every applicable baseline area. “Not listed” never means “out of scope.” Record why an area is inapplicable.
-</coverage_invariant>
-
 ## Work top-down
 
 Reconstruct the system before judging its tree:
@@ -120,17 +116,11 @@ Apply corrections in the direction supported by the system's intended invariants
 
 <output_contract>
 Auto-fix: behavior-preserving move/route/collapse with all references updated in one commit.
-Sign-off required: tree-reshaping — re-grouping a directory, splitting or merging modules, changing the layer scheme — sketch the before/after tree as evidence before proceeding.
+Tree-reshaping — re-grouping a directory, splitting or merging modules, changing the layer scheme — requires a before/after tree as evidence. Apply it under the shared auto-fix default when ownership and migration are established; escalate only a critical unresolved boundary decision.
 </output_contract>
 
-The examples in the output contract remain subject to the shared auto-fix boundary. Preserve legitimate behavior and public compatibility. Escalate ownership changes, public-surface changes, package/service extraction or consolidation, build or deployment boundary changes, schema/data ownership changes, migration or rollout requirements, and any correction whose intended boundary is ambiguous. Keep file moves and content edits in separate commits as required by the shared workflow.
+Preserve legitimate behavior and public compatibility. Treat ownership changes, public-surface changes, package/service extraction or consolidation, build or deployment boundary changes, schema/data ownership changes, migration or rollout requirements, and ambiguous boundaries as critical only when evidence cannot establish the intended target. Keep file moves and content edits in separate commits as required by the shared workflow.
 
 ## Completion gate
 
-Before sign-off, record every numbered baseline area and each newly derived lens as:
-
-- `reviewed`: components and boundaries inspected, invariants verified, candidates resolved, findings and variant searches;
-- `not applicable`: concrete evidence that the scoped system cannot exercise the area;
-- `deferred`: exact blocker, evidence still needed, and residual risk.
-
-Also record confirmed defects, worthwhile improvements, intentional constraints, migration states, generated/vendor/framework requirements, and unresolved questions separately. Completion requires accounting for every material component, ownership boundary, dependency form, entry point, lifecycle path, operational mode, and evolution path in scope—not reaching a finding count, flattening the tree, or making the repository look uniform.
+Use the shared completion ledger. Account for every material ownership boundary, dependency form, entry point, lifecycle, operational mode, and evolution path; topology uniformity is not completion.

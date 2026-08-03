@@ -8,10 +8,6 @@ argument-hint: [path]
 
 Run as the `correctness` dimension. Find behavior that can produce an observably wrong result or state, whether the defect is local, architectural, emergent between components, or visible only under particular lifecycle or operating conditions.
 
-<coverage_invariant>
-Every category, defect class, and example below is minimum and non-exhaustive. Add, combine, split, reweight, or skip probes according to the actual system while preserving every applicable baseline area. Derive further invariants from the product, domain, architecture, data, deployment, and operating model. “Not listed” never means “out of scope”; record evidence for any area judged inapplicable.
-</coverage_invariant>
-
 ## Work top-down
 
 Start from intended system behavior, not grep patterns:
@@ -139,15 +135,9 @@ Reject a candidate only after showing that the exact path preserves the invarian
 Do not inflate a hypothetical, stylistic preference, missing test alone, or possible alternative specification into a defect. Conversely, lack of a convenient reproduction does not disprove a path established from semantics and reachable state.
 
 <fix_gate>
-Auto-fix only within the shared workflow boundary and where intent is pinned by converging authoritative evidence. Preserve legitimate behavior. Escalate ambiguous product semantics, public contract changes, data repair or migration, irreversible state changes, distributed-consistency tradeoffs, financial or safety-critical rules, and fixes whose compatibility impact is uncertain. The split decides who fixes a divergence, never whether it gets reported.
+Apply validated correctness fixes under the shared auto-fix default. Treat ambiguous product semantics, data repair or migration, irreversible state changes, distributed-consistency tradeoffs, financial or safety-critical rules, and uncertain compatibility impact as critical decisions only when authoritative evidence cannot safely choose the correction. The split decides who fixes a divergence, never whether it gets reported.
 </fix_gate>
 
 ## Completion gate
 
-Before sign-off, reconcile findings across component boundaries, search for variants of each confirmed defect, and produce a coverage ledger for every numbered baseline area plus every newly derived lens. Record each as:
-
-- `reviewed` — components and boundaries examined, invariants verified, probes or scenarios exercised, and findings/variants;
-- `not applicable` — concrete architectural or domain evidence showing why;
-- `deferred` — exact blocker, unverified invariant or boundary, and residual correctness risk.
-
-Completion requires every baseline area and every material end-to-end behavior to be accounted for, not a predetermined number of findings. Report scope, confirmed defects, worthwhile improvements, unresolved questions, auto-fixes, escalations, verification performed, and residual gaps. Do not claim the system is “correct”; state what evidence supports and what remains unverified.
+Use the shared completion ledger. Account for every material end-to-end behavior and state the evidence supporting the reviewed behavior without claiming the system is universally correct.

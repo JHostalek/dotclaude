@@ -1,19 +1,19 @@
 # Audit Integration
 
-Orchestration for a sweep of two or more dimensions: fan out in parallel worktrees, integrate in dependency order, land one PR. Assumes the shared discipline in `audit-workflow.md`. Requesting a sweep is the authorization to fan out — spawn the group agents without asking; the one-agent-per-group rule is the damper.
+Orchestration for a sweep of two or more dimensions: fan out in parallel isolated workspaces, integrate in dependency order, land one PR. Assumes the shared discipline in `audit-workflow.md`. Requesting a sweep is the authorization to delegate the phase groups without asking; the one-agent-per-group rule is the damper.
 
 **Phase groups — restructuring before content, comments last:**
 
 1. `necessity → structure` — changes which files exist
-2. `patterns → correctness → error-handling` — behavior and convention
-3. `logs → perf → security` — cross-cutting concerns
+2. `patterns → contracts → correctness → data-integrity → error-handling` — behavior, interfaces, and state
+3. `logs → perf → reliability → security` — operations and cross-cutting concerns
 4. `tests → complexity → comments` — coverage and surface
 
 `necessity`/`structure` change which files exist, so content edits must land on the settled layout: a content edit rebased onto a moved file is a path remap; the reverse conflicts on every pending diff.
 
-One agent per group, each in its own worktree (`Agent(..., { isolation: 'worktree' })`) off the same base — fan out in parallel; each runs its dimensions' lenses, applies its auto-fix findings, gates, commits on its branch. One worktree per group, not per dimension: eleven agents multiply cost and contention for work that integrates in four ordered batches. Split a group across worktrees only when its scope is large enough that its dimensions won't finish together.
+One agent per group, each in an isolated worktree off the same base. Use the host's native delegation and workspace-isolation mechanisms; this workflow does not prescribe tool syntax. Fan out the groups in parallel. Each agent runs its dimensions in order, applies validated fixes, gates, and commits on its branch. One worktree per group, not per dimension: fourteen agents multiply cost and contention for work that integrates in four ordered batches. Split a group only when the scope is large enough and its subscopes do not overlap.
 
-The eleven dimensions are required baseline coverage, not a claim that every repository risk fits one of them. When the scope exposes a materially distinct concern, add a focused pass or assign it to the closest dimension; do not silently drop baseline coverage. Place an added pass in the group whose dependencies make it safest to integrate.
+The fourteen dimensions are required baseline coverage, not a claim that every repository risk fits one of them. When the scope exposes a materially distinct concern, add a focused pass or assign it to the closest dimension; do not silently drop baseline coverage. Place an added pass in the group whose dependencies make it safest to integrate.
 
 **Integrate the green branches sequentially** (never octopus) in phase order, gating after each. Revert-on-red. Then gate once on the result, commit, open/update the PR, tear the worktrees down.
 

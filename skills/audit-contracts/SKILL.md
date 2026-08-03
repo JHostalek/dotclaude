@@ -8,10 +8,6 @@ argument-hint: [path]
 
 Run as the `contracts` dimension. Find where producers and consumers can disagree about the meaning, shape, sequencing, lifecycle, or failure behavior of an interface. Cover accidental as well as declared contracts; do not reduce compatibility to schema diffs or API version labels.
 
-<coverage_invariant>
-Every interface class, lens, defect class, and probe in this skill is a minimum, non-exhaustive set. Add, combine, split, reweight, or skip probes according to the system's architecture, domains, technologies, deployed versions, consumers, lifecycle, and breakage risks while covering every applicable baseline area. “Not listed” never means “out of scope.” Record evidence for any area judged inapplicable.
-</coverage_invariant>
-
 ## Work top-down
 
 Start from intended behavior and deployed relationships, not grep patterns:
@@ -143,7 +139,7 @@ Classify retained items:
 Do not inflate a hypothetical consumer, cosmetic inconsistency, missing version label, absent test alone, or possible future evolution into a defect. Conversely, syntactic acceptance does not disprove semantic breakage. Search for variants of every confirmed issue across all implementations, generated artifacts, versions, stored data, and consumers.
 
 <approval_gate>
-Auto-fix only behavior-preserving implementation drift where all affected producer and consumer paths, generated artifacts, stored data, and supported versions are proven unchanged. Sign-off is required for public or relied-upon behavior changes, schema/data migration, compatibility-policy changes, version removal, deprecation, generated public surface changes, external integration changes, coordinated rollout, or any ambiguity about the intended contract.
+Apply validated contract corrections under the shared auto-fix default. Treat schema/data migration, compatibility-policy change, version removal, deprecation, external integration change, coordinated rollout, or ambiguity about a relied-upon contract as critical only when evidence cannot safely choose the intended contract or rollout.
 </approval_gate>
 
 The approval gate remains subject to the shared auto-fix boundary. Do not silently “fix” consumers by changing the commitment they depend on. Prefer corrections that restore the established contract; if the established contract is unsafe or wrong, report the conflict and propose an explicit migration.
@@ -152,10 +148,4 @@ When this dimension participates in a sweep, preserve the integration engine's o
 
 ## Completion gate
 
-Before sign-off, reconcile findings across component and version boundaries, search for variants of each confirmed defect, and produce a ledger for every numbered baseline area plus every newly derived lens. Record each as:
-
-- `reviewed` — producers, consumers, intermediaries, versions, lifecycle states, invariants, candidates, findings, and variant searches examined;
-- `not applicable` — concrete architectural, deployment, or domain evidence that the scoped system cannot exercise the area;
-- `deferred` — exact blocker, evidence or consumer access still needed, and residual compatibility risk.
-
-Also record confirmed defects, worthwhile improvements, intentional compatibility choices, active migrations, external constraints, unresolved questions, auto-fixes, sign-off findings, and verification performed separately. Completion requires accounting for every material interface, producer, consumer, intermediary, supported version combination, persisted or in-flight representation, deployment order, and lifecycle path in scope—not reaching a finding count or passing a schema checker. State scope, evidence, gaps, and residual risk; do not claim universal compatibility.
+Use the shared completion ledger. Account for every material producer, intermediary, consumer, supported version, persisted or in-flight representation, deployment order, and lifecycle state; do not claim universal compatibility.

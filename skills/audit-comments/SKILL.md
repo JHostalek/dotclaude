@@ -10,10 +10,6 @@ Run as the `comments` dimension. Comments run last because preceding structure, 
 
 Judge whether comments, docstrings, API documentation embedded beside code, annotations carrying prose, and documentation-only directives preserve the system's intended behavior or obscure it. The desired state is not maximal deletion: code states what it can express clearly; retained prose records consequential information that code and types cannot make reliable enough on their own.
 
-<coverage_invariant>
-Every lens, defect class, and example below is minimum and non-exhaustive. Add, combine, split, reweight, or skip probes according to the system's architecture, languages, tooling, domain, audiences, and failure consequences. “Not listed” never means “out of scope.” Skip a baseline area only when it is demonstrably inapplicable and record why.
-</coverage_invariant>
-
 ## Work top-down
 
 Reconstruct the system before judging individual prose:
@@ -118,14 +114,6 @@ Classify results as:
 
 ## Fix and completion gate
 
-Strip or rewrite prose as auto-fix only when code and machine-consumed behavior remain unchanged. Preserve legitimate behavior and intended guarantees. Validate affected documentation tooling, doctests, links, and rendered output where relevant.
+Apply validated prose corrections under the shared auto-fix default. Validate affected documentation tooling, doctests, links, and rendered output where relevant. A correction that changes machine-consumed behavior, a public contract, or a compliance/legal/safety/security guarantee is a critical decision only when the intended behavior cannot be established; otherwise fix it in the owning dimension rather than treating prose as isolated.
 
-Nothing in this dimension is sign-off. If the needed correction adds or relocates documentation, changes a public or compatibility contract, changes a directive or suppression, resolves an ambiguous specification, alters a compliance/legal/safety/security guarantee, or requires code, schema, configuration, operational, or user-facing changes, do not apply it here. Record the evidence as a worthwhile improvement or unresolved question for the owning dimension. “Comments are prose” does not make machine-consumed or contractual changes behavior-preserving.
-
-Before sign-off, account for every numbered baseline area and every newly derived lens in a coverage ledger:
-
-- `reviewed`: components, audiences, paths, sources checked, findings, and searched variants;
-- `not applicable`: evidence showing the scoped system cannot exercise the area;
-- `deferred`: exact blocker and the resulting uncertainty or risk.
-
-Reconcile claims across component boundaries and search for variants of each confirmed defect. Report scope, exclusions, auto-fixes, escalations, unresolved questions, and ledger gaps. Completion requires every applicable baseline area and material documentation boundary to be accounted for, not a predetermined number of edits.
+Use the shared completion ledger. This dimension is complete only when every material documentation boundary and affected audience is accounted for.

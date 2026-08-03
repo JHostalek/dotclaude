@@ -8,10 +8,6 @@ argument-hint: <path>
 
 Run as the `necessity` dimension. Ask: **which capabilities and mechanisms must exist to preserve the system's intended outcomes, and which impose more total cost and risk than the value they provide?** Necessity is not a small-code preference. Essential complex code stays; simple code that supports no legitimate outcome may go.
 
-<coverage_invariant>
-Every lens, example, candidate class, and baseline area in this skill is minimum and non-exhaustive. Add, combine, split, reweight, or skip probes according to the actual product, architecture, lifecycle, deployment, domain, and evidence. “Not listed” never means “out of scope.” Skip a baseline area only when it is demonstrably inapplicable and record why.
-</coverage_invariant>
-
 ## Work top-down
 
 Reconstruct the system before judging individual artifacts:
@@ -44,7 +40,7 @@ This is minimum coverage, not an exhaustive checklist. Apply every relevant area
 - Dormant but intentional paths such as rollback, restore, migration, break-glass, seasonal, regulatory, compatibility, and failure-only behavior.
 - Dead, shadowed, unreachable, permanently disabled, unshipped, abandoned, or superseded behavior, including code left behind after migrations and experiments.
 
-Absence of observed use is not proof of no value when observation is incomplete. Record the observation window and blind spots; classify unverifiable external usage for sign-off.
+Absence of observed use is not proof of no value when observation is incomplete. Record the observation window and blind spots; classify unverifiable external usage as an unresolved question. Escalate only when the shared critical-decision threshold is met.
 
 ### 3. Capability portfolio and product surface
 
@@ -124,7 +120,7 @@ Do not treat a single implementation, small call count, or framework-like appear
 
 Derive extra coverage where the domain changes the value of apparently idle or elaborate code. Examples include financial reconciliation, healthcare audit trails, safety interlocks, identity recovery, protocol negotiation, offline clients, multi-tenant isolation, regulated retention, internationalization, accessibility, real-time control, model evaluation, and AI-agent approval boundaries. These examples are explicitly non-exhaustive.
 
-Rare use, apparent duplication, or domain-specific machinery may be essential because failure consequences are asymmetric. If domain knowledge or evidence is insufficient, retain it as an unresolved question for sign-off rather than treating unfamiliarity as proof of waste.
+Rare use, apparent duplication, or domain-specific machinery may be essential because failure consequences are asymmetric. If domain knowledge or evidence is insufficient, retain it as an unresolved question rather than treating unfamiliarity as proof of waste; escalate only when the shared critical-decision threshold is met.
 
 ## Evidence and judgment
 
@@ -156,14 +152,8 @@ Estimate meaningful impact using total files, code, dependencies, states, config
 
 Apply **auto-fix** only when cost clearly exceeds value, no user-facing or externally callable capability is lost, and required behavior is preserved: proven dead code, unused internal abstraction, stale support assets, or an implementation materially larger than a verified simpler equivalent. Remove associated imports, configuration, tests, docs, generated sources, dependencies, and operational artifacts only when their ownership is proven and they have no other consumer.
 
-Require **sign-off** for removing or changing an endpoint, tool, CLI command, public API, event, format, externally callable feature, stored state, compatibility promise, operator/recovery path, domain control, or any capability whose usage or value remains unclear. Include the estimated total cut, migration and rollback plan, affected consumers, evidence gaps, and the specific decision required.
+Apply validated cuts under the shared auto-fix default. Treat removal or change of an endpoint, tool, CLI command, public API, event, format, externally callable feature, stored state, compatibility promise, operator/recovery path, or domain control as critical only when usage, value, migration, or rollback remains materially unclear. Include the estimated total cut, affected consumers, evidence gaps, recommendation, and exact decision required when escalation is necessary.
 
-Preserve legitimate behavior and the shared auto-fix/sign-off boundary. A safe reduction must test important allowed behavior, failure and recovery paths, deployment variants, and the absence of the removed path. Search for variants and stranded artifacts after every confirmed removal.
+Preserve legitimate behavior and the shared auto-fix/escalation boundary. A safe reduction must test important allowed behavior, failure and recovery paths, deployment variants, and the absence of the removed path. Search for variants and stranded artifacts after every confirmed removal.
 
-Before sign-off, produce a completion ledger for every numbered baseline area and every newly derived lens:
-
-- `reviewed`: components, boundaries, evidence, candidates, findings, keeps, and variants checked;
-- `not applicable`: evidence showing why the area cannot occur in scope;
-- `deferred`: exact blocker, decision owner or needed evidence, and residual cost or removal risk.
-
-Completion requires every baseline area and material architecture boundary to be accounted for. Report scope and evidence limits; never claim that all remaining code is necessary merely because no safe cuts were confirmed.
+Use the shared completion ledger. Account for every material capability and architecture boundary; report evidence limits without claiming that all remaining code is necessary.

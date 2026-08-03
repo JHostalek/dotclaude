@@ -1,6 +1,6 @@
 ---
 name: audit
-description: Use when running the full audit sweep on a scope — runs the focused audit dimensions (necessity, structure, patterns, correctness, error handling, logs, perf, security, tests, complexity, comments) as a parallel-worktree workflow that integrates in dependency order. Triggers on "audit", "full audit", "audit everything".
+description: Use when running the full audit sweep on a scope — runs all focused audit dimensions (necessity, structure, patterns, contracts, correctness, data integrity, error handling, logs, perf, reliability, security, tests, complexity, comments) as an isolated parallel workflow that integrates in dependency order. Triggers on "audit", "full audit", "audit everything".
 argument-hint: [path]
 ---
 
@@ -8,4 +8,4 @@ argument-hint: [path]
 
 !`cat "${CLAUDE_SKILL_DIR}/../shared/audit-integration.md"`
 
-Run all eleven baseline dimensions through the workflow above, in its phase groups. Each dimension's lens: `${CLAUDE_SKILL_DIR}/../audit-<dimension>/SKILL.md`. Skip `tests` if scope has no tests.
+Run all fourteen baseline dimensions through the workflow above, in its phase groups. Each dimension's lens: `${CLAUDE_SKILL_DIR}/../audit-<dimension>/SKILL.md`. Skip `tests` if scope has no tests.

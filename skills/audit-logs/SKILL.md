@@ -8,10 +8,6 @@ argument-hint: [path]
 
 Run as the `logs` dimension. Review whether production telemetry lets operators detect, localize, explain, and recover from consequential system behavior without leaking sensitive data or imposing disproportionate cost. Logs are one signal in an observability system; judge them with traces, metrics, events, alerts, audit records, crash reports, and platform telemetry rather than demanding that logs duplicate those signals.
 
-<coverage_invariant>
-Every area, defect class, and example below is minimum and non-exhaustive. Add, combine, split, reweight, or skip probes according to the system's architecture, operational model, failure modes, regulatory duties, and telemetry stack. "Not listed" never means "out of scope." Skip a baseline area only when the scoped system cannot exercise it, and record the evidence.
-</coverage_invariant>
-
 ## Work top-down
 
 1. Reconstruct intended behavior and operations from code, configuration, deployment manifests, schemas, runbooks, alerts, dashboards, tests, incident evidence, and telemetry plumbing. Identify user journeys, state machines, services and workers, trust and tenant boundaries, synchronous and asynchronous paths, dependencies, owners, reliability objectives, and recovery mechanisms.
@@ -138,14 +134,8 @@ Rank by incident and user consequence, frequency and burst behavior, affected sc
 
 ## Fix and completion gate
 
-Preserve legitimate behavior and the shared auto-fix/sign-off boundary. Prefer demotion over deletion for noisy INFO events when the event retains diagnostic value; restoration is harder than changing level. Behavior-preserving corrections to levels, stable templates, field names, duplicate emission, and non-sensitive context may be auto-fixes when unambiguous.
+Apply validated logging corrections under the shared auto-fix default. Prefer demotion over deletion for noisy INFO events when the event retains diagnostic value; restoration is harder than changing level.
 
-Sensitive data in any level must be removed, redacted, or appropriately transformed—demotion never fixes exposure. Sensitive-data removal, redaction, or hashing is sign-off because its required semantics may be domain-specific. Also escalate retention/access changes, audit-record changes, alert semantics, logging-library or pipeline adoption, routing/storage changes, and instrumentation that changes public behavior, performance guarantees, or compliance evidence. Do not silently trade diagnostic evidence for lower volume.
+Sensitive data in any level must be removed, redacted, or appropriately transformed—demotion never fixes exposure. Treat redaction or hashing semantics, retention/access changes, audit-record changes, alert semantics, logging pipeline adoption, routing/storage changes, and compliance evidence as critical only when domain requirements or intended operational behavior cannot be established. Do not silently trade diagnostic evidence for lower volume.
 
-Before sign-off, account for every numbered baseline area and every material component and boundary in a coverage ledger as:
-
-- `reviewed`: paths, invariants, evidence, findings, and searched variants;
-- `not applicable`: evidence that the scoped system cannot exercise the area;
-- `deferred`: exact blocker, missing evidence, and residual operational risk.
-
-Record newly derived lenses as well. Reconcile contradictions across producers and consumers, and verify corrections in both allowed and failing behavior. Completion means all applicable areas and boundaries are accounted for—not that a predetermined number of findings was produced. State scope, evidence, gaps, and residual risk; do not claim complete observability from source review alone.
+Use the shared completion ledger. Account for every material producer, telemetry path, consumer, privacy boundary, and operational question; do not claim complete observability from source review alone.

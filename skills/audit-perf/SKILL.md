@@ -8,10 +8,6 @@ argument-hint: [path]
 
 Run as the `perf` dimension. Find where the system violates its latency, throughput, capacity, responsiveness, resource, scalability, or cost invariants under realistic workloads. Performance is end-to-end behavior: do not reduce the review to local micro-optimizations or repeated work.
 
-<coverage_invariant>
-Every area, defect class, and example below is minimum and non-exhaustive. Add, combine, split, reweight, or skip probes according to the system's architecture, workload, lifecycle, deployment, and performance consequences. "Not listed" never means "out of scope." Skip a baseline area only when the scoped system cannot exercise it, and record the evidence.
-</coverage_invariant>
-
 ## Work top-down
 
 Reconstruct the performance model before searching for smells:
@@ -151,16 +147,10 @@ Drop speculative "might be slow under load" claims only after candidate collecti
 
 ## Fix and completion gate
 
-Auto-fix only within the shared workflow's boundary and preserve legitimate behavior. Safe examples may include batching an equivalent loop, removing duplicate work, narrowing an overfetch, bounding retained state, or moving blocking work off a critical thread when ordering and failure semantics stay unchanged. These examples are non-exhaustive and never authorize a change solely because it looks conventional.
+Apply validated performance fixes under the shared auto-fix default and preserve legitimate behavior. Examples include batching equivalent work, removing duplication, narrowing overfetch, bounding retained state, or moving blocking work off a critical thread when ordering and failure semantics stay intact.
 
-Escalate changes involving cache tiers or invalidation semantics, indexes, query/schema or data-layout changes, denormalization, consistency, transport/protocol swaps, concurrency or queue policy, resource limits, SLO/product behavior, infrastructure topology, capacity spend, or any ambiguous latency-versus-correctness tradeoff. Name the hot path, invariant, evidence, expected effect, risks, and verification plan.
+Treat cache or invalidation semantics, indexes, schema/data layout, denormalization, consistency, transport, concurrency or queue policy, resource limits, SLO/product behavior, infrastructure topology, capacity spend, or latency-versus-correctness tradeoffs as critical only when evidence cannot safely choose the correction. Name the hot path, invariant, evidence, expected effect, risks, and verification plan.
 
 Test the improved path under representative conditions plus important allowed behavior, boundary cardinalities, concurrency, cold/degraded states, and resource cleanup as relevant. Do not claim a speedup from code shape alone.
 
-Before sign-off, produce a completion ledger for every numbered baseline area and each newly derived lens:
-
-- `reviewed`: components and boundaries inspected, invariants verified, measurements or static evidence used, findings, and variants searched;
-- `not applicable`: evidence that the scoped system cannot exercise the area;
-- `deferred`: exact blocker, the unresolved hypothesis, and residual performance risk.
-
-Completion requires every baseline area and material end-to-end path to be accounted for, not a predetermined issue count. Report scope, workload assumptions, evidence limits, fixes, sign-off items, and residual risk. Do not claim "fast" or "scalable" beyond the workloads and environments actually verified.
+Use the shared completion ledger. Record workload assumptions and evidence limits; do not claim performance or scalability beyond the verified workloads and environments.
