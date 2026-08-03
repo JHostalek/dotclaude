@@ -8,10 +8,6 @@ argument-hint: [path-glob or module name; empty for full sweep]
 
 Run as the `tests` dimension. Determine whether the suite gives proportionate, trustworthy evidence that the system preserves intended behavior through change. The goal is not more tests or higher coverage; it is strong defect detection with the smallest maintainable suite.
 
-<coverage_invariant>
-Every area, defect class, and example below is minimum and non-exhaustive. Add, combine, split, reweight, or skip probes according to the system's architecture, domain, risk, change history, deployment, and observable failure modes. “Not listed” never means “out of scope.” Skip a baseline area only when the scoped system cannot exercise it, and record evidence.
-</coverage_invariant>
-
 ## Work top-down
 
 Start from the system's obligations, not test filenames or coverage reports:
@@ -157,12 +153,6 @@ Auto-fix behavior-preserving changes within the shared workflow boundary:
 - add proportionate coverage for established behavior where it would catch a real defect;
 - repair determinism, isolation, fixtures, and harnesses without changing the intended product contract.
 
-Deletion and rewriting are not safe merely because a test looks trivial or implementation-coupled. A rewrite that changes which behavior is correct, establishes a new product guarantee, alters public behavior, or resolves an ambiguous specification requires sign-off. Preserve legitimate behavior and run the relevant baseline before and after edits; a pre-existing red baseline is diagnostic context, not itself a test-audit finding.
+Deletion and rewriting are not safe merely because a test looks trivial or implementation-coupled. Apply validated changes under the shared auto-fix default. Treat a rewrite that changes which behavior is correct, establishes a new product guarantee, alters public behavior, or resolves an ambiguous specification as critical only when evidence cannot establish the intended contract. Run the relevant baseline before and after edits; a pre-existing red baseline is diagnostic context, not itself a test-audit finding.
 
-Before sign-off, account for every numbered baseline area and every material boundary in a coverage ledger. For each, record:
-
-- `reviewed`: components, behaviors, test levels, evidence, findings, and searched variants;
-- `not applicable`: evidence that the scoped system cannot exercise the area;
-- `deferred`: exact blocker, missing evidence, and residual escaped-defect risk.
-
-Record derived lenses not present in the baseline. Completion requires a top-down risk map, trustworthy evidence for retained findings, and ledger coverage—not a target issue count, coverage percentage, test-layer ratio, or all-green claim.
+Use the shared completion ledger. Account for the top-down risk map, test levels, production paths, and escaped-defect risk; coverage percentage, layer ratio, or an all-green run is not completion.

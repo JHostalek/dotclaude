@@ -8,10 +8,6 @@ argument-hint: [path]
 
 Run as the `data-integrity` dimension. Determine whether data retains its intended identity, meaning, relationships, completeness, ordering, precision, provenance, and lifecycle guarantees across every authoritative and derived representation. Include violations that appear only through component interaction, concurrency, failure, deployment, recovery, or historical data.
 
-<coverage_invariant>
-Every area, invariant, defect class, and example below is minimum and non-exhaustive. Add, combine, split, reweight, or skip probes according to the actual domain, architecture, data model, consistency promises, deployment, lifecycle, and consequences. “Not listed” never means “out of scope.” Skip a baseline area only when the scoped system cannot exercise it, and record evidence.
-</coverage_invariant>
-
 ## Work top-down
 
 1. Reconstruct the data model from product behavior, domain rules, schemas, migrations, storage configuration, APIs/events, code, tests, operational procedures, and deployed topology. Identify entities, identities, relationships, authoritative and derived stores, owners, trust boundaries, writers/readers, state machines, conservation laws, validity windows, and legal deletion or retention states.
@@ -147,14 +143,8 @@ Rank confirmed defects by consequence, affected data and tenants, likelihood, pr
 
 ## Fix and completion gate
 
-Apply only fixes within the shared auto-fix boundary. Preserve legitimate behavior and stored data. Escalate any migration, backfill, data repair, destructive operation, retention/deletion change, public schema or event change, transaction/consistency semantic change, compatibility tradeoff, or correction whose affected records or intent are uncertain. A safe code guard does not authorize mutating existing data.
+Apply validated integrity fixes under the shared auto-fix default while preserving legitimate stored data. Treat migration, backfill, data repair, destructive operation, retention/deletion change, schema/event change, transaction/consistency semantic change, or compatibility tradeoff as critical only when affected records, intended semantics, or rollback cannot be established safely. A safe code guard does not by itself authorize mutating existing data.
 
 Test the violating path, allowed behavior, historical shapes, concurrency/failure window, downstream representations, and recovery or reconciliation. Search for variants across all writers, readers, stores, tenants, regions, old/new versions, administrative paths, and repair tooling.
 
-Before sign-off, produce a coverage ledger for every numbered baseline area and each newly derived lens. Mark each:
-
-- `reviewed` — components and boundaries examined, invariants verified, probes or scenarios exercised, findings, and searched variants;
-- `not applicable` — concrete architectural or domain evidence showing why;
-- `deferred` — exact blocker, unverified invariant or store, and residual integrity risk.
-
-Completion requires accounting for every material datum lifecycle, authoritative/derived boundary, and applicable baseline area; reconciling interactions across components and operating states; and separating confirmed defects, worthwhile improvements, and unresolved questions. Report scope, auto-fixes, escalations, verification, limitations, and residual risk. Never claim the data is “integrity-safe” or “consistent” beyond the evidence reviewed.
+Use the shared completion ledger. Account for every material data lifecycle and authoritative/derived boundary; report residual integrity risk without claiming the data is universally safe or consistent.

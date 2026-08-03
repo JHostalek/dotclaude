@@ -8,10 +8,6 @@ argument-hint: [path]
 
 Run as the `error-handling` dimension. Determine whether failures preserve the system's contracts: callers and users receive truthful outcomes, state remains valid, resources are released, recovery is bounded, and operators can diagnose what happened. Observability alone is insufficient when execution continues with corrupt, partial, duplicated, or falsely successful state.
 
-<coverage_invariant>
-Every area, defect class, and example below is minimum and non-exhaustive. Add, combine, split, reweight, or skip probes according to the actual architecture, failure model, technologies, deployment, lifecycle, and domain consequences. “Not listed” never means “out of scope.” Skip a baseline area only when the scoped system cannot exercise it, and record evidence.
-</coverage_invariant>
-
 ## Work top-down
 
 1. Reconstruct intended behavior and the failure model from code, contracts, schemas, configuration, infrastructure, tests, and docs. Map entry points, asynchronous boundaries, state transitions, external dependencies, transactions, owned resources, background work, shutdown/recovery paths, and who must learn of each failure.
@@ -141,10 +137,8 @@ Cross-reference rather than fix unrelated root causes owned by another dimension
 
 ## Fix and completion gate
 
-Apply only fixes within the shared auto-fix boundary. Preserve legitimate fallback, compatibility, and user-visible behavior. A swallow or fallback that appears intentional and supports a known recoverable contract is sign-off, not auto-fix, when removing it changes observable behavior. Escalate changes to public error contracts, retry/idempotency semantics, transaction or acknowledgement boundaries, fail-open/closed policy, persistence/recovery formats, user workflows, or operational policy.
+Apply validated error-handling fixes under the shared auto-fix default. Preserve legitimate fallback, compatibility, and user-visible behavior. Treat public error-contract changes, retry/idempotency semantics, transaction or acknowledgement boundaries, fail-open/closed policy, persistence/recovery formats, user workflows, or operational policy as critical only when evidence cannot establish the intended behavior and safe rollout.
 
 Test the failed path, important allowed behavior, state/resource aftermath, and recovery. Search for variants of each confirmed defect across alternate entry points, sync/async paths, workers, retries, and legacy implementations.
 
-Before sign-off, produce a coverage ledger for every numbered baseline area and every newly derived lens. Mark each `reviewed`, `not applicable` with evidence, or `deferred` with the exact blocker and residual risk. For reviewed areas, record components and boundaries inspected, failure paths or invariants verified, retained findings, and searched variants.
-
-Completion requires accounting for every material failure boundary and baseline area, reconciling interactions across components and lifecycle states, and separating confirmed defects, improvements, and unresolved questions. Report scope and limitations; never infer “error handling is correct” from a predetermined finding count.
+Use the shared completion ledger. Account for every material failure boundary, including propagation, state/resource aftermath, recovery, and searched variants.

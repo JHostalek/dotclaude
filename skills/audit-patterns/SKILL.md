@@ -8,10 +8,6 @@ argument-hint: [path]
 
 Run as the `patterns` dimension. Find inconsistent solutions that make behavior, change, or operation unpredictable; do not optimize for textual sameness.
 
-<coverage_invariant>
-Every lens, example, defect class, and probe in this skill is a minimum, non-exhaustive set. Add, combine, split, reweight, or skip probes according to the system's architecture, domains, technologies, lifecycle, and risks while covering every applicable baseline area. “Not listed” never means “out of scope.” Record why an area is inapplicable.
-</coverage_invariant>
-
 ## Work top-down
 
 Reconstruct the system before comparing syntax:
@@ -124,17 +120,11 @@ Apply the shared workflow's noise filter only after collecting candidates. Drop 
 Search for variants of every confirmed divergence. When a shared abstraction is implicated, inspect both adopters and non-adopters; it may encode the same defect as the outlier.
 
 <approval_gate>
-Auto-fix: import existing utility, rename to dominant convention, reorder imports, drop unused dependencies. Sign-off when the dominant pattern itself is wrong — sweeping the majority pattern is a separate decision from cleaning up outliers.
+Apply validated convergence under the shared auto-fix default. When the dominant pattern itself is wrong, fix the majority only after the target invariant and migration path are established; escalate only if that choice remains a critical ambiguity.
 </approval_gate>
 
-The examples in the approval gate remain subject to the shared auto-fix boundary. Preserve legitimate behavior and public compatibility. A rename is automatic only when references, serialized names, reflection, generated code, external consumers, and migration behavior are proven safe; dependency removal requires proving no runtime, build, plugin, or side-effect use. Escalate architectural convergence, public contract changes, data/schema migrations, cross-service rollout, behavior changes, and any ambiguous target pattern.
+Preserve legitimate behavior and public compatibility. A rename requires accounting for references, serialized names, reflection, generated code, external consumers, and migration behavior; dependency removal requires proving no runtime, build, plugin, or side-effect use. Treat architectural convergence, public contract changes, data/schema migrations, cross-service rollout, or ambiguous target patterns as critical only when the evidence cannot safely choose the target.
 
 ## Completion gate
 
-Before sign-off, record every numbered baseline area and each newly derived lens as:
-
-- `reviewed`: components and boundaries inspected, invariants compared, candidates resolved, findings and variant searches;
-- `not applicable`: concrete evidence that the scoped system cannot exercise the area;
-- `deferred`: exact blocker, evidence still needed, and residual risk.
-
-Also record confirmed defects, worthwhile improvements, intentional variants, migration states, and unresolved questions separately. Completion requires accounting for every material component, entry point, lifecycle path, operational mode, and cross-component boundary in scope—not reaching a finding count or making the repository textually uniform.
+Use the shared completion ledger. Distinguish confirmed defects, worthwhile convergence, intentional variants, active migrations, and unresolved target patterns; textual uniformity is not completion.

@@ -25,7 +25,7 @@ Same format for follow-up `git commit` after staging resolutions. Notable decisi
 
 Targets that squash on merge keep no copy of the branch's commits, so merging back duplicates each one beside its squashed twin — count inflates, content does not.
 
-Counts cannot detect this; content can. `git diff origin/{target} HEAD` empty → already contained, `git reset --hard origin/{target}` is the lossless sync. Non-empty → real divergence, merge normally. Originals stay server-side at `refs/merge-requests/<iid>/head` or `refs/pull/<n>/head`, outside the default refspec.
+Counts cannot detect this; content can. `git diff origin/{target} HEAD` empty means the trees already match. Verify both index and worktree are clean, then use `git reset --keep origin/{target}` to align the branch pointer; it refuses rather than overwriting local changes. Non-empty means real divergence: merge normally. Originals stay server-side at `refs/merge-requests/<iid>/head` or `refs/pull/<n>/head`, outside the default refspec.
 
 ## Execution
 

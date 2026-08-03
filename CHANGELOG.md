@@ -3,6 +3,13 @@
 All notable harness changes are recorded here. Versions before `1.0.0` were
 reconstructed from the repository history.
 
+## [1.4.0] - 2026-08-03
+
+- Complete the full audit workflow with all fourteen focused dimensions.
+- Centralize audit coordination, evidence, auto-fix, and completion rules.
+- Add an agent execution layer to architecture-focused implementation plans.
+- Preserve local changes during squash merge sync and harden yeet worktree cleanup.
+
 ## [1.3.0] - 2026-08-03
 
 - Resolve plugin skill dependencies through the Codex registry before mutation.
@@ -69,6 +76,7 @@ reconstructed from the repository history.
 
 - Introduce the Claude Code configuration and initial skill harness.
 
+[1.4.0]: https://github.com/JHostalek/dotclaude/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/JHostalek/dotclaude/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/JHostalek/dotclaude/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/JHostalek/dotclaude/compare/v1.0.0...v1.1.0

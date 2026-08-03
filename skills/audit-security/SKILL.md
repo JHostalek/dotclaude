@@ -8,10 +8,6 @@ argument-hint: [path]
 
 Run as the `security` dimension. This is defensive review of software the user authorized. Find how the system can violate confidentiality, integrity, availability, privacy, tenant isolation, or control of privileged actions; do not reduce the task to matching a vulnerability checklist.
 
-<coverage_invariant>
-Every category and example in this skill and its baseline is a minimum, non-exhaustive set. Add, combine, split, and reweight probes based on the actual architecture, technologies, deployment, data, users, attacker capabilities, and current threat landscape. A named list must never become the boundary of the review. Skip a baseline area only when it is demonstrably inapplicable, and record why.
-</coverage_invariant>
-
 ## Work top-down
 
 Start with the system, not grep patterns:
@@ -166,16 +162,6 @@ For version-sensitive behavior, dependencies, protocols, cloud services, or cryp
 
 ## Fix and completion gate
 
-Auto-fix only within the shared workflow’s safety boundary. Preserve legitimate behavior; prefer eliminating the unsafe primitive or architecture over adding a fragile denylist. Test the closed attack path plus important allowed behavior. Escalate changes to identity/session semantics, authorization policy, tenant model, public API behavior, cryptographic formats or keys, data migration, infrastructure exposure, or product workflow.
+Apply validated security fixes under the shared auto-fix default. Preserve legitimate behavior; prefer eliminating the unsafe primitive or architecture over adding a fragile denylist. Test the closed attack path plus important allowed behavior. Treat identity/session semantics, authorization policy, tenant model, cryptographic formats or keys, data migration, infrastructure exposure, or product workflow as critical only when evidence cannot establish the safe intended correction.
 
-Before sign-off, produce a coverage ledger for the baseline: `reviewed`, `not applicable` with reason, or `deferred` with blocker. Reconcile findings across boundaries and search for variants of every confirmed flaw. Do not claim “secure” or “no vulnerabilities”; state scope, evidence, gaps, and residual risk.
-
-For every numbered baseline area, record:
-
-- components and boundaries reviewed;
-- attack paths tested or invariants verified;
-- findings and searched variants;
-- `not applicable` with evidence;
-- `deferred` with the exact blocker and residual risk.
-
-Also record newly derived lenses that were not in the baseline. Completion requires accounting for every baseline area and every material boundary—not finding a predetermined number of issues.
+Use the shared completion ledger. Account for every material trust boundary and attack path, including searched variants; never claim the system is secure or vulnerability-free.

@@ -7,10 +7,6 @@ description: Use when the goal is to reduce code size, remove unnecessary comple
 
 Run as the `complexity` dimension. Reduce the effort and risk required to understand, change, operate, and remove the scoped system while preserving its legitimate behavior. Net LOC reduction is useful evidence, not the objective: a smaller diff can still make state, coupling, or failure behavior harder to reason about.
 
-<coverage_invariant>
-Every lens, defect class, example, and probe below is minimum and non-exhaustive. Add, combine, split, reweight, or skip probes according to the system's architecture, domain, lifecycle, deployment, and change history. “Not listed” never means “out of scope.” Skip a baseline area only when the scoped system cannot exercise it, and record evidence.
-</coverage_invariant>
-
 ## Work top-down
 
 Reconstruct what the system must do before deciding what is unnecessary:
@@ -137,16 +133,8 @@ Do not inflate stylistic preference or speculative future cost into a finding. R
 
 ## Fix and completion gate
 
-Auto-fix within the shared workflow boundary: behavior-preserving file merges, abstraction collapses, internal API changes, dead-code removal, and test-scaffolding rewrites are eligible when all consumers and contracts are accounted for. Sign-off is required for user-facing capability removal, externally consumed or ambiguous contract changes, or any change whose behavior preservation cannot be established. Preserve legitimate logging, types, descriptions, domain-rich errors, business-rule tests, framework registrations, compatibility, and operational safeguards when they earn their role.
+Apply validated simplifications under the shared auto-fix default, including file merges, abstraction collapses, internal API changes, dead-code removal, and test-scaffolding rewrites when consumers and contracts are accounted for. Treat capability removal or externally consumed contract change as a critical decision only when evidence cannot establish the intended outcome. Preserve legitimate logging, types, descriptions, domain-rich errors, business-rule tests, framework registrations, compatibility, and operational safeguards when they earn their role.
 
 After each simplification, search for all affected references and variants, run the narrowest meaningful checks plus the repository gate, and inspect whether complexity moved rather than disappeared. Use `git diff --stat` as a result signal; review the semantic diff and affected paths as the proof.
 
-Before sign-off, produce a baseline coverage ledger. For every numbered area and every newly derived lens, record:
-
-- components, boundaries, and lifecycle paths reviewed;
-- `reviewed`, `not applicable` with evidence, or `deferred` with the exact blocker;
-- retained findings and searched variants;
-- simplifications applied or escalated, preserved behavior, and verification;
-- residual complexity or uncertainty.
-
-Completion requires accounting for every applicable baseline area and material boundary, not reaching a deletion quota or finding a predetermined number of issues. Report scope, evidence, gaps, and net change without claiming the system is “simple.”
+Use the shared completion ledger. Verify that complexity was removed rather than displaced, and report net change without claiming the system is universally simple.
