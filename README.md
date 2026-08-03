@@ -115,6 +115,10 @@ ln -s ~/dotclaude/skills/* ~/.claude/skills/
 cp -r skills/pr ~/.claude/skills/
 ```
 
+## contributing
+
+this project is owned and maintained by me alone. issues and pull requests are not accepted.
+
 ## license
 
 [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) — public domain.
