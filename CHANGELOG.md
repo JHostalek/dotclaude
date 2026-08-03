@@ -3,6 +3,12 @@
 All notable harness changes are recorded here. Versions before `1.0.0` were
 reconstructed from the repository history.
 
+## [1.3.0] - 2026-08-03
+
+- Resolve plugin skill dependencies through the Codex registry before mutation.
+- Skip the full audit by default; run it only when `with audit` is requested.
+- Add explicit-invocation metadata for Codex.
+
 ## [1.2.0] - 2026-08-03
 
 - Add the `yeet` end-to-end delivery workflow.
@@ -63,6 +69,7 @@ reconstructed from the repository history.
 
 - Introduce the Claude Code configuration and initial skill harness.
 
+[1.3.0]: https://github.com/JHostalek/dotclaude/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/JHostalek/dotclaude/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/JHostalek/dotclaude/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/JHostalek/dotclaude/compare/v0.7.0...v1.0.0

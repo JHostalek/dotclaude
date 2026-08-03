@@ -1,0 +1,6 @@
+interface:
+  display_name: "Yeet"
+  short_description: "Implement, merge, and optionally audit a change"
+  default_prompt: "Use $yeet to implement this work in a dedicated worktree, merge it, and sync the default branch. Add `with audit` only when a full audit is needed."
+policy:
+  allow_implicit_invocation: false
