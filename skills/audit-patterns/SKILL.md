@@ -4,7 +4,7 @@ description: Use when auditing and unifying pattern consistency in a scope — d
 argument-hint: [path]
 ---
 
-!`cat "${CLAUDE_SKILL_DIR}/../shared/audit-workflow.md"`
+!`cat "${CLAUDE_SKILL_DIR%/*}/shared/audit-workflow.md"`
 
 Run as the `patterns` dimension. Find inconsistent solutions that make behavior, change, or operation unpredictable; do not optimize for textual sameness.
 

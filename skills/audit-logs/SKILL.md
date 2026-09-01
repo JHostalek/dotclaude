@@ -4,7 +4,7 @@ description: Use when auditing and fixing logging in a scope — missing observa
 argument-hint: [path]
 ---
 
-!`cat "${CLAUDE_SKILL_DIR}/../shared/audit-workflow.md"`
+!`cat "${CLAUDE_SKILL_DIR%/*}/shared/audit-workflow.md"`
 
 Run as the `logs` dimension. Review whether production telemetry lets operators detect, localize, explain, and recover from consequential system behavior without leaking sensitive data or imposing disproportionate cost. Logs are one signal in an observability system; judge them with traces, metrics, events, alerts, audit records, crash reports, and platform telemetry rather than demanding that logs duplicate those signals.
 

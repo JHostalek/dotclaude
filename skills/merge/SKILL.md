@@ -8,8 +8,8 @@ input = $ARGUMENTS
 Merge target branch into current branch via `git merge origin/{target}` (remote-tracking ref, not local). Goal: integrate upstream changes with no orphaned symbols, no broken migration chain, and a conventional commit message that passes hooks.
 
 Read at the point of use, not up front:
-- Conflicts → `~/.claude/skills/shared/conflict-heuristics.md`
-- Migration files touched → `~/.claude/skills/shared/migration-reconciliation.md`
+- Conflicts → `${CLAUDE_SKILL_DIR%/*}/shared/conflict-heuristics.md`
+- Migration files touched → `${CLAUDE_SKILL_DIR%/*}/shared/migration-reconciliation.md`
 
 ## Merge Commit Message
 

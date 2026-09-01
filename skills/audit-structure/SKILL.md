@@ -4,7 +4,7 @@ description: Use when auditing repo topology in a scope — code grouped by type
 argument-hint: [path]
 ---
 
-!`cat "${CLAUDE_SKILL_DIR}/../shared/audit-workflow.md"`
+!`cat "${CLAUDE_SKILL_DIR%/*}/shared/audit-workflow.md"`
 
 Run as the `structure` dimension. Find topology and dependency design that makes ownership unclear, couples unrelated change, permits forbidden access, or fails under evolution, deployment, or runtime composition. Do not reduce structure to directory aesthetics.
 

@@ -4,7 +4,7 @@ description: Use when auditing and fixing end-to-end data integrity in a scope â
 argument-hint: [path]
 ---
 
-!`cat "${CLAUDE_SKILL_DIR}/../shared/audit-workflow.md"`
+!`cat "${CLAUDE_SKILL_DIR%/*}/shared/audit-workflow.md"`
 
 Run as the `data-integrity` dimension. Determine whether data retains its intended identity, meaning, relationships, completeness, ordering, precision, provenance, and lifecycle guarantees across every authoritative and derived representation. Include violations that appear only through component interaction, concurrency, failure, deployment, recovery, or historical data.
 

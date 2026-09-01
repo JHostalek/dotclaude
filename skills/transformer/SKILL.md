@@ -6,7 +6,7 @@ argument-hint: <path to SKILL.md or skill name>
 
 input = $ARGUMENTS
 
-Resolve `$input` to a path; if missing, try `${CLAUDE_SKILL_DIR}/../$input/SKILL.md` then `./.claude/skills/$input/SKILL.md` — if none resolve, ask. Read completely. Rewrite in place — diff is the review surface.
+Resolve `$input` to a path; if missing, try `${CLAUDE_SKILL_DIR%/*}/$input/SKILL.md` then `./.claude/skills/$input/SKILL.md` — if none resolve, ask. Read completely. Rewrite in place — diff is the review surface.
 
 **Rewrite, don't nibble.** The default failure of this skill is timidity: touching the lines that are safe to touch and leaving the frame that was wrong. You have the whole file and a clear standard, so use them. Blank the file and rewrite from the skill's purpose when the structure is wrong, the frame is wrong, or the accumulated edits no longer add up to one coherent document — that is the expected outcome, not the escalation. Split one file into a tree, collapse a tree into one file, replace a procedure with a principle, invent a section the original lacked, delete half of it. A diff that is only nits means you read for typos instead of for design. The one place restraint is right: the load-bearing surfaces listed below, which survive verbatim through any rewrite.
 
@@ -89,7 +89,7 @@ Note what this is not: a voice pass or a reshuffled checklist. The steps were de
 
 Prefer positive directives, motivate every constraint you keep, and keep rule density low — on a reasoning model, fewer rules land harder. The rest of the craft you need is already above: anchor through the interface, XML-tag load-bearing invariants, state floors instead of freedoms.
 
-Composing a prompt artifact rather than a skill — a tool description, a judge rubric, an API system prompt — is a different surface: read `${CLAUDE_SKILL_DIR}/../prompt/SKILL.md`, which owns target-model calibration and assembly order.
+Composing a prompt artifact rather than a skill — a tool description, a judge rubric, an API system prompt — is a different surface: read `${CLAUDE_SKILL_DIR%/*}/prompt/SKILL.md`, which owns target-model calibration and assembly order.
 
 ## Opus 5 reference
 

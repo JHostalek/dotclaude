@@ -15,6 +15,6 @@ Changes don't match branch name (auth changes on `feature/geo-optimization`) →
 
 ## Commit Format
 
-!`cat "${CLAUDE_SKILL_DIR}/../conventional-commits.md"`
+!`cat "${CLAUDE_SKILL_DIR%/*}/conventional-commits.md"`
 
 Capture *intent*, not implementation. Can't write a focused message → the commit spans unrelated changes, split it.

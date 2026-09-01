@@ -13,7 +13,7 @@ Write the body from `git log --oneline <target>..HEAD` and `git diff <target>...
 
 Uncommitted work is not PR material unless the user explicitly said to include it. A branch that already has an open PR/MR gets updated, not duplicated. Push and set upstream before invoking the CLI — an unpushed branch drops `gh`/`glab` into an interactive prompt that cannot be answered here.
 
-Title: conventional commit, same type/scope vocabulary as the commits it covers. Full spec if a case is unclear: `~/.claude/skills/conventional-commits.md`.
+Title: conventional commit, same type/scope vocabulary as the commits it covers. Full spec if a case is unclear: `${CLAUDE_SKILL_DIR%/*}/conventional-commits.md`.
 
 ## CLI invocation
 
