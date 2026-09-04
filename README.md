@@ -4,23 +4,45 @@ skills for agentic coding tools. extremely opinionated. updated (almost) daily.
 
 > **heads up:** this is a global `~/.claude` configuration repo — skills that apply across all projects. project-specific instructions (`CLAUDE.md`, `TOOLS.md`, skills) live in individual repositories.
 
-## Skills and invocation
+### build
 
-| Skill | Invocation | Purpose |
-| --- | --- | --- |
-| `git-workflow` | Automatic when relevant | Personal commit, PR, merge, rebase, and shipping conventions |
-| `timesheet` | Automatic when relevant | Monthly work summary from Git history |
-| `audit` | Explicit | Selected code/UX lenses or the full fourteen-dimension audit |
-| `design` | Explicit | Competing approaches from independent explorers |
-| `judge` | Explicit | Independent review of completed work |
-| `plan` | Explicit | HTML implementation plan with an approval checkpoint |
-| `sparring` | Explicit | Numbered question rounds over branches and shared dependencies |
-| `sota` | Explicit | Short prompt for a current expert recommendation |
-| `yeet` | Explicit | End-to-end Git workflow in the current checkout |
+start here. `sparring` examines a position through Socratic inquiry, `sota` finds a current expert recommendation, `design` explores alternatives, and `plan` turns the selected direction into an implementation-ready design document.
 
-Automatic means the agent may load conventions for relevant work; it does not authorize additional actions. Explicit skills are user-invoked with `/name` in Claude or `$name` in Codex. Codex currently displays these linked skills as `jhostalek-skills:name` in its picker. Their entrypoints set Claude's `disable-model-invocation: true` and Codex's `policy.allow_implicit_invocation: false` in `agents/openai.yaml`.
+| skill | |
+|-------|-|
+| `sparring` | question assumptions in rounds, follow branches, revisit conclusions when the premise changes |
+| `sota` | current expert recommendation grounded in brief web research |
+| `design` | competing approaches from independent agents, with the trade-offs exposed |
+| `plan` | one HTML implementation plan to review and approve before coding |
 
-Audit lenses are references, not separate skills: use `/audit security`, `/audit ux`, or `/audit full` (Codex: `$audit ...`). Only selected lenses load. Yeet's explicit `with audit` option uses the shared full-audit procedure; ordinary Git work does not start it.
+### quality
+
+before you ship. review what you built, refactor what's messy, audit what's bloated or stale.
+
+| skill | |
+|-------|-|
+| `judge` | independent review of the approach, including whether a simpler one would work |
+| `audit` | hunt bugs, question unnecessary code, fix validated findings. fourteen code lenses, plus UX |
+
+pick the audit you need. `/audit security src/auth` checks security. `/audit ux /settings` reviews usability. `/audit full` runs every code lens. scope defaults to changed files; ask explicitly for the whole repo. add `review only` when you want findings without fixes. UX defaults to review only.
+
+### ship
+
+git workflow from commit to PR. `yeet` takes it through merge.
+
+| skill | |
+|-------|-|
+| `git-workflow` | commit, PR, merge, and rebase conventions. follows the operation you asked for |
+| `yeet` | implement, check, commit, push, open the PR, merge, delete the remote branch. stay in the current checkout |
+| `timesheet` | monthly work summary from git, grouped by day and stripped of noise |
+
+add `with audit` to `yeet` when you want the full audit before merge. SOTA and Yeet are typing shortcuts. that's enough reason to keep them.
+
+### when they run
+
+`git-workflow` and `timesheet` load automatically when relevant. everything else is yours to invoke. an ordinary task should not turn into an audit, a panel of reviewers, or a planning session because the agent felt like it.
+
+use `/name` for standalone skills in Claude, or pick the skill with `$` in Codex. Codex may show the `jhostalek-skills:` prefix. automatic loading applies conventions to the requested work; it does not grant permission to ship it. invocation controls are set for both Claude and Codex.
 
 ## install
 
@@ -73,9 +95,7 @@ mkdir -p ~/.claude/skills
 ln -s ~/dotclaude/skills/git-workflow ~/.claude/skills/git-workflow
 ```
 
-For Codex, use `~/.codex/skills` as the link destination. SOTA and Yeet are
-explicit shortcuts; Yeet delegates to Git workflow and adds a full audit only
-when requested with `with audit`.
+For Codex, use `~/.codex/skills` as the link destination.
 
 ## contributing
 
