@@ -10,10 +10,10 @@ start here. `sparring` examines a position through Socratic inquiry, `sota` find
 
 | skill | |
 |-------|-|
-| `sparring` | question assumptions in rounds, follow branches, revisit conclusions when the premise changes |
+| `sparring` | Socratic inquiry in rounds, with branching exploration |
 | `sota` | current expert recommendation grounded in brief web research |
-| `design` | competing approaches from independent agents, with the trade-offs exposed |
-| `plan` | one HTML implementation plan to review and approve before coding |
+| `design` | divergent exploration with independent reasoning agents |
+| `plan` | reviewed implementation-ready design documents |
 
 ### quality
 
@@ -21,28 +21,28 @@ before you ship. review what you built, refactor what's messy, audit what's bloa
 
 | skill | |
 |-------|-|
-| `judge` | independent review of the approach, including whether a simpler one would work |
-| `audit` | hunt bugs, question unnecessary code, fix validated findings. fourteen code lenses, plus UX |
+| `judge` | independent expert review before accepting work |
+| `audit` | hunt bugs, cut unnecessary code, review usability |
 
-pick the audit you need. `/audit security src/auth` checks security. `/audit ux /settings` reviews usability. `/audit full` runs every code lens. scope defaults to changed files; ask explicitly for the whole repo. add `review only` when you want findings without fixes. UX defaults to review only.
+use `/audit <dimension> [path]` for a focused pass, `/audit full` for all fourteen code dimensions, or `/audit ux` for usability. scope defaults to changed files. add `review only` to skip fixes. UX defaults to review only.
 
 ### ship
 
-git workflow from commit to PR. `yeet` takes it through merge.
+git workflow from branch to PR to merge.
 
 | skill | |
 |-------|-|
-| `git-workflow` | commit, PR, merge, and rebase conventions. follows the operation you asked for |
-| `yeet` | implement, check, commit, push, open the PR, merge, delete the remote branch. stay in the current checkout |
-| `timesheet` | monthly work summary from git, grouped by day and stripped of noise |
+| `git-workflow` | commit, PR, merge, and rebase conventions |
+| `yeet` | implement through PR merge in the current checkout |
+| `timesheet` | monthly work summary from git |
 
-add `with audit` to `yeet` when you want the full audit before merge. SOTA and Yeet are typing shortcuts. that's enough reason to keep them.
+add `with audit` to `yeet` for a full audit before merge.
 
 ### when they run
 
-`git-workflow` and `timesheet` load automatically when relevant. everything else is yours to invoke. an ordinary task should not turn into an audit, a panel of reviewers, or a planning session because the agent felt like it.
+in Claude and Codex, `git-workflow` and `timesheet` load automatically when relevant. the other seven skills require explicit invocation.
 
-use `/name` for standalone skills in Claude, or pick the skill with `$` in Codex. Codex may show the `jhostalek-skills:` prefix. automatic loading applies conventions to the requested work; it does not grant permission to ship it. invocation controls are set for both Claude and Codex.
+use `/name` for standalone skills in Claude, or select the skill with `$` in Codex.
 
 ## install
 
@@ -86,8 +86,7 @@ See [RELEASING.md](RELEASING.md) for the release procedure.
 
 ### Editable standalone skills
 
-Link skill directories from the source checkout so their references stay attached
-and source edits take effect without another copy. For example:
+Symlink the skills you use from the source checkout:
 
 ```bash
 git clone git@github.com:JHostalek/dotclaude.git ~/dotclaude
