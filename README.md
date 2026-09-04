@@ -34,13 +34,13 @@ git workflow from branch to PR to merge.
 |-------|-|
 | `git-workflow` | commit, PR, merge, and rebase conventions |
 | `yeet` | implement through PR merge in the current checkout |
-| `timesheet` | monthly work summary from git |
+| `timesheet` | monthly timesheet entries from git |
 
 add `with audit` to `yeet` for a full audit before merge.
 
 ### when they run
 
-in Claude and Codex, `git-workflow` and `timesheet` load automatically when relevant. the other seven skills require explicit invocation.
+in Claude and Codex, `git-workflow` loads automatically when relevant. all other skills require explicit invocation.
 
 use `/name` for standalone skills in Claude, or select the skill with `$` in Codex.
 

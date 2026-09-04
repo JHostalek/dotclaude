@@ -1,7 +1,7 @@
 ---
 name: timesheet
-description: Format a requested monthly work summary from Git commits using personal timesheet conventions.
-disable-model-invocation: false
+description: Prepare monthly timesheet entries from Git commits.
+disable-model-invocation: true
 ---
 
 Generate a markdown table of the current user's git commits for the requested month, defaulting to the current month.
