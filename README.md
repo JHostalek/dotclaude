@@ -4,64 +4,23 @@ skills for agentic coding tools. extremely opinionated. updated (almost) daily.
 
 > **heads up:** this is a global `~/.claude` configuration repo — skills that apply across all projects. project-specific instructions (`CLAUDE.md`, `TOOLS.md`, skills) live in individual repositories.
 
-### build
+## Skills and invocation
 
-start here. `sparring` examines a position through Socratic inquiry, `sota` finds a current expert recommendation, `design` explores alternatives, and `plan` turns the selected direction into an implementation-ready design document.
+| Skill | Invocation | Purpose |
+| --- | --- | --- |
+| `git-workflow` | Automatic when relevant | Personal commit, PR, merge, rebase, and shipping conventions |
+| `timesheet` | Automatic when relevant | Monthly work summary from Git history |
+| `audit` | Explicit | Selected code/UX lenses or the full fourteen-dimension audit |
+| `design` | Explicit | Competing approaches from independent explorers |
+| `judge` | Explicit | Independent review of completed work |
+| `plan` | Explicit | HTML implementation plan with an approval checkpoint |
+| `sparring` | Explicit | Numbered question rounds over branches and shared dependencies |
+| `sota` | Explicit | Short prompt for a current expert recommendation |
+| `yeet` | Explicit | End-to-end Git workflow in the current checkout |
 
-| skill | |
-|-------|-|
-| `sparring` | rigorous Socratic inquiry before acting |
-| `sota` | current expert recommendation grounded in brief web research |
-| `design` | divergent exploration with independent reasoning agents |
-| `plan` | reviewed implementation-ready design documents |
+Automatic means the agent may load conventions for relevant work; it does not authorize additional actions. Explicit skills are user-invoked with `/name` in Claude or `$name` in Codex. Codex currently displays these linked skills as `jhostalek-skills:name` in its picker. Their entrypoints set Claude's `disable-model-invocation: true` and Codex's `policy.allow_implicit_invocation: false` in `agents/openai.yaml`.
 
-### quality
-
-before you ship. review what you built, refactor what's messy, audit what's bloated or stale.
-
-| skill | |
-|-------|-|
-| `judge` | independent expert review before accepting work |
-| `audit` | full baseline audit sweep in parallel worktrees |
-| `audit-necessity` | question whether code should exist, cut maintenance cost |
-| `audit-structure` | fix misplaced files, god-modules, leaky boundaries, layering violations |
-| `audit-patterns` | unify divergent implementations, kill reimplementations |
-| `audit-correctness` | hunt logic bugs — off-by-one, inverted conditions, boundary cases |
-| `audit-error-handling` | hunt swallowed errors, missing awaits, unguarded entry points, resource leaks |
-| `audit-contracts` | check API, schema, event, CLI, and integration compatibility |
-| `audit-data-integrity` | check invariants, writes, migrations, precision, and drift |
-| `audit-reliability` | check timeouts, retries, partial failure, recovery, and shutdown |
-| `audit-logs` | fix missing observability, INFO bloat, wrong-level messages |
-| `audit-perf` | catch N+1, overfetching, blocking hot paths, unbounded growth |
-| `audit-security` | injection, auth/authz gaps, secrets, weak crypto, OWASP |
-| `audit-tests` | find redundant/weak tests, cover uncovered code |
-| `audit-complexity` | maximize LOC reduction |
-| `audit-comments` | strip stale or bloated comments and docstrings |
-| `ux` | UI evaluation across Nielsen's heuristics |
-
-### ship
-
-git workflow from branch to PR to merge.
-
-| skill | |
-|-------|-|
-| `commit` | conventional commits + push |
-| `pr` | create or update a reviewable PR |
-| `merge` | merge branch into current, resolve conflicts |
-| `rebase` | rebase branch onto target, resolve conflicts |
-| `timesheet` | monthly work summary from git |
-| `yeet` | implement, merge, optionally audit, and sync from a dedicated worktree |
-
-### improve
-
-sharpen prompts, skills, and communication.
-
-| skill | |
-|-------|-|
-| `prompt` | create and refine LLM system prompts |
-| `transformer` | rewrite skills for reasoning model performance |
-| `design-refiner` | turn UI build requests into expert design briefs |
-| `writing-identity` | rewrite communication in the user's natural voice |
+Audit lenses are references, not separate skills: use `/audit security`, `/audit ux`, or `/audit full` (Codex: `$audit ...`). Only selected lenses load. Yeet's explicit `with audit` option uses the shared full-audit procedure; ordinary Git work does not start it.
 
 ## install
 
@@ -105,15 +64,18 @@ See [RELEASING.md](RELEASING.md) for the release procedure.
 
 ### Editable standalone skills
 
+Link skill directories from the source checkout so their references stay attached
+and source edits take effect without another copy. For example:
+
 ```bash
-# clone and symlink
 git clone git@github.com:JHostalek/dotclaude.git ~/dotclaude
 mkdir -p ~/.claude/skills
-ln -s ~/dotclaude/skills/* ~/.claude/skills/
-
-# or just copy what you need
-cp -r skills/pr ~/.claude/skills/
+ln -s ~/dotclaude/skills/git-workflow ~/.claude/skills/git-workflow
 ```
+
+For Codex, use `~/.codex/skills` as the link destination. SOTA and Yeet are
+explicit shortcuts; Yeet delegates to Git workflow and adds a full audit only
+when requested with `with audit`.
 
 ## contributing
 

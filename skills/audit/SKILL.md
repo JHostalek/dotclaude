@@ -1,11 +1,10 @@
 ---
 name: audit
-description: Use when running the full audit sweep on a scope — runs all focused audit dimensions (necessity, structure, patterns, contracts, correctness, data integrity, error handling, logs, perf, reliability, security, tests, complexity, comments) as an isolated parallel workflow that integrates in dependency order. Triggers on "audit", "full audit", "audit everything".
-argument-hint: [path]
+description: Run an explicitly selected code or UX audit, or a full fourteen-dimension sweep.
+argument-hint: "[full|dimension...] [path] [review only]"
+disable-model-invocation: true
 ---
 
-!`cat "${CLAUDE_SKILL_DIR%/*}/shared/audit-workflow.md"`
+Audit `$ARGUMENTS` using [the shared workflow](references/workflow.md). It defines scope, lens selection, evidence, corrections, and completion. Read only the selected lenses; read [integration](references/integration.md) for multiple dimensions.
 
-!`cat "${CLAUDE_SKILL_DIR%/*}/shared/audit-integration.md"`
-
-Run all fourteen baseline dimensions through the workflow above, in its phase groups. Each dimension's lens: `${CLAUDE_SKILL_DIR%/*}/audit-<dimension>/SKILL.md`. Skip `tests` if scope has no tests.
+Examples: `/audit security src/auth`, `/audit correctness contracts src/api review only`, `/audit ux /settings`, `/audit full`.
