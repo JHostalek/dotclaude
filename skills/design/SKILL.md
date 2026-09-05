@@ -1,87 +1,28 @@
 ---
 name: design
-description: Use when the requested deliverable is distinct competing approaches to compare before choosing what to implement.
-argument-hint: [design problem or goal]
+description: Explore competing approaches through independent agents before selecting an implementation.
+argument-hint: "[design problem or goal]"
+disable-model-invocation: true
 ---
 
-problem = $ARGUMENTS
+Explore `$ARGUMENTS` and produce approaches with distinct core mechanisms. Use the smallest useful set of independent explorers; add one only to cover a material alternative or unresolved gap. If delegation is unavailable, disclose that limit and explore sequentially without claiming independence.
 
-Senior Design Orchestrator. Purpose: produce genuinely orthogonal approaches — different core mechanisms, not surface variants of one idea — so the user can make a real tradeoff decision rather than choose between disguised versions of the same thing.
+Establish the raw problem, actual constraints, and obvious solutions. Reframe where it exposes a different mechanism; do not force reframing for a bounded problem. Give explorers the same relevant repository context, their chosen method, and a distinct question or provocation. They must not see each other's proposals. Reframings are optional starting points, not constraints. Send revisions back to their authors.
 
-Invoking this skill is the authorization to fan out — the explorer panel *is* the mechanism, so spawn without asking. The caps below are the damper.
+Choose methods that expose different mechanisms; this is a menu, not required coverage:
 
-## Governing principles
+| Method | Approach and check |
+| --- | --- |
+| Build upward | Start with the smallest useful unit; check emergent needs and necessary upfront investment. |
+| Work backward | Derive prerequisites from the ideal outcome; check the path is buildable. |
+| Constraint first | Solve or dissolve the hardest constraints; preserve the user outcome. |
+| Transfer an analogy | Borrow a mechanism from another domain; identify where the analogy breaks. |
+| Eliminate | Remove parts while preserving value; account for interactions and useful polish. |
+| Adversarial | Design around consequential failures; state the cost of robustness. |
+| Compose | Combine proven primitives; account for glue and dependency assumptions. |
+| Evolve over time | Show the initial design, observable change triggers, and migration path; avoid speculative infrastructure. |
+| Stakeholder trade-offs | Expose conflicting needs and selectable compromises; prioritize rather than satisfy everyone equally. |
 
-- **Ideation ≠ filtering.** Diverge first, constrain later — mixing the two kills divergence before it starts.
-- **Diversity comes from structure, not instruction.** Independent clean contexts + distinct reasoning methods + unique provocations make convergence structurally hard. Instruction alone ("be creative") is insufficient.
-- **Don't refine approaches in your own context.** The explorers' independent contexts created the diversity; merging revisions into your context destroys it. Send feedback back; let explorers revise in place.
+Each explorer returns its mechanism, benefits, sacrifices, and conditions for choosing it. Compare mechanisms, merge cosmetic variants, and identify shared assumptions. Reopen exploration only when convergence or an uncovered assumption hides a useful option.
 
-## Scale to problem complexity
-
-- **Quick** (simple/bounded): skip defamiliarize, 3 explorers, one synthesis.
-- **Standard** (default): defamiliarize, 4-5 explorers, one synthesis + optional gap-fill.
-- **Deep** (high-stakes/ambiguous): defamiliarize, 6-8 explorers, multiple synthesis rounds.
-
-Scale up if user signals high stakes or defamiliarize reveals hidden complexity.
-
-## Defamiliarize
-
-Name the 2-3 obvious solutions first — you can't escape defaults you haven't named. Then reframe through these lenses (each yields a reframing, not a solution):
-
-- **Step-Back:** abstract class of problem this belongs to, domain details stripped.
-- **Inversion:** worst possible approach; which assumptions might be wrong.
-- **Distant Analogy:** unrelated domain (biology, logistics, game theory) with the same structural shape.
-- **Constraint Removal:** ideal w/ no constraints; ideal w/ the primary constraint 10x tighter.
-
-Reframings seed the explorers — not the solutions. Run all four.
-
-## Diverge
-
-| Explorer | Agent file | Reasoning style |
-|----------|-----------|-----------------|
-| Forward Build-Up | `forward-build-up.md` | Build up from smallest viable unit |
-| Backward from Ideal | `backward-from-ideal.md` | Start from perfect outcome, work backward |
-| Constraint-First | `constraint-first.md` | Solve hardest constraints first |
-| Analogical Transfer | `analogical-transfer.md` | Map from a well-solved problem in another domain |
-| Elimination | `elimination.md` | Remove everything unnecessary |
-| Adversarial | `adversarial.md` | Attack the obvious solution, build what survives |
-| Composition | `composition.md` | Compose existing proven primitives |
-| Temporal | `temporal.md` | Design a trajectory across time, not a single state |
-| Stakeholder | `stakeholder.md` | Design for conflicting stakeholder needs simultaneously |
-
-Minimum coverage: Forward Build-Up, Backward from Ideal, Constraint-First, + one other relevant style. Invent a reasoning style when the problem needs an axis this catalog doesn't carry.
-
-Spawn explorers, each with a clean context containing only:
-- the problem statement,
-- their assigned method from `${CLAUDE_SKILL_DIR}/agents/<name>.md`,
-- relevant reframings,
-- a **unique provocation no other explorer gets** (random constraint, forced analogy, "what if") — this breaks the homogenization that converges LLM outputs even across independent contexts,
-- the anti-priming guard verbatim: "The orchestrator's reframings are starting points, not constraints. If the reframing feels wrong for your reasoning method, ignore it and start from the raw problem.",
-- the output contract verbatim: "Return your approach with narrative trade-offs: core mechanism, what it enables, what it sacrifices, and what makes it fundamentally different from the obvious solution."
-
-No teammate sees another's work. For codebase-aware problems: same codebase context to each, different reasoning methods.
-
-## Synthesize & verify distance
-
-For each pair, name the core mechanism — the fundamental "how," not the framing. Shared core mechanism = variants, not alternatives. Audit assumptions ALL approaches share — those are the blind spots.
-
-On convergence, diagnose then fix:
-- **Axis Collapse** — cosmetically different, same underlying structure.
-- **Function Lock** — all solve the same sub-problem first, anchoring everything.
-- **Domain Imprisonment** — all stay inside the domain's conventions.
-- **Novelty Chase** — different but purposelessly weird.
-
-Spawn targeted fix subagents with the shared assumption declared off-limits.
-
-<output_contract>
-Save to `docs/designs/<short-name>.md`:
-1. Problem statement + reframings (including the named defaults)
-2. Solution landscape (where each approach sits)
-3. Each approach: core mechanism, what it enables, what it sacrifices, when to choose it
-4. Shared assumptions across all approaches
-5. Unexplored territory and why
-
-For architecture/spatial designs, include concrete artifacts (Mermaid, ASCII wireframes, data-flow sketches) — visuals compare better than prose.
-
-Length is not a quality signal here. An approach that can't be stated as a mechanism in a short paragraph hasn't been reduced to its mechanism yet, and no section restates another.
-</output_contract>
+Save `docs/designs/<short-name>.md` with the problem and useful reframings, a landscape of approaches, their trade-offs and selection conditions, shared assumptions, and consequential unexplored territory. Include diagrams when they explain architectural or spatial choices. Stop after presenting the alternatives; implementation requires the user's selection or authorization.

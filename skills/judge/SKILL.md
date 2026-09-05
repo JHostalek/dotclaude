@@ -1,66 +1,16 @@
 ---
 name: judge
-description: Use when the user wants an independent expert review of work done in this conversation before accepting or extending it.
-argument-hint: "[description of what to review, or omit for recent work]"
+description: Obtain an independent review of the approach and trade-offs in completed work.
+argument-hint: "[subject, or omit for recent work]"
+disable-model-invocation: true
 ---
 
-subject = $ARGUMENTS
+Review `$ARGUMENTS`, or the latest substantive work when omitted. Infer scope from the conversation and relevant files; ask only if ambiguity would materially change the review.
 
-No subject → review most recent substantive work in this conversation; identify from context, confirm with user before spawning. Subject references a path → read enough to know full scope before dispatching.
+Delegate to one independent, read-only reviewer with a clean context: the requested outcome, constraints, subject, relevant files, stack, and project conventions. Do not provide your verdict or preferred critique. Add reviewers only for materially distinct expertise. If delegation is unavailable, disclose that limitation; do not call self-review independent.
 
-**Why this exists:** the engineer who built something is the worst judge of it — they see what they intended, not what's there. Reviewers with clean context catch approach-level errors and missed alternatives the author rationalizes away, without the cost of a human code review.
+Ask the reviewer to assess domain fitness, architectural choices, proportionality, and fundamentally different ways to achieve the outcome. Distinguish justified deviations from missed constraints; compare simplicity against real requirements and account for the adoption costs of alternatives. Feature necessity is a separate lens available through `/audit necessity`, not an automatic additional pass.
 
-You coordinate; teammates judge. Don't run the review yourself; dispatch + synthesize.
+Retain findings supported by specific evidence, an actionable alternative, and its costs. Distinguish defects, valid trade-offs, and preferences. Remove claims that misread constraints or lack evidence; preserve meaningful disagreements if multiple reviewers were used.
 
-## Scope
-
-Not `/audit-necessity` (should it exist). Given we're building it, **did we build it the way an expert would?** Approach selection, architecture fitness, idiom correctness, trade-off awareness, missed alternatives, domain-standard solutions, proportionality.
-
-## Teammates
-
-Spawn three clean-context reviewers, read-only and analysis-only. Domain, proportionality, and alternative-path coverage is the minimum panel.
-
-| Teammate | Agent file | Lens |
-|----------|-----------|------|
-| Domain Expert | `domain-expert.md` | Would a senior specialist in this exact domain do it this way? |
-| Pragmatist | `pragmatist.md` | Is this the most direct path to the goal? |
-| Alt-Path | `alt-path.md` | What fundamentally different approaches did we not consider? |
-
-Each gets: subject description, all relevant file paths / code / context, and the project's stack + conventions (detect from codebase).
-
-Each reports **everything its lens surfaces**, unfiltered — the credibility pass below is yours, and it only works on a complete list. A teammate that pre-filters hands you a short list you can't distinguish from a thorough one.
-
-## Synthesis
-
-### Credibility filter
-
-This is the filter stage; teammates do not run it. Drop any finding that fails one of:
-
-1. **Substantiated** — cites specific code/decision/pattern, not "generally speaking".
-2. **Actionable** — proposes a concrete alternative, not just criticism.
-3. **Trade-off honest** — states the alternative's costs too.
-4. **Calibrated** — separates "this is wrong" from "valid but here's another" from "fine, style preference". Overclaiming is this skill's #1 failure mode.
-
-Also drop: style preferences dressed as expertise, findings where the teammate misread the constraints.
-
-### Convergence
-
-2+ teammates independently flag the same concern → elevate it. Teammates contradict → present both with reasoning, don't pick a winner.
-
-### Verdict scale
-
-| Verdict | Meaning |
-|---------|---------|
-| **EXPERT-GRADE** | A domain expert would recognize this as their own work. Style nits at most. |
-| **SOLID** | Sound approach. Real improvements found, no fundamental issues. |
-| **RETHINK** | Functional, but an expert would take a meaningfully different approach. |
-| **RED FLAG** | Fundamental approach issue. Specific alternative(s) strongly recommended. |
-
-### Report
-
-1. **Verdict** — one word + one-sentence justification
-2. **What's strong** — what teammates validated (criticism-only reports read as dishonest and lose trust)
-3. **Findings** — grouped by importance. Each: concern, evidence, proposed alternative, trade-off of alternative, source teammate(s)
-4. **If we could start over** — single highest-leverage change, if any
-
-**Stop after the report. Do not implement changes unless asked.**
+Report a clear recommendation and its rationale, validated strengths, findings by importance, and the single most valuable change, if any. Identify missing evidence and reviewer limitations. Stop after the report; implement only when asked.

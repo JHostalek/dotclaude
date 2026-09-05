@@ -12,6 +12,7 @@
 !LICENSE
 !CODE_OF_CONDUCT.md
 !CLAUDE.md
+!WRITING.md
 !SOUL.md
 !CHANGELOG.md
 !RELEASING.md
@@ -48,5 +49,3 @@
 skills/*.*
 skills/ccs-delegation
 skills/graphify
-
-!skills/conventional-commits.md

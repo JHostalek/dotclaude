@@ -10,7 +10,7 @@ start here. `sparring` examines a position through Socratic inquiry, `sota` find
 
 | skill | |
 |-------|-|
-| `sparring` | rigorous Socratic inquiry before acting |
+| `sparring` | Socratic inquiry in rounds, with branching exploration |
 | `sota` | current expert recommendation grounded in brief web research |
 | `design` | divergent exploration with independent reasoning agents |
 | `plan` | reviewed implementation-ready design documents |
@@ -22,22 +22,9 @@ before you ship. review what you built, refactor what's messy, audit what's bloa
 | skill | |
 |-------|-|
 | `judge` | independent expert review before accepting work |
-| `audit` | full baseline audit sweep in parallel worktrees |
-| `audit-necessity` | question whether code should exist, cut maintenance cost |
-| `audit-structure` | fix misplaced files, god-modules, leaky boundaries, layering violations |
-| `audit-patterns` | unify divergent implementations, kill reimplementations |
-| `audit-correctness` | hunt logic bugs — off-by-one, inverted conditions, boundary cases |
-| `audit-error-handling` | hunt swallowed errors, missing awaits, unguarded entry points, resource leaks |
-| `audit-contracts` | check API, schema, event, CLI, and integration compatibility |
-| `audit-data-integrity` | check invariants, writes, migrations, precision, and drift |
-| `audit-reliability` | check timeouts, retries, partial failure, recovery, and shutdown |
-| `audit-logs` | fix missing observability, INFO bloat, wrong-level messages |
-| `audit-perf` | catch N+1, overfetching, blocking hot paths, unbounded growth |
-| `audit-security` | injection, auth/authz gaps, secrets, weak crypto, OWASP |
-| `audit-tests` | find redundant/weak tests, cover uncovered code |
-| `audit-complexity` | maximize LOC reduction |
-| `audit-comments` | strip stale or bloated comments and docstrings |
-| `ux` | UI evaluation across Nielsen's heuristics |
+| `audit` | hunt bugs, cut unnecessary code, review usability |
+
+use `/audit <dimension> [path]` for a focused pass, `/audit full` for all fourteen code dimensions, or `/audit ux` for usability. scope defaults to changed files. add `review only` to skip fixes. UX defaults to review only.
 
 ### ship
 
@@ -45,23 +32,17 @@ git workflow from branch to PR to merge.
 
 | skill | |
 |-------|-|
-| `commit` | conventional commits + push |
-| `pr` | create or update a reviewable PR |
-| `merge` | merge branch into current, resolve conflicts |
-| `rebase` | rebase branch onto target, resolve conflicts |
-| `timesheet` | monthly work summary from git |
-| `yeet` | implement, merge, optionally audit, and sync from a dedicated worktree |
+| `git-workflow` | commit, PR, merge, and rebase conventions |
+| `yeet` | implement through PR merge in the current checkout |
+| `timesheet` | monthly timesheet entries from git |
 
-### improve
+add `with audit` to `yeet` for a full audit before merge.
 
-sharpen prompts, skills, and communication.
+### when they run
 
-| skill | |
-|-------|-|
-| `prompt` | create and refine LLM system prompts |
-| `transformer` | rewrite skills for reasoning model performance |
-| `design-refiner` | turn UI build requests into expert design briefs |
-| `writing-identity` | rewrite communication in the user's natural voice |
+in Claude and Codex, `git-workflow` loads automatically when relevant. all other skills require explicit invocation.
+
+use `/name` for standalone skills in Claude, or select the skill with `$` in Codex.
 
 ## install
 
@@ -105,15 +86,15 @@ See [RELEASING.md](RELEASING.md) for the release procedure.
 
 ### Editable standalone skills
 
+Symlink the skills you use from the source checkout:
+
 ```bash
-# clone and symlink
 git clone git@github.com:JHostalek/dotclaude.git ~/dotclaude
 mkdir -p ~/.claude/skills
-ln -s ~/dotclaude/skills/* ~/.claude/skills/
-
-# or just copy what you need
-cp -r skills/pr ~/.claude/skills/
+ln -s ~/dotclaude/skills/git-workflow ~/.claude/skills/git-workflow
 ```
+
+For Codex, use `~/.codex/skills` as the link destination.
 
 ## contributing
 

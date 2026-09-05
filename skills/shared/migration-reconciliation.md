@@ -1,14 +1,11 @@
 ## Migration Reconciliation
 
-Integrating a branch re-chains revision pointers in migration files but does NOT execute the target's new migrations against the local database. The DB version marker still holds the old revision — the app crashes at runtime on missing schema objects.
+Branch integration changes migration files without applying them to a database. Inspect the repository's migration conventions, revision graph, and actual database state before reconciling either.
 
-**Re-chain:** update the feature migration's parent revision to point to the target's chain tip. If the project tracks the migration head outside Alembic, locate and update that declaration in the repository configuration or migration tooling.
+For an unpublished feature migration in a repository that requires a linear chain, update its parent to the target's tip and update any separately tracked head. Preserve branching or merge revisions when the project uses them. Do not rewrite applied or shared migration identities as a routine conflict resolution.
 
-**Re-ID if non-monotonic.** Re-pointing `down_revision` alone is not sufficient. If the feature's own revision ID is now ≤ any upstream ID in the new chain, the chain violates monotonic-timestamp rules and silently breaks any DB already stamped at that ID — alembic reports head, skips the inserted middle, app crashes on missing columns. Fix: generate a fresh `date +%Y%m%d%H%M%S`, update `revision: str = …` inside the file, rename the file to match, update project head tracking.
+Require increasing revision IDs only if the repository enforces that convention; [Alembic revision IDs](https://alembic.sqlalchemy.org/en/latest/tutorial.html) are not inherently timestamps. If a fresh ID is required for an unpublished migration, update the declaration, filename, references, and tracked head together. Validate the resulting graph with the project's tooling, such as `alembic history` and `alembic heads`.
 
-**Verify chain:** run `alembic history` and confirm revision IDs are non-decreasing along the chain.
+For a running local database, compare its recorded revision with the schema and migrations already applied. Apply missing migrations only when their prerequisites and effects are established. Never infer unapplied migrations solely from a changed parent pointer.
 
-**Apply to local DB:**
-- DB at target's tip → only the feature migration needs applying.
-- DB at feature's old pre-integration revision → stamp to the fork point (stamp moves the pointer without executing destructive down-migrations), then upgrade.
-- DB stamped at the feature revision but upstream migrations between fork and feature were inserted later → re-running the feature crashes. Stamp back to the fork point, `upgrade <last-upstream-rev>` (not `head`), then `stamp <feature-rev>`.
+Stamping changes the version marker without changing schema. Use it only when schema evidence proves the stamped revision accurately represents the database; do not automatically stamp backward or replay already-applied feature migrations. If reconciliation could duplicate effects, destroy data, or misrepresent schema state, report the mismatch and obtain the required decision before proceeding.
