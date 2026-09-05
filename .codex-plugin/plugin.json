@@ -1,6 +1,6 @@
 {
   "name": "jhostalek-skills",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "JHostalek's opinionated agent skills for planning, auditing, shipping, and improving software.",
   "author": {
     "name": "Jan Hostalek",
