@@ -3,6 +3,17 @@
 All notable harness changes are recorded here. Versions before `1.0.0` were
 reconstructed from the repository history.
 
+## [2.0.0] - 2026-09-05
+
+- Reduce the public harness to nine skills with aligned Claude Code, Codex, and Pi packaging.
+- **Breaking:** replace `audit-*` and `ux` commands with `audit <dimension>` and `audit ux`; use `audit full` for all fourteen code dimensions.
+- **Breaking:** consolidate `commit`, `pr`, `merge`, and `rebase` into `git-workflow` modes. Remove Prompt, Transformer, Design Refiner, Native Business Copywriter, and Writing Identity.
+- Require explicit invocation for every skill except Git workflow in Claude and Codex.
+- Run Yeet in the current checkout, resume work after resolved blockers, and keep the full audit opt-in with `with audit`.
+- Simplify design and judge delegation, retain plan's HTML approval artifact, and organize sparring into numbered branching rounds.
+- Correct timesheet date boundaries, shared skill references, conflict resolution, and migration reconciliation.
+- Replace redundant writing guidance with concise `WRITING.md` preferences and refresh installation and usage documentation.
+
 ## [1.4.0] - 2026-08-03
 
 - Complete the full audit workflow with all fourteen focused dimensions.
@@ -76,6 +87,7 @@ reconstructed from the repository history.
 
 - Introduce the Claude Code configuration and initial skill harness.
 
+[2.0.0]: https://github.com/JHostalek/dotclaude/compare/v1.4.0...v2.0.0
 [1.4.0]: https://github.com/JHostalek/dotclaude/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/JHostalek/dotclaude/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/JHostalek/dotclaude/compare/v1.1.0...v1.2.0
