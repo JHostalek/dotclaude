@@ -25,6 +25,7 @@
     "./skills/sota",
     "./skills/sparring",
     "./skills/timesheet",
+    "./skills/writing",
     "./skills/yeet"
   ]
 }
