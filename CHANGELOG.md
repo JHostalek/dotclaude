@@ -3,6 +3,12 @@
 All notable harness changes are recorded here. Versions before `1.0.0` were
 reconstructed from the repository history.
 
+## [2.1.0] - 2026-09-10
+
+- Add an explicitly invoked `writing` skill for rewriting text or the last agent response, preserving the former `WRITING.md` preferences.
+- Register the writing skill in the Claude Code plugin and document its invocation.
+- Identify `tldraw-offline` as a third-party skill supplied by tldraw Desktop and exclude its machine-specific local copy from the repository and published packages.
+
 ## [2.0.0] - 2026-09-05
 
 - Reduce the public harness to nine skills with aligned Claude Code, Codex, and Pi packaging.
@@ -87,6 +93,7 @@ reconstructed from the repository history.
 
 - Introduce the Claude Code configuration and initial skill harness.
 
+[2.1.0]: https://github.com/JHostalek/dotclaude/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/JHostalek/dotclaude/compare/v1.4.0...v2.0.0
 [1.4.0]: https://github.com/JHostalek/dotclaude/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/JHostalek/dotclaude/compare/v1.2.0...v1.3.0
