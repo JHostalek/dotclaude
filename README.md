@@ -23,6 +23,7 @@ before you ship. review what you built, refactor what's messy, audit what's bloa
 |-------|-|
 | `judge` | independent expert review before accepting work |
 | `audit` | hunt bugs, cut unnecessary code, review usability |
+| `writing` | rewrite unclear or formulaic text in my preferred voice |
 
 use `/audit <dimension> [path]` for a focused pass, `/audit full` for all fourteen code dimensions, or `/audit ux` for usability. scope defaults to changed files. add `review only` to skip fixes. UX defaults to review only.
 
@@ -43,6 +44,12 @@ add `with audit` to `yeet` for a full audit before merge.
 in Claude and Codex, `git-workflow` loads automatically when relevant. all other skills require explicit invocation.
 
 use `/name` for standalone skills in Claude, or select the skill with `$` in Codex.
+
+Use `/writing` or `$writing` to rewrite the last agent response. Add text, a file, or feedback to choose a different target or explain what should change.
+
+### third-party skills
+
+`tldraw-offline` is a third-party skill supplied by tldraw Desktop for working with its canvases. Its locally installed copy is excluded from this repository and the published packages. It is maintained separately from my skills above.
 
 ## install
 

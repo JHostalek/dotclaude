@@ -12,7 +12,6 @@
 !LICENSE
 !CODE_OF_CONDUCT.md
 !CLAUDE.md
-!WRITING.md
 !SOUL.md
 !CHANGELOG.md
 !RELEASING.md
@@ -49,3 +48,6 @@
 skills/*.*
 skills/ccs-delegation
 skills/graphify
+
+# Installed and maintained by tldraw Desktop
+skills/tldraw-offline/
