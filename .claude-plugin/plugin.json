@@ -19,8 +19,10 @@
   "skills": [
     "./skills/audit",
     "./skills/design",
+    "./skills/distill",
     "./skills/git-workflow",
     "./skills/judge",
+    "./skills/query-refiner",
     "./skills/sota",
     "./skills/timesheet",
     "./skills/writing"
