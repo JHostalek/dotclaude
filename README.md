@@ -21,7 +21,7 @@ before you ship. review what you built, refactor what's messy, audit what's bloa
 |-------|-|
 | `judge` | independent expert review before accepting work |
 | `audit` | independent reviews through focused audit dimensions |
-| `writing` | rewrite unclear or formulaic text in my preferred voice |
+| `writing` | rewrite AI slop into text a person would write |
 
 use `/audit <dimension> [path]` for a focused review, `/audit full` for all code dimensions, or `/audit ux` for usability. dimensions form one flat collection grounded in the book and personal criteria. each dimension gets one independent reviewer of the whole scope. audits are read-only; scope defaults to changed files.
 

@@ -1,2 +1,6 @@
+interface:
+  display_name: "Writing"
+  short_description: "Rewrite slop into text a person would write"
+
 policy:
   allow_implicit_invocation: false
