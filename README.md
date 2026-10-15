@@ -44,10 +44,6 @@ use `/name` for standalone skills in Claude, or select the skill with `$` in Cod
 
 Use `/writing` or `$writing` to rewrite the last agent response. Add text, a file, or feedback to choose a different target or explain what should change.
 
-### third-party skills
-
-`tldraw-offline` is a third-party skill supplied by tldraw Desktop for working with its canvases. Its locally installed copy is excluded from this repository and the published packages. It is maintained separately from my skills above.
-
 ## install
 
 ### Codex plugin
