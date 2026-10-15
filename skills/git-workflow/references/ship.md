@@ -1,6 +1,6 @@
 # End-to-end shipping
 
-Use this mode only when explicitly requested, including through `/yeet`. It authorizes the requested implementation, commits, push, PR/MR creation or update, merge, and deletion of its remote source branch.
+Use this mode only when explicitly requested. It authorizes the requested implementation, commits, push, PR/MR creation or update, merge, and deletion of its remote source branch.
 
 Work in the current checkout and branch. Do not create, select, switch, synchronize, or remove local branches or worktrees. If the current branch cannot support a PR into the intended target, report that specific blocker rather than changing checkouts. Preserve unrelated work.
 

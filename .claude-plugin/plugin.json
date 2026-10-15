@@ -21,11 +21,8 @@
     "./skills/design",
     "./skills/git-workflow",
     "./skills/judge",
-    "./skills/plan",
     "./skills/sota",
-    "./skills/sparring",
     "./skills/timesheet",
-    "./skills/writing",
-    "./skills/yeet"
+    "./skills/writing"
   ]
 }

@@ -6,14 +6,12 @@ skills for agentic coding tools. extremely opinionated. updated (almost) daily.
 
 ### build
 
-start here. `sparring` examines a position through Socratic inquiry, `sota` finds a current expert recommendation, `design` explores alternatives, and `plan` turns the selected direction into an implementation-ready design document.
+start here. `sota` finds a current expert recommendation, and `design` explores alternatives.
 
 | skill | |
 |-------|-|
-| `sparring` | Socratic inquiry in rounds, with branching exploration |
 | `sota` | current expert recommendation grounded in brief web research |
 | `design` | divergent exploration with independent reasoning agents |
-| `plan` | reviewed implementation-ready design documents |
 
 ### quality
 
@@ -34,10 +32,7 @@ git workflow from branch to PR to merge.
 | skill | |
 |-------|-|
 | `git-workflow` | commit, PR, merge, and rebase conventions |
-| `yeet` | implement through PR merge in the current checkout |
 | `timesheet` | monthly timesheet entries from git |
-
-add `with audit` to `yeet` for a full audit before merge.
 
 ### when they run
 

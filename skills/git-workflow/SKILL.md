@@ -13,7 +13,7 @@ Read the relevant reference before acting:
 | Commit or commit message | [commit.md](references/commit.md) |
 | Create or update a PR/MR | [pr.md](references/pr.md) |
 | Merge a branch, rebase, or resolve conflicts | [integration.md](references/integration.md) |
-| Explicit end-to-end shipping, including `/yeet` | [ship.md](references/ship.md) |
+| Explicit end-to-end shipping | [ship.md](references/ship.md) |
 
 Use the intended repository, current branch, and remote. Preserve unrelated work and staged changes. One PR per repository; update an existing PR for the branch.
 
