@@ -20,10 +20,10 @@ before you ship. review what you built, refactor what's messy, audit what's bloa
 | skill | |
 |-------|-|
 | `judge` | independent expert review before accepting work |
-| `audit` | hunt bugs, cut unnecessary code, review usability |
+| `audit` | independent reviews through focused audit dimensions |
 | `writing` | rewrite unclear or formulaic text in my preferred voice |
 
-use `/audit <dimension> [path]` for a focused pass, `/audit full` for all fourteen code dimensions, or `/audit ux` for usability. scope defaults to changed files. add `review only` to skip fixes. UX defaults to review only.
+use `/audit <dimension> [path]` for a focused review, `/audit full` for all code dimensions, or `/audit ux` for usability. dimensions form one flat collection grounded in the book and personal criteria. each dimension gets one independent reviewer of the whole scope. audits are read-only; scope defaults to changed files.
 
 ### ship
 

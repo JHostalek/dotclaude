@@ -1,31 +1,13 @@
 # Complexity
 
-Run as the `complexity` dimension. Reduce the effort to understand, change, operate, and remove the system while preserving behavior. LOC is a signal, not a target.
-
-Map sources of truth, state, dependencies, variation, and lifecycle paths. Look first for scattered policy, duplicated state, and changes that require coordinated edits across boundaries.
-
-## Probes
-
-1. **Domain model:** conflated concepts, redundant flags/statuses, illegal combinations, and hidden alternate models in exceptional or legacy workflows. Could explicit operations or states remove ambiguity?
-2. **Architecture:** pass-through layers, wrappers, registries, callbacks, cycles, broad fan-in/out, fragmented responsibilities, and duplicate orchestration. Judge cohesion and change locality rather than file size.
-3. **Control and data flow:** nesting, boolean flags, implicit fallthrough, exception-driven normal flow, hook/middleware indirection, excessive transformations, sentinels, ambient mutation, and temporal coupling. Include retry/reorder/partial-failure combinations.
-4. **Abstractions:** identify the invariant, policy, boundary, compression, or independent variation each interface/factory/plugin owns. Single implementation is not proof of waste. Consolidate repeated knowledge; allow duplication when cases change independently.
-5. **State and lifecycle:** authoritative versus derived state, invalidation, initialization/teardown, task ownership, cancellation, locks, reentrancy, and state split across memory, storage, messages, and flags. Include recovery, migration, and mixed versions.
-6. **Configuration:** mode combinations, contradictory or fixed knobs, aliases, precedence, distant effects, stale flags, rollback branches, and compatibility past its support window. Preserve real product and deployment variation.
-7. **Interfaces and types:** wide APIs, optionality, overloads, weak types, string dispatch, sentinel returns, and repeated validation/conversion. Check dynamic and external consumers before contracting a surface.
-8. **Failure paths:** wrapping, retry stacks, fallbacks, defensive copies, null handling, cleanup, and overlapping validation. Preserve domain context, cancellation, resource safety, observability, and intentionally different failure policy.
-9. **Resource costs:** repeated passes/conversions, materialization, custom caches/indexes, batching, and algorithms. A local simplification must not introduce N+1 work, unbounded growth, contention, or downstream cost. Measure before removing a useful optimization.
-10. **Dead and indirect code:** trace static consumers plus reflection, serialization names, generators, registries, DI, lazy/native bindings, configuration, external clients, jobs, and operational invocation. Delete proven dead code; zero static references alone proves nothing.
-11. **Supporting machinery:** fixtures, mock internals, setup DSLs, build/CI matrices, scripts, release automation, and repair procedures. `tests` owns cutting test cases; complexity owns scaffolding. Check operational consumers before removing telemetry or safety machinery.
-12. **Local expression:** clever type/metaprogramming, dense expressions, needless mutation/intermediates, ceremony, suppressions, and formatter fights. Preserve useful types, descriptions, errors, and comments; avoid exchanging lines for hidden coupling.
-13. **Domain constraints:** account for mandated redundancy, auditability, determinism, certification, latency, availability, and compatibility in specialized systems. Inspect complexity created by interacting mechanisms.
-
-## Judgment
-
-For each simplification, identify the existing mechanism's legitimate role, the concrete comprehension/change/state/resource cost, and the behavior that must survive. Separate proven unnecessary complexity from improvements needing design tradeoffs and unresolved consumer evidence. Verify affected references and boundary behavior; inspect whether complexity disappeared or moved elsewhere. Report net change without a reduction quota.
-
-## Changes and completion
-
-Apply validated merges, abstraction collapses, internal API changes, dead-code removal, and scaffolding rewrites when consumers/contracts are accounted for. Capability removal or external contract changes are critical decisions only when evidence cannot establish the intended outcome.
-
-Use the shared evidence and completion rules; account for every applicable numbered probe and material boundary, including domain-derived probes.
+- Flag a single design decision that requires coordinated edits in many places because the decision is duplicated or its consequences are scattered. Identify the decision and the places that must stay in sync.
+- Flag changes whose affected code cannot be discovered from the relevant interface, names, or nearby documentation. Hidden dependencies make an apparently local change unsafe.
+- Flag code that requires readers to accumulate unrelated implementation details before understanding a routine operation. Name the information burden rather than treating line count as a measure of complexity.
+- Flag feature additions or bug fixes that layer exceptions and parallel paths around an abstraction whose underlying design no longer fits. Show the resulting special cases or dependencies.
+- Flag dense expressions, implicit side effects, or indirect control flow whose meaning requires substantial reconstruction. The problem is missing or obscured information, not the use of a particular language feature alone.
+- Flag generic pairs, tuples, or containers whose unnamed or generically named elements conceal distinct domain meanings at their use sites. Named fields should make those meanings visible when position alone is unclear.
+- Flag declarations or apparently ordinary calls that conceal behavior readers must know, such as starting background threads or relying on a concrete collection's performance or concurrency properties.
+- Flag code made locally shorter or simpler by moving repeated work, obligations, or knowledge into callers, dependencies, or operations. Judge the complexity of the whole operation, including its consumers and maintainers.
+- Flag independently stored authoritative and derived state whose synchronization or invalidation rules are unclear, forcing readers to reconstruct which combinations are valid. Derived state is useful when its invariant and benefit are clear.
+- Flag flags, statuses, or alternate models that represent illegal domain states and require scattered reconciliation instead of a representation that preserves the needed invariant.
+- Flag configuration aliases, precedence rules, modes, or rollout branches that obscure which behavior is selected or multiply combinations without serving a supported need.

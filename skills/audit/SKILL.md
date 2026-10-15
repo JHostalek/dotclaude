@@ -1,10 +1,10 @@
 ---
 name: audit
-description: Run an explicitly selected code or UX audit, or a full fourteen-dimension sweep.
-argument-hint: "[full|dimension...] [path] [review only]"
+description: Review code through focused dimensions grounded in software design books and personal criteria, with one independent agent per dimension.
+argument-hint: "[full|dimension...] [path]"
 disable-model-invocation: true
 ---
 
-Audit `$ARGUMENTS` using [the shared workflow](references/workflow.md). It defines scope, lens selection, evidence, corrections, and completion. Read only the selected lenses; read [integration](references/integration.md) for multiple dimensions.
+Audit `$ARGUMENTS` using [the review workflow](references/workflow.md). Select dimensions from [the catalog](references/catalog.md). Each reviewer reads one dimension and reviews the whole requested scope. Report findings without changing code.
 
-Examples: `/audit security src/auth`, `/audit correctness contracts src/api review only`, `/audit ux /settings`, `/audit full`.
+Examples: `/audit modularity`, `/audit contracts security src/auth`, `/audit necessity`, `/audit full`, `/audit ux /settings`.

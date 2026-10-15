@@ -1,51 +1,22 @@
-# Audit Workflow
+# Audit workflow
 
-For multiple dimensions, read [integration.md](integration.md). Use the Git workflow only for explicitly authorized publication or integration; an audit does not imply either.
+Select dimensions from [the catalog](catalog.md). Each topic is one review assignment, regardless of how many sources contribute its criteria.
 
-**Scope:** explicit scope wins; otherwise use files changed against the default branch. Audit the full repository only when requested. Run a tiny scope or single dimension inline.
+Apply the book's qualifications: judge whole-system complexity, useful abstractions, and actual requirements. Do not turn process advice such as designing twice or writing comments first into violations inferred from code.
 
-## Select coverage
+Use the requested PR, diff, files, or paths. Otherwise review changes against the repository's default branch. Give every reviewer the same complete scope and base revision. Read surrounding code and consumers as needed to understand a finding.
 
-Use only the requested dimensions. `full`, or invocation without a dimension, selects all fourteen baseline lenses below. Scope arguments select files or paths, not extra dimensions. UX is additional coverage only when requested. Treat absent tests as an evidence-backed applicability decision, not an unreported omission.
+`full`, or no selector, selects every code dimension in the catalog. Dimension names select those topics; explicitly include `ux` when requested. Accept legacy `perf`, `structure`, and `patterns` as aliases for `performance`, `modularity`, and `consistency`. Treat legacy `review only` as redundant.
 
-| Area | Baseline lenses, in integration order |
-| --- | --- |
-| Layout | [necessity](necessity.md), [structure](structure.md) |
-| Behavior | [patterns](patterns.md), [contracts](contracts.md), [correctness](correctness.md), [data-integrity](data-integrity.md), [error-handling](error-handling.md) |
-| Operations | [logs](logs.md), [perf](perf.md), [reliability](reliability.md), [security](security.md) |
-| Surface | [tests](tests.md), [complexity](complexity.md), [comments](comments.md) |
-| Optional UI review | [ux](ux.md) |
+Spawn one independent, read-only agent per selected dimension. Give it the raw request, scope and base, project constraints, dimension name, this review instruction, and its dimension file. Deduplicate selected topics, including aliases. Do not combine dimensions in one agent, divide the PR between agents, or give a reviewer other reviewers' conclusions. When capacity is limited, run dimensions in successive batches. If delegation is unavailable, disclose the limit and review dimensions sequentially without claiming independence.
 
-Read each selected lens and apply its numbered probes. A narrow request does not authorize a full sweep.
+Each reviewer:
 
-## Review
+- Reads its entire dimension and scans the whole requested scope through those criteria.
+- Reports concrete code smells and violations, including maintenance costs that do not cause a runtime bug. Explains the observed burden, violated promise, or plausible failure. Missing tests, logs, retries, or configuration alone do not establish a problem. Applies each bullet's qualifications and the book's design principles in context of actual requirements.
+- Gives each finding a code location, the criterion it violates, and enough evidence to explain the problem. Suggests a direction for improvement when useful. Keeps missing evidence separate from findings and applies no finding quota.
+- Leaves code unchanged. Reports a short list of findings, or no findings, plus any material scope limitation. Keeps questions about unestablished capability value separate from confirmed findings. Does not create a compliance report for every bullet.
 
-Reconstruct intended behavior, ownership, lifecycle, operating modes, and boundaries from repository and runtime evidence. Map material end-to-end paths, including applicable alternate entry points, recovery, mixed versions, migrations, and operations. Establish the dimension's invariants and consequences before judging local code.
+The consolidating agent checks findings against the code and merges duplicates describing the same problem and underlying cause. Preserve useful evidence and the relevant criteria. Keep separate problems separate even when they occur at the same location. Use the book's principles to resolve competing design preferences; respect established behavioral and domain requirements. Retain unresolved disagreements when the evidence cannot settle them.
 
-Each numbered baseline is required coverage. Add probes for material risks exposed by the architecture, domain, lifecycle, deployment, or component interactions. Mark a baseline inapplicable only with evidence that the scope cannot exercise it.
-
-Collect candidates before applying the dimension's noise bar. Verify the actual path, configuration, version, lifecycle state, and consumers; a framework, type, test, or familiar pattern alone is insufficient evidence.
-
-For every retained finding record: violated invariant; path and triggering state; consequence; existing control and why it fails; smallest safe correction; and a check that distinguishes correct from incorrect behavior.
-
-Distinguish:
-- **confirmed defect:** demonstrated violation and consequence;
-- **worthwhile improvement:** valid behavior with a concrete avoidable risk or maintenance cost;
-- **unresolved question:** missing material evidence or intended behavior.
-
-Preserve those distinctions when using domain-specific labels. Hypotheticals, style preferences, or missing tests alone are not defects.
-
-## Corrections
-
-Honor review-only requests. Otherwise apply validated in-scope corrections and verify affected behavior. The UX lens defaults to review-only unless fixes were explicitly requested. Escalate decisions the evidence cannot safely choose: destructive or irreversible data actions; public capability or compatibility breaks; auth/authorization/crypto policy or format migrations; material infrastructure, availability, consistency, or cost trade-offs; external actions beyond scope; and ambiguous product contracts. Report evidence, options, recommendation, and the exact decision needed. A secret finding does not authorize history rewriting or credential rotation.
-
-When commits are authorized, separate file moves from content edits to preserve rename detection. An audit does not itself authorize commits, pushes, or PR creation.
-
-## Completion
-
-Account for every numbered baseline and derived lens:
-- `reviewed`: components, boundaries, paths, invariants, evidence, findings, and variant searches;
-- `not applicable`: evidence that the scope cannot exercise it;
-- `deferred`: blocker, missing evidence, and residual risk.
-
-Reconcile findings across boundaries, search for defect variants, and verify both failing and allowed paths. Report dimensions run, fixes, escalated decisions, unresolved questions, verification, coverage gaps, and gate results. If a PR is requested, include outstanding decisions with evidence and recommendations. Coverage accounting does not prove universal correctness or safety.
+Report consolidated findings by importance, dimensions reviewed, and material limitations. An audit is complete after review and consolidation. A calling workflow may separately implement findings when fixes are already authorized.

@@ -10,7 +10,7 @@ Complete in order:
 
 1. Implement the requested work, review the diff, and run the relevant checks.
 2. Follow [commit conventions](commit.md), then [PR conventions](pr.md) to commit, push, and create or update the PR/MR.
-3. If `with audit` was requested, run the [full audit procedure](../../audit/references/workflow.md) in its current-checkout mode: read-only reviews with sequential fixes, or sequential passes, without creating worktrees or branches. Fix validated in-scope findings, verify, commit, push, and update the PR. Audit authorization does not settle product decisions or other approvals reserved for the user.
+3. If `with audit` was requested, run the [full audit](../../audit/references/workflow.md) with one independent, read-only reviewer per dimension in the current checkout. Consolidate findings, then fix validated in-scope issues sequentially, verify, commit, push, and update the PR. Create no worktrees or branches. Audit authorization does not settle product decisions or other approvals reserved for the user.
 4. Check the final pushed revision and PR state. Merge through the repository host only when required checks and approvals allow it. If the final revision changes during review, re-check its status before merging. Never bypass branch protection or failing checks.
 5. Verify the remote merge and remove its remote source branch. Use cleanup that leaves the local branch and checkout unchanged; do not use a helper that switches or deletes local branches. Do not pull or synchronize the local checkout after merging.
 
