@@ -1,20 +1,20 @@
 # Pull requests
 
-Work from the repository root and write from the actual commits and diff against the target. Require a clean worktree unless the user explicitly requests otherwise. Update the branch's existing PR/MR instead of creating another. Push and set upstream before creating it.
+Work from the repository root; write from the actual commits and diff against the target. Require a clean worktree unless the user explicitly waives it. Update the branch's existing PR/MR; never open a second. Push and set upstream before creating.
 
-Use a Conventional Commit title. Supply the multiline body through a structured argument or body file. Rewrite updates from current branch state instead of appending to stale prose.
+Title: Conventional Commit. Pass the multiline body as a structured argument or body file. On update, rewrite the body from current branch state; don't append to stale prose.
 
-Use draft when requested, work is incomplete or exploratory, or risky changes lack verification. Otherwise use ready for review.
+Draft when requested, incomplete, exploratory, or risky and unverified; otherwise ready for review.
 
-For paired repository changes, cross-reference their PRs.
+Paired changes across repositories: cross-reference their PRs.
 
-GitLab can request source-branch cleanup at MR creation with `--remove-source-branch`. GitHub's `--delete-branch` belongs to PR merging, which requires separate authorization outside end-to-end mode.
+GitLab: `--remove-source-branch` requests source-branch cleanup at MR creation. GitHub: `--delete-branch` is a merge flag; merging needs separate authorization outside end-to-end mode.
 
-Report URL, title, branch, draft/ready state, and verification gaps.
+Report URL, title, branch, draft/ready state, verification gaps.
 
 ## Body
 
-Use this template. Keep prose brief, and use the domain language from `GLOSSARY.md`.
+Use this template. Brief prose; domain language from `GLOSSARY.md`.
 
 ```markdown
 ## Summary
@@ -39,7 +39,7 @@ Use this template. Keep prose brief, and use the domain language from `GLOSSARY.
 
 ### Summary
 
-Pick the smallest view that makes the key point clear, and place each visual next to the short text it supports:
+Pick the smallest view that makes the key point; place each visual beside the short text it supports:
 
 - **Pseudocode** for logic or an algorithm.
 - **Call tree** for runtime control flow.
@@ -58,16 +58,16 @@ Pick the smallest view that makes the key point clear, and place each visual nex
 
 - **Whole code block** when most of it is new, omitted context would hide ownership or order, or the reviewer needs a copyable target shape.
 
-Keep only the calls, files, props, states, and boundaries the reviewer needs. One or two views usually suffice.
+Include only the calls, files, props, states, and boundaries the reviewer needs. One or two views usually suffice.
 
 ### Evidence
 
-Show concrete before and after proof that the change works. Screenshots rank highest for visual changes when the environment supports them. Execution evidence comes next: test results or console output, naming the exact test that failed before and passes after, as pseudocode. With no evidence, write `Not run: <reason>`.
+Show concrete before/after proof the change works. Rank: screenshots first for visual changes, if the environment supports them; then execution evidence (test results or console output), naming the exact test that failed before and passes after, as pseudocode. No evidence: write `Not run: <reason>`.
 
 ### Merge Danger
 
-A two-way door can be walked back; a one-way door cannot. Destructive actions and hard-to-reverse decisions are one-way doors. Cheap rollback means lower risk.
+Two-way door: reversible. One-way door: not; includes destructive actions and hard-to-reverse decisions. Cheap rollback means lower risk.
 
-Blast radius is the scope of potential impact: layout shift, consumer breakage, mobile responsiveness, and the like. Consider every affected surface.
+Blast radius: scope of potential impact (layout shift, consumer breakage, mobile responsiveness, etc.). Consider every affected surface.
 
 Body template adapted from Matt Pocock's [`pr` skill](https://github.com/mattpocock/skills/tree/main/skills/engineering/pr) (MIT), whose Summary visuals come from Dex Horthy's [`show-me`](https://github.com/humanlayer/skills/blob/main/plugins/show-me/skills/show-me/SKILL.md).
