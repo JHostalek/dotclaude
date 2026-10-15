@@ -1,11 +1,11 @@
 # Logs
 
-- Flag consequential outcomes or state transitions whose emitted diagnostics cannot answer what happened, to whom, and whether the operation completed, failed, or degraded.
-- Flag success, count, actor, target, or outcome messages that disagree with the actual state or describe acceptance as completion.
+- Flag consequential outcomes or state transitions whose diagnostics cannot answer what happened, to whom, and whether the operation completed, failed, or degraded.
+- Flag success, count, actor, target, or outcome messages that disagree with actual state or describe acceptance as completion.
 - Flag failure records that omit the relevant cause and context or replace useful evidence with an unrelated exception.
-- Flag request, trace, job, message, or entity correlation lost across asynchronous boundaries or retries, making the causal path impossible to reconstruct.
-- Flag unstable names, types, units, field collisions, or dynamic templates that break existing queries or prevent meaningful aggregation.
-- Flag routine production logs, per-item records, repeated stacks, or retry storms whose volume obscures consequential evidence or creates disproportionate cost.
+- Flag correlation (request, trace, job, message, or entity IDs) lost across async boundaries or retries, making the causal path impossible to reconstruct.
+- Flag unstable names, types, units, field collisions, or dynamic message templates that break existing queries or prevent meaningful aggregation.
+- Flag routine production logs, per-item records, repeated stack traces, or retry storms whose volume buries consequential evidence or costs disproportionately.
 - Flag severity that makes normal operation look like failure or hides an exhausted, actionable failure below the level operators rely on.
 - Flag logging that can block, fail, recurse, or exhaust resources in a way that worsens or masks the application failure.
 - Flag exporter, routing, sampling, retention, flush, or mixed-version configuration that loses required records or sends them to the wrong environment or tenant.

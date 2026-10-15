@@ -1,6 +1,6 @@
 # Audit dimensions
 
-Each topic is one independent reviewer of the whole requested scope. Its file contains only self-contained things to flag.
+Each dimension is one independent reviewer of the whole requested scope; its file holds only self-contained items to flag.
 
 - [abstractions](abstractions.md) — interface cost versus hidden complexity. Ousterhout chapters 4, 6, 7, 9, 15, 19.
 - [comments](comments.md) — discoverable meaning, contracts, rationale, and accurate documentation. Ousterhout chapters 12, 13, 15, 16, 18.
@@ -20,7 +20,3 @@ Each topic is one independent reviewer of the whole requested scope. Its file co
 - [security](security.md) — trust boundaries, authority, abuse, and sensitive data. Personal criteria.
 - [tests](tests.md) — fault sensitivity, realistic boundaries, and maintainable protection. Personal criteria.
 - [ux](ux.md) — user task completion, feedback, accessibility, and informed choices. Personal criteria; explicitly requested.
-
-Ousterhout refers to *A Philosophy of Software Design*, first edition, 2018, read from the supplied PDF. Its principles are primary for the shared design topics; approved personal checks extend them. Chapter references attribute the book's contribution without attributing personal additions to the author.
-
-Future books contribute criteria to the appropriate topics in this same collection. Record their grounding here; create a new dimension only for a distinct review focus.

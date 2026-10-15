@@ -5,6 +5,6 @@ argument-hint: "[full|dimension...] [path]"
 disable-model-invocation: true
 ---
 
-Audit `$ARGUMENTS` using [the review workflow](references/workflow.md). Select dimensions from [the catalog](references/catalog.md). Each reviewer reads one dimension and reviews the whole requested scope. Report findings without changing code.
+Audit `$ARGUMENTS` per [the review workflow](references/workflow.md), selecting dimensions from [the catalog](references/catalog.md). One reviewer per dimension, each over the whole requested scope. Read-only: report findings, change no code.
 
 Examples: `/audit modularity`, `/audit contracts security src/auth`, `/audit necessity`, `/audit full`, `/audit ux /settings`.
