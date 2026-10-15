@@ -3,6 +3,16 @@
 All notable harness changes are recorded here. Versions before `1.0.0` were
 reconstructed from the repository history.
 
+## [3.0.0] - 2026-10-15
+
+- **Breaking:** remove the `plan`, `sparring`, and `yeet` skills; end-to-end shipping stays in `git-workflow`.
+- **Breaking:** regroup `audit` into eighteen flat dimensions with one read-only reviewer each. Audits no longer apply fixes. `perf`, `structure`, and `patterns` become `performance`, `modularity`, and `consistency`; the old names remain aliases.
+- Add `distill` for rewriting text into expert-register English and `query-refiner` for turning a rough question into a precise expert query.
+- Add a tells catalog, Czech human/AI example pairs, and a cold-reviewer loop to `writing`.
+- Add a PR body template with evidence and merge-danger sections to `git-workflow`.
+- Structure `sota` verdicts from prior, evidence, and grounding.
+- Tighten prose across `audit`, `git-workflow`, `query-refiner`, and `writing`.
+
 ## [2.1.0] - 2026-09-10
 
 - Add an explicitly invoked `writing` skill for rewriting text or the last agent response, preserving the former `WRITING.md` preferences.
@@ -93,6 +103,7 @@ reconstructed from the repository history.
 
 - Introduce the Claude Code configuration and initial skill harness.
 
+[3.0.0]: https://github.com/JHostalek/dotclaude/compare/v2.1.0...v3.0.0
 [2.1.0]: https://github.com/JHostalek/dotclaude/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/JHostalek/dotclaude/compare/v1.4.0...v2.0.0
 [1.4.0]: https://github.com/JHostalek/dotclaude/compare/v1.3.0...v1.4.0
