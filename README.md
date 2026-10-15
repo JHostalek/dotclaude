@@ -6,14 +6,12 @@ skills for agentic coding tools. extremely opinionated. updated (almost) daily.
 
 ### build
 
-start here. `sparring` examines a position through Socratic inquiry, `sota` finds a current expert recommendation, `design` explores alternatives, and `plan` turns the selected direction into an implementation-ready design document.
+start here. `sota` finds a current expert recommendation, and `design` explores alternatives.
 
 | skill | |
 |-------|-|
-| `sparring` | Socratic inquiry in rounds, with branching exploration |
 | `sota` | current expert recommendation grounded in brief web research |
 | `design` | divergent exploration with independent reasoning agents |
-| `plan` | reviewed implementation-ready design documents |
 
 ### quality
 
@@ -22,10 +20,12 @@ before you ship. review what you built, refactor what's messy, audit what's bloa
 | skill | |
 |-------|-|
 | `judge` | independent expert review before accepting work |
-| `audit` | hunt bugs, cut unnecessary code, review usability |
-| `writing` | rewrite unclear or formulaic text in my preferred voice |
+| `audit` | independent reviews through focused audit dimensions |
+| `writing` | rewrite AI slop into text a person would write |
+| `distill` | compress rough text into expert-register English |
+| `query-refiner` | rewrite a rough question into a precise expert query |
 
-use `/audit <dimension> [path]` for a focused pass, `/audit full` for all fourteen code dimensions, or `/audit ux` for usability. scope defaults to changed files. add `review only` to skip fixes. UX defaults to review only.
+use `/audit <dimension> [path]` for a focused review, `/audit full` for all code dimensions, or `/audit ux` for usability. each dimension gets one independent reviewer of the whole scope. audits are read-only; scope defaults to changed files.
 
 ### ship
 
@@ -34,22 +34,15 @@ git workflow from branch to PR to merge.
 | skill | |
 |-------|-|
 | `git-workflow` | commit, PR, merge, and rebase conventions |
-| `yeet` | implement through PR merge in the current checkout |
 | `timesheet` | monthly timesheet entries from git |
-
-add `with audit` to `yeet` for a full audit before merge.
 
 ### when they run
 
-in Claude and Codex, `git-workflow` loads automatically when relevant. all other skills require explicit invocation.
+in Claude and Codex, `git-workflow` and `query-refiner` load automatically when relevant. all other skills require explicit invocation.
 
 use `/name` for standalone skills in Claude, or select the skill with `$` in Codex.
 
 Use `/writing` or `$writing` to rewrite the last agent response. Add text, a file, or feedback to choose a different target or explain what should change.
-
-### third-party skills
-
-`tldraw-offline` is a third-party skill supplied by tldraw Desktop for working with its canvases. Its locally installed copy is excluded from this repository and the published packages. It is maintained separately from my skills above.
 
 ## install
 

@@ -28,7 +28,7 @@
     ],
     "websiteURL": "https://github.com/JHostalek/dotclaude",
     "defaultPrompt": [
-      "Turn this request into an implementation-ready plan.",
+      "Rewrite this text into something a person would write.",
       "Audit these changes before I ship them.",
       "Prepare these changes for a pull request."
     ]

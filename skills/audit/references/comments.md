@@ -1,30 +1,18 @@
 # Comments
 
-Run as the `comments` dimension, after behavior, structure, and naming edits.
-
-Trace consequential claims to implementations, callers, specifications, generated output, and their audiences. Retain rationale and cross-boundary constraints that code and types cannot express; agreement with today's implementation does not make them redundant.
-
-## Probes
-
-1. **Architecture:** ownership, dependency direction, trust boundaries, consistency, intentional duplication, and constraints spanning files or repositories. Keep rejected alternatives only when they constrain future decisions; identify migration and compatibility exit conditions.
-2. **Interfaces:** preconditions, errors, effects, idempotency, ordering, pagination, partial success, cancellation, timeouts, stability, and examples. Verify units, ranges, defaults, nullability, precision, encoding, identifiers, and version-specific references.
-3. **Lifecycle and concurrency:** initialization, ownership, mutation, cleanup, transactions, cache invalidation, lock order, visibility, reentrancy, callbacks, retry/replay, and crash recovery. Check claims across alternate phases and asynchronous/platform paths.
-4. **Domain meaning:** formulas, business rules, rounding, currency, coordinates, calendars, algorithm assumptions, numerical bounds, and safety/security rationale. Match terminology to authoritative schemas and specifications.
-5. **Operations:** configuration precedence, environment assumptions, capacity, diagnostics, runbooks, fallback, restore, and platform quirks. TODO/FIXME notes need a concrete trigger or exit condition; follow local tracking conventions without promising scheduled work.
-6. **Machine-consumed prose:** suppressions, doctests, structured tags, generation/build/test directives, annotations, and examples. Check exact syntax and diagnostic scope. Edit owned generators or templates rather than generated/vendor output.
-7. **Accuracy and locality:** resolve named symbols, files, flags, issues, versions, links, and behavior. Consolidate copied explanations at a durable source of truth. Check absolute claims across their full scope; remove dead references and commented-out code.
-8. **Signal:** delete syntax narration, boilerplate, redundant headings, and change history. Rewrite useful information buried in chronology, speculation, jargon, or excessive examples. Match abstraction level to location and audience.
-9. **Missing constraints:** add prose only for consequential information audiences cannot reliably recover elsewhere. Prefer enforceable types, schemas, validation, or tests when they can carry the invariant; prose may still explain its rationale.
-10. **Specialized surfaces:** inspect domain and tooling requirements, including bindings, notebooks, infrastructure, accessibility/localization notes, scientific records, and agent prompts. Check whether individually accurate comments jointly imply a false guarantee.
-
-User-facing strings and log templates are outside prose cleanup unless requested. Owned comments describing those surfaces remain in scope.
-
-## Judgment
-
-Show the exact prose, contradicting or supporting source, affected audience, and consequence. Classify false or machine-breaking claims and consequential omissions as defects; accurate but bloated, duplicated, or misplaced prose as improvements; conflicting authority as unresolved. Deletion must preserve necessary constraints elsewhere. Verify affected doctests, links, documentation tooling, and rendered output.
-
-## Changes and completion
-
-Apply validated prose corrections under the shared auto-fix default. Changes to machine-consumed behavior, contracts, or legal/safety/security guarantees belong in the owning dimension. Escalate only when intended behavior cannot be established under the shared critical-decision rule.
-
-Use the shared evidence and completion rules; account for every applicable numbered probe and material boundary, including domain-derived probes.
+- Flag missing class or module docs that leave the abstraction, an instance's purpose, or key usage limits unclear to a new reader.
+- Flag method docs insufficient to use the method without reading its implementation: preconditions, results, side effects, failures.
+- Flag undocumented units, inclusive/exclusive bounds, null/absent meanings, resource ownership, or invariants the declaration does not make clear.
+- Flag comments that repeat the code: translate nearby syntax or restate the name without adding meaning, precision, intent, or rationale.
+- Flag interface docs leaking implementation details callers do not need: internal algorithms, storage choices, private configuration. Keep them with the implementation unless they affect use.
+- Flag comments that describe how a value is manipulated but not what it represents. Readers should not reconstruct meaning from assignments.
+- Flag substantial or tricky code whose docs narrate steps but omit the overall goal or why the steps are needed.
+- Flag nonobvious constraints, workarounds, or design decisions whose rationale lives only in a commit message or the author's memory. State active obligations, and when to revisit temporary workarounds, at the affected code.
+- Flag cross-module dependencies with no discoverable explanation of which pieces must stay coordinated. Document shared decisions centrally; relevant code points there.
+- Flag one decision documented in several modules where copies can drift. Prefer references to one authoritative explanation.
+- Flag stale or contradictory comments, examples, or operational instructions, including claims about guarantees, formulas, units, configuration, fallback, or restore that disagree with the implementation or authoritative spec.
+- Flag detailed explanations so far from their code that changes will likely miss them.
+- Flag event handlers or unusual lifecycle behavior whose invocation conditions, execution context, or continuation are not apparent from names and docs.
+- Flag links, named symbols, flags, or version references that point to missing or incompatible information needed to understand the code.
+- Flag generated docs fixed only in output while their owned source still reproduces the error.
+- Flag commented-out code or obsolete change history that misleads maintainers about active behavior or available entry points.

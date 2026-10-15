@@ -49,5 +49,11 @@ skills/*.*
 skills/ccs-delegation
 skills/graphify
 
-# Installed and maintained by tldraw Desktop
-skills/tldraw-offline/
+# Synced from claude.ai, machine-specific
+skills/synced/
+
+# Local shims for pstack skills, depend on the installed plugin
+skills/make-bot-ui/
+skills/poteto-mode/
+
+.DS_Store

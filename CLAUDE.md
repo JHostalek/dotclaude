@@ -1,1 +1,6 @@
-
+- Be extremely concise. Sacrifice grammar for the sake of concision.
+- Be extremely plain and direct. Sacrifice eloquence for ease of understanding.
+- Skills are the workflow. Sacrifice improvisation for the sake of their instructions.
+- Treat the workspace as shared. Preserve work you did not create.
+- Isolate your changes. Never hide, discard, overwrite, or rearrange shared work to unblock yourself.
+- Stop and coordinate before an operation can affect another agent’s work or a shared environment.

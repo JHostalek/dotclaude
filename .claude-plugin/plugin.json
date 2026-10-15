@@ -19,13 +19,12 @@
   "skills": [
     "./skills/audit",
     "./skills/design",
+    "./skills/distill",
     "./skills/git-workflow",
     "./skills/judge",
-    "./skills/plan",
+    "./skills/query-refiner",
     "./skills/sota",
-    "./skills/sparring",
     "./skills/timesheet",
-    "./skills/writing",
-    "./skills/yeet"
+    "./skills/writing"
   ]
 }
