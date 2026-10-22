@@ -3,6 +3,13 @@
 All notable harness changes are recorded here. Versions before `1.0.0` were
 reconstructed from the repository history.
 
+## [3.1.0] - 2026-10-22
+
+- Add `intent-brief` for evidence-first intent elicitation, with assumptions, focused questions on hard-to-reverse decisions, and a brief that requires confirmation before action.
+- Expand audit criteria for coupling, shared mutable state, data history, tail latency, resource budgets, feedback loops, trust boundaries, and property-based testing.
+- Use version history as audit evidence and rank complex, frequently changed code first.
+- Simplify `sota` to a context-specific recommendation grounded in domain expertise and current web research.
+
 ## [3.0.0] - 2026-10-15
 
 - **Breaking:** remove the `plan`, `sparring`, and `yeet` skills; end-to-end shipping stays in `git-workflow`.
@@ -103,6 +110,7 @@ reconstructed from the repository history.
 
 - Introduce the Claude Code configuration and initial skill harness.
 
+[3.1.0]: https://github.com/JHostalek/dotclaude/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/JHostalek/dotclaude/compare/v2.1.0...v3.0.0
 [2.1.0]: https://github.com/JHostalek/dotclaude/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/JHostalek/dotclaude/compare/v1.4.0...v2.0.0
