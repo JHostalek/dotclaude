@@ -1,13 +1,13 @@
 # Correctness
 
-- Flag a reachable computation or workflow that violates an established business invariant, e.g. required ordering, monotonicity, conservation, or allowed terminal states.
+- Flag a reachable computation or workflow that violates an established business invariant, e.g., required ordering, monotonicity, conservation, or allowed terminal states.
 - Flag wrong conditions, operators, fallthrough, early returns, indexing, inclusive bounds, or loop termination that give a wrong result for supported inputs.
 - Flag decisions made with the wrong actor, tenant, identity, snapshot, version, or feature configuration.
 - Flag parsing, mapping, joining, defaulting, equality, hashing, or serialization that changes meaning, loses data, or attaches fields to the wrong entity.
-- Flag state transitions that can be skipped, repeated, reordered, resumed, expired, or cancelled into an invalid workflow state.
+- Flag state transitions that can be skipped, repeated, reordered, resumed, expired, or cancelled into an invalid workflow state, or workflows that can never reach a terminal state (deadlock, lost wake-up).
 - Flag arithmetic with wrong units, scale, sign, precision, rounding stage, overflow behavior, or algorithm assumptions.
 - Flag time calculations that confuse instants with civil time, mishandle DST or calendar boundaries, or use the wrong clock or timestamp.
-- Flag races, e.g. stale decisions, lost updates, write skew, check-then-act, or insufficient lock scope, that permit an incorrect outcome.
+- Flag race conditions, e.g., stale decisions, lost updates, write skew, check-then-act, or insufficient lock scope, that permit an incorrect outcome.
 - Flag query predicates, joins, ordering, null semantics, cache keys, or invalidation that return the wrong state or result.
 - Flag optimistic UI, async results, retries, or duplicate events that apply a valid update to the wrong or outdated state.
 - Flag language or framework usage that contradicts the supported version's actual behavior and yields a concrete wrong result or broken execution path.

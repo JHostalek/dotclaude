@@ -5,6 +5,7 @@
 - Flag grouping or navigation that forces users to understand the storage model instead of finding the concepts relevant to their task.
 - Flag confirmations or feedback that claim success before the change persisted, or conceal partial completion.
 - Flag unnecessary choices, missing hierarchy, or advanced controls that make a routine task harder to understand.
+- Flag mode errors: one action has different effects in different modes and the current mode is not visible.
 - Flag errors that erase input, offer no actionable recovery, trap users mid-flow, or present a failure as an empty result.
 - Flag destructive actions whose confirmation, cancellation, or recovery does not match their actual consequence.
 - Flag keyboard traps, unreachable controls, missing focus visibility, inaccessible semantics, or information conveyed only by color.

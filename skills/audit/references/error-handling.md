@@ -1,6 +1,6 @@
 # Error handling
 
-- Flag errors raised when the operation's intended result already holds, e.g., removing an already absent item. Consider whether natural semantics can define the error out of existence.
+- Flag errors raised when the operation's postcondition already holds, e.g., removing an already absent item. Consider whether natural semantics can define the error out of existence.
 - Flag routine boundary or empty cases every caller must guard though the operation could define a coherent result for them. Keep rejection when callers need the distinction.
 - Flag exceptions or sentinel failures that export a problem the module could resolve with its own knowledge, especially when callers just repeat the same recovery or ignore the failure.
 - Flag repeated handlers performing the same response, cleanup, or abort for failures that could be aggregated at an appropriate boundary. Keep distinctions that need different handling.
@@ -12,7 +12,7 @@
 - Flag representations that violate a useful invariant and force the same exceptional case to be handled throughout the code. Establish that the invariant fits rather than removing a distinction the domain needs.
 - Flag failure propagation or translation that loses the original cause, category, cancellation identity, or context the receiving boundary needs to respond correctly.
 - Flag API, CLI, worker, queue, or UI boundaries that signal success, acknowledge work, or exit successfully before the required operation completes.
-- Flag detached (fire-and-forget) async work whose failure has no accountable observer or whose effects outlive cancellation without an intended owner.
-- Flag cleanup that leaks resources on failure or after partial acquisition, including files, sockets, locks, leases, transactions, processes, tasks, and subscriptions.
+- Flag fire-and-forget async work whose failure has no accountable observer or whose effects outlive cancellation without an intended owner.
+- Flag resource leaks on failure or after partial acquisition: files, sockets, locks, leases, transactions, processes, tasks, subscriptions.
 - Flag cleanup failures that replace the primary failure or leave poisoned resources available for reuse.
 - Flag deadline or cancellation handling that reports a definite outcome while committed effects remain unknown. Distinguish the caller abandoning its wait from the operation actually stopping.

@@ -5,7 +5,7 @@ argument-hint: "[full|dimension...] [path]"
 disable-model-invocation: true
 ---
 
-Audit `$ARGUMENTS` per [the review workflow](references/workflow.md). One reviewer per dimension, each over the whole requested scope. Read-only: report findings, change no code.
+Audit `$ARGUMENTS` per [the review workflow](references/workflow.md): one reviewer per dimension, each over the whole requested scope. Read-only: report findings, change no code.
 
 Dimensions, one file each in `references/`: abstractions, comments, complexity, consistency, contracts, correctness, data-integrity, error-handling, interfaces, logs, modularity, naming, necessity, performance, reliability, security, tests, ux.
 
