@@ -6,10 +6,11 @@ skills for agentic coding tools. extremely opinionated. updated (almost) daily.
 
 ### build
 
-start here. `sota` finds a current expert recommendation, and `design` explores alternatives.
+start here. `intent-brief` clarifies intent, `sota` finds a current expert recommendation, and `design` explores alternatives.
 
 | skill | |
 |-------|-|
+| `intent-brief` | evidence-first intent brief with questions reserved for hard-to-reverse decisions |
 | `sota` | current expert recommendation grounded in brief web research |
 | `design` | divergent exploration with independent reasoning agents |
 
