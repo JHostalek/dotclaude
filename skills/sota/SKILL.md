@@ -1,7 +1,6 @@
 ---
 name: sota
-description: Produce an up-to-date, state-of-the-art recommendation using domain expertise and web research. Use only when explicitly invoked.
-disable-model-invocation: true
+description: Produce an up-to-date, state-of-the-art recommendation using domain expertise and web research. Use when asked for current best practice, or before committing to a technique, library or architecture in a fast-moving domain.
 ---
 
 # SOTA

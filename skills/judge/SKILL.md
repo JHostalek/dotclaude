@@ -1,8 +1,7 @@
 ---
 name: judge
-description: Obtain an independent review of the approach and trade-offs in completed work.
+description: Obtain an independent review of the approach and trade-offs in completed work. Use when asked for a judge or second opinion, or before handing off substantial or high-stakes work.
 argument-hint: "[subject, or omit for recent work]"
-disable-model-invocation: true
 ---
 
 Review `$ARGUMENTS`, or the latest substantive work when omitted. Infer scope from the conversation and relevant files; ask only if ambiguity would materially change the review.
