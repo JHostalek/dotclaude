@@ -3,4 +3,4 @@ interface:
   short_description: "Compress rough text into expert-register English"
 
 policy:
-  allow_implicit_invocation: false
+  allow_implicit_invocation: true

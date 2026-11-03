@@ -1,8 +1,7 @@
 ---
 name: distill
-description: Distill rough text into dense, expert-register English where terms of art carry the intent.
+description: Distill rough text into dense, expert-register English where terms of art carry the intent. Use when asked to distill, tighten or elevate wording, or when polishing an instruction file, prompt or skill before it ships.
 argument-hint: "[text or file; omit for my previous message]"
-disable-model-invocation: true
 ---
 
 # Distill
